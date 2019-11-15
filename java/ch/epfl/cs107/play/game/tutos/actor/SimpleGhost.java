@@ -44,6 +44,6 @@ public class SimpleGhost extends Entity {
 		else
 			energy = 0;
 		
-		hpText.setText(Float.toString(energy));
+		hpText.setText(Integer.toString((int)Math.ceil(energy)));
 	}
 }
