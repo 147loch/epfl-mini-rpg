@@ -6,11 +6,16 @@ import ch.epfl.cs107.play.game.tutos.area.tuto1.Ferme;
 import ch.epfl.cs107.play.game.tutos.area.tuto1.Village;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
 public class Tuto1 extends AreaGame {
 
 	private SimpleGhost player;
+	
+	public Tuto1() {
+		player = new SimpleGhost(new Vector(10, 7), "ghost.1");
+	}
 	
 	private void createAreas() {
 		addArea(new Ferme());
@@ -36,15 +41,31 @@ public class Tuto1 extends AreaGame {
 	public boolean begin(Window window, FileSystem fileSystem) {
 		if (super.begin(window , fileSystem)) {
 			createAreas();
-			this.setCurrentArea("zelda/Ferme", true);
-			
-			player = new SimpleGhost(new Vector(18, 7), "ghost.1");
+			this.setCurrentArea("zelda/Village", true);
 			this.getCurrentArea().registerActor(player);
 			this.getCurrentArea().setViewCandidate(player);
+			
+			keyboardInput();
 			
 			return true;
 		}
 		else return false;
+	}
+	
+	private void keyboardInput() {
+		Keyboard keyboard = getWindow().getKeyboard();
+		if (keyboard.get(Keyboard.UP).isDown()) {
+			player.moveUp();
+		}
+		if (keyboard.get(Keyboard.DOWN).isDown()) {
+			player.moveDown();
+		}
+		if (keyboard.get(Keyboard.LEFT).isDown()) {
+			player.moveLeft();
+		}
+		if (keyboard.get(Keyboard.RIGHT).isDown()) {
+			player.moveRight();
+		}
 	}
 	
 }

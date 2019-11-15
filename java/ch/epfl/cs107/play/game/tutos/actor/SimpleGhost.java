@@ -46,4 +46,20 @@ public class SimpleGhost extends Entity {
 		
 		hpText.setText(Float.toString(energy));
 	}
+	
+	public void moveUp() {
+		setCurrentPosition(getPosition().add(0.f, 0.05f));
+	}
+	
+	public void moveDown() {
+		setCurrentPosition(getPosition().add(0.f, -0.05f));
+	}
+	
+	public void moveLeft() {
+		setCurrentPosition(getPosition().add(-0.05f, 0.f));
+	}
+	
+	public void moveRight() {
+		setCurrentPosition(getPosition().add(0.05f, 0.f));
+	}
 }
