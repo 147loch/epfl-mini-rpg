@@ -35,6 +35,7 @@ public class Tuto1 extends AreaGame {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		keyboardInput();
 	}
 	
 	@Override
@@ -44,8 +45,6 @@ public class Tuto1 extends AreaGame {
 			this.setCurrentArea("zelda/Village", true);
 			this.getCurrentArea().registerActor(player);
 			this.getCurrentArea().setViewCandidate(player);
-			
-			keyboardInput();
 			
 			return true;
 		}
