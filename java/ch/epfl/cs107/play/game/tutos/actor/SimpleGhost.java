@@ -26,7 +26,7 @@ public class SimpleGhost extends Entity {
 	}
 	
 	public boolean isWeak() {
-		return energy <= 0 ? true : false;
+		return energy <= 0;
 	}
 	
 	public void strengthen() {
