@@ -43,5 +43,7 @@ public class SimpleGhost extends Entity {
 			energy -= deltaTime;
 		else
 			energy = 0;
+		
+		hpText.setText(Float.toString(energy));
 	}
 }
