@@ -10,7 +10,6 @@ public class Village extends SimpleArea {
 	
 	public Village() {
 		ghost = new SimpleGhost(new Vector(18, 7), "ghost.2");
-		this.registerActor(ghost);
 	}
 	
 	@Override
@@ -20,6 +19,6 @@ public class Village extends SimpleArea {
 
 	@Override
 	protected void createArea() {
-		
+		this.registerActor(ghost);
 	}
 }
