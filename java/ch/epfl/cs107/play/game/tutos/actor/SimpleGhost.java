@@ -14,6 +14,8 @@ public class SimpleGhost extends Entity {
 	private float energy;
 	private TextGraphics hpText;
 	
+	private final float SPEED = 0.75f;
+	
 	public SimpleGhost(Vector position, String spriteName) {
 		super(position);
 		sprite = new Sprite(spriteName, 1, 1.f, this);
@@ -48,18 +50,18 @@ public class SimpleGhost extends Entity {
 	}
 	
 	public void moveUp() {
-		setCurrentPosition(getPosition().add(0.f, 0.05f));
+		setCurrentPosition(getPosition().add(0.f, SPEED));
 	}
 	
 	public void moveDown() {
-		setCurrentPosition(getPosition().add(0.f, -0.05f));
+		setCurrentPosition(getPosition().add(0.f, -SPEED));
 	}
 	
 	public void moveLeft() {
-		setCurrentPosition(getPosition().add(-0.05f, 0.f));
+		setCurrentPosition(getPosition().add(-SPEED, 0.f));
 	}
 	
 	public void moveRight() {
-		setCurrentPosition(getPosition().add(0.05f, 0.f));
+		setCurrentPosition(getPosition().add(SPEED, 0.f));
 	}
 }

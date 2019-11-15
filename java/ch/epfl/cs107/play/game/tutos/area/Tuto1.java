@@ -14,7 +14,7 @@ public class Tuto1 extends AreaGame {
 	private SimpleGhost player;
 	
 	public Tuto1() {
-		player = new SimpleGhost(new Vector(10, 7), "ghost.1");
+		player = new SimpleGhost(new Vector(18, 7), "ghost.1");
 	}
 	
 	private void createAreas() {
@@ -36,6 +36,7 @@ public class Tuto1 extends AreaGame {
 	public void update(float deltaTime) {
 		super.update(deltaTime);
 		keyboardInput();
+		switchArea();
 	}
 	
 	@Override
@@ -67,4 +68,17 @@ public class Tuto1 extends AreaGame {
 		}
 	}
 	
+	private void switchArea() {
+		if (player.isWeak()) {
+			this.getCurrentArea().unregisterActor(player);
+			this.getCurrentArea().setViewCandidate(null);
+			if (this.getCurrentArea().getTitle().equals("zelda/Village"))
+				this.setCurrentArea("zelda/Ferme", true);
+			else
+				this.setCurrentArea("zelda/Village", true);
+			player.strengthen();
+			this.getCurrentArea().registerActor(player);
+			this.getCurrentArea().setViewCandidate(player);
+		}
+	}
 }
