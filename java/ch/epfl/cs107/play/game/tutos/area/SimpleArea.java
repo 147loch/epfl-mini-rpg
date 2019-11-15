@@ -29,15 +29,19 @@ abstract public class SimpleArea extends Area {
 
 	}
 	
-	 @Override
-	    public boolean begin(Window window, FileSystem fileSystem) {
-		 	this.window = window;
-	        if (super.begin(window, fileSystem)) {
-	            // Set the behavior map
-	            createArea();
-	            return true;
-	        }
-	        return false;
-	    }
-	 
+	@Override
+    public boolean begin(Window window, FileSystem fileSystem) {
+	 	this.window = window;
+        if (super.begin(window, fileSystem)) {
+            // Set the behavior map
+            createArea();
+            return true;
+        }
+        return false;
+	 }
+	
+	@Override
+	public float getCameraScaleFactor() {
+		return 10.f;
+	}
 }
