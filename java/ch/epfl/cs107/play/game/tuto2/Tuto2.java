@@ -1,22 +1,25 @@
 package ch.epfl.cs107.play.game.tuto2;
 
+import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
-import ch.epfl.cs107.play.game.tuto1.area.Ferme;
-import ch.epfl.cs107.play.game.tuto1.area.Village;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.tuto2.area.Ferme;
+import ch.epfl.cs107.play.game.tuto2.area.Village;
 import ch.epfl.cs107.play.game.tutos.actor.GhostPlayer;
-import ch.epfl.cs107.play.game.tutos.actor.SimpleGhost;
 import ch.epfl.cs107.play.io.FileSystem;
-import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.window.Keyboard;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class Tuto2 extends AreaGame {
 
-	private GhostPlayer player;
+	public final static float CAMERA_SCALE_FACTOR = 13.f;
+	public final static float STEP = 0.05f;
 	
-	public Tuto2() {
-		player = new GhostPlayer();
-	}
+	private GhostPlayer player;
+	private final String[] areas = {"zelda/Ferme", "zelda/Village"};
+	private final DiscreteCoordinates[] startingPositions = {new DiscreteCoordinates(2, 10), new DiscreteCoordinates(5, 15)};
+	
+	private int areaIndex;
 	
 	private void createAreas() {
 		addArea(new Ferme());
@@ -35,6 +38,11 @@ public class Tuto2 extends AreaGame {
 	
 	@Override
 	public void update(float deltaTime) {
+		if (player.isPassingADoor()) {
+			switchArea();
+			player.resetDoorState();
+		}
+		
 		super.update(deltaTime);
 	}
 	
@@ -42,12 +50,24 @@ public class Tuto2 extends AreaGame {
 	public boolean begin(Window window, FileSystem fileSystem) {
 		if (super.begin(window , fileSystem)) {
 			createAreas();
-			this.setCurrentArea("zelda/Village", true);
-			this.getCurrentArea().registerActor(player);
-			this.getCurrentArea().setViewCandidate(player);
+			areaIndex = 0;
+			Area area = setCurrentArea(areas[areaIndex], true);
+			player = new GhostPlayer(area, Orientation.DOWN, startingPositions[areaIndex], "ghost.1");
+			area.registerActor(player);
+			area.setViewCandidate(player);
 			
 			return true;
 		}
 		else return false;
+	}
+	
+	protected void switchArea() {
+		player.leaveArea();
+		areaIndex = (areaIndex == 0) ? 1 : 0;
+		
+		Area currentArea = setCurrentArea(areas[areaIndex], false);
+		player.enterArea(currentArea, startingPositions[areaIndex]);
+		
+		player.strengthen();
 	}
 }
