@@ -1,7 +1,6 @@
 package ch.epfl.cs107.play.game.tuto2;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
-import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
