@@ -5,7 +5,7 @@ import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
-abstract public class Tuto2Area extends Area {
+public abstract class Tuto2Area extends Area {
 
 	private Tuto2Behavior behavior;
 
