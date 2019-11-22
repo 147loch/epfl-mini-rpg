@@ -30,7 +30,7 @@ public class GhostPlayer extends MovableAreaEntity {
 		super(area, orientation, coordinates);
 
 		this.hp = 10;
-		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE);
+		message = new TextGraphics(Integer.toString((int)hp), 0.4f, Color.BLUE); // wow
 		message.setParent(this);
 		message.setAnchor(new Vector(-0.3f, 0.1f));
 		sprite = new Sprite(spriteString, 1.f, 1.f, this);
