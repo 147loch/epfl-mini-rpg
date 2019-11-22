@@ -1,7 +1,7 @@
 package ch.epfl.cs107.play;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
-import ch.epfl.cs107.play.game.tutos.area.Tuto1;
+import ch.epfl.cs107.play.game.tuto2.Tuto2;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.ResourceFileSystem;
@@ -29,7 +29,7 @@ public class Play {
         // Create a demo game and initialize corresponding texts
 		XMLTexts.initialize(fileSystem, "strings/icmon_fr.xml");
        
-        final AreaGame game = new Tuto1();
+        final AreaGame game = new Tuto2();
 
 		// Use Swing display
 		final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);

@@ -1,9 +1,9 @@
-package ch.epfl.cs107.play.game.tutos.area;
+package ch.epfl.cs107.play.game.tuto1;
 
 import ch.epfl.cs107.play.game.areagame.AreaGame;
+import ch.epfl.cs107.play.game.tuto1.area.Ferme;
+import ch.epfl.cs107.play.game.tuto1.area.Village;
 import ch.epfl.cs107.play.game.tutos.actor.SimpleGhost;
-import ch.epfl.cs107.play.game.tutos.area.tuto1.Ferme;
-import ch.epfl.cs107.play.game.tutos.area.tuto1.Village;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;

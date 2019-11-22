@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.tutos.area;
+package ch.epfl.cs107.play.game.tuto1;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
