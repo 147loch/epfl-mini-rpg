@@ -1,6 +1,8 @@
-package ch.epfl.cs107.play.game.tuto2;
+package ch.epfl.cs107.play.game.tutos.area;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.tutos.Tuto2;
+import ch.epfl.cs107.play.game.tutos.Tuto2Behavior;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;

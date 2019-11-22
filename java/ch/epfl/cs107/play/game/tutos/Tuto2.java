@@ -1,11 +1,11 @@
-package ch.epfl.cs107.play.game.tuto2;
+package ch.epfl.cs107.play.game.tutos;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.tuto2.area.Ferme;
-import ch.epfl.cs107.play.game.tuto2.area.Village;
 import ch.epfl.cs107.play.game.tutos.actor.GhostPlayer;
+import ch.epfl.cs107.play.game.tutos.area.tuto2.Ferme;
+import ch.epfl.cs107.play.game.tutos.area.tuto2.Village;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;

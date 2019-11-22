@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.tuto2;
+package ch.epfl.cs107.play.game.tutos;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;

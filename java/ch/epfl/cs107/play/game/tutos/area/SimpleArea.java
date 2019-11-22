@@ -1,8 +1,7 @@
-package ch.epfl.cs107.play.game.tutosSolution.area;
+package ch.epfl.cs107.play.game.tutos.area;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.game.tutosSolution.Tuto1;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.window.Image;
 import ch.epfl.cs107.play.window.Window;
@@ -30,19 +29,19 @@ abstract public class SimpleArea extends Area {
 
 	}
 	
-	 @Override
-	    public boolean begin(Window window, FileSystem fileSystem) {
-		 	this.window = window;
-	        if (super.begin(window, fileSystem)) {
-	            // Set the behavior map
-	            createArea();
-	            return true;
-	        }
-	        return false;
-	    }
-	 
-	 @Override
-	    public final float getCameraScaleFactor() {
-	        return Tuto1.CAMERA_SCALE_FACTOR;
-	    }
+	@Override
+    public boolean begin(Window window, FileSystem fileSystem) {
+	 	this.window = window;
+        if (super.begin(window, fileSystem)) {
+            // Set the behavior map
+            createArea();
+            return true;
+        }
+        return false;
+	 }
+	
+	@Override
+	public float getCameraScaleFactor() {
+		return 10.f;
+	}
 }
