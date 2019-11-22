@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class Tuto2Behavior extends AreaBehavior {
@@ -16,8 +17,8 @@ public class Tuto2Behavior extends AreaBehavior {
 		DOOR(-195580, true),
 		WALKABLE(-1, true);
 		
-		private final int type;
-		private final boolean isWalkable;
+		final int type;
+		final boolean isWalkable;
 		
 		Tuto2CellType(int type, boolean isWalkable) {
 			this.type = type;
@@ -30,7 +31,8 @@ public class Tuto2Behavior extends AreaBehavior {
 					return p;
 				}
 			}
-			
+			// TODO maybe remove
+			System.out.println(type);
 			return NULL;
 		}
 	}
@@ -45,48 +47,31 @@ public class Tuto2Behavior extends AreaBehavior {
 			}
 		}
 	}
-	
-	public class Tuto2Cell extends Cell {
 
-		private Tuto2CellType type;
+	public boolean isDoor(DiscreteCoordinates coord) {
+		return (((Tuto2Cell)getCell(coord.x, coord.y)).isDoor());
+	}
+
+	public class Tuto2Cell extends AreaBehavior.Cell {
+
+		private final Tuto2CellType type;
 		
 		private Tuto2Cell(int x, int y, Tuto2CellType type) {
 			super(x, y);
 			this.type = type;
 		}
 
-		public Tuto2CellType getType() {
-			return type;
-		}
-		
-		@Override
-		public boolean isCellInteractable() {
-			// TODO Auto-generated method stub
-			return false;
-		}
+		public boolean isDoor() { return type == Tuto2CellType.DOOR; }
 
 		@Override
-		public boolean isViewInteractable() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
+		public boolean isCellInteractable() { return true; }
 		@Override
-		public void acceptInteraction(AreaInteractionVisitor v) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		public boolean isViewInteractable() { return false; }
 		@Override
-		protected boolean canLeave(Interactable entity) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
+		public void acceptInteraction(AreaInteractionVisitor v) {}
 		@Override
-		protected boolean canEnter(Interactable entity) {
-			// TODO Auto-generated method stub
-			return false;
-		}
+		protected boolean canLeave(Interactable entity) { return true; }
+		@Override
+		protected boolean canEnter(Interactable entity) { return type.isWalkable; }
 	}
 }

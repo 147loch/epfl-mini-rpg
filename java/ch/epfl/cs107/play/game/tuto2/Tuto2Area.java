@@ -2,26 +2,30 @@ package ch.epfl.cs107.play.game.tuto2;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 abstract public class Tuto2Area extends Area {
-	private Window window;
-	
+
+	private Tuto2Behavior behavior;
+
 	protected abstract void createArea();
-	
+
+	@Override
+	public final float getCameraScaleFactor() { return Tuto2.CAMERA_SCALE_FACTOR; }
+
 	@Override
     public boolean begin(Window window, FileSystem fileSystem) {
-	 	this.window = window;
         if (super.begin(window, fileSystem)) {
-           	setBehavior(new Tuto2Behavior(window, getTitle()));
+        	behavior = new Tuto2Behavior(window, getTitle());
+           	setBehavior(behavior);
             createArea();
             return true;
         }
         return false;
 	 }
-	
-	@Override
-	public float getCameraScaleFactor() {
-		return 10.f;
-	}
+
+	 public boolean isDoor(DiscreteCoordinates coord) {
+		return (behavior.isDoor(coord));
+	 }
 }
