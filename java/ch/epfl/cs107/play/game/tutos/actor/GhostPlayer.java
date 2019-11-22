@@ -1,12 +1,14 @@
 package ch.epfl.cs107.play.game.tutos.actor;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.*;
+import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.tuto2.Tuto2Area;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -55,7 +57,7 @@ public class GhostPlayer extends MovableAreaEntity {
 		List<DiscreteCoordinates> coords = getCurrentCells();
 		if (coords != null) {
 			for (DiscreteCoordinates c : coords) {
-				if (((Tuto2Area)getOwnerArea()).isDoor(c)) setIsPassingDoor();
+				if (((Tuto2Area) getOwnerArea()).isDoor(c)) setIsPassingDoor();
 			}
 		}
 	}
