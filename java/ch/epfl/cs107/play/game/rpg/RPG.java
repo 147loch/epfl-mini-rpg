@@ -22,7 +22,7 @@ public abstract class RPG extends AreaGame {
      * @param player (Player): controlled player of this RPG, not null
      * @throws NullPointerException if the player is null
      */
-    protected void initPlayer(Player player){
+    protected void initPlayer(Player player) {
 
         if(player == null){
             throw new NullPointerException("player is null when adding it to area");
