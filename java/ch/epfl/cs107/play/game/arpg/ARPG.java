@@ -38,7 +38,9 @@ public class ARPG extends RPG {
     }
     
     @Override
-    public void update(float deltaTime) {}
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+    }
     
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
@@ -48,7 +50,7 @@ public class ARPG extends RPG {
     		Area area = setCurrentArea(areas.get(areaIndex).getTitle(), true);
     		ARPGPlayer player = new ARPGPlayer(area, Orientation.DOWN, new DiscreteCoordinates(6, 10));
     		initPlayer(player);
-    		
+
     		return true;
     	}
     	return false;
