@@ -30,4 +30,5 @@ public abstract class Tuto2Area extends Area {
 	 public boolean isDoor(DiscreteCoordinates coord) {
 		return (behavior.isDoor(coord));
 	 }
+	 
 }

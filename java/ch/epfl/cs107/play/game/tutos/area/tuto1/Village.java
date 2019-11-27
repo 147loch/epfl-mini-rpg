@@ -6,7 +6,7 @@ import ch.epfl.cs107.play.game.tutos.actor.SimpleGhost;
 import ch.epfl.cs107.play.math.Vector;
 
 public class Village extends SimpleArea {
-	
+
 	private SimpleGhost ghost;
 	
 	public Village() {
