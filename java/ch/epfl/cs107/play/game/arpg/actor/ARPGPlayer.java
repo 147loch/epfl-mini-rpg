@@ -41,7 +41,7 @@ public class ARPGPlayer extends Player {
 		List<DiscreteCoordinates> coords = getCurrentCells();
 		if (coords != null) {
 			for (DiscreteCoordinates c : coords) {
-				//if (((ARPGArea) getOwnerArea()).isDoor(c)) setIsPassingDoor();
+				// if (((ARPGArea) getOwnerArea()).isDoor(c)) setIsPassingDoor();
 			}
 		}
 	}
@@ -85,29 +85,23 @@ public class ARPGPlayer extends Player {
 
 	@Override
 	public boolean wantsCellInteraction() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean wantsViewInteraction() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public void interactWith(Interactable other) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void interactWith(Interactable other) { }
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		// TODO Auto-generated method stub
-		
+		((ARPGPlayerHandler)v).interactWith(this);
 	}
 	
-	private class ARPGPlayerHandler implements ARPGInteractionVisitor {
+	private static class ARPGPlayerHandler implements ARPGInteractionVisitor {
 		@Override
 		public void interactWith(Door door) {
 			door.acceptInteraction(this);

@@ -6,12 +6,8 @@ import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
 public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 
-	default void interactWith(ARPGCell cell) {
-		
-	}
+	default void interactWith(ARPGCell cell) {}
 	
-	default void interactWith(ARPGPlayer player) {
-		
-	}
+	default void interactWith(ARPGPlayer player) {}
 	
 }

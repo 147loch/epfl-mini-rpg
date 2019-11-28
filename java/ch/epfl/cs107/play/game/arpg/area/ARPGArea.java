@@ -32,4 +32,5 @@ public abstract class ARPGArea extends Area {
 		}
 		return false;
 	}
+
 }
