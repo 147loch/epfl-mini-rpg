@@ -63,7 +63,7 @@ public class ARPGBehavior extends AreaBehavior {
 		@Override
 		public boolean isCellInteractable() { return true; }
 		@Override
-		public boolean isViewInteractable() { return false; }
+		public boolean isViewInteractable() { return true; }
 		@Override
 		public void acceptInteraction(AreaInteractionVisitor v) {}
 		@Override
