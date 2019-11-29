@@ -19,13 +19,21 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class ARPGPlayer extends Player {
 
 	private final static int ANIMATION_DURATION = 8;
-	
 	private Sprite sprite;
+	private ARPGPlayerHandler handler;
 	
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
-		
+
 		sprite = new Sprite("ghost.1", 1.f, 1.f, this);
+		handler = new ARPGPlayerHandler();
+	}
+
+	private void moveOrientate(Orientation orientation, Button b){
+		if(b.isDown()) {
+			if(getOrientation() == orientation) move(ANIMATION_DURATION);
+			else orientate(orientation);
+		}
 	}
 
 	@Override
@@ -37,20 +45,6 @@ public class ARPGPlayer extends Player {
 		moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
 
 		super.update(deltaTime);
-
-		List<DiscreteCoordinates> coords = getCurrentCells();
-		if (coords != null) {
-			for (DiscreteCoordinates c : coords) {
-				// if (((ARPGArea) getOwnerArea()).isDoor(c)) setIsPassingDoor();
-			}
-		}
-	}
-
-	private void moveOrientate(Orientation orientation, Button b){
-		if(b.isDown()) {
-			if(getOrientation() == orientation) move(ANIMATION_DURATION);
-			else orientate(orientation);
-		}
 	}
 	
 	@Override
@@ -94,17 +88,19 @@ public class ARPGPlayer extends Player {
 	}
 
 	@Override
-	public void interactWith(Interactable other) { }
+	public void interactWith(Interactable other) {
+		other.acceptInteraction(handler);
+	}
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-		((ARPGPlayerHandler)v).interactWith(this);
+		((ARPGInteractionVisitor)v).interactWith(this);
 	}
 	
-	private static class ARPGPlayerHandler implements ARPGInteractionVisitor {
+	private class ARPGPlayerHandler implements ARPGInteractionVisitor {
 		@Override
 		public void interactWith(Door door) {
-			door.acceptInteraction(this);
+			setIsPassingADoor(door);
 		}
 	}
 	

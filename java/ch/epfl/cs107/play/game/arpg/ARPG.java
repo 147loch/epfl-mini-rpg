@@ -19,7 +19,7 @@ import java.util.List;
 public class ARPG extends RPG {
 
     // we use the ARPGArea type to ensure it isn't an area from any tutorial or some other sort
-    private int areaIndex;
+    private int areaIndex = 0;
     private final List<ARPGArea> areas = new ArrayList<>(
             Arrays.asList(
                     new Ferme(),
@@ -46,7 +46,6 @@ public class ARPG extends RPG {
     public boolean begin(Window window, FileSystem fileSystem) {
     	if (super.begin(window, fileSystem)) {
     	    createAreas();
-    	    areaIndex = 0;
     		Area area = setCurrentArea(areas.get(areaIndex).getTitle(), true);
     		ARPGPlayer player = new ARPGPlayer(area, Orientation.DOWN, new DiscreteCoordinates(6, 10));
     		initPlayer(player);
