@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
@@ -28,7 +29,7 @@ public class Grass extends AreaEntity {
 
 	@Override
 	public boolean takeCellSpace() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -42,7 +43,9 @@ public class Grass extends AreaEntity {
 	}
 
 	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {}
+	public void acceptInteraction(AreaInteractionVisitor v) {
+        ((ARPGInteractionVisitor)v).interactWith(this); //A voir si c'est ça
+    }
 
 	@Override
 	public void draw(Canvas canvas) {

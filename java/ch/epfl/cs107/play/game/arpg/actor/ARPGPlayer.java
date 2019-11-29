@@ -129,7 +129,7 @@ public class ARPGPlayer extends Player {
 		
 		@Override
 		public void interactWith(Grass grass) {
-			
+			//Interaction avec l'herbe
 		}
 	}
 	
