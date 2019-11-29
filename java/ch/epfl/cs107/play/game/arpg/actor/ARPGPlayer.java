@@ -126,6 +126,11 @@ public class ARPGPlayer extends Player {
 		public void interactWith(Door door) {
 			setIsPassingADoor(door);
 		}
+		
+		@Override
+		public void interactWith(Grass grass) {
+			
+		}
 	}
 	
 }
