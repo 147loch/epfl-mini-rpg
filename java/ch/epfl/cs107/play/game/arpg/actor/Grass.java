@@ -11,17 +11,26 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Grass extends AreaEntity {
 
 	Sprite sprite;
 	
+	private boolean active;
+	
 	public Grass(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		sprite = new Sprite("zelda/grass", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
+		active = true;
 	}
 
+	public void destroyGrass() {
+		this.setCurrentPosition(new Vector(-5, -5));
+		active = false;
+	}
+	
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		return Collections.singletonList(getCurrentMainCellCoordinates());
@@ -29,7 +38,7 @@ public class Grass extends AreaEntity {
 
 	@Override
 	public boolean takeCellSpace() {
-		return true;
+		return active;
 	}
 
 	@Override
@@ -39,12 +48,12 @@ public class Grass extends AreaEntity {
 
 	@Override
 	public boolean isViewInteractable() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
-        ((ARPGInteractionVisitor)v).interactWith(this); //A voir si c'est ça
+        ((ARPGInteractionVisitor)v).interactWith(this);
     }
 
 	@Override
