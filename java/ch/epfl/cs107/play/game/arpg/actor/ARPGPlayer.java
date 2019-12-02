@@ -25,6 +25,7 @@ public class ARPGPlayer extends Player {
 	private Animation[] animations;
 	private Animation currentAnimation;
 
+	@SuppressWarnings("unused")
 	private float hp;
 	
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
@@ -75,8 +76,6 @@ public class ARPGPlayer extends Player {
 		} else {
 			currentAnimation.reset();
 		}
-
-		System.out.println(hp);
 
 		super.update(deltaTime);
 	}

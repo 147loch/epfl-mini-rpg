@@ -22,6 +22,7 @@ import java.util.Objects;
 public class Bomb extends AreaEntity implements Interactor {
 
 	private final static int TIME_BEFORE_EXPLOSION = 4;
+	private final static int ANIMATION_EXPLOSION_FRAME_LENGTH = 7;
 	
 	private Animation bombAnimation;
 	private Animation explosionAnimation;
@@ -29,6 +30,7 @@ public class Bomb extends AreaEntity implements Interactor {
 	private boolean isExploding;
 	
 	private int bombAnimationSpeedIndex;
+	private int explosionAnimationIndex;
 	
 	private ARPGBombHandler handler;
 	
@@ -42,11 +44,12 @@ public class Bomb extends AreaEntity implements Interactor {
 		}
 		bombAnimation = new Animation(sprites.length, sprites, true);
 		bombAnimationSpeedIndex = 0;
+		explosionAnimationIndex = 0;
 		
 		handler = new ARPGBombHandler();
 		
-		Sprite[] spritesExplosion = new Sprite[7];
-		for (int i = 0; i < 7; i++) {
+		Sprite[] spritesExplosion = new Sprite[ANIMATION_EXPLOSION_FRAME_LENGTH];
+		for (int i = 0; i < ANIMATION_EXPLOSION_FRAME_LENGTH; i++) {
 			spritesExplosion[i] = new RPGSprite("zelda/explosion", 1.f, 1.f, this, new RegionOfInterest(32*i, 0, 32, 32));
 		}
 		explosionAnimation = new Animation(spritesExplosion.length, spritesExplosion, false);
@@ -61,6 +64,7 @@ public class Bomb extends AreaEntity implements Interactor {
 			if (!isExploding)
 				isExploding = true;
 			explosionAnimation.update(deltaTime);
+			explosionAnimationIndex++;
 		} else {
 			remainingTime -= deltaTime;
 		}
@@ -72,7 +76,7 @@ public class Bomb extends AreaEntity implements Interactor {
 		else
 			bombAnimationSpeedIndex++;
 		
-		if (explosionAnimation.isCompleted()) {
+		if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * 2)) { //*2 because speedFactor = 2
 			this.getOwnerArea().unregisterActor(this);
 		}
 		
@@ -122,7 +126,7 @@ public class Bomb extends AreaEntity implements Interactor {
 		List<DiscreteCoordinates> ret = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
 			ret.add(getCurrentMainCellCoordinates().jump(Objects.requireNonNull(Orientation.fromInt(i)).toVector()));
-			// TODO add diagonals
+			// TODO add diagonals Ah bon ? Aussi en diagonals ?
 		}
 		return Collections.unmodifiableList(ret);
 	}
@@ -147,7 +151,7 @@ public class Bomb extends AreaEntity implements Interactor {
 
 		@Override
 		public void interactWith(ARPGPlayer player) {
-			if (explosionAnimation.isCompleted()) {
+			if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * 2)) {
 				player.takeDamage();
 			}
 		}
