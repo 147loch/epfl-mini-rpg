@@ -133,5 +133,4 @@ public class ARPGPlayer extends Player {
 			grass.setInactive();
 		}
 	}
-	
 }

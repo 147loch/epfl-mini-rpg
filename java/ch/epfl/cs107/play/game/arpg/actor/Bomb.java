@@ -6,6 +6,8 @@ import java.util.List;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
@@ -15,7 +17,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Bomb extends AreaEntity {
+public class Bomb extends AreaEntity implements Interactor {
 
 	private final static int TIME_BEFORE_EXPLOSION = 4;
 	
@@ -25,6 +27,8 @@ public class Bomb extends AreaEntity {
 	private boolean isExploding;
 	
 	private int bombAnimationSpeedIndex;
+	
+	private ARPGBombHandler handler;
 	
 	public Bomb(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
@@ -36,6 +40,8 @@ public class Bomb extends AreaEntity {
 		}
 		bombAnimation = new Animation(sprites.length, sprites, true);
 		bombAnimationSpeedIndex = 0;
+		
+		handler = new ARPGBombHandler();
 		
 		Sprite[] spritesExplosion = new Sprite[7];
 		for (int i = 0; i < 7; i++) {
@@ -95,6 +101,11 @@ public class Bomb extends AreaEntity {
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((ARPGInteractionVisitor)v).interactWith(this);
 	}
+	
+	@Override
+	public void interactWith(Interactable other) {
+		other.acceptInteraction(handler);
+	}
 
 	@Override
 	public void draw(Canvas canvas) {
@@ -102,5 +113,27 @@ public class Bomb extends AreaEntity {
 			explosionAnimation.draw(canvas);
 		else
 			bombAnimation.draw(canvas);
+	}
+	
+	@Override
+	public List<DiscreteCoordinates> getFieldOfViewCells() {
+		return Collections.list(this.getCurrentMainCellCoordinates());
+	}
+
+	@Override
+	public boolean wantsCellInteraction() {
+		return true;
+	}
+
+	@Override
+	public boolean wantsViewInteraction() {
+		return true;
+	}
+	
+	private class ARPGBombHandler implements ARPGInteractionVisitor {
+		@Override
+		public void interactWith(Grass grass) {
+			grass.setInactive();
+		}
 	}
 }
