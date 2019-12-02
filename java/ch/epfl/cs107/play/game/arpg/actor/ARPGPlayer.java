@@ -30,8 +30,8 @@ public class ARPGPlayer extends Player {
 	}
 
 	private void moveOrientate(Orientation orientation, Button b){
-		if(b.isDown()) {
-			if(getOrientation() == orientation) move(ANIMATION_DURATION);
+		if (b.isDown()) {
+			if (getOrientation() == orientation) move(ANIMATION_DURATION);
 			else orientate(orientation);
 		}
 	}
