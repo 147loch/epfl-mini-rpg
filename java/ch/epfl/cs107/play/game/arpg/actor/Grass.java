@@ -17,7 +17,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Grass extends AreaEntity {
 
-	private final int ANIMATION_FRAME_LENGTH = 4;
+	private final static int ANIMATION_FRAME_LENGTH = 4;
 	
 	private Sprite sprite;
 	private Animation animation;

@@ -17,7 +17,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Bomb extends AreaEntity {
 
-	private final int TIME_BEFORE_EXPLOSION = 4;
+	private final static int TIME_BEFORE_EXPLOSION = 4;
 	
 	private Animation bombAnimation;
 	private Animation explosionAnimation;
