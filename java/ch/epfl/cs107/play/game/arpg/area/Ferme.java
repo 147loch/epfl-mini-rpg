@@ -34,6 +34,6 @@ public class Ferme extends ARPGArea {
 				new DiscreteCoordinates(13, 0), new DiscreteCoordinates(14, 0)));
 		
 		this.registerActor(new Bomb(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
-		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9, 9)));
+		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10, 9)));
 	}
 }
