@@ -1,8 +1,5 @@
 package ch.epfl.cs107.play.game.arpg.actor;
 
-import java.util.Collections;
-import java.util.List;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
@@ -16,6 +13,11 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class Bomb extends AreaEntity implements Interactor {
 
@@ -117,7 +119,12 @@ public class Bomb extends AreaEntity implements Interactor {
 	
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		return Collections.list(this.getCurrentMainCellCoordinates());
+		List<DiscreteCoordinates> ret = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			ret.add(getCurrentMainCellCoordinates().jump(Objects.requireNonNull(Orientation.fromInt(i)).toVector()));
+			// TODO add diagonals
+		}
+		return Collections.unmodifiableList(ret);
 	}
 
 	@Override
@@ -133,7 +140,16 @@ public class Bomb extends AreaEntity implements Interactor {
 	private class ARPGBombHandler implements ARPGInteractionVisitor {
 		@Override
 		public void interactWith(Grass grass) {
-			grass.setInactive();
+			if (isExploding) {
+				grass.setInactive();
+			}
+		}
+
+		@Override
+		public void interactWith(ARPGPlayer player) {
+			if (explosionAnimation.isCompleted()) {
+				player.takeDamage();
+			}
 		}
 	}
 }

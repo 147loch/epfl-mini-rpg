@@ -24,11 +24,14 @@ public class ARPGPlayer extends Player {
 	private ARPGPlayerHandler handler;
 	private Animation[] animations;
 	private Animation currentAnimation;
+
+	private float hp;
 	
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
 
 		handler = new ARPGPlayerHandler();
+		hp = 5;
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
@@ -36,12 +39,16 @@ public class ARPGPlayer extends Player {
 	}
 
 	private void moveOrientate(Orientation orientation, Button b){
-
 		if (b.isDown()) {
 			if (getOrientation() == orientation)
 				 move(ANIMATION_DURATION);
 			else orientate(orientation);
 		}
+	}
+
+	public void takeDamage() {
+		hp -= 0.5f;
+		// TODO animation and stuff
 	}
 
 	@Override
@@ -68,7 +75,9 @@ public class ARPGPlayer extends Player {
 		} else {
 			currentAnimation.reset();
 		}
-		
+
+		System.out.println(hp);
+
 		super.update(deltaTime);
 	}
 	
