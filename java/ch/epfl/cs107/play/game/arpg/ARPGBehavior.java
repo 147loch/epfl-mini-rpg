@@ -63,12 +63,18 @@ public class ARPGBehavior extends AreaBehavior {
 		@Override
 		public boolean isCellInteractable() { return true; }
 		@Override
-		public boolean isViewInteractable() { return false; }
+		public boolean isViewInteractable() { return true; }
 		@Override
 		public void acceptInteraction(AreaInteractionVisitor v) {}
 		@Override
 		protected boolean canLeave(Interactable entity) { return true; }
 		@Override
-		protected boolean canEnter(Interactable entity) { return type.isWalkable; }
+		protected boolean canEnter(Interactable entity) {
+			if (this.hasNonTraversableContent()) {
+				return false;
+			} else {
+				return type.isWalkable;
+			}
+		}
 	}	
 }
