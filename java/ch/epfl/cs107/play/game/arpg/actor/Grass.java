@@ -17,8 +17,11 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class Grass extends AreaEntity {
 
+	private final int ANIMATION_FRAME_LENGTH = 4;
+	
 	private Sprite sprite;
 	private Animation animation;
+	private int frameIndex;
 	
 	private boolean active;
 	
@@ -26,10 +29,11 @@ public class Grass extends AreaEntity {
 		super(area, orientation, position);
 		sprite = new RPGSprite("zelda/grass", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
 		active = true;
+		frameIndex = 0;
 		
-		Sprite[] sprites = new Sprite[4];
+		Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
 			sprites[i] = new RPGSprite("zelda/grass.sliced", 1.f, 1.f, this, new RegionOfInterest(i*32, 0, 32, 32));
 		}
 		animation = new Animation(sprites.length, sprites, false);
@@ -39,9 +43,12 @@ public class Grass extends AreaEntity {
 	public void update(float deltaTime) {
 		
 		if (!active)
+		{
 			animation.update(deltaTime);
-
-		if (animation.isCompleted())
+			frameIndex++;
+		}
+		
+		if (frameIndex == ANIMATION_FRAME_LENGTH)
 			getOwnerArea().unregisterActor(this);
 		
 		super.update(deltaTime);
