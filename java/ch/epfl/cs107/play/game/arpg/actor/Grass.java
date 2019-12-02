@@ -24,15 +24,15 @@ public class Grass extends AreaEntity {
 	
 	public Grass(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
-		sprite = new Sprite("zelda/grass", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
+		sprite = new RPGSprite("zelda/grass", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
 		active = true;
 		
-		Sprite[] sprites = {null, null, null , null};
+		Sprite[] sprites = new Sprite[4];
 		
 		for (int i = 0; i < 4; i++) {
-			sprites[i] = new RPGSprite("zelda/grass.sliced", 1.f, 1.f, this, new RegionOfInterest(i, 0, 32, 32));
+			sprites[i] = new RPGSprite("zelda/grass.sliced", 1.f, 1.f, this, new RegionOfInterest(i*32, 0, 32, 32));
 		}
-		animation = new Animation(4, sprites);
+		animation = new Animation(sprites.length, sprites, false);
 	}
 	
 	@Override
@@ -40,6 +40,9 @@ public class Grass extends AreaEntity {
 		
 		if (!active)
 			animation.update(deltaTime);
+
+		if (animation.isCompleted())
+			getOwnerArea().unregisterActor(this);
 		
 		super.update(deltaTime);
 	}

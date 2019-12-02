@@ -109,7 +109,7 @@ public class ARPGPlayer extends Player {
 
 	@Override
 	public boolean wantsViewInteraction() {
-		return getOwnerArea().getKeyboard().get(Keyboard.E).isPressed() ? true : false;
+		return getOwnerArea().getKeyboard().get(Keyboard.E).isPressed();
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public class ARPGPlayer extends Player {
 		public void interactWith(Door door) {
 			setIsPassingADoor(door);
 		}
-		
+
 		@Override
 		public void interactWith(Grass grass) {
 			grass.setInactive();

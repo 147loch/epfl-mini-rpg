@@ -23,7 +23,7 @@ public class Village extends ARPGArea {
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(4, 19), new DiscreteCoordinates(5, 19)));
 		
-		this.registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(14, 11),
+		this.registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(14, 1),
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(13, 19), new DiscreteCoordinates(14, 19),
 				new DiscreteCoordinates(15, 19)));
