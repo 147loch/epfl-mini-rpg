@@ -70,11 +70,10 @@ public class ARPGBehavior extends AreaBehavior {
 		protected boolean canLeave(Interactable entity) { return true; }
 		@Override
 		protected boolean canEnter(Interactable entity) {
-			if (this.hasNonTraversableContent()) {
+			if (this.hasNonTraversableContent())
 				return false;
-			} else {
+			else
 				return type.isWalkable;
-			}
 		}
 	}	
 }
