@@ -42,8 +42,7 @@ public class Grass extends AreaEntity {
 	@Override
 	public void update(float deltaTime) {
 		
-		if (!active)
-		{
+		if (!active) {
 			animation.update(deltaTime);
 			frameIndex++;
 		}
