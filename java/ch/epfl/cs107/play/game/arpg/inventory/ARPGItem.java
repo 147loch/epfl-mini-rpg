@@ -24,27 +24,3 @@ public enum ARPGItem implements InventoryItem {
 
 	}
 }
-
-
-/*public class ARPGItem extends InventoryItem implements Positionable {
-
-	public final static ARPGItem Arrow = new ARPGItem("Arrow", 0.f, 1, "zelda/arrow.icon");
-	
-	private Sprite sprite;
-	
-	public ARPGItem(String name, float weight, int price, String spriteString) {
-		super(name, weight, price);
-		
-		sprite = new Sprite(spriteString, 1.f, 1.f, this);
-	}
-
-	@Override
-	public Transform getTransform() {
-		return null;
-	}
-
-	@Override
-	public Vector getVelocity() {
-		return null;
-	}
-}*/

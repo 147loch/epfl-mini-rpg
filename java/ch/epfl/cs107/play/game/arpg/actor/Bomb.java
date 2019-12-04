@@ -23,7 +23,7 @@ public class Bomb extends AreaEntity implements Interactor {
 
 	private final static int TIME_BEFORE_EXPLOSION = 4;
 	private final static int ANIMATION_EXPLOSION_FRAME_LENGTH = 7;
-	private final static int ANIMATiON_EXPLOSION_SPEED_FACTOR = 2;
+	private final static int ANIMATION_EXPLOSION_SPEED_FACTOR = 2;
 
 	private Animation bombAnimation;
 	private Animation explosionAnimation;
@@ -54,7 +54,7 @@ public class Bomb extends AreaEntity implements Interactor {
 			spritesExplosion[i] = new RPGSprite("zelda/explosion", 1.f, 1.f, this, new RegionOfInterest(32*i, 0, 32, 32));
 		}
 		explosionAnimation = new Animation(spritesExplosion.length, spritesExplosion, false);
-		explosionAnimation.setSpeedFactor(ANIMATiON_EXPLOSION_SPEED_FACTOR);
+		explosionAnimation.setSpeedFactor(ANIMATION_EXPLOSION_SPEED_FACTOR);
 		
 		remainingTime = TIME_BEFORE_EXPLOSION;
 	}
@@ -77,7 +77,7 @@ public class Bomb extends AreaEntity implements Interactor {
 		else
 			bombAnimationSpeedIndex++;
 		
-		if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * ANIMATiON_EXPLOSION_SPEED_FACTOR)) { //*2 because speedFactor = 2
+		if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * ANIMATION_EXPLOSION_SPEED_FACTOR)) { //*2 because speedFactor = 2
 			this.getOwnerArea().unregisterActor(this);
 		}
 		
@@ -127,7 +127,6 @@ public class Bomb extends AreaEntity implements Interactor {
 		List<DiscreteCoordinates> ret = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
 			ret.add(getCurrentMainCellCoordinates().jump(Objects.requireNonNull(Orientation.fromInt(i)).toVector()));
-			// TODO add diagonals Ah bon ? Aussi en diagonals ?
 		}
 		return Collections.unmodifiableList(ret);
 	}
@@ -152,7 +151,7 @@ public class Bomb extends AreaEntity implements Interactor {
 
 		@Override
 		public void interactWith(ARPGPlayer player) {
-			if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * ANIMATiON_EXPLOSION_SPEED_FACTOR)) {
+			if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * ANIMATION_EXPLOSION_SPEED_FACTOR)) {
 				player.takeDamage();
 			}
 		}
