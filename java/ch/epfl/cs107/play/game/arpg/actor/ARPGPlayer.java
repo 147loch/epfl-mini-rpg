@@ -54,14 +54,18 @@ public class ARPGPlayer extends Player {
 	public void cycleCurrentInventoryItem() {
 		List<InventoryItem> list = inventory.getItemList();
 		int cur = list.indexOf(currentHoldingItem);
-		if (cur == list.size() -1) this.currentHoldingItem = (ARPGItem)list.get(0);
-		else this.currentHoldingItem = (ARPGItem)list.get(cur+1);
+		if (cur == list.size() -1) {
+			this.currentHoldingItem = (ARPGItem)list.get(0);
+			gui.changeCurrentItemGui(((ARPGItem)list.get(0)).getIconId());
+		} else {
+			this.currentHoldingItem = (ARPGItem)list.get(cur+1);
+			gui.changeCurrentItemGui(((ARPGItem)list.get(cur+1)).getIconId());
+		}
 	}
 
 	public void useInventoryItem() {
 		switch (currentHoldingItem) {
 			case BOMB:
-				// TODO accept when player is moving
 				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				break;
 			default:
@@ -77,8 +81,13 @@ public class ARPGPlayer extends Player {
 		}
 	}
 
+	protected String getCurrentInventoryStringItem() {
+		return currentHoldingItem.getIconId();
+	}
+	
 	public void takeDamage() {
-		hp -= 0.5f;
+		if (hp >= 0.5f)
+			hp -= 0.5f;
 		// TODO animation and stuff
 	}
 
@@ -110,7 +119,7 @@ public class ARPGPlayer extends Player {
 		if (keyboard.get(Keyboard.TAB).isPressed())
 			cycleCurrentInventoryItem();
 
-		if (keyboard.get(Keyboard.SPACE).isPressed())
+		if (keyboard.get(Keyboard.SPACE).isPressed() && !this.isDisplacementOccurs())
 			useInventoryItem();
 
 		super.update(deltaTime);

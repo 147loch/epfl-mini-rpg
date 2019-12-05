@@ -1,7 +1,5 @@
 package ch.epfl.cs107.play.game.inventory;
 
-import ch.epfl.cs107.play.game.rpg.actor.Player;
-
 import java.util.HashMap;
 import java.util.Map;
 

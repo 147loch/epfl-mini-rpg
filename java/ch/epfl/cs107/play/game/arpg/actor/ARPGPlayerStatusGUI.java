@@ -12,9 +12,15 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	private static final int DEPTH = 1000;
 	
 	private ARPGPlayer player;
+	private String stringCurrentItem;
 
 	protected ARPGPlayerStatusGUI(ARPGPlayer player) {
 		this.player = player;
+		stringCurrentItem = player.getCurrentInventoryStringItem();
+	}
+	
+	protected void changeCurrentItemGui(String itemString) {
+		stringCurrentItem = itemString;
 	}
 	
 	@Override
@@ -28,6 +34,13 @@ public class ARPGPlayerStatusGUI implements Graphics {
 				1.5f, 1.5f, new RegionOfInterest(0, 0, 32, 32),
 				anchor.add(new Vector(0.25f, height - 1.75f)), 1, DEPTH);
 		gearDisplay.draw(canvas);
+		
+		//DISPLAY CURRENT ITEM
+		
+		ImageGraphics currentItemDisplay = new ImageGraphics(ResourcePath.getSprite(stringCurrentItem),
+				1.f, 1.f, new RegionOfInterest(0, 0, 16, 16),
+				anchor.add(new Vector(0.5f, height - 1.5f)), 1, DEPTH + 1);
+		currentItemDisplay.draw(canvas);
 		
 		//DISPLAY HEART
 		for (int i = 0; i < 5; i++) {

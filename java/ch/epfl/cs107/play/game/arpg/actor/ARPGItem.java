@@ -1,8 +1,6 @@
 package ch.epfl.cs107.play.game.arpg.actor;
 
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
-import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.math.Positionable;
 
 public enum ARPGItem implements InventoryItem {
 	ARROW("zelda/arrow.icon") {
@@ -48,7 +46,7 @@ public enum ARPGItem implements InventoryItem {
 		this.iconId = iconId;
 	}
 
-	public RPGSprite getSprite(Positionable self) {
-		return new RPGSprite(this.iconId, 1.f, 1.f, self);
+	public String getIconId() {
+		return iconId;
 	}
 }
