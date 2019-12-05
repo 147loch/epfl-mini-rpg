@@ -1,5 +1,7 @@
 package ch.epfl.cs107.play.game.inventory;
 
+import ch.epfl.cs107.play.game.rpg.actor.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +27,13 @@ public class Inventory {
 	}
 	
 	protected boolean addEntry(InventoryItem item, int count) {
+		if (!inventory.containsKey(item)) {
+			if (item.getWeight() * count <= (maxWeight - weight)) {
+				inventory.put(item, count);
+				weight += item.getWeight() * count;
+				return true;
+			}
+		}
 		for (InventoryItem key : inventory.keySet()) {
 			if (key.getName().equals(item.getName())) {
 				if (item.getWeight() * count <= (maxWeight - weight)) {
@@ -51,6 +60,13 @@ public class Inventory {
 	}
 	
 	protected Map<InventoryItem, Integer> getMap() {
-		return inventory;
+		return new HashMap<>(inventory);
 	}
+
+	public class Holder {
+		public boolean possesses(InventoryItem item) {
+			return isInInventory(item);
+		}
+	}
+
 }

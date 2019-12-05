@@ -1,7 +1,5 @@
 package ch.epfl.cs107.play.game.inventory;
 
-import ch.epfl.cs107.play.math.Positionable;
-
 
 // TODO extends positionable
 public interface InventoryItem {
@@ -14,7 +12,7 @@ public interface InventoryItem {
 	/**
 	 * @return Item weight
 	 */
-	default float getWeight() { return 0; };
+	default float getWeight() { return 0.f; };
 
 	/**
 	 * @return the price of the item

@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
+import ch.epfl.cs107.play.game.inventory.InventoryItem;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
@@ -21,9 +22,14 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class ARPGPlayer extends Player {
 
 	private final static int ANIMATION_DURATION = 8;
+	private final static int BASE_MONEY = 100;
+
 	private ARPGPlayerHandler handler;
+	private ARPGInventory inventory;
 	private Animation[] animations;
 	private Animation currentAnimation;
+
+	private ARPGItem currentHoldingItem;
 
 	@SuppressWarnings("unused")
 	private float hp;
@@ -32,11 +38,34 @@ public class ARPGPlayer extends Player {
 		super(area, orientation, coordinates);
 
 		handler = new ARPGPlayerHandler();
+		inventory = new ARPGInventory(BASE_MONEY);
 		hp = 5;
+
+		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
+		if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
+		currentHoldingItem = (ARPGItem)inventory.getItemList().get(0);
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
+	}
+
+	public void cycleCurrentInventoryItem() {
+		List<InventoryItem> list = inventory.getItemList();
+		int cur = list.indexOf(currentHoldingItem);
+		if (cur == list.size() -1) this.currentHoldingItem = (ARPGItem)list.get(0);
+		else this.currentHoldingItem = (ARPGItem)list.get(cur+1);
+	}
+
+	public void useInventoryItem() {
+		switch (currentHoldingItem) {
+			case BOMB:
+				// TODO accept when player is moving
+				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				break;
+			default:
+				break;
+		}
 	}
 
 	private void moveOrientate(Orientation orientation, Button b){
@@ -76,6 +105,12 @@ public class ARPGPlayer extends Player {
 		} else {
 			currentAnimation.reset();
 		}
+
+		if (keyboard.get(Keyboard.TAB).isPressed())
+			cycleCurrentInventoryItem();
+
+		if (keyboard.get(Keyboard.SPACE).isPressed())
+			useInventoryItem();
 
 		super.update(deltaTime);
 	}
