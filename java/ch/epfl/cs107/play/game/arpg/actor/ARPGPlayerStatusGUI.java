@@ -45,11 +45,11 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		//DISPLAY HEART
 		for (int i = 0; i < 5; i++) {
 			ImageGraphics graphicHeart;
-			if (player.getHp() < (i + 1) && player.getHp() < (i)) { //NO LIFE
+			if (player.getHp() < (i + 0.5f)) { //NO LIFE
 				graphicHeart = new ImageGraphics(ResourcePath.getSprite("zelda/heartDisplay"),
 						1.f, 1.f, new RegionOfInterest(0, 0, 16, 16),
 						anchor.add(new Vector(2f + i*1.f, height - 1.f)), 1, DEPTH);
-			} else if (player.getHp() < (i + 1) && player.getHp() > (i)) { //MIDLIFE
+			} else if (player.getHp() == (i + 0.5f)) { //MIDLIFE
 				graphicHeart = new ImageGraphics(ResourcePath.getSprite("zelda/heartDisplay"),
 						1.f, 1.f, new RegionOfInterest(16, 0, 16, 16),
 						anchor.add(new Vector(2f + i*1.f, height - 1.f)), 1, DEPTH);
