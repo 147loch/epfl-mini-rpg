@@ -38,15 +38,19 @@ public class Inventory {
 	}
 	
 	protected boolean removeEntry(InventoryItem item, int count) {
-		if (item.getWeight() * count > weight)
-			return false;
 		for (InventoryItem key : inventory.keySet()) {
 			if (key.getName().equals(item.getName())) {
-					inventory.replace(key, inventory.get(key) - count);
-					weight -= item.getWeight() * count;
-					return true;
+				if (inventory.get(key) - count < 0)
+					return false;
+				inventory.replace(key, inventory.get(key) - count);
+				weight -= item.getWeight() * count;
+				return true;
 			}
 		}
 		return false;
+	}
+	
+	protected Map<InventoryItem, Integer> getMap() {
+		return inventory;
 	}
 }
