@@ -30,6 +30,7 @@ public class ARPGPlayer extends Player {
 	private Animation currentAnimation;
 	private ARPGPlayerStatusGUI gui;
 
+	private ARPGItem currentHoldingItem;
 	private float hp;
 	
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
