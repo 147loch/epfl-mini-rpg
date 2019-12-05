@@ -28,10 +28,8 @@ public class ARPGPlayer extends Player {
 	private ARPGInventory inventory;
 	private Animation[] animations;
 	private Animation currentAnimation;
+	private ARPGPlayerStatusGUI gui;
 
-	private ARPGItem currentHoldingItem;
-
-	@SuppressWarnings("unused")
 	private float hp;
 	
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
@@ -39,7 +37,7 @@ public class ARPGPlayer extends Player {
 
 		handler = new ARPGPlayerHandler();
 		inventory = new ARPGInventory(BASE_MONEY);
-		hp = 5;
+		hp = 3.5f;
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -48,6 +46,8 @@ public class ARPGPlayer extends Player {
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
+		
+		gui = new ARPGPlayerStatusGUI(this);
 	}
 
 	public void cycleCurrentInventoryItem() {
@@ -143,6 +143,7 @@ public class ARPGPlayer extends Player {
 	@Override
 	public void draw(Canvas canvas) {
 		currentAnimation.draw(canvas);
+		gui.draw(canvas);
 	}
 
 	@Override
@@ -175,5 +176,9 @@ public class ARPGPlayer extends Player {
 		public void interactWith(Grass grass) {
 			grass.setInactive();
 		}
+	}
+	
+	protected float getHp() {
+		return hp;
 	}
 }
