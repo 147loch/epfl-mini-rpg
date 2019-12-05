@@ -22,7 +22,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 public class ARPGPlayer extends Player {
 
 	private final static int ANIMATION_DURATION = 8;
-	private final static int BASE_MONEY = 100;
+	private final static int BASE_MONEY = 146;
 
 	private ARPGPlayerHandler handler;
 	private ARPGInventory inventory;
@@ -48,7 +48,7 @@ public class ARPGPlayer extends Player {
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
 		
-		gui = new ARPGPlayerStatusGUI(this);
+		gui = new ARPGPlayerStatusGUI(this, inventory);
 	}
 
 	public void cycleCurrentInventoryItem() {
