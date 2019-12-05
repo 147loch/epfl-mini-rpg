@@ -34,7 +34,7 @@ public class Grass extends AreaEntity {
 		Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
 		
 		for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
-			sprites[i] = new RPGSprite("zelda/grass.sliced", 1.f, 1.f, this, new RegionOfInterest(i*32, 0, 32, 32));
+			sprites[i] = new RPGSprite("zelda/grass.sliced", 2.f, 2.f, this, new RegionOfInterest((i*32) + 5, 0, 32, 32));
 		}
 		animation = new Animation(sprites.length, sprites, false);
 	}
@@ -47,7 +47,7 @@ public class Grass extends AreaEntity {
 			frameIndex++;
 		}
 		
-		if (frameIndex == ANIMATION_FRAME_LENGTH)
+		if (frameIndex == ANIMATION_FRAME_LENGTH) //Animation completed
 			getOwnerArea().unregisterActor(this);
 		
 		super.update(deltaTime);

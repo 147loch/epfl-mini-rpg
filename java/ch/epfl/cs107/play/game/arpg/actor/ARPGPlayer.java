@@ -24,6 +24,7 @@ public class ARPGPlayer extends Player {
 	private ARPGPlayerHandler handler;
 	private Animation[] animations;
 	private Animation currentAnimation;
+	private ARPGPlayerStatusGUI gui;
 
 	@SuppressWarnings("unused")
 	private float hp;
@@ -37,6 +38,8 @@ public class ARPGPlayer extends Player {
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
+		
+		gui = new ARPGPlayerStatusGUI();
 	}
 
 	private void moveOrientate(Orientation orientation, Button b){
@@ -108,6 +111,7 @@ public class ARPGPlayer extends Player {
 	@Override
 	public void draw(Canvas canvas) {
 		currentAnimation.draw(canvas);
+		gui.draw(canvas);
 	}
 
 	@Override
