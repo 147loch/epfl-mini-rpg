@@ -26,20 +26,19 @@ public class ARPGPlayer extends Player {
 	private Animation currentAnimation;
 	private ARPGPlayerStatusGUI gui;
 
-	@SuppressWarnings("unused")
 	private float hp;
 	
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
 
 		handler = new ARPGPlayerHandler();
-		hp = 5;
+		hp = 3.5f;
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
 		
-		gui = new ARPGPlayerStatusGUI();
+		gui = new ARPGPlayerStatusGUI(this);
 	}
 
 	private void moveOrientate(Orientation orientation, Button b){
@@ -144,5 +143,9 @@ public class ARPGPlayer extends Player {
 		public void interactWith(Grass grass) {
 			grass.setInactive();
 		}
+	}
+	
+	protected float getHp() {
+		return hp;
 	}
 }
