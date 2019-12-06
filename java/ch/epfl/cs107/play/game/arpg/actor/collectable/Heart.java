@@ -6,18 +6,18 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
-public class CoinCollectable extends CollectableAreaEntity {
+public class Heart extends CollectableAreaEntity {
 	
-	public CoinCollectable(Area area, Orientation orientation, DiscreteCoordinates position) {
-		super(area, orientation, position, "zelda/coin");
+	public Heart(Area area, Orientation orientation, DiscreteCoordinates position) {
+		super(area, orientation, position, "zelda/heart");
 	}
 	
-	public int getMoneyBack() {
-		return 50;
+	public float getHeartBack() {
+		return 1.f;
 	}
 	
 	@Override
 	public void acceptInteraction(AreaInteractionVisitor v) {
         ((ARPGInteractionVisitor)v).interactWith(this);
-    }
+	}
 }

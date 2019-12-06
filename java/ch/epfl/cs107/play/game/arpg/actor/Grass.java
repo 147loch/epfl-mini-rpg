@@ -9,8 +9,8 @@ import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.CoinCollectable;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.HeartCollectable;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -63,10 +63,10 @@ public class Grass extends AreaEntity {
 		
 		if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_ITEM) {
 			if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_HEART) {
-				getOwnerArea().registerActor(new HeartCollectable(getOwnerArea(), Orientation.UP,
+				getOwnerArea().registerActor(new Heart(getOwnerArea(), Orientation.UP,
 						new DiscreteCoordinates((int)this.getPosition().x, (int)this.getPosition().y)));
 			} else {
-				getOwnerArea().registerActor(new CoinCollectable(getOwnerArea(), Orientation.UP,
+				getOwnerArea().registerActor(new Coin(getOwnerArea(), Orientation.UP,
 						new DiscreteCoordinates((int)this.getPosition().x, (int)this.getPosition().y)));
 			}
 		}

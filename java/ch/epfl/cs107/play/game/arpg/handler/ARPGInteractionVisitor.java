@@ -6,8 +6,8 @@ import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.CoinCollectable;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.HeartCollectable;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
 public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
@@ -20,9 +20,9 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 
 	default void interactWith(Bomb bomb) {}
 	
-	default void interactWith(CoinCollectable collec) {}
+	default void interactWith(Coin collec) {}
 	
-	default void interactWith(HeartCollectable collec) {}
+	default void interactWith(Heart collec) {}
 	
 	default void interactWith(CastleKey key) {}
 	

@@ -9,8 +9,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.CoinCollectable;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.HeartCollectable;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.inventory.Inventory;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
@@ -235,13 +235,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 		
 		@Override
-		public void interactWith(CoinCollectable collec) {
+		public void interactWith(Coin collec) {
 			inventory.addMoney(collec.getMoneyBack());
 			getOwnerArea().unregisterActor(collec);
 		}
 		
 		@Override
-		public void interactWith(HeartCollectable collec) {
+		public void interactWith(Heart collec) {
 			if (hp < maxHp) {
 				addHp(collec.getHeartBack());
 				getOwnerArea().unregisterActor(collec);
