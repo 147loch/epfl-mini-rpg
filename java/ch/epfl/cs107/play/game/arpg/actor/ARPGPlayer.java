@@ -54,13 +54,8 @@ public class ARPGPlayer extends Player {
 	public void cycleCurrentInventoryItem() {
 		List<InventoryItem> list = inventory.getItemList();
 		int cur = list.indexOf(currentHoldingItem);
-		if (cur == list.size() -1) {
-			this.currentHoldingItem = (ARPGItem)list.get(0);
-			gui.changeCurrentItemGui(((ARPGItem)list.get(0)).getIconId());
-		} else {
-			this.currentHoldingItem = (ARPGItem)list.get(cur+1);
-			gui.changeCurrentItemGui(((ARPGItem)list.get(cur+1)).getIconId());
-		}
+		if (cur == list.size() -1) this.currentHoldingItem = (ARPGItem)list.get(0);
+		else this.currentHoldingItem = (ARPGItem)list.get(cur+1);
 	}
 
 	public void useInventoryItem() {
@@ -85,10 +80,6 @@ public class ARPGPlayer extends Player {
 			else orientate(orientation);
 		}
 	}
-
-	protected String getCurrentInventoryStringItem() {
-		return currentHoldingItem.getIconId();
-	}
 	
 	public void takeDamage() {
 		if (hp >= 0.5f)
@@ -96,7 +87,7 @@ public class ARPGPlayer extends Player {
 		// TODO animation and stuff
 	}
 
-	public String getCurrentHoldingItemSprite() {
+	protected String getCurrentItemResourcePath() {
 		return currentHoldingItem.getResourcePath();
 	}
 

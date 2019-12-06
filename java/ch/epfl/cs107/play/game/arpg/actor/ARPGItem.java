@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.arpg.actor;
 
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
 
 public enum ARPGItem implements InventoryItem {
@@ -46,7 +47,7 @@ public enum ARPGItem implements InventoryItem {
 		this.iconId = iconId;
 	}
 
-	public String getIconId() {
-		return iconId;
+	public String getResourcePath() {
+		return ResourcePath.getSprite(this.iconId);
 	}
 }
