@@ -13,6 +13,10 @@ public class ARPGInventory extends Inventory {
 	public ARPGInventory(int money) {
 		this.money = money;
 		fortune = this.money;
+
+        for (InventoryItem key : super.getMap().keySet()) {
+            fortune += key.getPrice() * super.getMap().get(key);
+        }
 	}
 	
 	protected void addMoney(int money) {
@@ -25,24 +29,25 @@ public class ARPGInventory extends Inventory {
 	}
 	
 	public int getFortune() {
-		fortune = money;
-		for (InventoryItem key : super.getMap().keySet()) {
-			fortune += key.getPrice();
-		}
 		return fortune;
 	}
 
+	// Overrides the basic inventory methods so that we include the fortune management system
+    // This way the followinf two methods are properly encapsulated and only available to actors.
+
 	@Override
 	protected boolean addEntry(InventoryItem item, int count) {
-		return super.addEntry(item, count);
+		this.fortune += item.getPrice() * count;
+	    return super.addEntry(item, count);
 	}
 
 	@Override
 	protected boolean removeEntry(InventoryItem item, int count) {
-		return super.removeEntry(item, count);
+        this.fortune -= item.getPrice() * count;
+	    return super.removeEntry(item, count);
 	}
 
 	protected List<InventoryItem> getItemList() {
-		return new ArrayList<>(getMap().keySet());
+		return new ArrayList<>(super.getMap().keySet());
 	}
 }

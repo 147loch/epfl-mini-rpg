@@ -64,6 +64,11 @@ public class ARPGPlayer extends Player {
 				// TODO accept when player is moving
 				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				break;
+			case ARROW:
+			case SWORD:
+			case STAFF:
+			case CASTLE_KEY:
+			case BOW:
 			default:
 				break;
 		}
@@ -80,6 +85,10 @@ public class ARPGPlayer extends Player {
 	public void takeDamage() {
 		hp -= 0.5f;
 		// TODO animation and stuff
+	}
+
+	public String getCurrentHoldingItemSprite() {
+		return currentHoldingItem.getResourcePath();
 	}
 
 	@Override
