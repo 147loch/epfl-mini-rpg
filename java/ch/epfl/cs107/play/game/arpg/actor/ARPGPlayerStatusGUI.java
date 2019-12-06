@@ -12,11 +12,9 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	private static final int DEPTH = 1000;
 	
 	private ARPGPlayer player;
-	private ARPGInventory inventory;
 
-	protected ARPGPlayerStatusGUI(ARPGPlayer player, ARPGInventory inventory) {
+	protected ARPGPlayerStatusGUI(ARPGPlayer player) {
 		this.player = player;
-		this.inventory = inventory;
 	}
 	
 	@Override
@@ -41,10 +39,10 @@ public class ARPGPlayerStatusGUI implements Graphics {
 				anchor.add(new Vector(0.25f, 0.25f)), 1, DEPTH).draw(canvas);
 		
 		//DISPLAY NUMBER FOR COINS
-		for (int i = 0; i < Math.ceil(Math.log10(inventory.getMoney())); i++) {
+		for (int i = 0; i < Math.ceil(Math.log10(player.getInventoryMoney())); i++) {
 			int row = 2;
 			int column = 3;
-			switch (Integer.toString(inventory.getMoney()).charAt(i)) {
+			switch (Integer.toString(player.getInventoryMoney()).charAt(i)) {
 				case ('1'):
 					row = 0;
 					column = 0;

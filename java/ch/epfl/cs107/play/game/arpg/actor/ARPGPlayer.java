@@ -47,8 +47,9 @@ public class ARPGPlayer extends Player {
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
-		
-		gui = new ARPGPlayerStatusGUI(this, inventory);
+
+		// TODO je ne suis pas persuadé que cela soit une bonne idée de donner l'inventaire au GUI alors j'ai enlevé mais implémenté une méthode protected dans ARGPPlayer
+		gui = new ARPGPlayerStatusGUI(this);
 	}
 
 	public void cycleCurrentInventoryItem() {
@@ -84,11 +85,15 @@ public class ARPGPlayer extends Player {
 	public void takeDamage() {
 		if (hp >= 0.5f)
 			hp -= 0.5f;
-		// TODO animation and stuff
+		// TODO animation and stuff also death
 	}
 
 	protected String getCurrentItemResourcePath() {
 		return currentHoldingItem.getResourcePath();
+	}
+
+	protected int getInventoryMoney() {
+		return inventory.getMoney();
 	}
 
 	@Override
@@ -116,6 +121,7 @@ public class ARPGPlayer extends Player {
 			currentAnimation.reset();
 		}
 
+		// TODO KeyboardEvents Register avec gestionnaire de touches au lieu de hardcode.
 		if (keyboard.get(Keyboard.TAB).isPressed())
 			cycleCurrentInventoryItem();
 
