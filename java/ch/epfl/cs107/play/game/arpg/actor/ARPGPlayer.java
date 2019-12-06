@@ -21,8 +21,8 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class ARPGPlayer extends Player {
 
-	private final static int ANIMATION_DURATION = 8;
-	private final static int BASE_MONEY = 146;
+	private final static int ANIMATION_DURATION = 4;
+	private final static int BASE_MONEY = 100;
 
 	private ARPGPlayerHandler handler;
 	private ARPGInventory inventory;
@@ -48,7 +48,6 @@ public class ARPGPlayer extends Player {
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
 
-		// TODO je ne suis pas persuadé que cela soit une bonne idée de donner l'inventaire au GUI alors j'ai enlevé mais implémenté une méthode protected dans ARGPPlayer
 		gui = new ARPGPlayerStatusGUI(this);
 	}
 
@@ -98,12 +97,6 @@ public class ARPGPlayer extends Player {
 
 	@Override
 	public void update(float deltaTime) {
-		Keyboard keyboard = getOwnerArea().getKeyboard();
-		moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-		moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
-		moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-		moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
-
 		if (this.getOrientation() == Orientation.UP) {
 			currentAnimation = animations[0];
 		} else if (this.getOrientation() == Orientation.DOWN) {
@@ -115,10 +108,16 @@ public class ARPGPlayer extends Player {
 			currentAnimation = animations[3];
 		}
 		
-		if (this.isDisplacementOccurs()) {
-			currentAnimation.update(deltaTime);
-		} else {
+		Keyboard keyboard = getOwnerArea().getKeyboard();
+		if (!this.isDisplacementOccurs()) {
+			moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
+			moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
+			moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+			moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+			
 			currentAnimation.reset();
+		} else {
+			currentAnimation.update(deltaTime);
 		}
 
 		// TODO KeyboardEvents Register avec gestionnaire de touches au lieu de hardcode.

@@ -39,7 +39,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 				anchor.add(new Vector(0.25f, 0.25f)), 1, DEPTH).draw(canvas);
 		
 		//DISPLAY NUMBER FOR COINS
-		for (int i = 0; i < Math.ceil(Math.log10(player.getInventoryMoney())); i++) {
+		for (int i = 0; i < Math.floor(Math.log10(player.getInventoryMoney()) + 1); i++) {
 			int row = 2;
 			int column = 3;
 			switch (Integer.toString(player.getInventoryMoney()).charAt(i)) {
@@ -92,7 +92,6 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		
 		//DISPLAY HEART
 		for (int i = 0; i < 5; i++) {
-			ImageGraphics graphicHeart;
 			int index;
 			if (player.getHp() < (i + 0.5f)) { //NO LIFE
 				index = 0;
