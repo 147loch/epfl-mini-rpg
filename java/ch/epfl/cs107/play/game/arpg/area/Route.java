@@ -28,6 +28,10 @@ public class Route extends ARPGArea {
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(9, 0), new DiscreteCoordinates(10, 0)));
 
+		this.registerActor(new Door("zelda/RouteChateau", new DiscreteCoordinates(9, 1),
+				Logic.TRUE, this, Orientation.UP,
+				new DiscreteCoordinates(9, 19), new DiscreteCoordinates(10, 19)));
+		
 		for (int i = 5; i <= 7; i++) {
 			for (int j = 6; j <= 11; j++) {
 				this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(i, j)));
