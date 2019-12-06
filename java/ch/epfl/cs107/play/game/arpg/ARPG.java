@@ -1,20 +1,22 @@
 package ch.epfl.cs107.play.game.arpg;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.area.ARPGArea;
+import ch.epfl.cs107.play.game.arpg.area.Chateau;
 import ch.epfl.cs107.play.game.arpg.area.Ferme;
 import ch.epfl.cs107.play.game.arpg.area.Route;
+import ch.epfl.cs107.play.game.arpg.area.RouteChateau;
 import ch.epfl.cs107.play.game.arpg.area.Village;
 import ch.epfl.cs107.play.game.rpg.RPG;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ARPG extends RPG {
 
@@ -25,7 +27,9 @@ public class ARPG extends RPG {
             Arrays.asList(
                     new Ferme(),
                     new Route(),
-                    new Village()
+                    new Village(),
+                    new RouteChateau(),
+                    new Chateau()
             )
     );
 

@@ -145,7 +145,7 @@ public class Bomb extends AreaEntity implements Interactor {
 		@Override
 		public void interactWith(Grass grass) {
 			if (isExploding) {
-				grass.setInactive();
+				grass.cut();
 			}
 		}
 

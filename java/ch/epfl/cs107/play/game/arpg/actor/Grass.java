@@ -9,15 +9,20 @@ import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.CoinCollectable;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.HeartCollectable;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Grass extends AreaEntity {
 
 	private final static int ANIMATION_FRAME_LENGTH = 4;
+	private final static double PROBABILITY_TO_DROP_ITEM = 0.3;
+	private final static double PROBABILITY_TO_DROP_HEART = 0.5;
 	
 	private Sprite sprite;
 	private Animation animation;
@@ -53,8 +58,18 @@ public class Grass extends AreaEntity {
 		super.update(deltaTime);
 	}
 
-	public void setInactive() {
+	public void cut() {
 		active = false;
+		
+		if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_ITEM) {
+			if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_HEART) {
+				getOwnerArea().registerActor(new HeartCollectable(getOwnerArea(), Orientation.UP,
+						new DiscreteCoordinates((int)this.getPosition().x, (int)this.getPosition().y)));
+			} else {
+				getOwnerArea().registerActor(new CoinCollectable(getOwnerArea(), Orientation.UP,
+						new DiscreteCoordinates((int)this.getPosition().x, (int)this.getPosition().y)));
+			}
+		}
 	}
 	
 	@Override

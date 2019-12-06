@@ -44,60 +44,22 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		for (int i = 0; i < Math.floor(Math.log10(player.getInventoryMoney()) + 1); i++) {
 			int row = 2;
 			int column = 3;
-
 			int c = Character.digit(Integer.toString(player.getInventoryMoney()).charAt(i), 10);
-
-			switch (Integer.toString(player.getInventoryMoney()).charAt(i)) {
-				case ('1'):
-					row = 0;
-					column = 0;
-					break;
-				case ('2'):
-					row = 1;
-					column = 0;
-					break;
-				case ('3'):
-					row = 2;
-					column = 0;
-					break;
-				case ('4'):
-					row = 3;
-					column = 0;
-					break;
-				case ('5'):
-					row = 0;
-					column = 1;
-					break;
-				case ('6'):
-					row = 1;
-					column = 1;
-					break;
-				case ('7'):
-					row = 2;
-					column = 1;
-					break;
-				case ('8'):
-					row = 3;
-					column = 1;
-					break;
-				case ('9'):
-					row = 0;
-					column = 2;
-					break;
-				case ('0'):
-					row = 1;
-					column = 2;
-					break;
+			if (c != 0) {
+				column = (c - 1) % 4;
+				row = (c - 1) / 4;
+			} else {
+				column = 1;
+				row = 2;
 			}
 			
 			new ImageGraphics(ResourcePath.getSprite("zelda/digits"),
-					0.8f, 0.8f, new RegionOfInterest(row*16, column*16, 16, 16),
+					0.8f, 0.8f, new RegionOfInterest(column*16, row*16, 16, 16),
 					anchor.add(new Vector(2f + i*0.5f, 0.9f)), 1, DEPTH + 1).draw(canvas);
 		}
 		
 		//DISPLAY HEART
-		for (int i = 0; i < 5; i++) {
-			ImageGraphics graphicHeart;
+		for (int i = 0; i < Math.ceil(player.getMaxHp()); i++) {
 			int index;
 			if (player.getHp() < (i + 0.5f)) { //NO LIFE
 				index = 0;
