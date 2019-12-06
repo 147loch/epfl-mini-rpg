@@ -1,7 +1,6 @@
 package ch.epfl.cs107.play.game.inventory;
 
 
-// TODO extends positionable
 public interface InventoryItem {
 
 	/**

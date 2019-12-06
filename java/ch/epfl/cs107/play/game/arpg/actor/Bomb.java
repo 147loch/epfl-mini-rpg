@@ -144,7 +144,7 @@ public class Bomb extends AreaEntity implements Interactor {
 	private class ARPGBombHandler implements ARPGInteractionVisitor {
 		@Override
 		public void interactWith(Grass grass) {
-			if (isExploding) {
+			if (remainingTime <= 0) { //TODO Change that
 				grass.cut();
 			}
 		}
