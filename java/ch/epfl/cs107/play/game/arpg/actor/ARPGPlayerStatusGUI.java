@@ -13,7 +13,6 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	
 	private ARPGPlayer player;
 	private ARPGInventory inventory;
-	private String stringCurrentItem;
 
 	protected ARPGPlayerStatusGUI(ARPGPlayer player, ARPGInventory inventory) {
 		this.player = player;
