@@ -9,6 +9,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.CoinCollectable;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.HeartCollectable;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
@@ -32,6 +34,7 @@ public class ARPGPlayer extends Player {
 
 	private ARPGItem currentHoldingItem;
 	private float hp;
+	private float maxHp;
 	
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
@@ -39,6 +42,7 @@ public class ARPGPlayer extends Player {
 		handler = new ARPGPlayerHandler();
 		inventory = new ARPGInventory(BASE_MONEY);
 		hp = 3.5f;
+		maxHp = 5.f;
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -93,6 +97,22 @@ public class ARPGPlayer extends Player {
 
 	protected int getInventoryMoney() {
 		return inventory.getMoney();
+	}
+	
+	
+	protected float getHp() {
+		return hp;
+	}
+	
+	protected float getMaxHp() {
+		return maxHp;
+	}
+	
+	private void addHp(float hp) {
+		this.hp += hp;
+		
+		if (this.hp > maxHp)
+			this.hp = maxHp;
 	}
 
 	@Override
@@ -191,9 +211,19 @@ public class ARPGPlayer extends Player {
 		public void interactWith(Grass grass) {
 			grass.setInactive();
 		}
-	}
-	
-	protected float getHp() {
-		return hp;
+		
+		@Override
+		public void interactWith(CoinCollectable collec) {
+			inventory.addMoney(collec.getMoneyBack());
+			getOwnerArea().unregisterActor(collec);
+		}
+		
+		@Override
+		public void interactWith(HeartCollectable collec) {
+			if (hp < maxHp) {
+				addHp(collec.getHeartBack());
+				getOwnerArea().unregisterActor(collec);
+			}
+		}
 	}
 }

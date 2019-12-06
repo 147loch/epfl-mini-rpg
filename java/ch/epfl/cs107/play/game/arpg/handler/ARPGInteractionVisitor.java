@@ -4,6 +4,8 @@ import ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.CoinCollectable;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.HeartCollectable;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
 public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
@@ -16,4 +18,7 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 
 	default void interactWith(Bomb bomb) {}
 	
+	default void interactWith(CoinCollectable collec) {}
+	
+	default void interactWith(HeartCollectable collec) {}
 }

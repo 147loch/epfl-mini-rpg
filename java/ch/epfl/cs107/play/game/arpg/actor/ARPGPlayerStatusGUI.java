@@ -57,7 +57,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		}
 		
 		//DISPLAY HEART
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < Math.ceil(player.getMaxHp()); i++) {
 			int index;
 			if (player.getHp() < (i + 0.5f)) { //NO LIFE
 				index = 0;
