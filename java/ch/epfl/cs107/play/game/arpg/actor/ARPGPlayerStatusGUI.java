@@ -29,19 +29,24 @@ public class ARPGPlayerStatusGUI implements Graphics {
 				anchor.add(new Vector(0.25f, height - 1.75f)), 1, DEPTH).draw(canvas);
 		
 		//DISPLAY CURRENT ITEM
-		new ImageGraphics(player.getCurrentItemResourcePath(),
-				1.f, 1.f, new RegionOfInterest(0, 0, 16, 16),
-				anchor.add(new Vector(0.5f, height - 1.5f)), 1, DEPTH + 1).draw(canvas);
-		
+		if (player.getCurrentItem() != null) {
+			new ImageGraphics(player.getCurrentItem().getResourcePath()	,
+					1.f, 1.f, new RegionOfInterest(0, 0, 16, 16),
+					anchor.add(new Vector(0.5f, height - 1.5f)), 1, DEPTH + 1).draw(canvas);
+		}
+
 		//DISPLAY COIN
 		new ImageGraphics(ResourcePath.getSprite("zelda/coinsDisplay"),
 				4.f, 2.f, new RegionOfInterest(0, 0, 64, 32),
 				anchor.add(new Vector(0.25f, 0.25f)), 1, DEPTH).draw(canvas);
 		
 		//DISPLAY NUMBER FOR COINS
-		for (int i = 0; i < Math.ceil(Math.log10(player.getInventoryMoney())); i++) {
+		for (int i = 0; i < Math.floor(Math.log10(player.getInventoryMoney()) + 1); i++) {
 			int row = 2;
 			int column = 3;
+
+			int c = Character.digit(Integer.toString(player.getInventoryMoney()).charAt(i), 10);
+
 			switch (Integer.toString(player.getInventoryMoney()).charAt(i)) {
 				case ('1'):
 					row = 0;

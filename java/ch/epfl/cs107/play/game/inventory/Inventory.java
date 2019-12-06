@@ -3,12 +3,12 @@ package ch.epfl.cs107.play.game.inventory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Inventory {
+public abstract class Inventory {
 
 	private float maxWeight;
 	private float weight;
 	private Map<InventoryItem, Integer> inventory;
-	
+
 	protected Inventory() {
 		inventory = new HashMap<>();
 		maxWeight = 20.f;
@@ -51,6 +51,11 @@ public class Inventory {
 					return false;
 				inventory.replace(key, inventory.get(key) - count);
 				weight -= item.getWeight() * count;
+
+				if (inventory.get(key) == 0) {
+					inventory.remove(key);
+				}
+
 				return true;
 			}
 		}
@@ -61,10 +66,8 @@ public class Inventory {
 		return new HashMap<>(inventory);
 	}
 
-	public class Holder {
-		public boolean possesses(InventoryItem item) {
-			return isInInventory(item);
-		}
+	public interface Holder {
+		boolean possess(InventoryItem item);
 	}
 
 }

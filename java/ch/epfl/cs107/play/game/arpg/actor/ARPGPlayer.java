@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
+import ch.epfl.cs107.play.game.inventory.Inventory;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
@@ -19,9 +20,9 @@ import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
-public class ARPGPlayer extends Player {
+public class ARPGPlayer extends Player implements Inventory.Holder {
 
-	private final static int ANIMATION_DURATION = 8;
+	private final static int ANIMATION_DURATION = 4;
 	private final static int BASE_MONEY = 146;
 
 	private ARPGPlayerHandler handler;
@@ -32,7 +33,7 @@ public class ARPGPlayer extends Player {
 
 	private ARPGItem currentHoldingItem;
 	private float hp;
-	
+
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
 
@@ -41,9 +42,9 @@ public class ARPGPlayer extends Player {
 		hp = 3.5f;
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
-		if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
+		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
 		currentHoldingItem = (ARPGItem)inventory.getItemList().get(0);
-		
+
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
@@ -54,15 +55,23 @@ public class ARPGPlayer extends Player {
 
 	public void cycleCurrentInventoryItem() {
 		List<InventoryItem> list = inventory.getItemList();
-		int cur = list.indexOf(currentHoldingItem);
-		if (cur == list.size() -1) this.currentHoldingItem = (ARPGItem)list.get(0);
-		else this.currentHoldingItem = (ARPGItem)list.get(cur+1);
+		if (list.size() == 0) this.currentHoldingItem = null;
+		else {
+			int cur = list.indexOf(currentHoldingItem);
+			if (cur == list.size() - 1) this.currentHoldingItem = (ARPGItem) list.get(0);
+			else this.currentHoldingItem = (ARPGItem) list.get(cur + 1);
+		}
 	}
 
 	public void useInventoryItem() {
+		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
 			case BOMB:
 				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				inventory.removeEntry(ARPGItem.BOMB, 1);
+				if (!this.possess(ARPGItem.BOMB)) {
+					cycleCurrentInventoryItem();
+				}
 				break;
 			case ARROW:
 			case SWORD:
@@ -81,15 +90,15 @@ public class ARPGPlayer extends Player {
 			else orientate(orientation);
 		}
 	}
-	
+
 	public void takeDamage() {
 		if (hp >= 0.5f)
 			hp -= 0.5f;
 		// TODO animation and stuff also death
 	}
 
-	protected String getCurrentItemResourcePath() {
-		return currentHoldingItem.getResourcePath();
+	protected ARPGItem getCurrentItem() {
+		return currentHoldingItem;
 	}
 
 	protected int getInventoryMoney() {
@@ -114,7 +123,7 @@ public class ARPGPlayer extends Player {
 		{
 			currentAnimation = animations[3];
 		}
-		
+
 		if (this.isDisplacementOccurs()) {
 			currentAnimation.update(deltaTime);
 		} else {
@@ -125,12 +134,16 @@ public class ARPGPlayer extends Player {
 		if (keyboard.get(Keyboard.TAB).isPressed())
 			cycleCurrentInventoryItem();
 
+		if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
+			cycleCurrentInventoryItem();
+		}
+
 		if (keyboard.get(Keyboard.SPACE).isPressed() && !this.isDisplacementOccurs())
 			useInventoryItem();
 
 		super.update(deltaTime);
 	}
-	
+
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		return Collections.singletonList(getCurrentMainCellCoordinates());
@@ -181,7 +194,12 @@ public class ARPGPlayer extends Player {
 	public void acceptInteraction(AreaInteractionVisitor v) {
 		((ARPGInteractionVisitor)v).interactWith(this);
 	}
-	
+
+	@Override
+	public boolean possess(InventoryItem item) {
+		return inventory.isInInventory(item);
+	}
+
 	private class ARPGPlayerHandler implements ARPGInteractionVisitor {
 		@Override
 		public void interactWith(Door door) {
@@ -193,7 +211,7 @@ public class ARPGPlayer extends Player {
 			grass.setInactive();
 		}
 	}
-	
+
 	protected float getHp() {
 		return hp;
 	}

@@ -10,7 +10,7 @@ public enum ARPGItem implements InventoryItem {
 			return "Arrow";
 		}
 	},
-	SWORD("zelda/arrow.icon") {
+	SWORD("zelda/sword.icon") {
 		@Override
 		public String getName() {
 			return "Sword";

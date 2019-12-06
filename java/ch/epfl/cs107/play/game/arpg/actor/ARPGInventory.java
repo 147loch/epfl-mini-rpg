@@ -32,6 +32,8 @@ public class ARPGInventory extends Inventory {
 		return fortune;
 	}
 
+	public int getItemAmount(InventoryItem item) { return super.getMap().get(item); }
+
 	// Overrides the basic inventory methods so that we include the fortune management system
     // This way the followinf two methods are properly encapsulated and only available to actors.
 
@@ -50,4 +52,6 @@ public class ARPGInventory extends Inventory {
 	protected List<InventoryItem> getItemList() {
 		return new ArrayList<>(super.getMap().keySet());
 	}
+
+
 }
