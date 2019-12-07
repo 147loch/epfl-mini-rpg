@@ -77,7 +77,7 @@ public class Bomb extends AreaEntity implements Interactor {
 		else
 			bombAnimationSpeedIndex++;
 		
-		if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * ANIMATION_EXPLOSION_SPEED_FACTOR)) { //*2 because speedFactor = 2
+		if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * ANIMATION_EXPLOSION_SPEED_FACTOR)) {
 			this.getOwnerArea().unregisterActor(this);
 		}
 		
@@ -133,7 +133,7 @@ public class Bomb extends AreaEntity implements Interactor {
 
 	@Override
 	public boolean wantsCellInteraction() {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -142,16 +142,16 @@ public class Bomb extends AreaEntity implements Interactor {
 	}
 	
 	private class ARPGBombHandler implements ARPGInteractionVisitor {
+		
 		@Override
 		public void interactWith(Grass grass) {
-			if (remainingTime <= 0) { //TODO Change that
+			if (explosionAnimationIndex == 1)
 				grass.cut();
-			}
 		}
 
 		@Override
 		public void interactWith(ARPGPlayer player) {
-			if (explosionAnimationIndex == (ANIMATION_EXPLOSION_FRAME_LENGTH * ANIMATION_EXPLOSION_SPEED_FACTOR)) {
+			if (explosionAnimationIndex == 1) {
 				player.takeDamage();
 			}
 		}

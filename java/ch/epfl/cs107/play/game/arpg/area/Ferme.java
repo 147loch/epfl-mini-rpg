@@ -4,9 +4,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.Bomb;
+import ch.epfl.cs107.play.game.arpg.actor.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.CoinCollectable;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.HeartCollectable;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -41,7 +40,6 @@ public class Ferme extends ARPGArea {
 		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 11)));
 		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
 		
-		this.registerActor(new HeartCollectable(this, Orientation.UP, new DiscreteCoordinates(12, 13)));
-		this.registerActor(new CoinCollectable(this, Orientation.UP, new DiscreteCoordinates(12, 12)));
+		this.registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
 	}
 }

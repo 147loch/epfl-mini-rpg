@@ -8,8 +8,12 @@ import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class CastleDoor extends Door {
 
-	public CastleDoor(String destination, DiscreteCoordinates otherSideCoordinates, Logic signal, Area area,
-			Orientation orientation, DiscreteCoordinates position) {
-		super(destination, otherSideCoordinates, signal, area, orientation, position);
+	public CastleDoor(String destination, DiscreteCoordinates otherSideCoordinates, Area area,
+			Orientation orientation, DiscreteCoordinates position, DiscreteCoordinates secondPosition) {
+		super(destination, otherSideCoordinates, Logic.FALSE, area, orientation, position, secondPosition);
+	}
+	
+	public void changeSignal() {
+		
 	}
 }

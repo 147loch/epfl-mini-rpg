@@ -42,8 +42,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		handler = new ARPGPlayerHandler();
 		inventory = new ARPGInventory(BASE_MONEY);
-		hp = 3.5f;
 		maxHp = 5.f;
+		hp = maxHp;
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -223,6 +223,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void interactWith(Door door) {
 			setIsPassingADoor(door);
 		}
+		
+		@Override
+		public void interactWith(CastleDoor castleDoor) {
+
+		}
 
 		@Override
 		public void interactWith(Grass grass) {
@@ -241,6 +246,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				addHp(collec.getHeartBack());
 				getOwnerArea().unregisterActor(collec);
 			}
+		}
+		
+		@Override
+		public void interactWith(CastleKey key) {
+			inventory.addEntry(ARPGItem.CASTLE_KEY, 1);
+			getOwnerArea().unregisterActor(key);
 		}
 	}
 }
