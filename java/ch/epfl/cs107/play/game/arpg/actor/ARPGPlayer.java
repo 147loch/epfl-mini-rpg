@@ -12,6 +12,9 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
+import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
+import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventRegister;
 import ch.epfl.cs107.play.game.inventory.Inventory;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
@@ -24,19 +27,42 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class ARPGPlayer extends Player implements Inventory.Holder {
 
+    // Constants
 	private final static int ANIMATION_DURATION = 4;
 	private final static int BASE_MONEY = 100;
 
+	// ARPG Stuff
 	private ARPGPlayerHandler handler;
 	private ARPGInventory inventory;
+    private ARPGPlayerStatusGUI gui;
+    private ARPGItem currentHoldingItem;
+
+    // Animations
 	private Animation[] animations;
 	private Animation currentAnimation;
-	private ARPGPlayerStatusGUI gui;
 
-	private ARPGItem currentHoldingItem;
+	// Keyboard events
+    private KeyboardEventRegister keyboardRegister;
+
+	// Attributes
 	private float hp;
 	private float maxHp;
-	
+
+	// Keyboard Events used for the player
+	private class CycleItemEventListener implements KeyboardEventListener {
+		@Override
+		public void onKeyEvent() {
+			cycleCurrentInventoryItem();
+		}
+	}
+
+	private class UseInventoryItemEventListener implements KeyboardEventListener {
+		@Override
+		public void onKeyEvent() {
+			if (!isDisplacementOccurs()) useInventoryItem();
+		}
+	}
+
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
 
@@ -44,6 +70,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		inventory = new ARPGInventory(BASE_MONEY);
 		maxHp = 5.f;
 		hp = maxHp;
+
+		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
+		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemEventListener());
+		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryItemEventListener());
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -70,7 +100,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
 			case BOMB:
-				// TODO try to catch when the bomb cannot be places properly, because otherwise we remove an unused item from the inventory
+				// TODO try to catch when the bomb cannot be placed properly, because otherwise we remove an unused item from the inventory
 				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				inventory.removeEntry(ARPGItem.BOMB, 1);
 				if (!this.possess(ARPGItem.BOMB)) {
@@ -137,28 +167,25 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			currentAnimation = animations[3];
 		}
 
+
+		// TODO this could potentially be replaced with an event listener
 		Keyboard keyboard = getOwnerArea().getKeyboard();
 		if (!this.isDisplacementOccurs()) {
-			moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-			moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
-			moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-			moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+			moveOrientate(Orientation.LEFT, KeyboardAction.MOVE_LEFT.getAssignedButton(keyboard));
+			moveOrientate(Orientation.UP, KeyboardAction.MOVE_UP.getAssignedButton(keyboard));
+			moveOrientate(Orientation.RIGHT, KeyboardAction.MOVE_RIGHT.getAssignedButton(keyboard));
+			moveOrientate(Orientation.DOWN, KeyboardAction.MOVE_DOWN.getAssignedButton(keyboard));
 			
 			currentAnimation.reset();
 		} else {
 			currentAnimation.update(deltaTime);
 		}
 
-		// TODO KeyboardEvents Register avec gestionnaire de touches au lieu de hardcode.
-		if (keyboard.get(Keyboard.TAB).isPressed())
-			cycleCurrentInventoryItem();
+		keyboardRegister.update();
 
 		if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
 			cycleCurrentInventoryItem();
 		}
-
-		if (keyboard.get(Keyboard.SPACE).isPressed() && !this.isDisplacementOccurs())
-			useInventoryItem();
 
 		super.update(deltaTime);
 	}
@@ -201,7 +228,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public boolean wantsViewInteraction() {
-		return getOwnerArea().getKeyboard().get(Keyboard.E).isPressed();
+		return KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed();
 	}
 
 	@Override
