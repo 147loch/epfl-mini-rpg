@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.arpg;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.actor.monster.FlyableEntity;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
@@ -70,7 +71,13 @@ public class ARPGBehavior extends AreaBehavior {
 		protected boolean canLeave(Interactable entity) { return true; }
 		@Override
 		protected boolean canEnter(Interactable entity) {
-			if (this.hasNonTraversableContent())
+			if (entity instanceof FlyableEntity)
+			{
+				if (((FlyableEntity) entity).canFly() && (type.isWalkable || type.equals(ARPGCellType.IMPASSABLE)))
+					return true;
+				else return false;
+			}
+			if (hasNonTraversableContent())
 				return false;
 			else
 				return type.isWalkable;
