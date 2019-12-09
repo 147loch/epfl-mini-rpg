@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.arpg.actor;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,15 +17,14 @@ import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventRegister;
+import ch.epfl.cs107.play.game.arpg.keybindings.StaticKeyboardEventListener;
 import ch.epfl.cs107.play.game.inventory.Inventory;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
-import ch.epfl.cs107.play.window.Keyboard;
 
 public class ARPGPlayer extends Player implements Inventory.Holder {
 
@@ -49,17 +49,41 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private float maxHp;
 
 	// Keyboard Events used for the player
-	private class CycleItemEventListener implements KeyboardEventListener {
+	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
 		@Override
 		public void onKeyEvent() {
 			cycleCurrentInventoryItem();
 		}
 	}
 
-	private class UseInventoryItemEventListener implements KeyboardEventListener {
+	private class UseInventoryKeyItemEventListener implements StaticKeyboardEventListener {
 		@Override
 		public void onKeyEvent() {
 			if (!isDisplacementOccurs()) useInventoryItem();
+		}
+	}
+
+	private class MoveOrientateKeyEventListener implements KeyboardEventListener {
+		@Override
+		public void onKeyEvent(KeyboardAction action) {
+			if (!isDisplacementOccurs()) {
+				switch (action) {
+					case MOVE_LEFT:
+						moveOrientate(Orientation.LEFT);
+						break;
+					case MOVE_UP:
+						moveOrientate(Orientation.UP);
+						break;
+					case MOVE_RIGHT:
+						moveOrientate(Orientation.RIGHT);
+					 	break;
+					case MOVE_DOWN:
+						moveOrientate(Orientation.DOWN);
+						break;
+					default:
+						break;
+				}
+			}
 		}
 	}
 
@@ -72,8 +96,16 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		hp = maxHp;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
-		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemEventListener());
-		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryItemEventListener());
+		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
+		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
+		keyboardRegister.registerKeyboardEvents(
+				Arrays.asList(
+						KeyboardAction.MOVE_DOWN,
+						KeyboardAction.MOVE_LEFT,
+						KeyboardAction.MOVE_UP,
+						KeyboardAction.MOVE_RIGHT
+				), new MoveOrientateKeyEventListener(),true
+		);
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -117,12 +149,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 
-	private void moveOrientate(Orientation orientation, Button b){
-		if (b.isDown()) {
-			if (getOrientation() == orientation)
-				 move(ANIMATION_DURATION * 2);
-			else orientate(orientation);
-		}
+	private void moveOrientate(Orientation orientation){
+		if (getOrientation() == orientation)
+			move(ANIMATION_DURATION * 2);
+		else orientate(orientation);
 	}
 
 	public void takeDamage() {
@@ -167,21 +197,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			currentAnimation = animations[3];
 		}
 
-
-		// TODO this could potentially be replaced with an event listener
-		Keyboard keyboard = getOwnerArea().getKeyboard();
-		if (!this.isDisplacementOccurs()) {
-			moveOrientate(Orientation.LEFT, KeyboardAction.MOVE_LEFT.getAssignedButton(keyboard));
-			moveOrientate(Orientation.UP, KeyboardAction.MOVE_UP.getAssignedButton(keyboard));
-			moveOrientate(Orientation.RIGHT, KeyboardAction.MOVE_RIGHT.getAssignedButton(keyboard));
-			moveOrientate(Orientation.DOWN, KeyboardAction.MOVE_DOWN.getAssignedButton(keyboard));
-			
-			currentAnimation.reset();
-		} else {
-			currentAnimation.update(deltaTime);
-		}
-
 		keyboardRegister.update();
+
+		if (isDisplacementOccurs()) {
+			currentAnimation.update(deltaTime);
+		} else {
+			currentAnimation.reset();
+		}
 
 		if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
 			cycleCurrentInventoryItem();
