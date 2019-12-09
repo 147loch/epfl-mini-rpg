@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Rarity;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -23,7 +24,6 @@ public class Grass extends AreaEntity {
 	private final static int ANIMATION_FRAME_LENGTH = 4;
 	
 	private final static double PROBABILITY_TO_DROP_ITEM = 0.3;
-	private final static double PROBABILITY_TO_DROP_HEART = 0.5;
 	
 	private Sprite sprite;
 	private Animation animation;
@@ -63,7 +63,7 @@ public class Grass extends AreaEntity {
 		active = false;
 		
 		if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_ITEM) {
-			if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_HEART) {
+			if (RandomGenerator.getInstance().nextDouble() < Rarity.COMMON.getRarity()) {
 				getOwnerArea().registerActor(new Heart(getOwnerArea(), Orientation.UP,
 						new DiscreteCoordinates((int)this.getPosition().x, (int)this.getPosition().y)));
 			} else {
