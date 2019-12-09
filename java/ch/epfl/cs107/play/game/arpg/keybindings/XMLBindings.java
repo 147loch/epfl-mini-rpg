@@ -68,10 +68,10 @@ public final class XMLBindings {
                 if (binding.hasAttributes()) {
                     NamedNodeMap attr = binding.getAttributes();
                     String name = attr.getNamedItem("name").getTextContent();
-                    int keyId = Integer.parseInt(attr.getNamedItem("key").getTextContent());
+                    KeyboardKey key = KeyboardKey.valueOf(attr.getNamedItem("key").getTextContent());
 
-                    if (name != null && keyId != -1)
-                        this.bindings.put(name, new XMLBinding(name, keyId));
+                    if (name != null)
+                        this.bindings.put(name, new XMLBinding(name, key));
                 }
             }
         } catch (SAXException | ParserConfigurationException | TransformerException e) {
@@ -108,11 +108,11 @@ public final class XMLBindings {
      *  - update the map
      *
      * @param name Name of the binding to change
-     * @param keyId The new key to replace the previous one
+     * @param key The new key to replace the previous one
      */
-    void setBinding(String name, int keyId) {
+    void setBinding(String name, KeyboardKey key) {
         if (!this.bindings.containsKey(name)) {
-            this.addBinding(name, keyId);
+            this.addBinding(name, key);
             return;
         }
 
@@ -129,12 +129,12 @@ public final class XMLBindings {
             for (Node _binding: iterable(bindings)) {
                 NamedNodeMap attr = _binding.getAttributes();
                 if (attr.getNamedItem("name").getTextContent().equals(name))
-                    attr.getNamedItem("key").setTextContent(String.valueOf(keyId));
+                    attr.getNamedItem("key").setTextContent(key.name());
             }
 
             transformXML(dom);
 
-            this.bindings.replace(name, new XMLBinding(name, keyId));
+            this.bindings.replace(name, new XMLBinding(name, key));
         } catch (ParserConfigurationException | SAXException | TransformerException e) {
             e.printStackTrace();
         } catch (IOException ioe) {
@@ -143,14 +143,14 @@ public final class XMLBindings {
     }
     /**
      * @param binding The binding to replace
-     * @see this#setBinding(String, int)
-     * @see XMLBinding#XMLBinding(String, int)
+     * @see this#setBinding(String, KeyboardKey)
+     * @see XMLBinding#XMLBinding(String, KeyboardKey)
      */
-    void setBinding(XMLBinding binding) { setBinding(binding.getName(), binding.getKeyId()); }
+    void setBinding(XMLBinding binding) { setBinding(binding.getName(), binding.getKey()); }
     /**
      * @param bindings The list of bindings to replace
-     * @see this#setBinding(String, int)
-     * @see XMLBinding#XMLBinding(String, int)
+     * @see this#setBinding(String, KeyboardKey)
+     * @see XMLBinding#XMLBinding(String, KeyboardKey)
      */
     void setBindings(List<XMLBinding> bindings) { bindings.forEach(this::setBinding); }
 
@@ -167,9 +167,9 @@ public final class XMLBindings {
      *  - update the map
      *
      * @param name Name of the binding to change
-     * @param keyId The new key to replace the previous one
+     * @param key The new key to replace the previous one
      */
-    void addBinding(String name, int keyId) {
+    void addBinding(String name, KeyboardKey key) {
         if (this.bindings.containsKey(name))
             throw new IllegalArgumentException("The binding you want to add already exists.");
 
@@ -183,13 +183,13 @@ public final class XMLBindings {
 
             Element newBinding = dom.createElement("binding");
             newBinding.setAttribute("name", name);
-            newBinding.setAttribute("key", String.valueOf(keyId));
+            newBinding.setAttribute("key", key.name());
 
             dom.getFirstChild().appendChild(newBinding);
 
             transformXML(dom);
 
-            this.bindings.put(name, new XMLBinding(name, keyId));
+            this.bindings.put(name, new XMLBinding(name, key));
         } catch (ParserConfigurationException | SAXException | TransformerException e) {
             e.printStackTrace();
         } catch (IOException ioe) {
@@ -198,14 +198,14 @@ public final class XMLBindings {
     }
     /**
      * @param binding The binding to add
-     * @see this#addBinding(String, int)
-     * @see XMLBinding#XMLBinding(String, int)
+     * @see this#addBinding(String, KeyboardKey)
+     * @see XMLBinding#XMLBinding(String, KeyboardKey)
      */
-    void addBinding(XMLBinding binding) { addBinding(binding.getName(), binding.getKeyId()); }
+    void addBinding(XMLBinding binding) { addBinding(binding.getName(), binding.getKey()); }
     /**
      * @param bindings The list of bindings to add
-     * @see this#addBinding(String, int)
-     * @see XMLBinding#XMLBinding(String, int)
+     * @see this#addBinding(String, KeyboardKey)
+     * @see XMLBinding#XMLBinding(String, KeyboardKey)
      */
     void addBindings(List<XMLBinding> bindings) { bindings.forEach(this::addBinding); }
 
@@ -255,7 +255,7 @@ public final class XMLBindings {
     /**
      * @param binding The binding to remove
      * @see this#removeBinding(String)
-     * @see XMLBinding#XMLBinding(String, int)
+     * @see XMLBinding#XMLBinding(String, KeyboardKey)
      */
     void removeBinding(XMLBinding binding) { removeBinding(binding.getName()); }
 

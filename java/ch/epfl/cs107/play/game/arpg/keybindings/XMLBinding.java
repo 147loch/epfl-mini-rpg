@@ -3,17 +3,17 @@ package ch.epfl.cs107.play.game.arpg.keybindings;
 public class XMLBinding {
 
     private String name;
-    private int keyId;
+    private KeyboardKey key;
 
     /**
      * A pair of two properties to store the data from the XML keybinds
      * @param name Action and Keybind name
-     * @param keyId The Keyboard key ID correpsonding to the action
+     * @param key The Keyboard key ID correpsonding to the action
      * @see KeyboardAction
      */
-    XMLBinding(String name, int keyId) {
+    XMLBinding(String name, KeyboardKey key) {
         this.name = name;
-        this.keyId = keyId;
+        this.key = key;
     }
 
     /**
@@ -26,8 +26,8 @@ public class XMLBinding {
     /**
      * @return The key id linked
      */
-    public int getKeyId() {
-        return keyId;
+    public KeyboardKey getKey() {
+        return key;
     }
 
     /**
