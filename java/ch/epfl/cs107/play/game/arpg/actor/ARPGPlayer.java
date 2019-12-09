@@ -58,11 +58,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	public void cycleCurrentInventoryItem() {
 		List<InventoryItem> list = inventory.getItemList();
-		if (list.size() == 0) this.currentHoldingItem = null;
+		if (list.size() == 0) currentHoldingItem = null;
 		else {
 			int cur = list.indexOf(currentHoldingItem);
-			if (cur == list.size() - 1) this.currentHoldingItem = (ARPGItem) list.get(0);
-			else this.currentHoldingItem = (ARPGItem) list.get(cur + 1);
+			if (cur == list.size() - 1) currentHoldingItem = (ARPGItem) list.get(0);
+			else currentHoldingItem = (ARPGItem) list.get(cur + 1);
 		}
 	}
 
@@ -70,6 +70,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
 			case BOMB:
+				// TODO try to catch when the bomb cannot be places properly, because otherwise we remove an unused item from the inventory
 				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				inventory.removeEntry(ARPGItem.BOMB, 1);
 				if (!this.possess(ARPGItem.BOMB)) {
