@@ -21,6 +21,7 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Grass extends AreaEntity {
 
 	private final static int ANIMATION_FRAME_LENGTH = 4;
+	
 	private final static double PROBABILITY_TO_DROP_ITEM = 0.3;
 	private final static double PROBABILITY_TO_DROP_HEART = 0.5;
 	

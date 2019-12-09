@@ -220,14 +220,24 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	private class ARPGPlayerHandler implements ARPGInteractionVisitor {
+		
 		@Override
 		public void interactWith(Door door) {
-			setIsPassingADoor(door);
+			if (door instanceof CastleDoor)
+				interactWith((CastleDoor) door);
+			else
+				setIsPassingADoor(door);
 		}
 		
 		@Override
 		public void interactWith(CastleDoor castleDoor) {
-
+			if (wantsViewInteraction()) {
+				if (currentHoldingItem.equals(ARPGItem.CASTLE_KEY))
+					castleDoor.changeSignal();
+			} else {
+				setIsPassingADoor(castleDoor);
+				castleDoor.changeSignal();
+			}
 		}
 
 		@Override

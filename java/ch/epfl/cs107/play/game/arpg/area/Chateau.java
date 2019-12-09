@@ -19,7 +19,7 @@ public class Chateau extends ARPGArea {
 		this.registerActor(new Background(this));
 		this.registerActor(new Foreground(this));
 		
-		this.registerActor(new Door("zelda/Route", new DiscreteCoordinates(9, 13),
+		this.registerActor(new Door("zelda/RouteChateau", new DiscreteCoordinates(9, 12),
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(7, 0), new DiscreteCoordinates(8, 0)));
 	}
