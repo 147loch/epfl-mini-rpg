@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.monster.SkullFlame;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -27,8 +28,7 @@ import ch.epfl.cs107.play.window.Keyboard;
 
 public class ARPGPlayer extends Player implements Inventory.Holder {
 
-    // Constants
-	private final static int ANIMATION_DURATION = 4;
+	private final static int ANIMATION_DURATION = 2;
 	private final static int BASE_MONEY = 100;
 
 	// ARPG Stuff
@@ -81,7 +81,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
-		animations = RPGSprite.createAnimations(ANIMATION_DURATION/2, sprites);
+		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
 
 		gui = new ARPGPlayerStatusGUI(this);
 	}
@@ -120,7 +120,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private void moveOrientate(Orientation orientation, Button b){
 		if (b.isDown()) {
 			if (getOrientation() == orientation)
-				 move(ANIMATION_DURATION);
+				 move(ANIMATION_DURATION * 2);
 			else orientate(orientation);
 		}
 	}
@@ -290,6 +290,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void interactWith(CastleKey key) {
 			inventory.addEntry(ARPGItem.CASTLE_KEY, 1);
 			getOwnerArea().unregisterActor(key);
+		}
+		
+		@Override
+		public void interactWith(SkullFlame skull) {
+			skull.takeDamage();
 		}
 	}
 }
