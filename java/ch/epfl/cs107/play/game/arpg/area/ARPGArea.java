@@ -7,6 +7,8 @@ import ch.epfl.cs107.play.window.Window;
 
 public abstract class ARPGArea extends Area {
 
+	private final static float CAMERA_SCALE_FACTOR = 15.f;
+
 	protected abstract void createArea();
 	
 	@Override
@@ -16,7 +18,7 @@ public abstract class ARPGArea extends Area {
 
 	@Override
 	public float getCameraScaleFactor() {
-		return 10.f;
+		return CAMERA_SCALE_FACTOR;
 	}
 
 	@Override

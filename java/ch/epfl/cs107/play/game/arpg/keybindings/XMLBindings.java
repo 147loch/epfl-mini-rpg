@@ -33,7 +33,6 @@ public final class XMLBindings {
      * Upon instantiation, we initialize the linked file and save the contents in a Map
      */
     XMLBindings() {
-        this.bindings = new HashMap<>();
         this.init();
     }
 
@@ -46,6 +45,8 @@ public final class XMLBindings {
      *  - pase all the binding elements inside the bindings, create the XMLbinding, and add it to the map
      */
     private void init() {
+        this.bindings = new HashMap<>();
+
         Document dom;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -97,7 +98,7 @@ public final class XMLBindings {
     }
 
     /**
-     * Replace a binding, if it does not exist, add it.
+     * Replaces a binding, if it does not exist, add it.
      *
      * Again, what we do is pretty straight-forward:
      *  - initialize the builder factory
@@ -155,7 +156,7 @@ public final class XMLBindings {
     void setBindings(List<XMLBinding> bindings) { bindings.forEach(this::setBinding); }
 
     /**
-     * Add a binding.
+     * Adds a binding.
      *
      * Again, what we do is pretty straight-forward:
      *  - initialize the builder factory
@@ -210,7 +211,7 @@ public final class XMLBindings {
     void addBindings(List<XMLBinding> bindings) { bindings.forEach(this::addBinding); }
 
     /**
-     * Remove a binding.
+     * Removes a binding.
      *
      * Again, what we do is pretty straight-forward:
      *  - initialize the builder factory

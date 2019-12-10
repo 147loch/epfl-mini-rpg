@@ -32,7 +32,7 @@ public class Play {
         final AreaGame game = new ARPG();
 
 		// Use Swing display
-		final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);
+		final Window window = new SwingWindow(game.getTitle(), fileSystem, 800, 550);
 		
 		//Recorder recorder = new Recorder(window); 
 		//RecordReplayer replayer = new RecordReplayer(window); // not used in this project
