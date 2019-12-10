@@ -3,7 +3,6 @@ package ch.epfl.cs107.play.game.arpg.area;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
@@ -35,14 +34,12 @@ public class Ferme extends ARPGArea {
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(13, 0), new DiscreteCoordinates(14, 0)));
 
-		this.registerActor(new Bomb(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
+		this.registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
 		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10, 9 )));
 		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 10)));
-		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 11)));
+		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10 , 13)));
 		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
 		
 		this.registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
-		
-		this.registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(7, 6)));
 	}
 }
