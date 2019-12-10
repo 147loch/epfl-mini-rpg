@@ -9,6 +9,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
+import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
@@ -18,14 +20,16 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class FlameSkull extends MonsterEntity {
 
-	private static final float MIN_LIFE_TIME = 0.f;
-	private static final float MAX_LIFE_TIME = 0.5f;
-	private final static int ANIMATION_DURATION = 4;
+	private static final float MIN_LIFE_TIME = 0f;
+	private static final float MAX_LIFE_TIME = 8f;
+	private static final int ANIMATION_DURATION = 4;
 	
 	private Animation[] animations;
 	
 	private ARPGFlameSkullHandler handler;
-	
+
+	private float remainingTime;
+
 	public FlameSkull(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position, 2.f);
 		
@@ -37,14 +41,20 @@ public class FlameSkull extends MonsterEntity {
 			animations[i].setAnchor(new Vector(this.getTransform().getX().getY() - 0.5f, this.getTransform().getX().getY()));
 		}
 		setAnimation(animations[0]);
-		
+
+		remainingTime = MAX_LIFE_TIME;
+
 		handler = new ARPGFlameSkullHandler();
-		
 	}
 	
 	@Override
 	public void update(float deltaTime) {
-		
+		if (remainingTime <= 0) {
+			setState(Behavior.DEAD);
+		} else {
+			remainingTime -= deltaTime;
+		}
+
 		if (this.getOrientation() == Orientation.UP) {
 			setAnimation(animations[2]);
 		} else if (this.getOrientation() == Orientation.DOWN) {
@@ -93,6 +103,17 @@ public class FlameSkull extends MonsterEntity {
 		@Override
 		public void interactWith(Grass grass) {
 			grass.cut(false);
+		}
+
+		@Override
+		public void interactWith(Bomb bomb) {
+			bomb.explode();
+		}
+
+		@Override
+		public void interactWith(ARPGPlayer player) {
+			if (!isDisplacementOccurs())
+				player.takeDamage();
 		}
 	}
 }

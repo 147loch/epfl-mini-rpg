@@ -17,7 +17,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public abstract class MonsterEntity extends MovableAreaEntity implements FlyableEntity, Interactor {
 
-	private enum Behavior {
+	protected enum Behavior {
 		IDLE,
 		ATTACK,
 		DEAD,
@@ -25,6 +25,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 	}
 
 	private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
+	private static final int MOVEMENT_FRAMES = 8;
 	
 	private Animation animationVanish;
 	private Animation currentAnimation;
@@ -59,6 +60,8 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 	protected float getCurrentHp() {
 		return currentHp;
 	}
+
+	protected void setState(Behavior state) { this.state = state; }
 	
 	public void takeDamage() {
 		currentHp -= 0.5f;
@@ -84,7 +87,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 						resetMotion();
 						orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
 					} else
-						move(5);
+						move(MOVEMENT_FRAMES);
 				}
 				break;
 			case DEAD:

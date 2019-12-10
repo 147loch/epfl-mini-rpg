@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -57,6 +58,10 @@ public class Bomb extends AreaEntity implements Interactor {
 		explosionAnimation.setSpeedFactor(ANIMATION_EXPLOSION_SPEED_FACTOR);
 		
 		remainingTime = TIME_BEFORE_EXPLOSION;
+	}
+
+	public void explode() {
+		remainingTime = 0;
 	}
 
 	@Override
@@ -152,9 +157,14 @@ public class Bomb extends AreaEntity implements Interactor {
 
 		@Override
 		public void interactWith(ARPGPlayer player) {
-			if (explosionAnimationIndex == 1) {
+			if (explosionAnimationIndex == 1)
 				player.takeDamage();
-			}
+		}
+
+		@Override
+		public void interactWith(FlameSkull skull) {
+			if (explosionAnimationIndex == 1)
+				skull.takeDamage();
 		}
 	}
 }

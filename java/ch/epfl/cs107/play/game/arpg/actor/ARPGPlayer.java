@@ -30,6 +30,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	private final static int ANIMATION_DURATION = 2;
 	private final static int BASE_MONEY = 100;
+	private final static float INVINCIBILITY_TIME = 1.5f;
 
 	// ARPG Stuff
 	private ARPGPlayerHandler handler;
@@ -47,6 +48,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	// Attributes
 	private float hp;
 	private float maxHp;
+	private float invicibilityTime;
+	private boolean tookDamage;
 
 	// Keyboard Events used for the player
 	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
@@ -129,6 +132,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		inventory = new ARPGInventory(BASE_MONEY);
 		maxHp = 5.f;
 		hp = maxHp;
+		invicibilityTime = 0;
+		tookDamage = false;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
@@ -184,9 +189,18 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	public void takeDamage() {
-		if (hp >= 0.5f)
-			hp -= 0.5f;
-		// TODO animation and stuff also death
+		if (!tookDamage) {
+			if (hp >= 0.5f)
+				hp -= 0.5f;
+			invicibilityTime = INVINCIBILITY_TIME;
+		}
+		// TODO if took damage: blink corresponding heart for time of anim
+		//   					also turn player sprite red-er
+		//   	if hp == death: die, game over, restart
+	}
+
+	public boolean tookDamage() {
+		return tookDamage;
 	}
 
 	protected ARPGItem getCurrentItem() {
@@ -235,6 +249,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
 			cycleCurrentInventoryItem();
+		}
+
+		if (invicibilityTime > 0) {
+			invicibilityTime -= deltaTime;
+			tookDamage = true;
+		} else if (invicibilityTime < 0) {
+			invicibilityTime = 0;
+			tookDamage = false;
 		}
 
 		super.update(deltaTime);
