@@ -79,7 +79,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 			if (!player.tookDamage() && !isInvHeartOff)
 				isInvHeartOff = true;
 
-			if (!player.tookDamage() && blinkCounter >= 5)
+			if (!player.tookDamage() && blinkCounter >= 3)
 				blinkCounter = 0;
 
 			if (player.tookDamage() && i == Math.floor(player.getHp()) && !isInvHeartOff && blinkCounter <= 3) {
