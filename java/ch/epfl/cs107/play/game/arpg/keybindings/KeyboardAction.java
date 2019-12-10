@@ -4,14 +4,16 @@ import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Keyboard;
 
 public enum KeyboardAction implements Action {
-    /* NAME         | DEFAULT KEY       | INTEFACE METHODS (MAINLY TTTLE)                                           */
-    MOVE_UP          (KeyboardKey.UP)    { @Override public String getActionTitle() { return "Move Up"; } },
-    MOVE_RIGHT       (KeyboardKey.RIGHT) { @Override public String getActionTitle() { return "Move Right"; } },
-    MOVE_DOWN        (KeyboardKey.DOWN)  { @Override public String getActionTitle() { return "Move Down"; } },
-    MOVE_LEFT        (KeyboardKey.LEFT)  { @Override public String getActionTitle() { return "Move Left"; } },
-    CYCLE_INVENTORY  (KeyboardKey.TAB)   { @Override public String getActionTitle() { return "Cycle Inventory"; } },
-    USE_CURRENT_ITEM (KeyboardKey.SPACE) { @Override public String getActionTitle() { return "Use"; } },
-    VIEW_INTERACTION (KeyboardKey.E)     { @Override public String getActionTitle() { return "Interact"; } };
+    /* NAME               | DEFAULT KEY       | INTEFACE METHODS (MAINLY TTTLE)                                           */
+    MOVE_UP                (KeyboardKey.UP)    { @Override public String getActionTitle() { return "Move Up"; } },
+    MOVE_RIGHT             (KeyboardKey.RIGHT) { @Override public String getActionTitle() { return "Move Right"; } },
+    MOVE_DOWN              (KeyboardKey.DOWN)  { @Override public String getActionTitle() { return "Move Down"; } },
+    MOVE_LEFT              (KeyboardKey.LEFT)  { @Override public String getActionTitle() { return "Move Left"; } },
+    CYCLE_INVENTORY        (KeyboardKey.TAB)   { @Override public String getActionTitle() { return "Cycle Inventory"; } },
+    USE_CURRENT_ITEM       (KeyboardKey.SPACE) { @Override public String getActionTitle() { return "Use"; } },
+    VIEW_INTERACTION       (KeyboardKey.E)     { @Override public String getActionTitle() { return "Interact"; } },
+    CHEAT_SPAWN_BOMB       (KeyboardKey.B)     { @Override public String getActionTitle() { return "Spawn Bombs"; } },
+    CHEAT_SPAWN_FLAMESKULL (KeyboardKey.S)     { @Override public String getActionTitle() { return "Spawn Bombs"; } };
 
     private XMLBindings bindings;
     private KeyboardKey actionKey;

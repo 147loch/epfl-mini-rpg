@@ -11,13 +11,13 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class SkullFlame extends MonsterEntity {
+public class FlameSkull extends MonsterEntity {
 
 	private final static int ANIMATION_DURATION = 4;
 	
 	private Animation[] animations;
 	
-	public SkullFlame(Area area, Orientation orientation, DiscreteCoordinates position) {
+	public FlameSkull(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position, 2.f);
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/flameSkull", 3, 2, 2, this , 32, 32, new Orientation[]

@@ -8,7 +8,7 @@ import ch.epfl.cs107.play.game.arpg.actor.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
-import ch.epfl.cs107.play.game.arpg.actor.monster.SkullFlame;
+import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
 public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
@@ -29,5 +29,5 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	
 	default void interactWith(CastleDoor castleDoor) {}
 	
-	default void interactWith(SkullFlame skull) {}
+	default void interactWith(FlameSkull skull) {}
 }

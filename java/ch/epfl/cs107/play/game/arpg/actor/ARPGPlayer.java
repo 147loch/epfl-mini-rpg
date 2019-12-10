@@ -12,7 +12,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
-import ch.epfl.cs107.play.game.arpg.actor.monster.SkullFlame;
+import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -87,6 +87,20 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 
+	private class CheatKeysEventListener implements  KeyboardEventListener {
+		@Override
+		public void onKeyEvent(KeyboardAction action) {
+			switch (action) {
+				case CHEAT_SPAWN_BOMB:
+					getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+					break;
+				case CHEAT_SPAWN_FLAMESKULL:
+				default:
+					break;
+			}
+		}
+	}
+
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
 
@@ -95,17 +109,25 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		maxHp = 5.f;
 		hp = maxHp;
 
+		// TODO put the list of action in the listener instead
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
 		keyboardRegister.registerKeyboardEvents(
-				Arrays.asList(
-						KeyboardAction.MOVE_DOWN,
-						KeyboardAction.MOVE_LEFT,
-						KeyboardAction.MOVE_UP,
-						KeyboardAction.MOVE_RIGHT
-				), new MoveOrientateKeyEventListener(),true
+			Arrays.asList(
+				KeyboardAction.MOVE_DOWN,
+				KeyboardAction.MOVE_LEFT,
+				KeyboardAction.MOVE_UP,
+				KeyboardAction.MOVE_RIGHT
+			), new MoveOrientateKeyEventListener(),true
 		);
+		keyboardRegister.registerKeyboardEvents(
+			Arrays.asList(
+				KeyboardAction.CHEAT_SPAWN_BOMB,
+				KeyboardAction.CHEAT_SPAWN_FLAMESKULL
+			), new CheatKeysEventListener()
+		);
+
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -315,7 +337,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 		
 		@Override
-		public void interactWith(SkullFlame skull) {
+		public void interactWith(FlameSkull skull) {
 			skull.takeDamage();
 		}
 	}

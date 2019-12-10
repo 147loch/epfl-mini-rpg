@@ -6,7 +6,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
-import ch.epfl.cs107.play.game.arpg.actor.monster.SkullFlame;
+import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -43,6 +43,6 @@ public class Ferme extends ARPGArea {
 		
 		this.registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
 		
-		this.registerActor(new SkullFlame(this, Orientation.UP, new DiscreteCoordinates(7, 6)));
+		this.registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(7, 6)));
 	}
 }
