@@ -37,6 +37,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private ARPGInventory inventory;
     private ARPGPlayerStatusGUI gui;
     private ARPGItem currentHoldingItem;
+    private FloatingText floatingText;
+    
 
     // Animations
 	private Animation[] animations;
@@ -134,6 +136,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		hp = maxHp;
 		invicibilityTime = 0;
 		tookDamage = false;
+		floatingText = new FloatingText(getPosition());
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
@@ -193,6 +196,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			if (hp >= 0.5f)
 				hp -= 0.5f;
 			invicibilityTime = INVINCIBILITY_TIME;
+			floatingText.init("❤", getPosition());
+		}
 		}
 		// TODO if took damage: blink corresponding heart for time of anim
 		//   					also turn player sprite red-er
@@ -259,6 +264,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			tookDamage = false;
 		}
 
+		floatingText.update(deltaTime);
+		
 		super.update(deltaTime);
 	}
 
@@ -291,6 +298,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	public void draw(Canvas canvas) {
 		currentAnimation.draw(canvas);
 		gui.draw(canvas);
+		floatingText.draw(canvas);
 	}
 
 	@Override
