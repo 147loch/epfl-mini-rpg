@@ -65,6 +65,16 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	private class MoveOrientateKeyEventListener implements KeyboardEventListener {
 		@Override
+		public List<KeyboardAction> getActions() {
+			return Arrays.asList(
+				KeyboardAction.MOVE_DOWN,
+				KeyboardAction.MOVE_LEFT,
+				KeyboardAction.MOVE_UP,
+				KeyboardAction.MOVE_RIGHT
+			);
+		}
+
+		@Override
 		public void onKeyEvent(KeyboardAction action) {
 			if (!isDisplacementOccurs()) {
 				switch (action) {
@@ -87,7 +97,15 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 
-	private class CheatKeysEventListener implements  KeyboardEventListener {
+	private class CheatKeysEventListener implements KeyboardEventListener {
+		@Override
+		public List<KeyboardAction> getActions() {
+			return Arrays.asList(
+				KeyboardAction.CHEAT_SPAWN_BOMB,
+				KeyboardAction.CHEAT_SPAWN_FLAMESKULL
+			);
+		}
+
 		@Override
 		public void onKeyEvent(KeyboardAction action) {
 			switch (action) {
@@ -95,6 +113,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 					getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 					break;
 				case CHEAT_SPAWN_FLAMESKULL:
+					getOwnerArea().registerActor(new FlameSkull(getOwnerArea(), Orientation.DOWN, new DiscreteCoordinates(8, 10)));
+					break;
 				default:
 					break;
 			}
@@ -113,21 +133,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
-		keyboardRegister.registerKeyboardEvents(
-			Arrays.asList(
-				KeyboardAction.MOVE_DOWN,
-				KeyboardAction.MOVE_LEFT,
-				KeyboardAction.MOVE_UP,
-				KeyboardAction.MOVE_RIGHT
-			), new MoveOrientateKeyEventListener(),true
-		);
-		keyboardRegister.registerKeyboardEvents(
-			Arrays.asList(
-				KeyboardAction.CHEAT_SPAWN_BOMB,
-				KeyboardAction.CHEAT_SPAWN_FLAMESKULL
-			), new CheatKeysEventListener()
-		);
-
+		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
+		keyboardRegister.registerKeyboardEvents(new CheatKeysEventListener());
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");

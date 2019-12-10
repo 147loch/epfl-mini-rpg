@@ -6,10 +6,12 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -54,13 +56,21 @@ public final class XMLBindings {
             DocumentBuilder db = dbf.newDocumentBuilder();
 
             File file = new File(FILE_PATH);
-            if (!file.exists()) {
+            if (!file.exists() || file.length() == 0) {
                 Document newDom = db.newDocument();
                 newDom.appendChild(newDom.createElement("bindings"));
                 transformXML(newDom);
             }
 
-            dom = db.parse(file);
+            try {
+                dom = db.parse(file);
+            } catch (SAXParseException e) {
+                Document newDom = db.newDocument();
+                newDom.appendChild(newDom.createElement("bindings"));
+                transformXML(newDom);
+                dom = db.parse(file);
+            }
+
             dom.getDocumentElement().normalize();
 
             NodeList bindings = dom.getElementsByTagName("binding");
@@ -272,6 +282,9 @@ public final class XMLBindings {
     private void transformXML(Document dom) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
         DOMSource source = new DOMSource(dom);
         StreamResult result = new StreamResult(new File(FILE_PATH));
         transformer.transform(source, result);

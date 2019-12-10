@@ -27,7 +27,7 @@ public class Event {
         this(action, listener);
         this.canKeepPressed = canKeepPressed;
     }
-
+    
     /**
      * Method called by the event register if the linked key was pressed
      * @param action The linked action which is then passed to the listener (static or dynamic)

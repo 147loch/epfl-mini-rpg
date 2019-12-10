@@ -1,5 +1,8 @@
 package ch.epfl.cs107.play.game.arpg.keybindings;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * This interface defines an event listener and the callback that needs to be called when
  * the linked keyboard event is activated. The advantage this provides is that we can use
@@ -13,5 +16,11 @@ public interface KeyboardEventListener {
      * @param action The action that triggered the event
      */
     void onKeyEvent(KeyboardAction action);
+
+    /**
+     * This is a method to defined in the listener which actions it should listen to,
+     * @return The list of Keyboard actions
+     */
+    List<KeyboardAction> getActions();
 
 }
