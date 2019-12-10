@@ -198,7 +198,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			invicibilityTime = INVINCIBILITY_TIME;
 			floatingText.init("❤", getPosition());
 		}
-		}
 		// TODO if took damage: blink corresponding heart for time of anim
 		//   					also turn player sprite red-er
 		//   	if hp == death: die, game over, restart
@@ -353,16 +352,16 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 		
 		@Override
-		public void interactWith(Coin collec) {
-			inventory.addMoney(collec.getMoneyBack());
-			getOwnerArea().unregisterActor(collec);
+		public void interactWith(Coin coin) {
+			inventory.addMoney(coin.getMoneyBack());
+			getOwnerArea().unregisterActor(coin);
 		}
 		
 		@Override
-		public void interactWith(Heart collec) {
+		public void interactWith(Heart heart) {
 			if (hp < maxHp) {
-				addHp(collec.getHeartBack());
-				getOwnerArea().unregisterActor(collec);
+				addHp(heart.getHeartBack());
+				getOwnerArea().unregisterActor(heart);
 			}
 		}
 		

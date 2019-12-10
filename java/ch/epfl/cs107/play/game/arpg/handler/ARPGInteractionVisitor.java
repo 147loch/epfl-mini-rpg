@@ -21,9 +21,9 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 
 	default void interactWith(Bomb bomb) {}
 	
-	default void interactWith(Coin collec) {}
+	default void interactWith(Coin coin) {}
 	
-	default void interactWith(Heart collec) {}
+	default void interactWith(Heart heart) {}
 	
 	default void interactWith(CastleKey key) {}
 	
