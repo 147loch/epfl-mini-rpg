@@ -36,6 +36,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private ARPGInventory inventory;
     private ARPGPlayerStatusGUI gui;
     private ARPGItem currentHoldingItem;
+    private FloatingText floatingText;
+    
 
     // Animations
 	private Animation[] animations;
@@ -129,8 +131,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		inventory = new ARPGInventory(BASE_MONEY);
 		maxHp = 5.f;
 		hp = maxHp;
+		floatingText = new FloatingText(getPosition());
 
-		// TODO put the list of action in the listener instead
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
@@ -185,9 +187,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	public void takeDamage() {
-		if (hp >= 0.5f)
+		if (hp >= 0.5f) {
 			hp -= 0.5f;
-		// TODO animation and stuff also death
+			floatingText.init("❤", getPosition());
+		}
 	}
 
 	protected ARPGItem getCurrentItem() {
@@ -238,6 +241,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			cycleCurrentInventoryItem();
 		}
 
+		floatingText.update(deltaTime);
+		
 		super.update(deltaTime);
 	}
 
@@ -270,6 +275,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	public void draw(Canvas canvas) {
 		currentAnimation.draw(canvas);
 		gui.draw(canvas);
+		floatingText.draw(canvas);
 	}
 
 	@Override
