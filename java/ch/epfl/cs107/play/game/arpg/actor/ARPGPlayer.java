@@ -130,7 +130,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		maxHp = 5.f;
 		hp = maxHp;
 
-		// TODO put the list of action in the listener instead
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
@@ -162,7 +161,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
 			case BOMB:
-				// TODO try to catch when the bomb cannot be placed properly, because otherwise we remove an unused item from the inventory
 				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				inventory.removeEntry(ARPGItem.BOMB, 1);
 				if (!this.possess(ARPGItem.BOMB)) {

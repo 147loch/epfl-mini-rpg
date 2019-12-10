@@ -11,7 +11,8 @@ import org.xml.sax.SAXParseException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -282,11 +283,8 @@ public final class XMLBindings {
     private void transformXML(Document dom) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
-        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-        DOMSource source = new DOMSource(dom);
-        StreamResult result = new StreamResult(new File(FILE_PATH));
+        Source source = new DOMSource(dom);
+        Result result = new StreamResult(new File(FILE_PATH));
         transformer.transform(source, result);
     }
 
