@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class ARPGPlayerStatusGUI implements Graphics {
 
-	private static final int DEPTH = 1000;
+	private static final int GUI_DEPTH = 1000;
 	
 	private ARPGPlayer player;
 
@@ -26,36 +26,33 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		//DISPLAY GEAR
 		new ImageGraphics(ResourcePath.getSprite("zelda/gearDisplay"),
 				1.5f, 1.5f, new RegionOfInterest(0, 0, 32, 32),
-				anchor.add(new Vector(0.25f, height - 1.75f)), 1, DEPTH).draw(canvas);
+				anchor.add(new Vector(0.25f, height - 1.75f)), 1, GUI_DEPTH).draw(canvas);
 		
 		//DISPLAY CURRENT ITEM
 		if (player.getCurrentItem() != null) {
 			new ImageGraphics(player.getCurrentItem().getResourcePath()	,
 					1.f, 1.f, new RegionOfInterest(0, 0, 16, 16),
-					anchor.add(new Vector(0.5f, height - 1.5f)), 1, DEPTH + 1).draw(canvas);
+					anchor.add(new Vector(0.5f, height - 1.5f)), 1, GUI_DEPTH + 1).draw(canvas);
 		}
 
 		//DISPLAY COIN
 		new ImageGraphics(ResourcePath.getSprite("zelda/coinsDisplay"),
 				4.f, 2.f, new RegionOfInterest(0, 0, 64, 32),
-				anchor.add(new Vector(0.5f, 0.25f)), 1, DEPTH).draw(canvas);
+				anchor.add(new Vector(0.5f, 0.25f)), 1, GUI_DEPTH).draw(canvas);
 		
 		//DISPLAY NUMBER FOR COINS
 		for (int i = 0; i < Math.floor(Math.log10(player.getInventoryMoney()) + 1); i++) {
 			int row = 2;
-			int column = 3;
+			int column = 1;
 			int c = Character.digit(Integer.toString(player.getInventoryMoney()).charAt(i), 10);
 			if (c != 0) {
 				column = (c - 1) % 4;
 				row = (c - 1) / 4;
-			} else {
-				column = 1;
-				row = 2;
 			}
 			
 			new ImageGraphics(ResourcePath.getSprite("zelda/digits"),
 					0.8f, 0.8f, new RegionOfInterest(column*16, row*16, 16, 16),
-					anchor.add(new Vector(2.25f + i*0.5f, 0.9f)), 1, DEPTH + 1).draw(canvas);
+					anchor.add(new Vector(2.25f + i*0.5f, 0.9f)), 1, GUI_DEPTH + 1).draw(canvas);
 		}
 		
 		//DISPLAY HEART
@@ -70,7 +67,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 			}
 			new ImageGraphics(ResourcePath.getSprite("zelda/heartDisplay"),
 					1.f, 1.f, new RegionOfInterest(index, 0, 16, 16),
-					anchor.add(new Vector(2f + i*1.f, height - 1.5f)), 1, DEPTH).draw(canvas);
+					anchor.add(new Vector(2f + i*1.f, height - 1.5f)), 1, GUI_DEPTH).draw(canvas);
 		}
 	}
 }
