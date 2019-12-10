@@ -161,7 +161,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
 			case BOMB:
-				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
 				inventory.removeEntry(ARPGItem.BOMB, 1);
 				if (!this.possess(ARPGItem.BOMB)) {
 					cycleCurrentInventoryItem();

@@ -128,6 +128,7 @@ public class Bomb extends AreaEntity implements Interactor {
 		for (int i = 0; i < 4; i++) {
 			ret.add(getCurrentMainCellCoordinates().jump(Objects.requireNonNull(Orientation.fromInt(i)).toVector()));
 		}
+		ret.add(getCurrentMainCellCoordinates());
 		return Collections.unmodifiableList(ret);
 	}
 

@@ -1,6 +1,5 @@
 package ch.epfl.cs107.play.game.arpg.keybindings;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
