@@ -82,15 +82,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 				else {
 					if (RandomGenerator.getInstance().nextDouble() > 0.6) {
 						this.resetMotion();
-						int direction = RandomGenerator.getInstance().nextInt(4);
-						if (direction == 0)
-							orientate(Orientation.UP);
-						else if (direction == 1)
-							orientate(Orientation.DOWN);
-						else if (direction == 2)
-							orientate(Orientation.LEFT);
-						else
-							orientate(Orientation.RIGHT);
+						orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
 					} else
 						move(5);
 				}
