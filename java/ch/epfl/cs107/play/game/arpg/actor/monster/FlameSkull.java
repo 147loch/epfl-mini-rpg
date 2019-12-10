@@ -18,6 +18,8 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class FlameSkull extends MonsterEntity {
 
+	private static final float MIN_LIFE_TIME = 0.f;
+	private static final float MAX_LIFE_TIME = 0.5f;
 	private final static int ANIMATION_DURATION = 4;
 	
 	private Animation[] animations;

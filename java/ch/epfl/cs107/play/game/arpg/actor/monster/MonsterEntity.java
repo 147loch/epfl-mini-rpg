@@ -23,7 +23,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 		DEAD,
 		SLEEP;
 	}
-	
+
 	private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
 	
 	private Animation animationVanish;
