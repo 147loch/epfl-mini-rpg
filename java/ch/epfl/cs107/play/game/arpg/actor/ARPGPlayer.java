@@ -111,7 +111,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void onKeyEvent(KeyboardAction action) {
 			switch (action) {
 				case CHEAT_SPAWN_BOMB:
-					getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+					getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
 					break;
 				case CHEAT_SPAWN_FLAMESKULL:
 					getOwnerArea().registerActor(new FlameSkull(getOwnerArea(), Orientation.DOWN, new DiscreteCoordinates(8, 10)));
@@ -254,7 +254,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public boolean takeCellSpace() {
-		return true;
+		return false;
 	}
 
 	@Override
