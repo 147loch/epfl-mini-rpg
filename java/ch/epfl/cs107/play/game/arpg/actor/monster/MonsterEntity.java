@@ -81,7 +81,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 					currentAnimation.update(deltaTime);
 				else {
 					if (RandomGenerator.getInstance().nextDouble() > 0.6) {
-						this.resetMotion();
+						resetMotion();
 						orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
 					} else
 						move(5);
