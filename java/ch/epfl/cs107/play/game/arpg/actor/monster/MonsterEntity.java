@@ -5,19 +5,23 @@ import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
-import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public abstract class MonsterEntity extends AreaEntity implements FlyableEntity {
+public abstract class MonsterEntity extends MovableAreaEntity implements FlyableEntity, Interactor {
 
 	private enum Behavior {
 		IDLE,
-		ATTACK;
+		ATTACK,
+		DEAD,
+		SLEEP;
 	}
 	
 	private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
@@ -28,15 +32,15 @@ public abstract class MonsterEntity extends AreaEntity implements FlyableEntity 
 	
 	private float maxHp;
 	private float currentHp;
-	
-	private boolean isDead;
+	private Behavior state;
 	
 	public MonsterEntity(Area area, Orientation orientation, DiscreteCoordinates position, float Hp) {
 		super(area, orientation, position);
 		
 		maxHp = Hp;
 		currentHp = maxHp;
-		isDead = false;
+		
+		state = Behavior.IDLE;
 		
 		RPGSprite[] sprites = new RPGSprite[ANIMATION_VANISH_FRAME_LENGTH];
 		
@@ -56,10 +60,6 @@ public abstract class MonsterEntity extends AreaEntity implements FlyableEntity 
 		return currentHp;
 	}
 	
-	protected boolean isDead() {
-		return isDead;
-	}
-	
 	public void takeDamage() {
 		currentHp -= 0.5f;
 	}
@@ -68,18 +68,40 @@ public abstract class MonsterEntity extends AreaEntity implements FlyableEntity 
 	public void update(float deltaTime) {
 		
 		if (currentHp <= 0) {
-			isDead = true;
+			state = Behavior.DEAD;
 			currentHp = 0;
 		}
 		
-		if (isDead) {
-			animationVanish.update(deltaTime);
-			indexAnimationVanish++;
-		} else
-			currentAnimation.update(deltaTime);
-		
 		if (indexAnimationVanish == ANIMATION_VANISH_FRAME_LENGTH)
 			getOwnerArea().unregisterActor(this);
+		
+		switch (state) {
+			case IDLE:
+				if (this.isDisplacementOccurs())
+					currentAnimation.update(deltaTime);
+				else {
+					if (RandomGenerator.getInstance().nextDouble() > 0.6) {
+						this.resetMotion();
+						int direction = RandomGenerator.getInstance().nextInt(4);
+						if (direction == 0)
+							orientate(Orientation.UP);
+						else if (direction == 1)
+							orientate(Orientation.DOWN);
+						else if (direction == 2)
+							orientate(Orientation.LEFT);
+						else
+							orientate(Orientation.RIGHT);
+					} else
+						move(5);
+				}
+				break;
+			case DEAD:
+				animationVanish.update(deltaTime);
+				indexAnimationVanish++;
+				break;
+			default:
+				break;
+		}
 		
 		super.update(deltaTime);
 	}
@@ -96,7 +118,7 @@ public abstract class MonsterEntity extends AreaEntity implements FlyableEntity 
 
 	@Override
 	public boolean isCellInteractable() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -106,11 +128,10 @@ public abstract class MonsterEntity extends AreaEntity implements FlyableEntity 
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (isDead) {
+		if (state.equals(Behavior.DEAD)) {
 			animationVanish.draw(canvas);
 		} else {
 			currentAnimation.draw(canvas);
 		}
 	}
-
 }

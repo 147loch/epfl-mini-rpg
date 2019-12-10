@@ -59,7 +59,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private class UseInventoryKeyItemEventListener implements StaticKeyboardEventListener {
 		@Override
 		public void onKeyEvent() {
-			if (!isDisplacementOccurs()) useInventoryItem();
+			if (!isDisplacementOccurs())
+				useInventoryItem();
 		}
 	}
 
@@ -320,7 +321,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void interactWith(Grass grass) {
-			grass.cut();
+			grass.cut(true);
 		}
 		
 		@Override
@@ -345,7 +346,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		
 		@Override
 		public void interactWith(FlameSkull skull) {
-			skull.takeDamage();
+			
 		}
 	}
 }
