@@ -36,7 +36,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private ARPGPlayerHandler handler;
 	private ARPGInventory inventory;
     private ARPGPlayerStatusGUI gui;
+    private ARPGInventoryGUI inventoryGui;
     private ARPGItem currentHoldingItem;
+    
+    private boolean isInventoryOpen;
+    
+    //FloatingText
     private FloatingText floatingText;
     
 
@@ -58,6 +63,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		@Override
 		public void onKeyEvent() {
 			cycleCurrentInventoryItem();
+		}
+	}
+	
+	private class OpenInventoryEventListener implements StaticKeyboardEventListener {
+		@Override
+		public void onKeyEvent() {
+			isInventoryOpen = !isInventoryOpen;
 		}
 	}
 
@@ -137,10 +149,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		invicibilityTime = 0;
 		tookDamage = false;
 		floatingText = new FloatingText(getPosition());
+		isInventoryOpen = false;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
+		keyboardRegister.registerKeyboardEvent(KeyboardAction.OPEN_INVENTORY, new OpenInventoryEventListener());
 		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
 		keyboardRegister.registerKeyboardEvents(new CheatKeysEventListener());
 
@@ -153,6 +167,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
 
 		gui = new ARPGPlayerStatusGUI(this);
+		inventoryGui = new ARPGInventoryGUI();
 	}
 
 	public void cycleCurrentInventoryItem() {
@@ -296,8 +311,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public void draw(Canvas canvas) {
 		currentAnimation.draw(canvas);
-		gui.draw(canvas);
 		floatingText.draw(canvas);
+		if (isInventoryOpen)
+			inventoryGui.draw(canvas);
+		else
+			gui.draw(canvas);
 	}
 
 	@Override
@@ -337,10 +355,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		
 		@Override
 		public void interactWith(CastleDoor castleDoor) {
-			if (wantsViewInteraction()) {
+			if (wantsViewInteraction()) { //VIEW INTERACTION
 				if (currentHoldingItem.equals(ARPGItem.CASTLE_KEY))
 					castleDoor.changeSignal();
-			} else {
+			} else { //CELL INTERACTION
 				setIsPassingADoor(castleDoor);
 				castleDoor.changeSignal();
 			}

@@ -10,6 +10,7 @@ public enum KeyboardAction implements Action {
     MOVE_DOWN              (KeyboardKey.DOWN)  { @Override public String getActionTitle() { return "Move Down"; } },
     MOVE_LEFT              (KeyboardKey.LEFT)  { @Override public String getActionTitle() { return "Move Left"; } },
     CYCLE_INVENTORY        (KeyboardKey.TAB)   { @Override public String getActionTitle() { return "Cycle Inventory"; } },
+    OPEN_INVENTORY		   (KeyboardKey.I)     { @Override public String getActionTitle() { return "Open Inventory"; } },
     USE_CURRENT_ITEM       (KeyboardKey.SPACE) { @Override public String getActionTitle() { return "Use"; } },
     VIEW_INTERACTION       (KeyboardKey.E)     { @Override public String getActionTitle() { return "Interact"; } },
     CHEAT_SPAWN_BOMB       (KeyboardKey.B)     { @Override public String getActionTitle() { return "Spawn Bombs"; } },
