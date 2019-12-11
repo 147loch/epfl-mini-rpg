@@ -12,7 +12,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
-import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -85,7 +84,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void onKeyReleasedEvent(KeyboardAction previousAction) {
-			if (currentHoldingItem.equals(ARPGItem.BOW) && isReadyBow) {
+			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && isReadyBow) {
 				isReadyBow = false;
 				getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 			}
@@ -295,7 +294,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public boolean takeCellSpace() {
-		return false;
+		return false; // TODO faut voir, les monstres peuvent traverser le joueur avec ça
 	}
 
 	@Override
