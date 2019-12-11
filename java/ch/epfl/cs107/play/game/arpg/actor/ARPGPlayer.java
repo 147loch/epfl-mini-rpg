@@ -43,7 +43,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     
     //FloatingText
     private FloatingText floatingText;
-    
 
     // Animations
 	private Animation[] animations;
