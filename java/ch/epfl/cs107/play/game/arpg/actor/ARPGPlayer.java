@@ -31,6 +31,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private final static int ANIMATION_DURATION = 2;
 	private final static int BASE_MONEY = 100;
 	private final static float INVINCIBILITY_TIME = 1.5f;
+	private final static float SPEED_BOW = 1.f;
 
 	// ARPG Stuff
 	private ARPGPlayerHandler handler;
@@ -38,9 +39,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private ARPGPlayerStatusGUI gui;
     private ARPGInventoryGUI inventoryGui;
     private ARPGItem currentHoldingItem;
-    
-    private boolean isInventoryOpen;
-    private boolean isReadyBow;
     
     //FloatingText
     private FloatingText floatingText;
@@ -59,6 +57,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private float maxHp;
 	private float invicibilityTime;
 	private boolean tookDamage;
+    private boolean isInventoryOpen;
+    private boolean isReadyBow;
+    private float speedBow;
 
 	// Keyboard Events used for the player
 	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
@@ -85,8 +86,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		@Override
 		public void onKeyReleasedEvent(KeyboardAction previousAction) {
 			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && isReadyBow) {
+				if (speedBow >= SPEED_BOW)
+					getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				speedBow = 0;
 				isReadyBow = false;
-				getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				animationWithBow.reset();
 			}
 		}
 	}
@@ -142,6 +146,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		floatingText = new FloatingText(getPosition());
 		isInventoryOpen = false;
 		isReadyBow = false;
+		speedBow = 0;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
@@ -160,7 +165,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		
 		Sprite[][] spritesWithBow = RPGSprite.extractSprites("zelda/player.bow", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
 			{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
-		animationsWithBow = RPGSprite.createAnimations(ANIMATION_DURATION, spritesWithBow);
+		animationsWithBow = RPGSprite.createAnimations(ANIMATION_DURATION * 2, spritesWithBow, false);
 			
 		currentAnimation = animations[2];
 		animationWithBow = animationsWithBow[2];
@@ -251,6 +256,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	public void update(float deltaTime) {	
 		if (isReadyBow) {
 			animationWithBow = animationsWithBow[getOrientation().opposite().ordinal()];
+			speedBow += deltaTime;
+			animationWithBow.update(deltaTime);
 		} else {
 			currentAnimation = animations[getOrientation().opposite().ordinal()];
 		}
@@ -259,7 +266,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		if (isDisplacementOccurs()) {
 			isReadyBow = false;
-			currentAnimation.setAnchor(new Vector(this.getTransform().getX().getY(), this.getTransform().getX().getY()));
 			currentAnimation.update(deltaTime);
 		} else {
 			currentAnimation.reset();
