@@ -22,4 +22,10 @@ public interface KeyboardEventListener {
      */
     List<KeyboardAction> getActions();
 
+    /**
+     * This method will triger if not empty when a key is released
+     * @param previousAction The action which was released
+     */
+    default void onKeyReleasedEvent(KeyboardAction previousAction) {};
+
 }

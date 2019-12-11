@@ -82,6 +82,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			if (!isDisplacementOccurs())
 				useInventoryItem();
 		}
+
+		@Override
+		public void onKeyReleasedEvent(KeyboardAction previousAction) {
+			if (currentHoldingItem.equals(ARPGItem.BOW) && isReadyBow) {
+				isReadyBow = false;
+				getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+			}
+		}
 	}
 
 	private class MoveOrientateKeyEventListener implements KeyboardEventListener {
@@ -148,11 +156,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		currentHoldingItem = (ARPGItem)inventory.getItemList().get(0);
 
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
-			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
+			{Orientation.UP , Orientation.LEFT , Orientation.DOWN, Orientation.RIGHT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
 		
 		Sprite[][] spritesWithBow = RPGSprite.extractSprites("zelda/player.bow", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
-				{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
+			{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
 		animationsWithBow = RPGSprite.createAnimations(ANIMATION_DURATION, spritesWithBow);
 			
 		currentAnimation = animations[2];
@@ -184,7 +192,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				break;
 			case BOW:
 				isReadyBow = true;
-				getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				break;
 			case ARROW:
 			case SWORD:
@@ -244,25 +251,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public void update(float deltaTime) {	
 		if (isReadyBow) {
-			if (getOrientation() == Orientation.UP) {
-				animationWithBow = animationsWithBow[1];
-			} else if (getOrientation() == Orientation.DOWN) {
-				animationWithBow = animationsWithBow[2];
-			} else if (getOrientation() == Orientation.RIGHT) {
-				animationWithBow = animationsWithBow[0];
-			} else {
-				animationWithBow = animationsWithBow[3];
-			}
+			animationWithBow = animationsWithBow[getOrientation().opposite().ordinal()];
 		} else {
-			if (getOrientation() == Orientation.UP) {
-				currentAnimation = animations[0];
-			} else if (getOrientation() == Orientation.DOWN) {
-				currentAnimation = animations[2];
-			} else if (getOrientation() == Orientation.RIGHT) {
-				currentAnimation = animations[1];
-			} else {
-				currentAnimation = animations[3];
-			}
+			currentAnimation = animations[getOrientation().opposite().ordinal()];
 		}
 
 		keyboardRegister.update();
@@ -304,7 +295,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public boolean takeCellSpace() {
-		return true;
+		return false;
 	}
 
 	@Override

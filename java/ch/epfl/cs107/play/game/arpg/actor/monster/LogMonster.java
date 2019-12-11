@@ -26,12 +26,11 @@ public class LogMonster extends MonsterEntity {
     public LogMonster(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position, 2.f);
 
-        Sprite[][] walkingSprites = RPGSprite.extractSprites("zelda/logMonster", 4, 2, 2, this , 32, 32, new Orientation[]
-                {Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
+        Sprite[][] walkingSprites = RPGSprite.extractSprites(
+            "zelda/logMonster", 4, 2, 2, this , 32, 32,
+            new Vector(-0.5f, 0), new Orientation[] {Orientation.DOWN , Orientation.UP , Orientation.RIGHT, Orientation.LEFT}
+        );
         walkingAnimations = RPGSprite.createAnimations(ANIMATION_DURATION, walkingSprites);
-        for (Animation walkingAnimation : walkingAnimations) {
-            walkingAnimation.setAnchor(new Vector(this.getTransform().getX().getY() - 0.5f, this.getTransform().getX().getY()));
-        }
         setAnimation(walkingAnimations[0]);
 
         handler = new ARPGLogMonsterHandler();
@@ -39,7 +38,7 @@ public class LogMonster extends MonsterEntity {
 
     @Override
     public void update(float deltaTime) {
-        setAnimation(walkingAnimations[getOrientation().opposite().ordinal()]);
+        setAnimation(walkingAnimations[getOrientation().ordinal()]);
 
         super.update(deltaTime);
     }

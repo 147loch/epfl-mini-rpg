@@ -30,12 +30,22 @@ public class Event {
     
     /**
      * Method called by the event register if the linked key was pressed
-     * @param action The linked action which is then passed to the listener (static or dynamic)
+     * @param action The linked action which is then passed to the listener (dynamic)
      * @see StaticKeyboardEventListener
      * @see KeyboardEventListener
      */
     protected void onKeyEvent(KeyboardAction action) {
         listener.onKeyEvent(action);
+    }
+
+    /**
+     * Method called by the event register if the linked key was released
+     * @param action The linked action which is then passed to the listener (dynamic)
+     * @see StaticKeyboardEventListener
+     * @see KeyboardEventListener
+     */
+    protected void onKeyReleasedEvent(KeyboardAction action) {
+        listener.onKeyReleasedEvent(action);
     }
 
     /**

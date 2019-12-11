@@ -33,6 +33,8 @@ public class KeyboardEventRegister {
             } else {
                 if (e.getAction().getAssignedButton(keyboard).isPressed())
                     e.onKeyEvent(e.getAction());
+                if (e.getAction().getAssignedButton(keyboard).isReleased())
+                    e.onKeyReleasedEvent(e.getAction());
             }
         }
     }

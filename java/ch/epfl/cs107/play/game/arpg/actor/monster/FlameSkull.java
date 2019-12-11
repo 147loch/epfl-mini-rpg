@@ -35,7 +35,7 @@ public class FlameSkull extends MonsterEntity {
 		super(area, orientation, position, 2.f);
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/flameSkull", 3, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
-				{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
+				{Orientation.UP , Orientation.LEFT , Orientation.DOWN, Orientation.RIGHT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
 		setAnimation(animations[0]);
 
@@ -52,7 +52,7 @@ public class FlameSkull extends MonsterEntity {
 			remainingTime -= deltaTime;
 		}
 
-		setAnimation(animations[getOrientation().opposite().ordinal()]);
+		setAnimation(animations[getOrientation().ordinal()]);
 		
 		super.update(deltaTime);
 	}
