@@ -24,6 +24,7 @@ import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class ARPGPlayer extends Player implements Inventory.Holder {
@@ -40,13 +41,16 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private ARPGItem currentHoldingItem;
     
     private boolean isInventoryOpen;
+    private boolean isReadyBow;
     
     //FloatingText
     private FloatingText floatingText;
 
     // Animations
 	private Animation[] animations;
+	private Animation[] animationsWithBow;
 	private Animation currentAnimation;
+	private Animation animationWithBow;
 
 	// Keyboard events
     private KeyboardEventRegister keyboardRegister;
@@ -93,23 +97,21 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void onKeyEvent(KeyboardAction action) {
-			if (!isDisplacementOccurs()) {
-				switch (action) {
-					case MOVE_LEFT:
-						moveOrientate(Orientation.LEFT);
-						break;
-					case MOVE_UP:
-						moveOrientate(Orientation.UP);
-						break;
-					case MOVE_RIGHT:
-						moveOrientate(Orientation.RIGHT);
-					 	break;
-					case MOVE_DOWN:
-						moveOrientate(Orientation.DOWN);
-						break;
-					default:
-						break;
-				}
+			switch (action) {
+				case MOVE_LEFT:
+					moveOrientate(Orientation.LEFT);
+					break;
+				case MOVE_UP:
+					moveOrientate(Orientation.UP);
+					break;
+				case MOVE_RIGHT:
+					moveOrientate(Orientation.RIGHT);
+				 	break;
+				case MOVE_DOWN:
+					moveOrientate(Orientation.DOWN);
+					break;
+				default:
+					break;
 			}
 		}
 	}
@@ -149,6 +151,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		tookDamage = false;
 		floatingText = new FloatingText(getPosition());
 		isInventoryOpen = false;
+		isReadyBow = false;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
@@ -164,6 +167,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
+		
+		Sprite[][] spritesWithBow = RPGSprite.extractSprites("zelda/player.bow", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
+				{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
+		animationsWithBow = RPGSprite.createAnimations(ANIMATION_DURATION, spritesWithBow);
+			
+		currentAnimation = animations[2];
+		animationWithBow = animationsWithBow[2];
 
 		gui = new ARPGPlayerStatusGUI(this);
 		inventoryGui = new ARPGInventoryGUI();
@@ -189,16 +199,19 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 					cycleCurrentInventoryItem();
 				}
 				break;
+			case BOW:
+				isReadyBow = true;
+				getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				break;
 			case ARROW:
 			case SWORD:
 			case STAFF:
 			case CASTLE_KEY:
-			case BOW:
 			default:
 				break;
 		}
 	}
-
+	
 	private void moveOrientate(Orientation orientation){
 		if (getOrientation() == orientation)
 			move(ANIMATION_DURATION * 2);
@@ -212,8 +225,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			invicibilityTime = INVINCIBILITY_TIME;
 			floatingText.init("❤", getPosition());
 		}
-		// TODO if took damage: blink corresponding heart for time of anim
-		//   					also turn player sprite red-er
+		// TODO
+		//   	turn player sprite red-er
 		//   	if hp == death: die, game over, restart
 	}
 
@@ -246,20 +259,34 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	@Override
-	public void update(float deltaTime) {
-		if (this.getOrientation() == Orientation.UP) {
-			currentAnimation = animations[0];
-		} else if (this.getOrientation() == Orientation.DOWN) {
-			currentAnimation = animations[2];
-		} else if (this.getOrientation() == Orientation.RIGHT) {
-			currentAnimation = animations[1];
+	public void update(float deltaTime) {	
+		if (isReadyBow) {
+			if (getOrientation() == Orientation.UP) {
+				animationWithBow = animationsWithBow[1];
+			} else if (getOrientation() == Orientation.DOWN) {
+				animationWithBow = animationsWithBow[2];
+			} else if (getOrientation() == Orientation.RIGHT) {
+				animationWithBow = animationsWithBow[0];
+			} else {
+				animationWithBow = animationsWithBow[3];
+			}
 		} else {
-			currentAnimation = animations[3];
+			if (getOrientation() == Orientation.UP) {
+				currentAnimation = animations[0];
+			} else if (getOrientation() == Orientation.DOWN) {
+				currentAnimation = animations[2];
+			} else if (getOrientation() == Orientation.RIGHT) {
+				currentAnimation = animations[1];
+			} else {
+				currentAnimation = animations[3];
+			}
 		}
 
 		keyboardRegister.update();
 
 		if (isDisplacementOccurs()) {
+			isReadyBow = false;
+			currentAnimation.setAnchor(new Vector(this.getTransform().getX().getY(), this.getTransform().getX().getY()));
 			currentAnimation.update(deltaTime);
 		} else {
 			currentAnimation.reset();
@@ -309,8 +336,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public void draw(Canvas canvas) {
-		currentAnimation.draw(canvas);
+		if (isReadyBow)
+			animationWithBow.draw(canvas);
+		else
+			currentAnimation.draw(canvas);
+		
 		floatingText.draw(canvas);
+		
 		if (isInventoryOpen)
 			inventoryGui.draw(canvas);
 		else
@@ -389,8 +421,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 		
 		@Override
-		public void interactWith(FlameSkull skull) {
-			
+		public void interactWith(Bow bow) {
+			inventory.addEntry(ARPGItem.BOW, 1);
+			getOwnerArea().unregisterActor(bow);
 		}
 	}
 }

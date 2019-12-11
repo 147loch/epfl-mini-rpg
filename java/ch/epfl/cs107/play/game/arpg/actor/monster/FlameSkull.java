@@ -15,13 +15,14 @@ import ch.epfl.cs107.play.game.arpg.actor.Grass;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class FlameSkull extends MonsterEntity {
 
-	private static final float MIN_LIFE_TIME = 0f;
-	private static final float MAX_LIFE_TIME = 8f;
+	private static final int MIN_LIFE_TIME = 0;
+	private static final int MAX_LIFE_TIME = 8;
 	private static final int ANIMATION_DURATION = 4;
 	
 	private Animation[] animations;
@@ -33,16 +34,12 @@ public class FlameSkull extends MonsterEntity {
 	public FlameSkull(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position, 2.f);
 		
-		Sprite[][] sprites = RPGSprite.extractSprites("zelda/flameSkull", 3, 2, 2, this , 32, 32, new Orientation[]
+		Sprite[][] sprites = RPGSprite.extractSprites("zelda/flameSkull", 3, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
 				{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
-		for (int i = 0; i < 4; i++)
-		{
-			animations[i].setAnchor(new Vector(this.getTransform().getX().getY() - 0.5f, this.getTransform().getX().getY()));
-		}
 		setAnimation(animations[0]);
 
-		remainingTime = MAX_LIFE_TIME;
+		remainingTime = RandomGenerator.getInstance().nextInt(MAX_LIFE_TIME + 1) + MIN_LIFE_TIME;
 
 		handler = new ARPGFlameSkullHandler();
 	}
