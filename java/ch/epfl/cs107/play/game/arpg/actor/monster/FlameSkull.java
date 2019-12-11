@@ -23,7 +23,7 @@ public class FlameSkull extends MonsterEntity {
 	private static final float MIN_LIFE_TIME = 0f;
 	private static final float MAX_LIFE_TIME = 8f;
 	private static final int ANIMATION_DURATION = 4;
-	
+
 	private Animation[] animations;
 	
 	private ARPGFlameSkullHandler handler;
@@ -36,8 +36,7 @@ public class FlameSkull extends MonsterEntity {
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/flameSkull", 3, 2, 2, this , 32, 32, new Orientation[]
 				{Orientation.DOWN , Orientation.RIGHT , Orientation.UP, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
-		for (int i = 0; i < 4; i++)
-		{
+		for (int i = 0; i < 4; i++) {
 			animations[i].setAnchor(new Vector(this.getTransform().getX().getY() - 0.5f, this.getTransform().getX().getY()));
 		}
 		setAnimation(animations[0]);
@@ -55,15 +54,7 @@ public class FlameSkull extends MonsterEntity {
 			remainingTime -= deltaTime;
 		}
 
-		if (this.getOrientation() == Orientation.UP) {
-			setAnimation(animations[2]);
-		} else if (this.getOrientation() == Orientation.DOWN) {
-			setAnimation(animations[0]);
-		} else if (this.getOrientation() == Orientation.RIGHT) {
-			setAnimation(animations[3]);
-		} else {
-			setAnimation(animations[1]);
-		}
+		setAnimation(animations[getOrientation().opposite().ordinal()]);
 		
 		super.update(deltaTime);
 	}

@@ -14,7 +14,8 @@ public enum KeyboardAction implements Action {
     USE_CURRENT_ITEM       (KeyboardKey.SPACE) { @Override public String getActionTitle() { return "Use"; } },
     VIEW_INTERACTION       (KeyboardKey.E)     { @Override public String getActionTitle() { return "Interact"; } },
     CHEAT_SPAWN_BOMB       (KeyboardKey.B)     { @Override public String getActionTitle() { return "Spawn Bombs"; } },
-    CHEAT_SPAWN_FLAMESKULL (KeyboardKey.S)     { @Override public String getActionTitle() { return "Spawn Flame Skull"; } };
+    CHEAT_SPAWN_FLAMESKULL (KeyboardKey.S)     { @Override public String getActionTitle() { return "Spawn Flame Skull"; } },
+    CHEAT_SPAWN_LOGMONSTER (KeyboardKey.L)     { @Override public String getActionTitle() { return "Spawn Log Monster"; } };
 
     private XMLBindings bindings;
     private KeyboardKey actionKey;

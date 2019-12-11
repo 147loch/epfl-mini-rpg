@@ -71,13 +71,9 @@ public class ARPGBehavior extends AreaBehavior {
 		protected boolean canLeave(Interactable entity) { return true; }
 		@Override
 		protected boolean canEnter(Interactable entity) {
-			if (entity instanceof FlyableEntity)
-			{
-				if (((FlyableEntity) entity).canFly() && (type.isWalkable || type.equals(ARPGCellType.IMPASSABLE)))
-					return true;
-				else return false;
-			}
-			if (hasNonTraversableContent())
+			if (entity instanceof FlyableEntity && ((FlyableEntity) entity).canFly())
+				return hasNonTraversableContent() || type.isWalkable || type.equals(ARPGCellType.IMPASSABLE);
+			else if (hasNonTraversableContent())
 				return false;
 			else
 				return type.isWalkable;

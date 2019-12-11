@@ -114,27 +114,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 
-	private class CheatKeysEventListener implements KeyboardEventListener {
+	private class CheatKeysEventListener implements StaticKeyboardEventListener {
 		@Override
-		public List<KeyboardAction> getActions() {
-			return Arrays.asList(
-				KeyboardAction.CHEAT_SPAWN_BOMB,
-				KeyboardAction.CHEAT_SPAWN_FLAMESKULL
-			);
-		}
-
-		@Override
-		public void onKeyEvent(KeyboardAction action) {
-			switch (action) {
-				case CHEAT_SPAWN_BOMB:
-					getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
-					break;
-				case CHEAT_SPAWN_FLAMESKULL:
-					getOwnerArea().registerActor(new FlameSkull(getOwnerArea(), Orientation.DOWN, new DiscreteCoordinates(8, 10)));
-					break;
-				default:
-					break;
-			}
+		public void onKeyEvent() {
+			getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
 		}
 	}
 
@@ -155,7 +138,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.OPEN_INVENTORY, new OpenInventoryEventListener());
 		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
-		keyboardRegister.registerKeyboardEvents(new CheatKeysEventListener());
+		keyboardRegister.registerKeyboardEvent(KeyboardAction.CHEAT_SPAWN_BOMB, new CheatKeysEventListener());
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -294,7 +277,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public boolean takeCellSpace() {
-		return false;
+		return true;
 	}
 
 	@Override

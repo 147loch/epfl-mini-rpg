@@ -21,6 +21,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 		IDLE,
 		ATTACK,
 		DEAD,
+		FALLING_ASLEEP,
 		SLEEP;
 	}
 
@@ -62,6 +63,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 	}
 
 	protected void setState(Behavior state) { this.state = state; }
+	protected Behavior getState() { return this.state; }
 	
 	public void takeDamage() {
 		currentHp -= 0.5f;
