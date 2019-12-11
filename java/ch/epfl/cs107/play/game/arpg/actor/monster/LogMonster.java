@@ -1,7 +1,9 @@
 package ch.epfl.cs107.play.game.arpg.actor.monster;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
@@ -12,6 +14,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
@@ -20,6 +23,8 @@ public class LogMonster extends MonsterEntity {
     private static final int ANIMATION_DURATION = 4;
 
     private Animation[] walkingAnimations;
+    private Animation sleepingAnimation;
+    private Animation wakingUpAnimation;
 
     private ARPGLogMonsterHandler handler;
 
@@ -33,12 +38,38 @@ public class LogMonster extends MonsterEntity {
         walkingAnimations = RPGSprite.createAnimations(ANIMATION_DURATION, walkingSprites);
         setAnimation(walkingAnimations[0]);
 
+        Sprite[] sleepingSprites = new Sprite[4];
+        for (int i = 0; i > sleepingSprites.length; i++) {
+            sleepingSprites[i] = new RPGSprite("zelda/logMonster.sleeping", 1, 1, this,
+                    new RegionOfInterest(0, 32 * i, 32, 32));
+        }
+        sleepingAnimation = new Animation(sleepingSprites.length, sleepingSprites, true);
+
+        Sprite[] wakingUpSprites = new Sprite[3];
+        for (int i = 0; i < wakingUpSprites.length; i++) {
+            wakingUpSprites[i] = new RPGSprite("zelda/logMonster.wakingUp", 1, 1, this,
+                    new RegionOfInterest(0, 32 * i, 32, 32));
+        }
+        wakingUpAnimation = new Animation(wakingUpSprites.length, wakingUpSprites, true);
+
         handler = new ARPGLogMonsterHandler();
     }
 
     @Override
     public void update(float deltaTime) {
-        setAnimation(walkingAnimations[getOrientation().ordinal()]);
+        switch(getState()) {
+            case WAKING_UP:
+                setAnimation(wakingUpAnimation);
+                break;
+            case SLEEP:
+                setAnimation(sleepingAnimation);
+                break;
+            case IDLE:
+                setAnimation(walkingAnimations[getOrientation().ordinal()]);
+                break;
+            default:
+                break;
+        }
 
         super.update(deltaTime);
     }
@@ -61,7 +92,18 @@ public class LogMonster extends MonsterEntity {
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
-        return Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+        switch (getState()) {
+            case ATTACK:
+                return Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+            case IDLE:
+                List<DiscreteCoordinates> ret = new ArrayList<>();
+                for (int i = 1; i <= 8; i++) {
+                    ret.add(getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(i)));
+                }
+                return Collections.unmodifiableList(ret);
+            default:
+                return Collections.emptyList();
+        }
     }
 
     @Override

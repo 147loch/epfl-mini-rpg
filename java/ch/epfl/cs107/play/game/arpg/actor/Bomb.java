@@ -129,10 +129,7 @@ public class Bomb extends AreaEntity implements Interactor {
 	
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		List<DiscreteCoordinates> ret = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
-			ret.add(getCurrentMainCellCoordinates().jump(Objects.requireNonNull(Orientation.fromInt(i)).toVector()));
-		}
+		List<DiscreteCoordinates> ret = new ArrayList<>(getCurrentMainCellCoordinates().getNeighbours());
 		ret.add(getCurrentMainCellCoordinates());
 		return Collections.unmodifiableList(ret);
 	}

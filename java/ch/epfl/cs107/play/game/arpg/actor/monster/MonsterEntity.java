@@ -22,7 +22,8 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 		ATTACK,
 		DEAD,
 		FALLING_ASLEEP,
-		SLEEP;
+		WAKING_UP,
+		SLEEP
 	}
 
 	private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
