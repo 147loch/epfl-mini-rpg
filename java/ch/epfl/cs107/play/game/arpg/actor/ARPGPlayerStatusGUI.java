@@ -7,6 +7,9 @@ import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ARPGPlayerStatusGUI implements Graphics {
 
 	private static final int GUI_DEPTH = 1000;
@@ -14,6 +17,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	private static final float INV_HEART_TIMER_DECREASE_INTERVAL = 0.05f;
 
 	private ARPGPlayer player;
+
 	private boolean isInvHeartOff = true;
 	private float invHeartTimer = INV_HEART_TIMER;
 	private int blinkCounter = 0;
@@ -24,6 +28,9 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	
 	@Override
 	public void draw(Canvas canvas) {
+		List<Graphics> arrayHeartsBeforeDamage = new ArrayList<>();
+		List<Graphics> arrayHearts = new ArrayList<>();
+
 		float width = canvas.getScaledWidth();
 		float height = canvas.getScaledHeight();
 		Vector anchor = canvas.getTransform().getOrigin().sub(new Vector(width/2, height/2));
@@ -61,7 +68,24 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		}
 		
 		//DISPLAY HEART
-		// TODO replace hardcoded values with player constant for how much damage he can take
+		if (player.tookDamage() >= 0) {
+			for (int i = 0; i < Math.ceil(player.getMaxHp()); i++) {
+				int index;
+
+				if (player.getHp() + player.tookDamage() < (i + 0.5f)) { //NO LIFE
+					index = 0;
+				} else if (player.getHp() + player.tookDamage() == (i + 0.5f)) { //MIDLIFE
+					index = 16;
+				} else { //FULL LIFE
+					index = 32;
+				}
+
+				arrayHeartsBeforeDamage.add(new ImageGraphics(ResourcePath.getSprite("zelda/heartDisplay"),
+						1.f, 1.f, new RegionOfInterest(index, 0, 16, 16),
+						anchor.add(new Vector(2f + i*1.f, height - 1.5f)), 1, GUI_DEPTH));
+			}
+		}
+
 		for (int i = 0; i < Math.ceil(player.getMaxHp()); i++) {
 			int index;
 
@@ -73,49 +97,41 @@ public class ARPGPlayerStatusGUI implements Graphics {
 				index = 32;
 			}
 
-			if (!player.tookDamage() && invHeartTimer < INV_HEART_TIMER)
+			arrayHearts.add(new ImageGraphics(ResourcePath.getSprite("zelda/heartDisplay"),
+					1.f, 1.f, new RegionOfInterest(index, 0, 16, 16),
+					anchor.add(new Vector(2f + i*1.f, height - 1.5f)), 1, GUI_DEPTH));
+		}
+
+		if (player.tookDamage() <= 0 && invHeartTimer < INV_HEART_TIMER)
+			invHeartTimer = INV_HEART_TIMER;
+
+		if (player.tookDamage() <= 0 && blinkCounter >= 3)
+			blinkCounter = 0;
+
+		if (player.tookDamage() >= 0 && !isInvHeartOff && blinkCounter <= 3) {
+			arrayHeartsBeforeDamage.forEach(heart -> heart.draw(canvas));
+
+			if (invHeartTimer > 0) {
+				isInvHeartOff = false;
+				invHeartTimer -= INV_HEART_TIMER_DECREASE_INTERVAL;
+			} else {
 				invHeartTimer = INV_HEART_TIMER;
-
-			if (!player.tookDamage() && !isInvHeartOff)
 				isInvHeartOff = true;
+				blinkCounter++;
+			}
+		} else {
+			arrayHearts.forEach(heart -> heart.draw(canvas));
 
-			if (!player.tookDamage() && blinkCounter >= 3)
-				blinkCounter = 0;
-
-			if (player.tookDamage() && i == Math.floor(player.getHp()) && !isInvHeartOff && blinkCounter <= 3) {
-				int blinkIndex;
-				if ((player.getHp() + 0.5) % 1 != 0) { //MIDLIFE
-					blinkIndex = 16;
-				} else { //FULL LIFE
-					blinkIndex = 32;
-				}
-
-				new ImageGraphics(ResourcePath.getSprite("zelda/heartDisplay"),
-						1.f, 1.f, new RegionOfInterest(blinkIndex, 0, 16, 16),
-						anchor.add(new Vector(2f + i*1.f, height - 1.5f)), 1, GUI_DEPTH).draw(canvas);
-
+			if (isInvHeartOff && player.tookDamage() >= 0) {
 				if (invHeartTimer > 0) {
-					isInvHeartOff = false;
 					invHeartTimer -= INV_HEART_TIMER_DECREASE_INTERVAL;
 				} else {
 					invHeartTimer = INV_HEART_TIMER;
-					isInvHeartOff = true;
+					isInvHeartOff = false;
 					blinkCounter++;
 				}
 			} else {
-				new ImageGraphics(ResourcePath.getSprite("zelda/heartDisplay"),
-					1.f, 1.f, new RegionOfInterest(index, 0, 16, 16),
-					anchor.add(new Vector(2f + i*1.f, height - 1.5f)), 1, GUI_DEPTH).draw(canvas);
-
-				if (i == Math.floor(player.getHp()) && isInvHeartOff && player.tookDamage()) {
-					if (invHeartTimer > 0) {
-						invHeartTimer -= INV_HEART_TIMER_DECREASE_INTERVAL;
-					} else {
-						invHeartTimer = INV_HEART_TIMER;
-						isInvHeartOff = false;
-						blinkCounter++;
-					}
-				}
+				isInvHeartOff = true;
 			}
 		}
 	}

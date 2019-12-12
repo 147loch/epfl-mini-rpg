@@ -56,7 +56,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private float hp;
 	private float maxHp;
 	private float invicibilityTime;
-	private boolean tookDamage;
+	private float lastTookDamage;
     private boolean isInventoryOpen;
     private boolean isReadyBow;
     private float speedBow;
@@ -142,7 +142,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		maxHp = 5.f;
 		hp = maxHp;
 		invicibilityTime = 0;
-		tookDamage = false;
+		lastTookDamage = 0;
 		floatingText = new FloatingText(getPosition());
 		isInventoryOpen = false;
 		isReadyBow = false;
@@ -152,8 +152,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.OPEN_INVENTORY, new OpenInventoryEventListener());
-		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CHEAT_SPAWN_BOMB, new CheatKeysEventListener());
+		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
 		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
@@ -212,10 +212,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		else orientate(orientation);
 	}
 
-	public void takeDamage() {
-		if (!tookDamage) {
-			if (hp >= 0.5f)
-				hp -= 0.5f;
+	public void takeDamage(float damage) {
+		if (lastTookDamage <= 0) {
+			if (hp >= damage) {
+				hp -= damage;
+				lastTookDamage = damage;
+			}
 			invicibilityTime = INVINCIBILITY_TIME;
 			floatingText.init("❤", getPosition());
 		}
@@ -224,8 +226,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		//   	if hp == death: die, game over, restart
 	}
 
-	public boolean tookDamage() {
-		return tookDamage;
+	public void takeDamage() {
+		takeDamage(0.5f);
+	}
+
+	public float tookDamage() {
+		return lastTookDamage;
 	}
 
 	protected ARPGItem getCurrentItem() {
@@ -277,10 +283,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		if (invicibilityTime > 0) {
 			invicibilityTime -= deltaTime;
-			tookDamage = true;
 		} else if (invicibilityTime < 0) {
 			invicibilityTime = 0;
-			tookDamage = false;
+			lastTookDamage = 0;
 		}
 
 		floatingText.update(deltaTime);
