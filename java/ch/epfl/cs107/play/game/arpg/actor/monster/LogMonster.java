@@ -3,7 +3,6 @@ package ch.epfl.cs107.play.game.arpg.actor.monster;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
@@ -21,6 +20,7 @@ import ch.epfl.cs107.play.window.Canvas;
 public class LogMonster extends MonsterEntity {
 
     private static final int ANIMATION_DURATION = 4;
+    private static final float PLAYER_ATTACK_DAMAGE = 2.f;
 
     private Animation[] walkingAnimations;
     private Animation sleepingAnimation;
@@ -59,9 +59,13 @@ public class LogMonster extends MonsterEntity {
     public void update(float deltaTime) {
         switch(getState()) {
             case WAKING_UP:
+                if (!Orientation.DOWN.equals(getOrientation()))
+                    orientate(Orientation.DOWN);
                 setAnimation(wakingUpAnimation);
                 break;
             case SLEEP:
+                if (!Orientation.DOWN.equals(getOrientation()))
+                    orientate(Orientation.DOWN);
                 setAnimation(sleepingAnimation);
                 break;
             case IDLE:
@@ -122,6 +126,6 @@ public class LogMonster extends MonsterEntity {
     }
 
     private class ARPGLogMonsterHandler implements ARPGInteractionVisitor {
-
+        
     }
 }

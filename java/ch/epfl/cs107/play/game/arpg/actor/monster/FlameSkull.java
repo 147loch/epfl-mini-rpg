@@ -24,6 +24,7 @@ public class FlameSkull extends MonsterEntity {
 	private static final int MIN_LIFE_TIME = 0;
 	private static final int MAX_LIFE_TIME = 8;
 	private static final int ANIMATION_DURATION = 4;
+	private static final float PLAYER_ATTACK_DAMAGE = 1.f;
 
 	private Animation[] animations;
 	
@@ -102,7 +103,7 @@ public class FlameSkull extends MonsterEntity {
 		@Override
 		public void interactWith(ARPGPlayer player) {
 			if (!isDisplacementOccurs())
-				player.takeDamage();
+				player.takeDamage(PLAYER_ATTACK_DAMAGE);
 		}
 	}
 }

@@ -15,6 +15,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	private static final int GUI_DEPTH = 1000;
 	private static final float INV_HEART_TIMER = 0.25f;
 	private static final float INV_HEART_TIMER_DECREASE_INTERVAL = 0.05f;
+	private static final int INV_HEART_BLINK_TIMES = 3;
 
 	private ARPGPlayer player;
 
@@ -105,10 +106,10 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		if (player.tookDamage() <= 0 && invHeartTimer < INV_HEART_TIMER)
 			invHeartTimer = INV_HEART_TIMER;
 
-		if (player.tookDamage() <= 0 && blinkCounter >= 3)
+		if (player.tookDamage() <= 0 && blinkCounter != 0)
 			blinkCounter = 0;
 
-		if (player.tookDamage() >= 0 && !isInvHeartOff && blinkCounter <= 3) {
+		if (player.tookDamage() >= 0 && !isInvHeartOff && blinkCounter <= INV_HEART_BLINK_TIMES) {
 			arrayHeartsBeforeDamage.forEach(heart -> heart.draw(canvas));
 
 			if (invHeartTimer > 0) {
