@@ -59,10 +59,10 @@ public class Grass extends AreaEntity {
 		super.update(deltaTime);
 	}
 
-	public void cut(boolean isPlayer) {
+	public void cut(boolean wantDroppingItems) {
 		active = false;
 		
-		if (isPlayer) {
+		if (wantDroppingItems) {
 			if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_ITEM) {
 				if (RandomGenerator.getInstance().nextDouble() < PROBABIBITY_TO_DROP_HEART) {
 					getOwnerArea().registerActor(new Heart(getOwnerArea(), Orientation.UP,

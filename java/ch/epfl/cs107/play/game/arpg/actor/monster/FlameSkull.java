@@ -25,6 +25,7 @@ public class FlameSkull extends MonsterEntity {
 	private static final int MAX_LIFE_TIME = 8;
 	private static final int ANIMATION_DURATION = 4;
 	private static final float PLAYER_ATTACK_DAMAGE = 1.f;
+	private static final DamageType[] VULNERABILITIES = {DamageType.PHYSICAL, DamageType.MAGICAL};
 
 	private Animation[] animations;
 	
@@ -33,7 +34,7 @@ public class FlameSkull extends MonsterEntity {
 	private float remainingTime;
 
 	public FlameSkull(Area area, Orientation orientation, DiscreteCoordinates position) {
-		super(area, orientation, position, 2.f);
+		super(area, orientation, position, 2.f, VULNERABILITIES);
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/flameSkull", 3, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
 				{Orientation.UP , Orientation.LEFT , Orientation.DOWN, Orientation.RIGHT});

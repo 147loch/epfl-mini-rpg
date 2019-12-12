@@ -2,16 +2,19 @@ package ch.epfl.cs107.play.game.arpg.handler;
 
 import ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
-import ch.epfl.cs107.play.game.arpg.actor.Arrow;
 import ch.epfl.cs107.play.game.arpg.actor.Bomb;
-import ch.epfl.cs107.play.game.arpg.actor.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.battle.Arrow;
+import ch.epfl.cs107.play.game.arpg.actor.battle.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
 import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.monster.LogMonster;
+import ch.epfl.cs107.play.game.arpg.actor.monster.MonsterEntity;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
 public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
@@ -38,5 +41,11 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	
 	default void interactWith(Bow bow) {}
 	
+	default void interactWith(WaterStaff staff) {}
+	
+	default void interactWith(MonsterEntity monster) {}
+	
 	default void interactWith(Arrow arrow) {}
+	
+	default void interactWith(MagicWaterProjectile projectile) {}
 }

@@ -21,6 +21,7 @@ public class LogMonster extends MonsterEntity {
 
     private static final int ANIMATION_DURATION = 4;
     private static final float PLAYER_ATTACK_DAMAGE = 2.f;
+    private static final DamageType[] VULNERABILITIES = {DamageType.PHYSICAL, DamageType.FIRE};
 
     private Animation[] walkingAnimations;
     private Animation sleepingAnimation;
@@ -29,7 +30,7 @@ public class LogMonster extends MonsterEntity {
     private ARPGLogMonsterHandler handler;
 
     public LogMonster(Area area, Orientation orientation, DiscreteCoordinates position) {
-        super(area, orientation, position, 2.f);
+        super(area, orientation, position, 2.f, VULNERABILITIES);
 
         Sprite[][] walkingSprites = RPGSprite.extractSprites(
             "zelda/logMonster", 4, 2, 2, this , 32, 32,

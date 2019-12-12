@@ -10,8 +10,12 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.actor.battle.Arrow;
+import ch.epfl.cs107.play.game.arpg.actor.battle.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -31,7 +35,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private final static int ANIMATION_DURATION = 2;
 	private final static int BASE_MONEY = 100;
 	private final static float INVINCIBILITY_TIME = 1.5f;
-	private final static float SPEED_BOW = 1.f;
+	private final static float SPEED_BOW = 0.8f;
 
 	// ARPG Stuff
 	private ARPGPlayerHandler handler;
@@ -86,7 +90,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		@Override
 		public void onKeyReleasedEvent(KeyboardAction previousAction) {
 			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && isReadyBow) {
-				if (speedBow >= SPEED_BOW)
+				if (speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())), getFieldOfViewCells()))
 					getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				speedBow = 0;
 				isReadyBow = false;
@@ -199,7 +203,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				break;
 			case ARROW:
 			case SWORD:
+				break;
 			case STAFF:
+				getOwnerArea().registerActor(new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				break;
 			case CASTLE_KEY:
 			default:
 				break;
@@ -408,6 +415,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void interactWith(Bow bow) {
 			inventory.addEntry(ARPGItem.BOW, 1);
 			getOwnerArea().unregisterActor(bow);
+		}
+		
+		@Override
+		public void interactWith(WaterStaff staff) {
+			inventory.addEntry(ARPGItem.STAFF, 1);
+			getOwnerArea().unregisterActor(staff);
 		}
 	}
 }
