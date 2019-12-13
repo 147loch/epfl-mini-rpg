@@ -9,14 +9,11 @@ import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.monster.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.monster.FlyableEntity;
-import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.window.Canvas;
 
 public abstract class Projectile extends MovableAreaEntity implements FlyableEntity, Interactor {
 	
 	private DamageType damageType;
-	private RPGSprite sprite;
 	private int frameSpeed;
 	private float maxLifeTime;
 	
@@ -28,10 +25,6 @@ public abstract class Projectile extends MovableAreaEntity implements FlyableEnt
 		currentLifeTime = 0;
 		this.maxLifeTime = maxLifeTime;
 		this.frameSpeed = frameSpeed;
-	}
-	
-	protected void setSprite(RPGSprite sprite) {
-		this.sprite = sprite;
 	}
 	
 	protected DamageType getDamageType() {
@@ -72,11 +65,6 @@ public abstract class Projectile extends MovableAreaEntity implements FlyableEnt
 	@Override
 	public boolean isViewInteractable() {
 		return true;
-	}
-
-	@Override
-	public void draw(Canvas canvas) {
-		sprite.draw(canvas);
 	}
 	
 	@Override

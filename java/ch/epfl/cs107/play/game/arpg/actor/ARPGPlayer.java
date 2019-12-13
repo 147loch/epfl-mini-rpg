@@ -30,12 +30,22 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
+//TODO problème avec l'animation du animationWithStaff et du animationWithBow
+
 public class ARPGPlayer extends Player implements Inventory.Holder {
 
+	private enum Behavior {
+		IDLE,
+		ATTACK_WITH_SWORD,
+		ATTACK_WITH_BOW,
+		ATTACK_WITH_STAFF
+	}
+	
 	private final static int ANIMATION_DURATION = 2;
 	private final static int BASE_MONEY = 100;
 	private final static float INVINCIBILITY_TIME = 1.5f;
 	private final static float SPEED_BOW = 0.8f;
+	private final static float SPEED_STAFF = 0.8f;
 
 	// ARPG Stuff
 	private ARPGPlayerHandler handler;
@@ -50,8 +60,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     // Animations
 	private Animation[] animations;
 	private Animation[] animationsWithBow;
-	private Animation currentAnimation;
+	private Animation[] animationsWithStaff;
+	private Animation animationIdle;
 	private Animation animationWithBow;
+	private Animation animationWithStaff;
 
 	// Keyboard events
     private KeyboardEventRegister keyboardRegister;
@@ -62,8 +74,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private float invicibilityTime;
 	private float lastTookDamage;
     private boolean isInventoryOpen;
-    private boolean isReadyBow;
     private float speedBow;
+    private float speedStaff;
+    private Behavior behavior;
 
 	// Keyboard Events used for the player
 	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
@@ -89,12 +102,18 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void onKeyReleasedEvent(KeyboardAction previousAction) {
-			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && isReadyBow) {
+			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && behavior.equals(Behavior.ATTACK_WITH_BOW)) {
 				if (speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())), getFieldOfViewCells()))
 					getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 				speedBow = 0;
-				isReadyBow = false;
+				behavior = Behavior.IDLE;
 				animationWithBow.reset();
+			} else if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.STAFF) && behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
+				if (speedStaff >= SPEED_STAFF && getOwnerArea().canEnterAreaCells(new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())), getFieldOfViewCells()))
+					getOwnerArea().registerActor(new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				speedStaff = 0;
+				behavior = Behavior.IDLE;
+				animationWithStaff.reset();
 			}
 		}
 	}
@@ -149,8 +168,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		lastTookDamage = 0;
 		floatingText = new FloatingText(getPosition());
 		isInventoryOpen = false;
-		isReadyBow = false;
 		speedBow = 0;
+		speedStaff = 0;
+		behavior = Behavior.IDLE;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
@@ -170,9 +190,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		Sprite[][] spritesWithBow = RPGSprite.extractSprites("zelda/player.bow", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
 			{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
 		animationsWithBow = RPGSprite.createAnimations(ANIMATION_DURATION * 2, spritesWithBow, false);
+		
+		Sprite[][] spritesWithStaff = RPGSprite.extractSprites("zelda/player.staff_water", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
+				{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
+		animationsWithStaff = RPGSprite.createAnimations(ANIMATION_DURATION * 2, spritesWithStaff, false);
 			
-		currentAnimation = animations[2];
+		animationIdle = animations[2];
 		animationWithBow = animationsWithBow[2];
+		animationWithStaff = animationsWithStaff[2];
 
 		gui = new ARPGPlayerStatusGUI(this);
 		inventoryGui = new ARPGInventoryGUI();
@@ -199,13 +224,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				}
 				break;
 			case BOW:
-				isReadyBow = true;
+				behavior = Behavior.ATTACK_WITH_BOW;
 				break;
-			case ARROW:
 			case SWORD:
 				break;
 			case STAFF:
-				getOwnerArea().registerActor(new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				behavior = Behavior.ATTACK_WITH_STAFF;
 				break;
 			case CASTLE_KEY:
 			default:
@@ -267,21 +291,25 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public void update(float deltaTime) {	
-		if (isReadyBow) {
+		if (behavior.equals(Behavior.ATTACK_WITH_BOW)) {
 			animationWithBow = animationsWithBow[getOrientation().opposite().ordinal()];
 			speedBow += deltaTime;
 			animationWithBow.update(deltaTime);
+		} else if (behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
+			animationWithStaff = animationsWithStaff[getOrientation().opposite().ordinal()];
+			speedStaff += deltaTime;
+			animationWithStaff.update(deltaTime);
 		} else {
-			currentAnimation = animations[getOrientation().opposite().ordinal()];
+			animationIdle = animations[getOrientation().opposite().ordinal()];
 		}
 
 		keyboardRegister.update();
 
 		if (isDisplacementOccurs()) {
-			isReadyBow = false;
-			currentAnimation.update(deltaTime);
+			behavior = Behavior.IDLE;
+			animationIdle.update(deltaTime);
 		} else {
-			currentAnimation.reset();
+			animationIdle.reset();
 		}
 
 		if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
@@ -327,10 +355,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (isReadyBow)
+		if (behavior.equals(Behavior.ATTACK_WITH_BOW))
 			animationWithBow.draw(canvas);
+		else if (behavior.equals(Behavior.ATTACK_WITH_STAFF))
+			animationWithStaff.draw(canvas);
 		else
-			currentAnimation.draw(canvas);
+			animationIdle.draw(canvas);
 		
 		floatingText.draw(canvas);
 		

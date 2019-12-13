@@ -13,6 +13,7 @@ import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
+import ch.epfl.cs107.play.window.Canvas;
 
 public class Arrow extends Projectile implements FlyableEntity {
 	
@@ -31,7 +32,6 @@ public class Arrow extends Projectile implements FlyableEntity {
 			sprites[i] = new RPGSprite("zelda/arrow", 1.f, 1.f, this, new RegionOfInterest(32*i, 0, 32, 32));	
 		}
 		
-		setSprite(sprites[orientation.ordinal()]);
 		handler = new ArrowHandler();
 	}
 
@@ -43,6 +43,11 @@ public class Arrow extends Projectile implements FlyableEntity {
 	@Override
 	public void interactWith(Interactable other) {
 		other.acceptInteraction(handler);
+	}
+	
+	@Override
+	public void draw(Canvas canvas) {
+		sprites[getOrientation().ordinal()].draw(canvas);
 	}
 	
 	private class ArrowHandler implements ARPGInteractionVisitor {
