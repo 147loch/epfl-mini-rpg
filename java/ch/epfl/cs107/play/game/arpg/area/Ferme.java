@@ -38,7 +38,7 @@ public class Ferme extends ARPGArea {
 				new DiscreteCoordinates(13, 0), new DiscreteCoordinates(14, 0)));
 
 		registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
-		registerActor(new LogMonster(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
+		registerActor(new LogMonster(this, Orientation.DOWN, new DiscreteCoordinates(11, 10)));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10, 9 )));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 10)));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10 , 13)));

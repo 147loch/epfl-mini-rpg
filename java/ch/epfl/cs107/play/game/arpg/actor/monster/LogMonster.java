@@ -125,6 +125,9 @@ public class LogMonster extends MonsterEntity {
 
     @Override
     public void draw(Canvas canvas) {
+        if (!State.DEAD.equals(getCurrentState()) && !currentAnimation.isCompleted()) {
+            currentAnimation.draw(canvas);
+        }
         super.draw(canvas);
     }
 
