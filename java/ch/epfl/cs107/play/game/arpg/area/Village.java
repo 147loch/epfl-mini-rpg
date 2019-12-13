@@ -16,19 +16,19 @@ public class Village extends ARPGArea {
 
 	@Override
 	protected void createArea() {
-		this.registerActor(new Background(this));
-		this.registerActor(new Foreground(this));
+		registerActor(new Background(this));
+		registerActor(new Foreground(this));
 		
-		this.registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(4, 1),
+		registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(4, 1),
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(4, 19), new DiscreteCoordinates(5, 19)));
 		
-		this.registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(14, 1),
+		registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(14, 1),
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(13, 19), new DiscreteCoordinates(14, 19),
 				new DiscreteCoordinates(15, 19)));
 		
-		this.registerActor(new Door("zelda/Route", new DiscreteCoordinates(9, 1),
+		registerActor(new Door("zelda/Route", new DiscreteCoordinates(9, 1),
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(29, 19), new DiscreteCoordinates(30, 19)));
 	}

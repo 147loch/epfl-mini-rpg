@@ -59,21 +59,21 @@ public abstract class Projectile extends MovableAreaEntity implements FlyableEnt
 
 	@Override
 	public boolean isCellInteractable() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isViewInteractable() {
-		return true;
+		return false;
 	}
 	
 	@Override
 	public boolean wantsCellInteraction() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean wantsViewInteraction() {
-		return true;
+		return false;
 	}
 }

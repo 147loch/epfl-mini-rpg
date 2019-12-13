@@ -75,6 +75,8 @@ public class MagicWaterProjectile extends Projectile {
 		@Override
 		public void interactWith(MonsterEntity monster) {
 			monster.takeDamage(DamageType.MAGICAL, 1.f); // TODO put constant
+			getOwnerArea().unregisterActor(MagicWaterProjectile.this);
+			
 		}
 	}
 }

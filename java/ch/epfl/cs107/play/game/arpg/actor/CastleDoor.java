@@ -2,6 +2,8 @@ package ch.epfl.cs107.play.game.arpg.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -38,6 +40,11 @@ public class CastleDoor extends Door {
 	@Override
 	public boolean isViewInteractable() {
 		return true;
+	}
+	
+	@Override
+	public void acceptInteraction(AreaInteractionVisitor v) {
+		((ARPGInteractionVisitor)v).interactWith(this);
 	}
 	
 	@Override
