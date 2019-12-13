@@ -22,9 +22,10 @@ public class ARPGInventoryGUI implements Graphics {
 		
 		new ImageGraphics(ResourcePath.getSprite("zelda/inventory.background"),
 				9.5f, 9.5f, new RegionOfInterest(0, 0, 240, 240),
-				anchor.add(new Vector(3.f, 0.f)), 1, GUI_DEPTH).draw(canvas);
+				anchor.add(new Vector(3.f, 0.f)), 1, GUI_DEPTH).draw(canvas);;
 		
-		new TextGraphics("Inventory", 4.f, Color.BLACK);
+		TextGraphics title = new TextGraphics("Inventory", 2.f, Color.BLACK);
+		title.draw(canvas);
 		
 		new ImageGraphics(ResourcePath.getSprite("zelda/inventory.slot"),
 				2.f, 2.f, new RegionOfInterest(0, 0, 64, 64),

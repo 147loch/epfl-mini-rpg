@@ -1,6 +1,6 @@
 package ch.epfl.cs107.play.game.arpg.actor.monster;
 
-public enum Vulnerability {
+public enum DamageType {
 	FIRE,
 	PHYSICAL,
 	MAGICAL;

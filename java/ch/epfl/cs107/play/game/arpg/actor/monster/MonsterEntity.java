@@ -36,12 +36,14 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 	private float maxHp;
 	private float currentHp;
 	private Behavior state;
+	private DamageType vulnerabilities[];
 	
-	public MonsterEntity(Area area, Orientation orientation, DiscreteCoordinates position, float Hp) {
+	public MonsterEntity(Area area, Orientation orientation, DiscreteCoordinates position, float Hp, DamageType[] vulnerabilities) {
 		super(area, orientation, position);
 		
 		maxHp = Hp;
 		currentHp = maxHp;
+		this.vulnerabilities = vulnerabilities;
 		
 		state = Behavior.IDLE;
 		
@@ -62,6 +64,10 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 
 	protected float getCurrentHp() {
 		return currentHp;
+	}
+	
+	public DamageType[] getVulnerabilities() {
+		return vulnerabilities;
 	}
 
 	protected void setState(Behavior state) { this.state = state; }
