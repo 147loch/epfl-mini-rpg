@@ -45,7 +45,16 @@ public class FlameSkull extends MonsterEntity {
 
 		handler = new ARPGFlameSkullHandler();
 	}
-	
+
+	@Override
+	protected void handleMovement() {
+		if (RandomGenerator.getInstance().nextDouble() > 0.6) {
+			resetMotion();
+			orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
+		} else
+			move(MOVEMENT_FRAMES);
+	}
+
 	@Override
 	public void update(float deltaTime) {
 		if (remainingTime <= 0) {
@@ -73,7 +82,6 @@ public class FlameSkull extends MonsterEntity {
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
 	}
-
 
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
