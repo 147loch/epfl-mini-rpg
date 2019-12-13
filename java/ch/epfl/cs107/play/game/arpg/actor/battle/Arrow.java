@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.arpg.actor.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.monster.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.monster.FlyableEntity;
 import ch.epfl.cs107.play.game.arpg.actor.monster.MonsterEntity;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.Activator;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -68,8 +69,16 @@ public class Arrow extends Projectile implements FlyableEntity {
 		public void interactWith(MonsterEntity monster) {
 			for (DamageType dt : monster.getVulnerabilities()) {
 				if (dt.equals(DAMAGE_TYPE))
+				{
 					monster.takeDamage();
+					getOwnerArea().unregisterActor(Arrow.this);
+				}
 			}
+		}
+		
+		@Override
+		public void interactWith(Activator activator) {
+			activator.active();
 		}
 	}
 }

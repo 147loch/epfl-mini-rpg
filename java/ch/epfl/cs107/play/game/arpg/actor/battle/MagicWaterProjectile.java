@@ -76,7 +76,10 @@ public class MagicWaterProjectile extends Projectile {
 		public void interactWith(MonsterEntity monster) {
 			for (DamageType dt : monster.getVulnerabilities()) {
 				if (dt.equals(DAMAGE_TYPE))
+				{
 					monster.takeDamage();
+					getOwnerArea().unregisterActor(MagicWaterProjectile.this);
+				}
 			}
 		}
 	}

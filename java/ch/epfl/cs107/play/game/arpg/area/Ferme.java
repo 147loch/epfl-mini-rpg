@@ -22,30 +22,30 @@ public class Ferme extends ARPGArea {
 
 	@Override
 	protected void createArea() {
-		this.registerActor(new Background(this));
-		this.registerActor(new Foreground(this));
+		registerActor(new Background(this));
+		registerActor(new Foreground(this));
 		
-		this.registerActor(new Door("zelda/Route", new DiscreteCoordinates(1, 15),
+		registerActor(new Door("zelda/Route", new DiscreteCoordinates(1, 15),
 				Logic.TRUE, this, Orientation.RIGHT,
 				new DiscreteCoordinates(19, 15), new DiscreteCoordinates(19, 16)));
 		
-		this.registerActor(new Door("zelda/Village", new DiscreteCoordinates(4, 18),
+		registerActor(new Door("zelda/Village", new DiscreteCoordinates(4, 18),
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(4, 0), new DiscreteCoordinates(5, 0)));
 		
-		this.registerActor(new Door("zelda/Village", new DiscreteCoordinates(14, 18),
+		registerActor(new Door("zelda/Village", new DiscreteCoordinates(14, 18),
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(13, 0), new DiscreteCoordinates(14, 0)));
 
-		this.registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
-		this.registerActor(new LogMonster(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
-		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10, 9 )));
-		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 10)));
-		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10 , 13)));
-		this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
+		registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
+		registerActor(new LogMonster(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10, 9 )));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 10)));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10 , 13)));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
 		
-		this.registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
-		this.registerActor(new Bow(this, Orientation.UP, new DiscreteCoordinates(5, 6)));
-		this.registerActor(new WaterStaff(this, Orientation.UP, new DiscreteCoordinates(4, 6)));
+		registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
+		registerActor(new Bow(this, Orientation.UP, new DiscreteCoordinates(5, 6)));
+		registerActor(new WaterStaff(this, Orientation.UP, new DiscreteCoordinates(4, 6)));
 	}
 }

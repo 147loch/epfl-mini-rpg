@@ -30,8 +30,6 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-//TODO problème avec l'animation du animationWithStaff et du animationWithBow
-
 public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	private enum Behavior {
@@ -58,12 +56,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private FloatingText floatingText;
 
     // Animations
-	private Animation[] animations;
+	private Animation[] animationsIdle;
 	private Animation[] animationsWithBow;
 	private Animation[] animationsWithStaff;
-	private Animation animationIdle;
-	private Animation animationWithBow;
-	private Animation animationWithStaff;
 
 	// Keyboard events
     private KeyboardEventRegister keyboardRegister;
@@ -103,17 +98,18 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		@Override
 		public void onKeyReleasedEvent(KeyboardAction previousAction) {
 			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && behavior.equals(Behavior.ATTACK_WITH_BOW)) {
-				if (speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())), getFieldOfViewCells()))
-					getOwnerArea().registerActor(new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+				Arrow arrow = new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+				if (speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(arrow, getFieldOfViewCells()))
+					getOwnerArea().registerActor(arrow);
 				speedBow = 0;
 				behavior = Behavior.IDLE;
-				animationWithBow.reset();
+				animationsWithBow[getOrientation().opposite().ordinal()].reset();
 			} else if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.STAFF) && behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
-				if (speedStaff >= SPEED_STAFF && getOwnerArea().canEnterAreaCells(new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())), getFieldOfViewCells()))
-					getOwnerArea().registerActor(new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
-				speedStaff = 0;
+				MagicWaterProjectile projectile = new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+				if (speedStaff >= SPEED_STAFF && getOwnerArea().canEnterAreaCells(projectile, getFieldOfViewCells()))
+					getOwnerArea().registerActor(projectile);
 				behavior = Behavior.IDLE;
-				animationWithStaff.reset();
+				animationsWithStaff[getOrientation().opposite().ordinal()].reset();
 			}
 		}
 	}
@@ -185,7 +181,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.UP , Orientation.LEFT , Orientation.DOWN, Orientation.RIGHT});
-		animations = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
+		animationsIdle = RPGSprite.createAnimations(ANIMATION_DURATION, sprites);
 		
 		Sprite[][] spritesWithBow = RPGSprite.extractSprites("zelda/player.bow", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
 			{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
@@ -194,10 +190,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		Sprite[][] spritesWithStaff = RPGSprite.extractSprites("zelda/player.staff_water", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
 				{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
 		animationsWithStaff = RPGSprite.createAnimations(ANIMATION_DURATION * 2, spritesWithStaff, false);
-			
-		animationIdle = animations[2];
-		animationWithBow = animationsWithBow[2];
-		animationWithStaff = animationsWithStaff[2];
 
 		gui = new ARPGPlayerStatusGUI(this);
 		inventoryGui = new ARPGInventoryGUI();
@@ -292,24 +284,20 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public void update(float deltaTime) {	
 		if (behavior.equals(Behavior.ATTACK_WITH_BOW)) {
-			animationWithBow = animationsWithBow[getOrientation().opposite().ordinal()];
 			speedBow += deltaTime;
-			animationWithBow.update(deltaTime);
+			animationsWithBow[getOrientation().opposite().ordinal()].update(deltaTime);
 		} else if (behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
-			animationWithStaff = animationsWithStaff[getOrientation().opposite().ordinal()];
 			speedStaff += deltaTime;
-			animationWithStaff.update(deltaTime);
-		} else {
-			animationIdle = animations[getOrientation().opposite().ordinal()];
+			animationsWithStaff[getOrientation().opposite().ordinal()].update(deltaTime);
 		}
 
 		keyboardRegister.update();
 
 		if (isDisplacementOccurs()) {
 			behavior = Behavior.IDLE;
-			animationIdle.update(deltaTime);
+			animationsIdle[getOrientation().opposite().ordinal()].update(deltaTime);
 		} else {
-			animationIdle.reset();
+			animationsIdle[getOrientation().opposite().ordinal()].reset();
 		}
 
 		if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
@@ -356,11 +344,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public void draw(Canvas canvas) {
 		if (behavior.equals(Behavior.ATTACK_WITH_BOW))
-			animationWithBow.draw(canvas);
+			animationsWithBow[getOrientation().opposite().ordinal()].draw(canvas);
 		else if (behavior.equals(Behavior.ATTACK_WITH_STAFF))
-			animationWithStaff.draw(canvas);
+			animationsWithStaff[getOrientation().opposite().ordinal()].draw(canvas);
 		else
-			animationIdle.draw(canvas);
+			animationsIdle[getOrientation().opposite().ordinal()].draw(canvas);
 		
 		floatingText.draw(canvas);
 		
@@ -399,18 +387,15 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		
 		@Override
 		public void interactWith(Door door) {
-			if (door instanceof CastleDoor)
-				interactWith((CastleDoor) door);
-			else
-				setIsPassingADoor(door);
+			setIsPassingADoor(door);
 		}
 		
 		@Override
 		public void interactWith(CastleDoor castleDoor) {
-			if (wantsViewInteraction()) { //VIEW INTERACTION
+			if (wantsViewInteraction()) {
 				if (currentHoldingItem.equals(ARPGItem.CASTLE_KEY))
 					castleDoor.changeSignal();
-			} else { //CELL INTERACTION
+			} else {
 				setIsPassingADoor(castleDoor);
 				castleDoor.changeSignal();
 			}

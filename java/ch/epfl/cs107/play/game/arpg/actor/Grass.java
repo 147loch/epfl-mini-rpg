@@ -27,15 +27,15 @@ public class Grass extends AreaEntity {
 	
 	private Sprite sprite;
 	private Animation animation;
-	private int frameIndex;
-	
+
 	private boolean active;
+	private boolean dropped;
 	
 	public Grass(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		sprite = new RPGSprite("zelda/grass", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
 		active = true;
-		frameIndex = 0;
+		dropped = false;
 		
 		Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
 		
@@ -48,13 +48,8 @@ public class Grass extends AreaEntity {
 	@Override
 	public void update(float deltaTime) {
 		
-		if (!active) {
+		if (!active)
 			animation.update(deltaTime);
-			frameIndex++;
-		}
-		
-		if (frameIndex == ANIMATION_FRAME_LENGTH) //Animation completed
-			getOwnerArea().unregisterActor(this);
 		
 		super.update(deltaTime);
 	}
@@ -62,7 +57,7 @@ public class Grass extends AreaEntity {
 	public void cut(boolean wantDroppingItems) {
 		active = false;
 		
-		if (wantDroppingItems) {
+		if (wantDroppingItems && !dropped) {
 			if (RandomGenerator.getInstance().nextDouble() < PROBABILITY_TO_DROP_ITEM) {
 				if (RandomGenerator.getInstance().nextDouble() < PROBABIBITY_TO_DROP_HEART) {
 					getOwnerArea().registerActor(new Heart(getOwnerArea(), Orientation.UP,
@@ -72,6 +67,7 @@ public class Grass extends AreaEntity {
 							new DiscreteCoordinates((int)this.getPosition().x, (int)this.getPosition().y)));
 				}
 			}
+			dropped = true;
 		}
 	}
 	
@@ -87,7 +83,7 @@ public class Grass extends AreaEntity {
 
 	@Override
 	public boolean isCellInteractable() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -104,8 +100,12 @@ public class Grass extends AreaEntity {
 	public void draw(Canvas canvas) {
 		if (active)
 			sprite.draw(canvas);
-		else
+		else if (!animation.isCompleted())
+		{
 			animation.draw(canvas);
+		} else {
+			getOwnerArea().unregisterActor(this);
+		}
 	}
 
 }

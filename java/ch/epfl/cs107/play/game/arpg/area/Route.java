@@ -4,8 +4,12 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.Waterfall;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.Activator;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Route extends ARPGArea {
@@ -17,25 +21,32 @@ public class Route extends ARPGArea {
 
 	@Override
 	protected void createArea() {
-		this.registerActor(new Background(this));
-		this.registerActor(new Foreground(this));
+		registerActor(new Background(this));
+		registerActor(new Foreground(this));
 		
-		this.registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(18, 15),
+		registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(18, 15),
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(0, 15), new DiscreteCoordinates(0, 16)));
 		
-		this.registerActor(new Door("zelda/Village", new DiscreteCoordinates(29, 18),
+		registerActor(new Door("zelda/Village", new DiscreteCoordinates(29, 18),
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(9, 0), new DiscreteCoordinates(10, 0)));
 
-		this.registerActor(new Door("zelda/RouteChateau", new DiscreteCoordinates(9, 1),
+		registerActor(new Door("zelda/RouteChateau", new DiscreteCoordinates(9, 1),
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(9, 19), new DiscreteCoordinates(10, 19)));
 		
 		for (int i = 5; i <= 7; i++) {
 			for (int j = 6; j <= 11; j++) {
-				this.registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(i, j)));
+				registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(i, j)));
 			}
 		}
+		
+		registerActor(new Waterfall(new Vector(15, 3)));
+		
+		HiddenBridge bridge = new HiddenBridge(this, Orientation.UP, new DiscreteCoordinates(15, 9));
+		registerActor(bridge);
+		registerActor(new Activator(this, Orientation.UP, new DiscreteCoordinates(18, 7), bridge));
+		
 	}
 }

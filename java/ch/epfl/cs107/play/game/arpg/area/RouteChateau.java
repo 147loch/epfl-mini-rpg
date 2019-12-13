@@ -57,17 +57,17 @@ public class RouteChateau extends ARPGArea {
 
 	@Override
 	protected void createArea() {
-		this.registerActor(new Background(this));
-		this.registerActor(new Foreground(this));
+		registerActor(new Background(this));
+		registerActor(new Foreground(this));
 		
-		this.registerActor(new Door("zelda/Route", new DiscreteCoordinates(9, 18),
+		registerActor(new Door("zelda/Route", new DiscreteCoordinates(9, 18),
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(9, 0), new DiscreteCoordinates(10, 0)));
 		
-		this.registerActor(new CastleDoor("zelda/Chateau", new DiscreteCoordinates(7, 1), this, Orientation.UP,
+		registerActor(new CastleDoor("zelda/Chateau", new DiscreteCoordinates(7, 1), this, Orientation.UP,
 				new DiscreteCoordinates(9, 13), new DiscreteCoordinates(10, 13)));
 
-		keyboardEventRegister = new KeyboardEventRegister(this.getKeyboard());
+		keyboardEventRegister = new KeyboardEventRegister(getKeyboard());
 		keyboardEventRegister.registerKeyboardEvents(new CheatKeysEventListener());
 	}
 }
