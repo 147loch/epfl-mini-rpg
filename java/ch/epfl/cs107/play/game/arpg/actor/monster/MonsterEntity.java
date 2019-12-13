@@ -27,7 +27,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 	}
 
 	private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
-	private static final int MOVEMENT_FRAMES = 8;
+	protected static final int MOVEMENT_FRAMES = 8;
 	
 	private Animation animationVanish;
 	private Animation currentAnimation;
@@ -58,7 +58,8 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 	protected void setAnimation(Animation animation) {
 		currentAnimation = animation;
 	}
-	
+	protected Animation getAnimation() { return currentAnimation; }
+
 	protected float getCurrentHp() {
 		return currentHp;
 	}
@@ -85,24 +86,23 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Flyable
 			case IDLE:
 				if (this.isDisplacementOccurs())
 					currentAnimation.update(deltaTime);
-				else {
-					if (RandomGenerator.getInstance().nextDouble() > 0.6) {
-						resetMotion();
-						orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
-					} else
-						move(MOVEMENT_FRAMES);
-				}
+				else
+					handleMovement();
 				break;
 			case DEAD:
 				animationVanish.update(deltaTime);
 				indexAnimationVanish++;
 				break;
 			default:
+				if (currentAnimation != null)
+					currentAnimation.update(deltaTime);
 				break;
 		}
 		
 		super.update(deltaTime);
 	}
+
+	protected abstract void handleMovement();
 
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {

@@ -29,7 +29,7 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(Heart heart) {}
 	
 	default void interactWith(CastleKey key) {}
-	
+
 	default void interactWith(CastleDoor castleDoor) {}
 
 	default void interactWith(FlameSkull skull) {}
