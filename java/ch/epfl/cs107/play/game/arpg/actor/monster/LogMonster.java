@@ -26,6 +26,7 @@ public class LogMonster extends MonsterEntity {
     private static final DamageType[] VULNERABILITIES = {DamageType.PHYSICAL, DamageType.FIRE};
 
     private Animation[] walkingAnimations;
+    private Animation currentAnimation;
     private Animation sleepingAnimation;
     private Animation wakingUpAnimation;
     private Animation fallingAsleepAnimation;
@@ -42,7 +43,7 @@ public class LogMonster extends MonsterEntity {
             new Vector(-0.5f, 0), new Orientation[] {Orientation.DOWN , Orientation.UP , Orientation.RIGHT, Orientation.LEFT}
         );
         walkingAnimations = RPGSprite.createAnimations(ANIMATION_DURATION, walkingSprites);
-        setAnimation(walkingAnimations[0]);
+        currentAnimation = walkingAnimations[orientation.ordinal()];
 
         Sprite[] sleepingSprites = new Sprite[4];
         for (int i = 0; i < sleepingSprites.length; i++) {
@@ -67,14 +68,49 @@ public class LogMonster extends MonsterEntity {
         inactivityCounter = 0;
     }
 
-    @Override
-    protected void handleMovement() {
-
-    }
+    // MonsterEntity events
+    @Override protected void handleDamageEvent(float damageTook) {}
+    @Override protected void handleDeathDropEvent() {}
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+
+        // currentAnimation = walkingAnimations[getOrientation().ordinal()];
+
+        switch(getCurrentState()) {
+            case WAKING_UP:
+                if (!Orientation.DOWN.equals(getOrientation()))
+                    orientate(Orientation.DOWN);
+                currentAnimation = wakingUpAnimation;
+                if (currentAnimation.isCompleted())
+                    setCurrentState(State.IDLE);
+                break;
+            case FALLING_ASLEEP:
+                if (!Orientation.DOWN.equals(getOrientation()))
+                    orientate(Orientation.DOWN);
+                currentAnimation = fallingAsleepAnimation;
+                if (currentAnimation.isCompleted())
+                    setCurrentState(State.ASLEEP);
+                break;
+            case ASLEEP:
+                if (!Orientation.DOWN.equals(getOrientation()))
+                    orientate(Orientation.DOWN);
+                currentAnimation = sleepingAnimation;
+                break;
+            case IDLE:
+                currentAnimation = walkingAnimations[getOrientation().ordinal()];
+                break;
+            default:
+                break;
+        }
+
+        if (inactivityCounter == 0) {
+            switch(getCurrentState()) {
+                case IDLE:
+                    break;
+            }
+        }
     }
 
     @Override
@@ -90,38 +126,11 @@ public class LogMonster extends MonsterEntity {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        switch(getState()) {
-            case WAKING_UP:
-                if (!Orientation.DOWN.equals(getOrientation()))
-                    orientate(Orientation.DOWN);
-                setAnimation(wakingUpAnimation);
-                if (getAnimation().isCompleted())
-                    setState(Behavior.IDLE);
-                break;
-            case FALLING_ASLEEP:
-                if (!Orientation.DOWN.equals(getOrientation()))
-                    orientate(Orientation.DOWN);
-                setAnimation(fallingAsleepAnimation);
-                if (getAnimation().isCompleted())
-                    setState(Behavior.SLEEP);
-                break;
-            case SLEEP:
-                if (!Orientation.DOWN.equals(getOrientation()))
-                    orientate(Orientation.DOWN);
-                setAnimation(sleepingAnimation);
-                break;
-            case IDLE:
-                setAnimation(walkingAnimations[getOrientation().ordinal()]);
-                break;
-            default:
-                break;
-        }
     }
-
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
-        switch (getState()) {
+        switch (getCurrentState()) {
             case ATTACK:
                 return Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
             case IDLE:
@@ -142,20 +151,15 @@ public class LogMonster extends MonsterEntity {
 
     @Override
     public boolean wantsViewInteraction() {
-        return Behavior.IDLE.equals(getState()) || Behavior.ATTACK.equals(getState());
-    }
-
-    @Override
-    public boolean canFly() {
-        return false;
+        return State.IDLE.equals(getCurrentState()) || State.ATTACK.equals(getCurrentState());
     }
 
     private class ARPGLogMonsterHandler implements ARPGInteractionVisitor {
         @Override
         public void interactWith(ARPGPlayer player) {
-            switch (getState()) {
+            switch (getCurrentState()) {
                 case IDLE:
-                    setState(Behavior.ATTACK);
+                    setCurrentState(State.ATTACK);
                     break;
                 case ATTACK:
                     player.takeDamage(PLAYER_ATTACK_DAMAGE);

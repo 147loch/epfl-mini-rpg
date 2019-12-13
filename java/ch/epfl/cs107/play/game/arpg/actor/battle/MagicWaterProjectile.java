@@ -74,10 +74,7 @@ public class MagicWaterProjectile extends Projectile {
 		
 		@Override
 		public void interactWith(MonsterEntity monster) {
-			for (DamageType dt : monster.getVulnerabilities()) {
-				if (dt.equals(DAMAGE_TYPE))
-					monster.takeDamage();
-			}
+			monster.takeDamage(DamageType.MAGICAL, 1.f); // TODO put constant
 		}
 	}
 }

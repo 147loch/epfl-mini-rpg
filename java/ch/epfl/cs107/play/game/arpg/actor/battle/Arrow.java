@@ -66,10 +66,7 @@ public class Arrow extends Projectile implements FlyableEntity {
 		
 		@Override
 		public void interactWith(MonsterEntity monster) {
-			for (DamageType dt : monster.getVulnerabilities()) {
-				if (dt.equals(DAMAGE_TYPE))
-					monster.takeDamage();
-			}
+			monster.takeDamage(DamageType.PHYSICAL, 1.f); // TODO put constant
 		}
 	}
 }
