@@ -30,7 +30,6 @@ public class Tuto2Behavior extends AreaBehavior {
 					return p;
 				}
 			}
-			// TODO maybe remove
 			System.out.println(type);
 			return NULL;
 		}
