@@ -4,7 +4,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
-import ch.epfl.cs107.play.game.arpg.actor.Waterfall;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Waterfall;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.Activator;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge;
 import ch.epfl.cs107.play.game.rpg.actor.Door;

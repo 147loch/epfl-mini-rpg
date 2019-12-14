@@ -13,6 +13,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
@@ -31,9 +32,10 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class ARPGPlayer extends Player implements Inventory.Holder {
+public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI{
 
 	private enum Behavior {
+
 		IDLE,
 		ATTACK_WITH_SWORD,
 		ATTACK_WITH_BOW,
@@ -262,24 +264,28 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		takeDamage(0.5f);
 	}
 
+	@Override
 	public float tookDamage() {
 		return lastTookDamage;
 	}
 
-	protected ARPGItem getCurrentItem() {
+	@Override
+	public ARPGItem getCurrentItem() {
 		return currentHoldingItem;
 	}
 
-	protected int getInventoryMoney() {
+	@Override
+	public int getInventoryMoney() {
 		return inventory.getMoney();
 	}
 	
-	
-	protected float getHp() {
+	@Override
+	public float getHp() {
 		return hp;
 	}
 	
-	protected float getMaxHp() {
+	@Override
+	public float getMaxHp() {
 		return maxHp;
 	}
 	

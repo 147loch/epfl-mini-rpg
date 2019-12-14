@@ -69,7 +69,7 @@ public class Activator extends AreaEntity implements FlyableEntity {
 
 	@Override
 	public boolean isViewInteractable() {
-		return true;
+		return false;
 	}
 
 	@Override

@@ -17,13 +17,13 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	private static final float INV_HEART_TIMER_DECREASE_INTERVAL = 0.05f;
 	private static final int INV_HEART_BLINK_TIMES = 3;
 
-	private ARPGPlayer player;
+	private PlayerForGUI player;
 
 	private boolean isInvHeartOff = true;
 	private float invHeartTimer = INV_HEART_TIMER;
 	private int blinkCounter = 0;
 
-	protected ARPGPlayerStatusGUI(ARPGPlayer player) {
+	protected ARPGPlayerStatusGUI(PlayerForGUI player) {
 		this.player = player;
 	}
 	
@@ -43,7 +43,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 		
 		//DISPLAY CURRENT ITEM
 		if (player.getCurrentItem() != null) {
-			new ImageGraphics(player.getCurrentItem().getResourcePath()	,
+			new ImageGraphics(player.getCurrentItem().getResourcePath(),
 					1.f, 1.f, new RegionOfInterest(0, 0, 16, 16),
 					anchor.add(new Vector(0.5f, height - 1.5f)), 1, GUI_DEPTH + 1).draw(canvas);
 		}
