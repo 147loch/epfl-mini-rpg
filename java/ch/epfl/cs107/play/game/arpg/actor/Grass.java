@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Rarity;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -22,8 +23,8 @@ public class Grass extends AreaEntity {
 
 	private final static int ANIMATION_FRAME_LENGTH = 4;
 	
-	private final static double PROBABILITY_TO_DROP_ITEM = 0.3;
-	private final static double PROBABIBITY_TO_DROP_HEART = 0.5;
+	private final static double PROBABILITY_TO_DROP_ITEM = Rarity.UNCOMMON;
+	private final static double PROBABIBITY_TO_DROP_HEART = Rarity.COMMON;
 	
 	private Sprite sprite;
 	private Animation animation;

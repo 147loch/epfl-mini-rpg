@@ -1,7 +1,8 @@
 package ch.epfl.cs107.play.game.arpg.actor.collectable;
 
 public interface Rarity {
-	double COMMON = 0.5;
-	double UNCOMMON = 0.25;
-	double RARE = 0.1;
+	public static final double COMMON = 1/2;
+	public static final double UNCOMMON = 1/3;
+	public static final double RARE = 1/5;
+	public static final double LEGENDARY = 1/10;
 }

@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor;
+package ch.epfl.cs107.play.game.arpg.actor.collectable;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,16 +12,16 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class CastleKey extends AreaEntity {
+public class ArrowItem extends AreaEntity {
 
-	private RPGSprite keySprite;
+	private RPGSprite sprite;
 	
-	public CastleKey(Area area, Orientation orientation, DiscreteCoordinates position) {
+	public ArrowItem(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
-		keySprite = new RPGSprite("zelda/key", 1.f, 1.f, this);
+		sprite = new RPGSprite("zelda/arrow.icon", 1.f, 1.f, this);
 	}
-	
+
 	@Override
 	public List<DiscreteCoordinates> getCurrentCells() {
 		return Collections.singletonList(getCurrentMainCellCoordinates());
@@ -43,13 +43,13 @@ public class CastleKey extends AreaEntity {
 	}
 
 	@Override
-	public void draw(Canvas canvas) {
-		keySprite.draw(canvas);
+	public void acceptInteraction(AreaInteractionVisitor v) {
+		((ARPGInteractionVisitor)v).interactWith(this);
 	}
 
 	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {
-		((ARPGInteractionVisitor)v).interactWith(this);
+	public void draw(Canvas canvas) {
+		sprite.draw(canvas);
 	}
 
 }

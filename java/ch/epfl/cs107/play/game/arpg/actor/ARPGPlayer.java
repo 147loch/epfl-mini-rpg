@@ -10,11 +10,14 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.arpg.actor.battle.Arrow;
-import ch.epfl.cs107.play.game.arpg.actor.battle.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
+import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
@@ -30,7 +33,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class ARPGPlayer extends Player implements Inventory.Holder {
+public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI{
 
 	private enum Behavior {
 		IDLE,
@@ -52,13 +55,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private ARPGInventoryGUI inventoryGui;
     private ARPGItem currentHoldingItem;
     
-    //FloatingText
-    private FloatingText floatingText;
+    //Text
+    private FaddingText floatingText;
 
     // Animations
 	private Animation[] animationsIdle;
 	private Animation[] animationsWithBow;
 	private Animation[] animationsWithStaff;
+	private Animation[] animationsWithSword;
 
 	// Keyboard events
     private KeyboardEventRegister keyboardRegister;
@@ -99,8 +103,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void onKeyReleasedEvent(KeyboardAction previousAction) {
 			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && behavior.equals(Behavior.ATTACK_WITH_BOW)) {
 				Arrow arrow = new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
-				if (speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(arrow, getFieldOfViewCells()))
-					getOwnerArea().registerActor(arrow);
+				if (possess(ARPGItem.ARROW) && speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(arrow, getFieldOfViewCells())) {
+					if (getAmountOf(ARPGItem.ARROW) >= 1) {
+						getOwnerArea().registerActor(arrow);
+						inventory.removeEntry(ARPGItem.ARROW, 1);
+					}
+				}
 				speedBow = 0;
 				behavior = Behavior.IDLE;
 				animationsWithBow[getOrientation().opposite().ordinal()].reset();
@@ -110,6 +118,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 					getOwnerArea().registerActor(projectile);
 				behavior = Behavior.IDLE;
 				animationsWithStaff[getOrientation().opposite().ordinal()].reset();
+			}  else if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.SWORD) && behavior.equals(Behavior.ATTACK_WITH_SWORD)) {
+				
 			}
 		}
 	}
@@ -162,7 +172,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		hp = maxHp;
 		invicibilityTime = 0;
 		lastTookDamage = 0;
-		floatingText = new FloatingText(getPosition());
+		floatingText = new FaddingText(getPosition());
 		isInventoryOpen = false;
 		speedBow = 0;
 		speedStaff = 0;
@@ -190,9 +200,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		Sprite[][] spritesWithStaff = RPGSprite.extractSprites("zelda/player.staff_water", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
 				{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
 		animationsWithStaff = RPGSprite.createAnimations(ANIMATION_DURATION * 2, spritesWithStaff, false);
+		
+		Sprite[][] spritesWithSword = RPGSprite.extractSprites("zelda/player.sword", 4, 2, 2, this , 32, 32, new Vector(-0.5f, 0), new Orientation[]
+				{Orientation.UP , Orientation.DOWN , Orientation.LEFT, Orientation.RIGHT});
+		animationsWithSword = RPGSprite.createAnimations(ANIMATION_DURATION, spritesWithSword, false);
 
 		gui = new ARPGPlayerStatusGUI(this);
-		inventoryGui = new ARPGInventoryGUI();
+		inventoryGui = new ARPGInventoryGUI(this);
 	}
 
 	public void cycleCurrentInventoryItem() {
@@ -219,6 +233,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				behavior = Behavior.ATTACK_WITH_BOW;
 				break;
 			case SWORD:
+				behavior = Behavior.ATTACK_WITH_SWORD;
 				break;
 			case STAFF:
 				behavior = Behavior.ATTACK_WITH_STAFF;
@@ -253,24 +268,28 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		takeDamage(0.5f);
 	}
 
+	@Override
 	public float tookDamage() {
 		return lastTookDamage;
 	}
 
-	protected ARPGItem getCurrentItem() {
+	@Override
+	public ARPGItem getCurrentItem() {
 		return currentHoldingItem;
 	}
 
-	protected int getInventoryMoney() {
+	@Override
+	public int getInventoryMoney() {
 		return inventory.getMoney();
 	}
 	
-	
-	protected float getHp() {
+	@Override
+	public float getHp() {
 		return hp;
 	}
 	
-	protected float getMaxHp() {
+	@Override
+	public float getMaxHp() {
 		return maxHp;
 	}
 	
@@ -279,6 +298,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		
 		if (this.hp > maxHp)
 			this.hp = maxHp;
+	}
+	
+	protected int getAmountOf(InventoryItem item) {
+		if (possess(item)) {
+			return inventory.getItemAmount(item);
+		}
+		return 0;
 	}
 
 	@Override
@@ -289,12 +315,15 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		} else if (behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
 			speedStaff += deltaTime;
 			animationsWithStaff[getOrientation().opposite().ordinal()].update(deltaTime);
+		} else if (behavior.equals(Behavior.ATTACK_WITH_SWORD)) {
+			animationsWithSword[getOrientation().opposite().ordinal()].update(deltaTime);
 		}
 
 		keyboardRegister.update();
 
 		if (isDisplacementOccurs()) {
 			behavior = Behavior.IDLE;
+			animationsWithSword[getOrientation().opposite().ordinal()].reset();
 			animationsIdle[getOrientation().opposite().ordinal()].update(deltaTime);
 		} else {
 			animationsIdle[getOrientation().opposite().ordinal()].reset();
@@ -347,8 +376,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			animationsWithBow[getOrientation().opposite().ordinal()].draw(canvas);
 		else if (behavior.equals(Behavior.ATTACK_WITH_STAFF))
 			animationsWithStaff[getOrientation().opposite().ordinal()].draw(canvas);
+		else if (behavior.equals(Behavior.ATTACK_WITH_SWORD) && !animationsWithSword[getOrientation().opposite().ordinal()].isCompleted())
+			animationsWithSword[getOrientation().opposite().ordinal()].draw(canvas);
 		else
+		{
+			behavior = Behavior.IDLE;
 			animationsIdle[getOrientation().opposite().ordinal()].draw(canvas);
+			animationsWithSword[getOrientation().opposite().ordinal()].reset();
+		}
 		
 		floatingText.draw(canvas);
 		
@@ -365,7 +400,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public boolean wantsViewInteraction() {
-		return KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed();
+		return (KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed()
+				|| behavior.equals(Behavior.ATTACK_WITH_SWORD));
 	}
 
 	@Override
@@ -403,7 +439,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void interactWith(Grass grass) {
-			grass.cut(true);
+			if (behavior.equals(Behavior.ATTACK_WITH_SWORD))
+				grass.cut(true);
 		}
 		
 		@Override
@@ -436,6 +473,18 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void interactWith(WaterStaff staff) {
 			inventory.addEntry(ARPGItem.STAFF, 1);
 			getOwnerArea().unregisterActor(staff);
+		}
+		
+		@Override
+		public void interactWith(Sword sword) {
+			inventory.addEntry(ARPGItem.SWORD, 1);
+			getOwnerArea().unregisterActor(sword);
+		}
+		
+		@Override
+		public void interactWith(ArrowItem arrow) {
+			inventory.addEntry(ARPGItem.ARROW, 1);
+			getOwnerArea().unregisterActor(arrow);
 		}
 	}
 }

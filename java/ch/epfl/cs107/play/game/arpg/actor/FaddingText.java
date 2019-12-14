@@ -7,7 +7,7 @@ import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class FloatingText extends Entity {
+public class FaddingText extends Entity {
 
 	private static final int INDEX_FADING = 10;
 	
@@ -16,7 +16,7 @@ public class FloatingText extends Entity {
 	private float alpha;
 	private int indexBeforeFading;
 	
-	public FloatingText(Vector position) {
+	public FaddingText(Vector position) {
 		super(position);
 		text = new TextGraphics("❤", 1, Color.RED);
 		isOver = true;
