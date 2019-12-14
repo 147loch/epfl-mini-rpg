@@ -36,7 +36,6 @@ import ch.epfl.cs107.play.window.Canvas;
 public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI{
 
 	private enum Behavior {
-
 		IDLE,
 		ATTACK_WITH_SWORD,
 		ATTACK_WITH_BOW,
