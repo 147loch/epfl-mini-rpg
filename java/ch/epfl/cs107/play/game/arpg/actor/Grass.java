@@ -101,8 +101,7 @@ public class Grass extends AreaEntity {
 	public void draw(Canvas canvas) {
 		if (active)
 			sprite.draw(canvas);
-		else if (!animation.isCompleted())
-		{
+		else if (!animation.isCompleted()) {
 			animation.draw(canvas);
 		} else {
 			getOwnerArea().unregisterActor(this);

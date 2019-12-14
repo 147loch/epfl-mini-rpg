@@ -4,7 +4,7 @@ import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Keyboard;
 
 public enum KeyboardAction implements Action {
-    /* NAME               | DEFAULT KEY       | INTEFACE METHODS (MAINLY TTTLE)                                           */
+    /* NAME               | DEFAULT KEY       | INTERFACE METHODS (MAINLY TITLE)                                           */
     MOVE_UP                (KeyboardKey.UP)    { @Override public String getActionTitle() { return "Move Up"; } },
     MOVE_RIGHT             (KeyboardKey.RIGHT) { @Override public String getActionTitle() { return "Move Right"; } },
     MOVE_DOWN              (KeyboardKey.DOWN)  { @Override public String getActionTitle() { return "Move Down"; } },

@@ -56,7 +56,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
     private ARPGItem currentHoldingItem;
     
     //Text
-    private FaddingText floatingText;
+    private FadingText floatingText;
 
     // Animations
 	private Animation[] animationsIdle;
@@ -172,7 +172,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		hp = maxHp;
 		invicibilityTime = 0;
 		lastTookDamage = 0;
-		floatingText = new FaddingText(getPosition());
+		floatingText = new FadingText(getPosition());
 		isInventoryOpen = false;
 		speedBow = 0;
 		speedStaff = 0;
@@ -378,8 +378,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 			animationsWithStaff[getOrientation().opposite().ordinal()].draw(canvas);
 		else if (behavior.equals(Behavior.ATTACK_WITH_SWORD) && !animationsWithSword[getOrientation().opposite().ordinal()].isCompleted())
 			animationsWithSword[getOrientation().opposite().ordinal()].draw(canvas);
-		else
-		{
+		else {
 			behavior = Behavior.IDLE;
 			animationsIdle[getOrientation().opposite().ordinal()].draw(canvas);
 			animationsWithSword[getOrientation().opposite().ordinal()].reset();
@@ -400,8 +399,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 
 	@Override
 	public boolean wantsViewInteraction() {
-		return (KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed()
-				|| behavior.equals(Behavior.ATTACK_WITH_SWORD));
+		return (
+				KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed() ||
+				behavior.equals(Behavior.ATTACK_WITH_SWORD)
+		);
 	}
 
 	@Override
@@ -439,7 +440,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 
 		@Override
 		public void interactWith(Grass grass) {
-			if (behavior.equals(Behavior.ATTACK_WITH_SWORD))
+			if (behavior.equals(Behavior.ATTACK_WITH_SWORD)) // TODO ne marche pas si on n'a pas l'épée, intended?
 				grass.cut(true);
 		}
 		

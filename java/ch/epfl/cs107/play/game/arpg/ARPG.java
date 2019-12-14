@@ -7,12 +7,7 @@ import java.util.List;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
-import ch.epfl.cs107.play.game.arpg.area.ARPGArea;
-import ch.epfl.cs107.play.game.arpg.area.Chateau;
-import ch.epfl.cs107.play.game.arpg.area.Ferme;
-import ch.epfl.cs107.play.game.arpg.area.Route;
-import ch.epfl.cs107.play.game.arpg.area.RouteChateau;
-import ch.epfl.cs107.play.game.arpg.area.Village;
+import ch.epfl.cs107.play.game.arpg.area.*;
 import ch.epfl.cs107.play.game.rpg.RPG;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -29,7 +24,9 @@ public class ARPG extends RPG {
                     new Route(),
                     new Village(),
                     new RouteChateau(),
-                    new Chateau()
+                    new Chateau(),
+                    new RouteTemple(),
+                    new Temple()
             )
     );
 

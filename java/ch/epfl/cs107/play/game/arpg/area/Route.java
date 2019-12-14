@@ -25,7 +25,7 @@ public class Route extends ARPGArea {
 		registerActor(new Foreground(this));
 		
 		registerActor(new Door("zelda/Ferme", new DiscreteCoordinates(18, 15),
-				Logic.TRUE, this, Orientation.UP,
+				Logic.TRUE, this, Orientation.LEFT,
 				new DiscreteCoordinates(0, 15), new DiscreteCoordinates(0, 16)));
 		
 		registerActor(new Door("zelda/Village", new DiscreteCoordinates(29, 18),
@@ -35,6 +35,10 @@ public class Route extends ARPGArea {
 		registerActor(new Door("zelda/RouteChateau", new DiscreteCoordinates(9, 1),
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(9, 19), new DiscreteCoordinates(10, 19)));
+
+		registerActor(new Door("zelda/RouteTemple", new DiscreteCoordinates(1, 5),
+				Logic.TRUE, this, Orientation.RIGHT,
+				new DiscreteCoordinates(19, 9), new DiscreteCoordinates(19, 10), new DiscreteCoordinates(19, 11)));
 		
 		for (int i = 5; i <= 7; i++) {
 			for (int j = 6; j <= 11; j++) {
