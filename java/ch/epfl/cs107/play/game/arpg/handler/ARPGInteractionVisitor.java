@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.arpg.actor.battle.MagicWaterProjectile;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
 import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.monster.LogMonster;
@@ -51,4 +52,6 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(MagicWaterProjectile projectile) {}
 	
 	default void interactWith(Activator activator) {}
+	
+	default void interactWith(Sword sword) {}
 }

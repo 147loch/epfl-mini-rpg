@@ -109,6 +109,8 @@ public class LogMonster extends MonsterEntity {
             switch(getCurrentState()) {
                 case IDLE:
                     break;
+                default:
+                	break;
             }
         }
     }

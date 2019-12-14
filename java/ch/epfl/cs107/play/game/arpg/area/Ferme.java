@@ -6,6 +6,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
 import ch.epfl.cs107.play.game.arpg.actor.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.monster.LogMonster;
@@ -47,5 +48,6 @@ public class Ferme extends ARPGArea {
 		registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
 		registerActor(new Bow(this, Orientation.UP, new DiscreteCoordinates(5, 6)));
 		registerActor(new WaterStaff(this, Orientation.UP, new DiscreteCoordinates(4, 6)));
+		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(3, 6)));
 	}
 }
