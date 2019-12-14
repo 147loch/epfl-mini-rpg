@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.battle;
+package ch.epfl.cs107.play.game.arpg.actor.battle.weapon;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,8 +7,8 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.arpg.actor.monster.DamageType;
-import ch.epfl.cs107.play.game.arpg.actor.monster.FlyableEntity;
+import ch.epfl.cs107.play.game.arpg.actor.FlyableEntity;
+import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public abstract class Projectile extends MovableAreaEntity implements FlyableEntity, Interactor {
