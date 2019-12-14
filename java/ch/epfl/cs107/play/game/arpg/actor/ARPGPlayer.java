@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
@@ -202,7 +203,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		animationsWithSword = RPGSprite.createAnimations(ANIMATION_DURATION, spritesWithSword, false);
 
 		gui = new ARPGPlayerStatusGUI(this);
-		inventoryGui = new ARPGInventoryGUI();
+		inventoryGui = new ARPGInventoryGUI(this);
 	}
 
 	public void cycleCurrentInventoryItem() {
@@ -294,6 +295,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		
 		if (this.hp > maxHp)
 			this.hp = maxHp;
+	}
+	
+	protected int getAmountOf(InventoryItem item) {
+		if (possess(item)) {
+			return inventory.getItemAmount(item);
+		}
+		return 0;
 	}
 
 	@Override
@@ -468,6 +476,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		public void interactWith(Sword sword) {
 			inventory.addEntry(ARPGItem.SWORD, 1);
 			getOwnerArea().unregisterActor(sword);
+		}
+		
+		@Override
+		public void interactWith(ArrowItem arrow) {
+			inventory.addEntry(ARPGItem.ARROW, 1);
+			getOwnerArea().unregisterActor(arrow);
 		}
 	}
 }

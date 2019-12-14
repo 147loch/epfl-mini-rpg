@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
@@ -48,6 +49,8 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(MonsterEntity monster) {}
 	
 	default void interactWith(Arrow arrow) {}
+	
+	default void interactWith(ArrowItem arrow) {}
 	
 	default void interactWith(MagicWaterProjectile projectile) {}
 	
