@@ -328,7 +328,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public boolean takeCellSpace() {
-		return false; // TODO faut voir, les monstres peuvent traverser le joueur avec ça
+		return true; // TODO faut voir, les monstres peuvent traverser le joueur avec ça
 	}
 
 	@Override

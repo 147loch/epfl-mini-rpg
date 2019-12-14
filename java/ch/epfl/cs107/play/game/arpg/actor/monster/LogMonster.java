@@ -12,9 +12,11 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -22,7 +24,15 @@ import ch.epfl.cs107.play.window.Canvas;
 public class LogMonster extends MonsterEntity {
 
     private static final int ANIMATION_DURATION = 4;
+    private static final int MAXIMUM_INACTIVITY_COUNTER = 24;
+    private static final int IDLE_MOVEMENT_FRAMES = 12;
+    private static final int DASH_MOVEMENT_FRAMES = 4;
+
+    private static final int MIN_SLEEPING_DURATION = 18;
+    private static final int MAX_SLEEPING_DURATION = 36;
+
     private static final float PLAYER_ATTACK_DAMAGE = 2.f;
+
     private static final DamageType[] VULNERABILITIES = {DamageType.PHYSICAL, DamageType.FIRE};
 
     private Animation[] walkingAnimations;
@@ -70,44 +80,76 @@ public class LogMonster extends MonsterEntity {
 
     // MonsterEntity events
     @Override protected void handleDamageEvent(float damageTook) {}
-    @Override protected void handleDeathDropEvent() {}
+    @Override protected void handleDeathDropEvent() {
+        getOwnerArea().registerActor(new Coin(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
+    }
+
+    // Methods
+    private void handleIdleMovement() {
+        if (RandomGenerator.getInstance().nextDouble() > 0.6) {
+            resetMotion();
+            orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
+            currentAnimation = walkingAnimations[getOrientation().ordinal()];
+        } else move(IDLE_MOVEMENT_FRAMES);
+        
+        inactivityCounter = RandomGenerator.getInstance().nextInt(MAXIMUM_INACTIVITY_COUNTER);
+    }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        // currentAnimation = walkingAnimations[getOrientation().ordinal()];
+        System.out.println(getCurrentState());
 
-        switch(getCurrentState()) {
-            case WAKING_UP:
-                if (!Orientation.DOWN.equals(getOrientation()))
-                    orientate(Orientation.DOWN);
-                currentAnimation = wakingUpAnimation;
-                if (currentAnimation.isCompleted())
-                    setCurrentState(State.IDLE);
+        switch (getCurrentState()) {
+            case ATTACK:
+            case IDLE:
+                if (this.isDisplacementOccurs())
+                    currentAnimation.update(deltaTime);
+                else
+                    currentAnimation.reset();
                 break;
             case FALLING_ASLEEP:
-                if (!Orientation.DOWN.equals(getOrientation()))
-                    orientate(Orientation.DOWN);
-                currentAnimation = fallingAsleepAnimation;
-                if (currentAnimation.isCompleted())
+                if (currentAnimation.equals(fallingAsleepAnimation) && currentAnimation.isCompleted()) {
+                    fallingAsleepAnimation.reset();
+                    currentAnimation = sleepingAnimation;
                     setCurrentState(State.ASLEEP);
-                break;
-            case ASLEEP:
-                if (!Orientation.DOWN.equals(getOrientation()))
-                    orientate(Orientation.DOWN);
-                currentAnimation = sleepingAnimation;
-                break;
-            case IDLE:
-                currentAnimation = walkingAnimations[getOrientation().ordinal()];
-                break;
+                }
             default:
-                break;
+                currentAnimation.update(deltaTime);
+        }
+
+        if (inactivityCounter > 0) {
+            inactivityCounter--;
         }
 
         if (inactivityCounter == 0) {
-            switch(getCurrentState()) {
+            switch (getCurrentState()) {
                 case IDLE:
+                    currentAnimation = walkingAnimations[getOrientation().ordinal()];
+                    handleIdleMovement();
+                    break;
+                case ATTACK:
+                    if (!this.isDisplacementOccurs())
+                        if (!move(DASH_MOVEMENT_FRAMES))
+                            setCurrentState(State.FALLING_ASLEEP);
+                    break;
+                case FALLING_ASLEEP:
+                    inactivityCounter = RandomGenerator.getInstance().nextInt(MAX_SLEEPING_DURATION - MIN_SLEEPING_DURATION) + MIN_SLEEPING_DURATION;
+                    currentAnimation = fallingAsleepAnimation;
+                    break;
+                case ASLEEP:
+                    sleepingAnimation.reset();
+                    currentAnimation = wakingUpAnimation;
+                    setCurrentState(State.WAKING_UP);
+                    break;
+                case WAKING_UP:
+                    if (currentAnimation.isCompleted()) {
+                        wakingUpAnimation.reset();
+                        setCurrentState(State.IDLE);
+                    }
+                    break;
+                default:
                     break;
             }
         }
@@ -138,9 +180,8 @@ public class LogMonster extends MonsterEntity {
                 return Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
             case IDLE:
                 List<DiscreteCoordinates> ret = new ArrayList<>();
-                for (int i = 1; i <= 8; i++) {
+                for (int i = 1; i <= 8; i++)
                     ret.add(getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(i)));
-                }
                 return Collections.unmodifiableList(ret);
             default:
                 return Collections.emptyList();
@@ -166,6 +207,7 @@ public class LogMonster extends MonsterEntity {
                     break;
                 case ATTACK:
                     player.takeDamage(PLAYER_ATTACK_DAMAGE);
+                    setCurrentState(State.FALLING_ASLEEP);
                     break;
                 default:
                     break;
