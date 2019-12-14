@@ -152,8 +152,6 @@ public class LogMonster extends MonsterEntity {
                     break;
                 default:
                     break;
-                default:
-                	break;
             }
         }
     }
@@ -210,7 +208,6 @@ public class LogMonster extends MonsterEntity {
                     break;
                 case ATTACK:
                     player.takeDamage(PLAYER_ATTACK_DAMAGE);
-                    setCurrentState(State.FALLING_ASLEEP);
                     break;
                 default:
                     break;
