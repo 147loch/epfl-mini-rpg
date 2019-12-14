@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
+// TODO Could this extend CollectableAreaEntity ?
 public class CastleKey extends AreaEntity {
 
 	private RPGSprite keySprite;

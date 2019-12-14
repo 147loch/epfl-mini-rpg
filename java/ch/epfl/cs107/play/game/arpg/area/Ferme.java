@@ -3,14 +3,14 @@ package ch.epfl.cs107.play.game.arpg.area;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
-import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
-import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
+import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -48,7 +48,7 @@ public class Ferme extends ARPGArea {
 		
 		registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
 		registerActor(new Bow(this, Orientation.UP, new DiscreteCoordinates(5, 6)));
-		registerActor(new WaterStaff(this, Orientation.UP, new DiscreteCoordinates(4, 6)));
+		registerActor(new Staff(this, Orientation.UP, new DiscreteCoordinates(4, 6)));
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(3, 6)));
 		registerActor(new ArrowItem(this, Orientation.UP, new DiscreteCoordinates(3, 7)));
 		registerActor(new ArrowItem(this, Orientation.UP, new DiscreteCoordinates(4, 7)));

@@ -17,8 +17,8 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
@@ -473,7 +473,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		}
 		
 		@Override
-		public void interactWith(WaterStaff staff) {
+		public void interactWith(Staff staff) {
 			inventory.addEntry(ARPGItem.STAFF, 1);
 			getOwnerArea().unregisterActor(staff);
 		}
