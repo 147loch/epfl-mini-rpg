@@ -4,7 +4,7 @@ import ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.CastleDoor;
-import ch.epfl.cs107.play.game.arpg.actor.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;

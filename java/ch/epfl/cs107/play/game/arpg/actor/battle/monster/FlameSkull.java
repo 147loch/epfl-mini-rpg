@@ -12,7 +12,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.FlyableEntity;
-import ch.epfl.cs107.play.game.arpg.actor.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;

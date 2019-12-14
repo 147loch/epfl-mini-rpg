@@ -2,13 +2,14 @@ package ch.epfl.cs107.play.game.arpg.actor;
 
 public interface PlayerForGUI {
 
-	public float tookDamage();
+	float tookDamage();
 	
-	public float getHp();
+	float getHp();
 	
-	public float getMaxHp();
+	float getMaxHp();
 	
-	public int getInventoryMoney();
+	int getInventoryMoney();
 	
-	public ARPGItem getCurrentItem();
+	ARPGItem getCurrentItem();
+
 }

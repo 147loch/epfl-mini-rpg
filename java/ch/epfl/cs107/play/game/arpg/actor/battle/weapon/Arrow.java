@@ -6,7 +6,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.FlyableEntity;
-import ch.epfl.cs107.play.game.arpg.actor.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.Activator;

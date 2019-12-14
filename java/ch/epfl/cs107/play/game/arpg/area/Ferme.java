@@ -3,7 +3,7 @@ package ch.epfl.cs107.play.game.arpg.area;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.arpg.actor.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;

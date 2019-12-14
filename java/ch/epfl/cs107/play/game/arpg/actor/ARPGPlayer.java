@@ -19,6 +19,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.WaterStaff;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -33,7 +34,8 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI{
+// TODO A voir, je suis pas sûr que gérer les getters du GUI à travers change quelque chose puisqu'on peut juste faire un cast vers ARPGPlayer
+public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI {
 
 	private enum Behavior {
 		IDLE,
