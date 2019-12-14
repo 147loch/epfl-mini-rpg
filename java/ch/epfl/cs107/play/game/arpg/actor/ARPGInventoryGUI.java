@@ -49,45 +49,44 @@ public class ARPGInventoryGUI implements Graphics {
 		}
 		
 		//Items
-		if (player.possess(ARPGItem.BOMB)) {
-			new ImageGraphics(ARPGItem.BOMB.getResourcePath(),
-					2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
-					anchor.add(new Vector(3.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
-			TextGraphics number = new TextGraphics(player.getAmountOf(ARPGItem.BOMB) + "x", 0.6f, Color.BLACK);
-			number.setDepth(GUI_DEPTH);
-			number.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
-			number.setAnchor(new Vector(4.25f, 4.5f));
-			number.draw(canvas);
-		}
-		if (player.possess(ARPGItem.ARROW)) {
-			new ImageGraphics(ARPGItem.ARROW.getResourcePath(),
-					2.f, 2.f, new RegionOfInterest(0, 0, 16, 16),
-					anchor.add(new Vector(5.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
-			TextGraphics number = new TextGraphics(player.getAmountOf(ARPGItem.ARROW) + "x", 0.6f, Color.BLACK);
-			number.setDepth(GUI_DEPTH);
-			number.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
-			number.setAnchor(new Vector(6.25f, 4.5f));
-			number.draw(canvas);
+		ARPGItem[] expendableList = {ARPGItem.BOMB, ARPGItem.ARROW};
+		for (int i = 0; i < expendableList.length; i++) {
+			ARPGItem item = expendableList[i];
+			if (player.possess(item)) {
+				new ImageGraphics(item.getResourcePath(),
+						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
+						anchor.add(new Vector(2.f*i + 3.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
+				TextGraphics number = new TextGraphics(player.getAmountOf(item) + "x", 0.6f, Color.BLACK);
+				number.setDepth(GUI_DEPTH);
+				number.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
+				number.setAnchor(new Vector(2.f*i + 4.25f, 4.5f));
+				number.draw(canvas);
+			}
 		}
 		if (player.possess(ARPGItem.CASTLE_KEY)) {
 			new ImageGraphics(ARPGItem.CASTLE_KEY.getResourcePath(),
 					2.f, 2.f, new RegionOfInterest(0, 0, 16, 16),
-					anchor.add(new Vector(7.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
+					anchor.add(new Vector(9.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
+			TextGraphics name = new TextGraphics(ARPGItem.CASTLE_KEY.getName(), 0.3f, Color.BLACK);
+			name.setDepth(GUI_DEPTH);
+			name.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
+			name.setAnchor(new Vector(9.8f, 4.5f));
+			name.draw(canvas);
 		}
-		if (player.possess(ARPGItem.SWORD)) {
-			new ImageGraphics(ARPGItem.SWORD.getResourcePath(),
-					2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
-					anchor.add(new Vector(3.7f, 2.f)), 1, GUI_DEPTH).draw(canvas);
-		}
-		if (player.possess(ARPGItem.BOW)) {
-			new ImageGraphics(ARPGItem.BOW.getResourcePath(),
-					2.f, 2.f, new RegionOfInterest(0, 0, 16, 16),
-					anchor.add(new Vector(5.7f, 2.f)), 1, GUI_DEPTH).draw(canvas);
-		}
-		if (player.possess(ARPGItem.STAFF)) {
-			new ImageGraphics(ARPGItem.STAFF.getResourcePath(),
-					2.f, 2.f, new RegionOfInterest(0, 0, 16, 16),
-					anchor.add(new Vector(7.7f, 2.f)), 1, GUI_DEPTH).draw(canvas);
+		ARPGItem[] weaponsList = {ARPGItem.SWORD, ARPGItem.BOW, ARPGItem.STAFF};
+		for (int i = 0; i < weaponsList.length; i++)
+		{
+			ARPGItem item = weaponsList[i];
+			if (player.possess(item)) {
+				new ImageGraphics(item.getResourcePath(),
+						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
+						anchor.add(new Vector(2.f*i + 3.7f, 2.f)), 1, GUI_DEPTH).draw(canvas);
+				TextGraphics name = new TextGraphics(item.getName(), 0.3f, Color.BLACK);
+				name.setDepth(GUI_DEPTH);
+				name.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
+				name.setAnchor(new Vector(2.f*i + 3.75f, 1.5f));
+				name.draw(canvas);
+			}
 		}
 	}
 

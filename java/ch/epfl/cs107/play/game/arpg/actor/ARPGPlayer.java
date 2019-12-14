@@ -56,8 +56,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
     private ARPGInventoryGUI inventoryGui;
     private ARPGItem currentHoldingItem;
     
-    //FloatingText
-    private FloatingText floatingText;
+    //Text
+    private FaddingText floatingText;
 
     // Animations
 	private Animation[] animationsIdle;
@@ -104,8 +104,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		public void onKeyReleasedEvent(KeyboardAction previousAction) {
 			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && behavior.equals(Behavior.ATTACK_WITH_BOW)) {
 				Arrow arrow = new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
-				if (speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(arrow, getFieldOfViewCells()))
-					getOwnerArea().registerActor(arrow);
+				if (possess(ARPGItem.ARROW) && speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(arrow, getFieldOfViewCells())) {
+					if (getAmountOf(ARPGItem.ARROW) >= 1) {
+						getOwnerArea().registerActor(arrow);
+						inventory.removeEntry(ARPGItem.ARROW, 1);
+					}
+				}
 				speedBow = 0;
 				behavior = Behavior.IDLE;
 				animationsWithBow[getOrientation().opposite().ordinal()].reset();
@@ -169,7 +173,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		hp = maxHp;
 		invicibilityTime = 0;
 		lastTookDamage = 0;
-		floatingText = new FloatingText(getPosition());
+		floatingText = new FaddingText(getPosition());
 		isInventoryOpen = false;
 		speedBow = 0;
 		speedStaff = 0;
