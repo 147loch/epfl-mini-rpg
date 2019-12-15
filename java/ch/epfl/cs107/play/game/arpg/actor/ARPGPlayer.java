@@ -19,6 +19,8 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
+import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
@@ -295,18 +297,19 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		return maxHp;
 	}
 	
+	@Override
+	public int getAmountOf(InventoryItem item) {
+		if (possess(item)) {
+			return inventory.getItemAmount(item);
+		}
+		return 0;
+	}
+	
 	private void addHp(float hp) {
 		this.hp += hp;
 		
 		if (this.hp > maxHp)
 			this.hp = maxHp;
-	}
-	
-	protected int getAmountOf(InventoryItem item) {
-		if (possess(item)) {
-			return inventory.getItemAmount(item);
-		}
-		return 0;
 	}
 
 	@Override

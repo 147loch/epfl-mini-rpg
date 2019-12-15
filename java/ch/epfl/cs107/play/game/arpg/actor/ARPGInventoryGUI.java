@@ -15,9 +15,9 @@ public class ARPGInventoryGUI implements Graphics {
 	
 	private static final int GUI_DEPTH = 1000;
 	
-	private ARPGPlayer player;
+	private PlayerForGUI player;
 	
-	public ARPGInventoryGUI(ARPGPlayer player) {
+	public ARPGInventoryGUI(PlayerForGUI player) {
 		this.player = player;
 	}
 
@@ -52,7 +52,7 @@ public class ARPGInventoryGUI implements Graphics {
 		ARPGItem[] expendableList = {ARPGItem.BOMB, ARPGItem.ARROW};
 		for (int i = 0; i < expendableList.length; i++) {
 			ARPGItem item = expendableList[i];
-			if (player.possess(item)) {
+			if (player.getAmountOf(item) > 0) {
 				new ImageGraphics(item.getResourcePath(),
 						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
 						anchor.add(new Vector(2.f*i + 3.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
@@ -63,7 +63,7 @@ public class ARPGInventoryGUI implements Graphics {
 				number.draw(canvas);
 			}
 		}
-		if (player.possess(ARPGItem.CASTLE_KEY)) {
+		if (player.getAmountOf(ARPGItem.CASTLE_KEY) > 0) {
 			new ImageGraphics(ARPGItem.CASTLE_KEY.getResourcePath(),
 					2.f, 2.f, new RegionOfInterest(0, 0, 16, 16),
 					anchor.add(new Vector(9.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
@@ -77,7 +77,7 @@ public class ARPGInventoryGUI implements Graphics {
 		for (int i = 0; i < weaponsList.length; i++)
 		{
 			ARPGItem item = weaponsList[i];
-			if (player.possess(item)) {
+			if (player.getAmountOf(item) > 0) {
 				new ImageGraphics(item.getResourcePath(),
 						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
 						anchor.add(new Vector(2.f*i + 3.7f, 2.f)), 1, GUI_DEPTH).draw(canvas);
