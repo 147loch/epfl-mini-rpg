@@ -24,6 +24,9 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
         ASLEEP,
         WAKING_UP,
         ATTACK,
+        INVOCK,
+        TELEPORTATION,
+        IS_GOING_TO_TELEPORT,
         DEAD
     }
 
@@ -101,8 +104,8 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
             animationVanish.update(deltaTime);
 
         if (animationVanish.isCompleted()) {
-            getOwnerArea().unregisterActor(this);
             handleDeathDropEvent();
+            getOwnerArea().unregisterActor(this);
         }
     }
 
