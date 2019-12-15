@@ -43,7 +43,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		IDLE,
 		ATTACK_WITH_SWORD,
 		ATTACK_WITH_BOW,
-		ATTACK_WITH_STAFF
+		ATTACK_WITH_STAFF,
+		DEAD
 	}
 	
 	private final static int ANIMATION_DURATION = 2;
@@ -259,13 +260,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 			if (hp >= damage) {
 				hp -= damage;
 				lastTookDamage = damage;
+				invicibilityTime = INVINCIBILITY_TIME;
+				floatingText.init("❤", getPosition());
+			} else {
+				behavior = Behavior.DEAD;
 			}
-			invicibilityTime = INVINCIBILITY_TIME;
-			floatingText.init("❤", getPosition());
 		}
-		// TODO
-		//   	turn player sprite red-er
-		//   	if hp == death: die, game over, restart
 	}
 
 	public void takeDamage() {
@@ -347,7 +347,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 
 		floatingText.update(deltaTime);
 		
-		super.update(deltaTime);
+		if (!behavior.equals(Behavior.DEAD))
+			super.update(deltaTime);
 	}
 
 	@Override
