@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.collectable;
+package ch.epfl.cs107.play.game.arpg.actor;
 
 public interface Rarity {
 	double COMMON = 1.0/2.0;

@@ -53,7 +53,7 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 	 * @param animationSpriteSize One animation sprite size
 	 */
 	public CollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position, String animationString, int animationLength, int animationSpriteSize) {
-		this(area, orientation, position, animationString, animationLength, animationSpriteSize, 1.f, null);
+		this(area, orientation, position, animationString, animationLength, animationSpriteSize, 1.f, new Vector(0.f, 0.f));
 	}
 
 	/**

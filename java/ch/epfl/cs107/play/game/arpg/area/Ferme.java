@@ -3,14 +3,15 @@ package ch.epfl.cs107.play.game.arpg.area;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord;
+import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
-import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
-import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -40,7 +41,8 @@ public class Ferme extends ARPGArea {
 				new DiscreteCoordinates(13, 0), new DiscreteCoordinates(14, 0)));
 
 		registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
-		registerActor(new LogMonster(this, Orientation.DOWN, new DiscreteCoordinates(11, 10)));
+		registerActor(new DarkLord(this, Orientation.DOWN, new DiscreteCoordinates(13, 10)));
+		registerActor(new Heart(this, Orientation.DOWN, new DiscreteCoordinates(14, 10)));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10, 9 )));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 10)));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10 , 13)));
