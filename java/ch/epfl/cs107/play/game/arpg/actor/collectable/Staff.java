@@ -14,6 +14,7 @@ public class Staff extends CollectableAreaEntity {
     }
 
     @Override
-    public void acceptInteraction(AreaInteractionVisitor v) { ((ARPGInteractionVisitor)v).interactWith(this); }
-
+    public void acceptInteraction(AreaInteractionVisitor v) {
+    	((ARPGInteractionVisitor)v).interactWith(this);
+    }
 }
