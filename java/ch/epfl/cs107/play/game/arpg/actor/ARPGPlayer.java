@@ -39,8 +39,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-// TODO A voir, je suis pas sûr que gérer les getters du GUI à travers change quelque chose puisqu'on peut juste faire un cast vers ARPGPlayer
-public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI {
+public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	private enum Behavior {
 		IDLE,
@@ -62,9 +61,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
     private ARPGPlayerStatusGUI gui;
     private ARPGInventoryGUI inventoryGui;
     private ARPGItem currentHoldingItem;
-    
-    //Text
-    private FadingText floatingText;
 
     // Animations
 	private Animation[] animationsIdle;
@@ -181,7 +177,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		hp = maxHp;
 		invicibilityTime = 0;
 		lastTookDamage = 0;
-		floatingText = new FadingText(getPosition());
 		isInventoryOpen = false;
 		didDamage = false;
 		speedBow = 0;
@@ -263,55 +258,28 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		else orientate(orientation);
 	}
 
-	public void takeDamage(float damage) {
+	public final void takeDamage(float damage) {
 		if (lastTookDamage <= 0) {
 			if (hp - damage >= 0) {
 				hp -= damage;
 				lastTookDamage = damage;
 				invicibilityTime = INVINCIBILITY_TIME;
-				floatingText.init("❤", getPosition());
 			} else {
 				behavior = Behavior.DEAD;
 			}
 		}
 	}
-	public void takeDamage() {
-		takeDamage(0.5f);
-	}
+	public final void takeDamage() { takeDamage(0.5f); }
 
-	@Override
-	public float tookDamage() {
-		return lastTookDamage;
-	}
+	public float tookDamage() { return lastTookDamage; }
 
-	@Override
-	public ARPGItem getCurrentItem() {
-		return currentHoldingItem;
-	}
+	// INVENTORY
+	public ARPGItem getCurrentItem() { return currentHoldingItem; }
+	public int getInventoryMoney() { return inventory.getMoney(); }
+	public float getHp() { return hp; }
+	public float getMaxHp() { return maxHp; }
+	public int getAmountOf(InventoryItem item) { return possess(item) ? inventory.getItemAmount(item) : 0; }
 
-	@Override
-	public int getInventoryMoney() {
-		return inventory.getMoney();
-	}
-	
-	@Override
-	public float getHp() {
-		return hp;
-	}
-	
-	@Override
-	public float getMaxHp() {
-		return maxHp;
-	}
-	
-	@Override
-	public int getAmountOf(InventoryItem item) {
-		if (possess(item)) {
-			return inventory.getItemAmount(item);
-		}
-		return 0;
-	}
-	
 	private void addHp(float hp) {
 		this.hp += hp;
 		
@@ -351,8 +319,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 			invicibilityTime = 0;
 			lastTookDamage = 0;
 		}
-
-		floatingText.update(deltaTime);
 		
 		if (!behavior.equals(Behavior.DEAD))
 			super.update(deltaTime);
@@ -396,8 +362,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 			animationsIdle[getOrientation().opposite().ordinal()].draw(canvas);
 			animationsWithSword[getOrientation().opposite().ordinal()].reset();
 		}
-		
-		floatingText.draw(canvas);
 		
 		if (isInventoryOpen)
 			inventoryGui.draw(canvas);

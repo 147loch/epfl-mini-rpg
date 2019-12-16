@@ -15,9 +15,9 @@ public class ARPGInventoryGUI implements Graphics {
 	
 	private static final int GUI_DEPTH = 1000;
 	
-	private PlayerForGUI player;
+	private ARPGPlayer player;
 	
-	public ARPGInventoryGUI(PlayerForGUI player) {
+	public ARPGInventoryGUI(ARPGPlayer player) {
 		this.player = player;
 	}
 

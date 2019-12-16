@@ -17,13 +17,13 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	private static final float INV_HEART_TIMER_DECREASE_INTERVAL = 0.05f;
 	private static final int INV_HEART_BLINK_TIMES = 3;
 
-	private PlayerForGUI player;
+	private ARPGPlayer player;
 
 	private boolean isInvHeartOff = true;
 	private float invHeartTimer = INV_HEART_TIMER;
 	private int blinkCounter = 0;
 
-	protected ARPGPlayerStatusGUI(PlayerForGUI player) {
+	protected ARPGPlayerStatusGUI(ARPGPlayer player) {
 		this.player = player;
 	}
 	
