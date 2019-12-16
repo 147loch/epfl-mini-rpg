@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.arpg.actor.battle.monster;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class DarkLord extends MonsterEntity {
 	private static final int ANIMATION_DURATION = 4;
 	private static final int MOVEMENT_FRAMES = 16;
     private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
+    private static final int RADIUS = 2;
+    private static final int TELEPORTATION_RADIUS = 3;
 	
 	private ARPGDarkLordHandler handler;
 	
@@ -60,8 +63,12 @@ public class DarkLord extends MonsterEntity {
 	
 	private void teleportation(int x, int y) {
 		resetMotion();
-		setCurrentState(State.IDLE);
+		getOwnerArea().leaveAreaCells(this, getCurrentCells());
 		setCurrentPosition(new Vector(x, y));
+		ArrayList<DiscreteCoordinates> position = new ArrayList<>();
+		position.add(new DiscreteCoordinates(x, y));
+		getOwnerArea().canEnterAreaCells(this, position);
+		setCurrentState(State.IDLE);
 	}
 
 	@Override
@@ -84,7 +91,7 @@ public class DarkLord extends MonsterEntity {
 			case TELEPORTATION:
 				animationVanishTeleportation.update(deltaTime);
 				if (animationVanishTeleportation.isCompleted())
-					teleportation(5, 5);
+					teleportation(RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS, RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS);
 				break;
 			default:
 				break;
@@ -94,7 +101,13 @@ public class DarkLord extends MonsterEntity {
 	
 	@Override
 	public List<DiscreteCoordinates> getFieldOfViewCells() {
-		return Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+		ArrayList<DiscreteCoordinates> fieldOfView = new ArrayList<>();
+		for (int i = 0; i < 2 * RADIUS + 1; i++) {
+			for (int j = 0; j < 2 * RADIUS + 1; j++) {
+				fieldOfView.add(getCurrentMainCellCoordinates().jump(i - RADIUS, j - RADIUS));
+			}
+		}
+		return Collections.unmodifiableList(fieldOfView);
 	}
 
 	@Override
