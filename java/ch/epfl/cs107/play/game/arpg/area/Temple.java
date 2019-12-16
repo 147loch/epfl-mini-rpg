@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.arpg.area;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -22,6 +23,9 @@ public class Temple extends ARPGArea {
                 new DiscreteCoordinates(4, 0)));
 
         registerActor(new Staff(this, Orientation.UP, new DiscreteCoordinates(4, 3)));
-
+        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 4)));
+        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 3)));
+        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 2)));
+        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 1)));
     }
 }

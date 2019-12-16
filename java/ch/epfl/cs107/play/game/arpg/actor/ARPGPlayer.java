@@ -219,7 +219,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		inventoryGui = new ARPGInventoryGUI(this);
 	}
 
-	public void cycleCurrentInventoryItem() {
+	private void cycleCurrentInventoryItem() {
 		List<InventoryItem> list = inventory.getItemList();
 		if (list.size() == 0) currentHoldingItem = null;
 		else {
@@ -229,7 +229,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		}
 	}
 
-	public void useInventoryItem() {
+	private void useInventoryItem() {
 		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
 			case BOMB:
@@ -370,7 +370,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 
 	@Override
 	public boolean takeCellSpace() {
-		return true; // TODO faut voir, les monstres peuvent traverser le joueur avec ça
+		return true;
 	}
 
 	@Override
