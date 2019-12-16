@@ -39,8 +39,7 @@ public class Activator extends AreaEntity implements FlyableEntity {
 	}
 	
 	public void active() {
-		if (!isAlreadyActive)
-		{
+		if (!isAlreadyActive) {
 			entityActivatable.activeEntity();
 			isAlreadyActive = true;
 		}

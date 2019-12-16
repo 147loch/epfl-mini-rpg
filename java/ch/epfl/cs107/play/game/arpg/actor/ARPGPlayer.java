@@ -10,8 +10,11 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
+import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
-import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWater;
+import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
@@ -78,6 +81,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 	private float invicibilityTime;
 	private float lastTookDamage;
     private boolean isInventoryOpen;
+    private boolean didDamage;
     private float speedBow;
     private float speedStaff;
     private Behavior behavior;
@@ -118,7 +122,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 				behavior = Behavior.IDLE;
 				animationsWithBow[getOrientation().opposite().ordinal()].reset();
 			} else if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.STAFF) && behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
-				MagicWaterProjectile projectile = new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+				Projectile projectile = new MagicWater(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
 				if (speedStaff >= SPEED_STAFF && getOwnerArea().canEnterAreaCells(projectile, getFieldOfViewCells()))
 					getOwnerArea().registerActor(projectile);
 				behavior = Behavior.IDLE;
@@ -179,6 +183,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 		lastTookDamage = 0;
 		floatingText = new FadingText(getPosition());
 		isInventoryOpen = false;
+		didDamage = false;
 		speedBow = 0;
 		speedStaff = 0;
 		behavior = Behavior.IDLE;
@@ -236,12 +241,15 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 				break;
 			case BOW:
 				behavior = Behavior.ATTACK_WITH_BOW;
+				didDamage = false;
 				break;
 			case SWORD:
 				behavior = Behavior.ATTACK_WITH_SWORD;
+				didDamage = false;
 				break;
 			case STAFF:
 				behavior = Behavior.ATTACK_WITH_STAFF;
+				didDamage = false;
 				break;
 			case CASTLE_KEY:
 			default:
@@ -257,7 +265,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 
 	public void takeDamage(float damage) {
 		if (lastTookDamage <= 0) {
-			if (hp >= damage) {
+			if (hp - damage >= 0) {
 				hp -= damage;
 				lastTookDamage = damage;
 				invicibilityTime = INVINCIBILITY_TIME;
@@ -267,7 +275,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 			}
 		}
 	}
-
 	public void takeDamage() {
 		takeDamage(0.5f);
 	}
@@ -446,10 +453,18 @@ public class ARPGPlayer extends Player implements Inventory.Holder, PlayerForGUI
 
 		@Override
 		public void interactWith(Grass grass) {
-			if (behavior.equals(Behavior.ATTACK_WITH_SWORD)) // TODO ne marche pas si on n'a pas l'épée, intended?
+			if (behavior.equals(Behavior.ATTACK_WITH_SWORD))
 				grass.cut(true);
 		}
-		
+
+		@Override
+		public void interactWith(MonsterEntity monster) {
+			if (behavior.equals(Behavior.ATTACK_WITH_SWORD) && !didDamage) {
+				monster.takeDamage(DamageType.PHYSICAL, 0.5f);
+				didDamage = true;
+			}
+		}
+
 		@Override
 		public void interactWith(Coin coin) {
 			inventory.addMoney(coin.getMoneyBack());

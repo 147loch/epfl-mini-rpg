@@ -16,7 +16,7 @@ import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
-import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
+import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWater;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.Activator;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
@@ -52,7 +52,7 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	
 	default void interactWith(ArrowItem arrow) {}
 	
-	default void interactWith(MagicWaterProjectile projectile) {}
+	default void interactWith(MagicWater projectile) {}
 	
 	default void interactWith(Activator activator) {}
 	

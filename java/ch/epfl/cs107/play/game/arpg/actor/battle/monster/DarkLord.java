@@ -8,7 +8,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
@@ -111,11 +110,6 @@ public class DarkLord extends MonsterEntity {
 	public void interactWith(Interactable other) {
 		other.acceptInteraction(handler);
 	}
-
-	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {
-		((ARPGInteractionVisitor)v).interactWith(this);
-	}
 	
 	@Override
 	public void draw(Canvas canvas) {
@@ -150,5 +144,6 @@ public class DarkLord extends MonsterEntity {
 			if (getCurrentState().equals(State.IDLE))
 				setCurrentState(State.IS_GOING_TO_TELEPORT);
 		}
+
 	}
 }

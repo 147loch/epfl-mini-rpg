@@ -41,6 +41,10 @@ public class Ferme extends ARPGArea {
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(13, 0), new DiscreteCoordinates(14, 0)));
 
+		registerActor(new Door("PetalburgTimmy", new DiscreteCoordinates(3, 1),
+				Logic.TRUE, this, Orientation.DOWN,
+				new DiscreteCoordinates(6, 11)));
+
 		registerActor(new FlameSkull(this, Orientation.UP, new DiscreteCoordinates(10, 10)));
 		registerActor(new DarkLord(this, Orientation.DOWN, new DiscreteCoordinates(13, 10)));
 		registerActor(new Heart(this, Orientation.DOWN, new DiscreteCoordinates(14, 10)));

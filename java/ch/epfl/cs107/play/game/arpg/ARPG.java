@@ -26,7 +26,8 @@ public class ARPG extends RPG {
                     new RouteChateau(),
                     new Chateau(),
                     new RouteTemple(),
-                    new Temple()
+                    new Temple(),
+                    new MaisonFerme()
             )
     );
 

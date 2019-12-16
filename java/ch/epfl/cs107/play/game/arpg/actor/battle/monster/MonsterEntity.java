@@ -5,7 +5,9 @@ import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
+import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
@@ -24,7 +26,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
         ASLEEP,
         WAKING_UP,
         ATTACK,
-        INVOCK,
+        INVOKE,
         TELEPORTATION,
         IS_GOING_TO_TELEPORT,
         DEAD
@@ -57,8 +59,8 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
         animationVanish = new Animation(1, vanishAnimationSprites, false);
     }
 
-    // Methods
-    public void takeDamage(DamageType damageType, float damage) {
+    // Final Methods
+    public final void takeDamage(DamageType damageType, float damage) {
         if (vulnerabilities.contains(damageType)) {
             if (currentHealth - damage <= 0) {
                 currentHealth = 0;
@@ -71,14 +73,14 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
     }
 
     // Abstracted methods
-    protected abstract void handleDamageEvent(float damageTook); // TODO not necessarily useful, need to check
+    protected abstract void handleDamageEvent(float damageTook);
     protected abstract void handleDeathDropEvent();
 
     // Accessor / Mutator
-    public float getMaxHealth() { return maxHealth; }
-    public float getCurrentHealth() { return currentHealth; }
+    public final float getMaxHealth() { return maxHealth; }
+    public final float getCurrentHealth() { return currentHealth; }
 
-    protected State getCurrentState() { return currentState; }
+    protected final State getCurrentState() { return currentState; }
     protected void setCurrentState(State state) { currentState = state; }
 
     // Overrides
@@ -87,7 +89,12 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
     @Override public boolean takeCellSpace() { return !State.DEAD.equals(this.currentState); }
 
     @Override
-    public List<DiscreteCoordinates> getCurrentCells() {
+    public void acceptInteraction(AreaInteractionVisitor v) {
+        ((ARPGInteractionVisitor)v).interactWith(this);
+    }
+
+    @Override
+    public final List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 

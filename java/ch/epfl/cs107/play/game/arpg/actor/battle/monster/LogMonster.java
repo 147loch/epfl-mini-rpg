@@ -10,7 +10,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
@@ -87,11 +86,15 @@ public class LogMonster extends MonsterEntity {
 
     // Methods
     private void handleIdleMovement() {
-        if (RandomGenerator.getInstance().nextDouble() > 0.6) {
-            resetMotion();
-            orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
-            currentAnimation = walkingAnimations[getOrientation().ordinal()];
-        } else move(IDLE_MOVEMENT_FRAMES);
+        if (!this.isDisplacementOccurs()) {
+            if (RandomGenerator.getInstance().nextDouble() > 0.6) {
+                resetMotion();
+                orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
+                currentAnimation = walkingAnimations[getOrientation().ordinal()];
+            } else {
+                move(IDLE_MOVEMENT_FRAMES);
+            }
+        }
         
         inactivityCounter = RandomGenerator.getInstance().nextInt(MAXIMUM_INACTIVITY_COUNTER);
     }
@@ -99,8 +102,6 @@ public class LogMonster extends MonsterEntity {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-
-        System.out.println(getCurrentState());
 
         switch (getCurrentState()) {
             case ATTACK:
@@ -131,9 +132,14 @@ public class LogMonster extends MonsterEntity {
                     handleIdleMovement();
                     break;
                 case ATTACK:
-                    if (!this.isDisplacementOccurs())
-                        if (!move(DASH_MOVEMENT_FRAMES))
+                    if (!this.isDisplacementOccurs()) {
+                        if (getOwnerArea().canEnterAreaCells(this, getFieldOfViewCells())) {
+                            currentAnimation = walkingAnimations[getOrientation().ordinal()];
+                            move(DASH_MOVEMENT_FRAMES);
+                        } else {
                             setCurrentState(State.FALLING_ASLEEP);
+                        }
+                    }
                     break;
                 case FALLING_ASLEEP:
                     inactivityCounter = RandomGenerator.getInstance().nextInt(MAX_SLEEPING_DURATION - MIN_SLEEPING_DURATION) + MIN_SLEEPING_DURATION;
@@ -148,17 +154,13 @@ public class LogMonster extends MonsterEntity {
                     if (currentAnimation.isCompleted()) {
                         wakingUpAnimation.reset();
                         setCurrentState(State.IDLE);
+                        inactivityCounter = RandomGenerator.getInstance().nextInt(MAXIMUM_INACTIVITY_COUNTER);
                     }
                     break;
                 default:
                     break;
             }
         }
-    }
-
-    @Override
-    public void acceptInteraction(AreaInteractionVisitor v) {
-        ((ARPGInteractionVisitor)v).interactWith(this);
     }
 
     @Override
