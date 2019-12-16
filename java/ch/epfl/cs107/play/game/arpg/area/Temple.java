@@ -24,7 +24,6 @@ public class Temple extends ARPGArea {
                 new DiscreteCoordinates(4, 0)));
 
         registerActor(new LightHalo(this));
-
         registerActor(new Staff(this, Orientation.UP, new DiscreteCoordinates(4, 3)));
 
         for (int i = 1; i <= 4; i++) {
