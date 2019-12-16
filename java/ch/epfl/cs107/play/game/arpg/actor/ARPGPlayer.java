@@ -13,7 +13,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
-import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWater;
+import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
@@ -63,10 +63,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private ARPGItem currentHoldingItem;
 
     // Animations
-	private Animation[] animationsIdle;
-	private Animation[] animationsWithBow;
-	private Animation[] animationsWithStaff;
-	private Animation[] animationsWithSword;
+	private final Animation[] animationsIdle;
+	private final Animation[] animationsWithBow;
+	private final Animation[] animationsWithStaff;
+	private final Animation[] animationsWithSword;
 
 	// Keyboard events
     private KeyboardEventRegister keyboardRegister;
@@ -118,7 +118,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				behavior = Behavior.IDLE;
 				animationsWithBow[getOrientation().opposite().ordinal()].reset();
 			} else if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.STAFF) && behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
-				Projectile projectile = new MagicWater(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+				Projectile projectile = new MagicWaterProjectile(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
 				if (speedStaff >= SPEED_STAFF && getOwnerArea().canEnterAreaCells(projectile, getFieldOfViewCells()))
 					getOwnerArea().registerActor(projectile);
 				behavior = Behavior.IDLE;

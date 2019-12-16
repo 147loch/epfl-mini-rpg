@@ -30,6 +30,8 @@ public class DarkLord extends MonsterEntity {
     private static final int TELEPORTATION_RADIUS = 3;
 	
 	private ARPGDarkLordHandler handler;
+	private int initX;
+	private int initY;
 	
 	private Animation[] animationsIdle;
 	private Animation[] animationsAttack;
@@ -41,6 +43,8 @@ public class DarkLord extends MonsterEntity {
 		super(area, orientation, coordinates, 2.f, VULNERABILITIES);
 		
 		handler = new ARPGDarkLordHandler();
+		initX = (int)getPosition().x;
+		initY = (int)getPosition().y;
 		
 		Sprite[][] spritesIdle = RPGSprite.extractSprites("zelda/darkLord", 3, 2, 2, this, 32, 32, new Vector(-0.5f, 0),
 				new Orientation[] {Orientation.UP , Orientation.LEFT , Orientation.DOWN, Orientation.RIGHT});
@@ -90,7 +94,8 @@ public class DarkLord extends MonsterEntity {
 			case TELEPORTATION:
 				animationVanishTeleportation.update(deltaTime);
 				if (animationVanishTeleportation.isCompleted())
-					teleportation(RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS, RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS);
+					teleportation(initX + RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS,
+							initY + RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS);
 				break;
 			default:
 				break;
