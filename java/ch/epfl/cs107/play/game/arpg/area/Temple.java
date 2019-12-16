@@ -6,6 +6,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
+import ch.epfl.cs107.play.game.rpg.actor.LightHalo;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -22,10 +23,12 @@ public class Temple extends ARPGArea {
                 Logic.TRUE, this, Orientation.DOWN,
                 new DiscreteCoordinates(4, 0)));
 
+        registerActor(new LightHalo(this));
+
         registerActor(new Staff(this, Orientation.UP, new DiscreteCoordinates(4, 3)));
-        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 4)));
-        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 3)));
-        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 2)));
-        registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, 1)));
+
+        for (int i = 1; i <= 4; i++) {
+            registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, i)));
+        }
     }
 }

@@ -28,7 +28,7 @@ public class LightHalo extends Entity {
         DY = area.getCameraScaleFactor()/2;
         final float side = area.getCameraScaleFactor();
 
-        sprite = new ImageGraphics(ResourcePath.getForegrounds("lightHalo"), side, side, null, Vector.ZERO, 1.0f, 999);
+        sprite = new ImageGraphics(ResourcePath.getForegrounds("lightHalo"), side, side, null, Vector.ZERO, 1.0f, 1000);
     }
 
     /// Foreground implements Graphics

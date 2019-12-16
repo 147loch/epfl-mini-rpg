@@ -10,7 +10,7 @@ import ch.epfl.cs107.play.math.Vector;
 public class Staff extends CollectableAreaEntity {
 
     public Staff(Area area, Orientation orientation, DiscreteCoordinates position) {
-        super(area, orientation, position, "zelda/staff", 8, 32, 2.f, new Vector(-0.5f, 0.f));
+        super(area, orientation, position, "zelda/staff", 8, 32, 2.f, new Vector(-0.5f, 0.f), 3);
     }
 
     @Override

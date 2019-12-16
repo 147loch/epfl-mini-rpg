@@ -68,6 +68,22 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 	 * @param anchor The anchor if needed
 	 */
 	public CollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position, String animationString, int animationLength, int animationSpriteSize, float finalAnimationSize, Vector anchor) {
+		this(area, orientation, position, animationString, animationLength, animationSpriteSize, finalAnimationSize, anchor, animationLength);
+	}
+
+	/**
+	 * Create a Collectable Area Entity item
+	 * @param area The area it is in
+	 * @param orientation The orientation it should have
+	 * @param position The position where it should appear
+	 * @param animationString The animation sprite, not null
+	 * @param animationLength The animation length, if not 4
+	 * @param animationSpriteSize One animation sprite size
+	 * @param finalAnimationSize The final animation scale
+	 * @param anchor The anchor if needed
+	 * @param animationSpeed The animation speed
+	 */
+	public CollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position, String animationString, int animationLength, int animationSpriteSize, float finalAnimationSize, Vector anchor, int animationSpeed) {
 		super(area, orientation, position);
 
 		Sprite[] sprites = new Sprite[animationLength];
@@ -75,7 +91,7 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 			sprites[i] = new RPGSprite(animationString, finalAnimationSize, finalAnimationSize, this,
 					new RegionOfInterest(i*animationSpriteSize, 0, animationSpriteSize, animationSpriteSize), anchor);
 		}
-		animation = new Animation(sprites.length, sprites, true);
+		animation = new Animation(animationSpeed, sprites, true);
 	}
 
 	// Default Overrides for subclasses
