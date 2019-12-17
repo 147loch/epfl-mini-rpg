@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
+import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
@@ -37,10 +38,6 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(CastleKey key) {}
 
 	default void interactWith(CastleDoor castleDoor) {}
-
-	default void interactWith(FlameSkull skull) {}
-
-	default void interactWith(LogMonster logMonster) {}
 	
 	default void interactWith(Bow bow) {}
 
@@ -57,4 +54,7 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(Activator activator) {}
 	
 	default void interactWith(Sword sword) {}
+
+	default void interactWith(FireSpell fireSpell) {}
+
 }

@@ -123,8 +123,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 					getOwnerArea().registerActor(projectile);
 				behavior = Behavior.IDLE;
 				animationsWithStaff[getOrientation().opposite().ordinal()].reset();
-			}  else if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.SWORD) && behavior.equals(Behavior.ATTACK_WITH_SWORD)) {
-				
 			}
 		}
 	}

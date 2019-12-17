@@ -106,10 +106,8 @@ public class LogMonster extends MonsterEntity {
         switch (getCurrentState()) {
             case ATTACK:
             case IDLE:
-                if (this.isDisplacementOccurs())
-                    currentAnimation.update(deltaTime);
-                else
-                    currentAnimation.reset();
+                if (this.isDisplacementOccurs()) currentAnimation.update(deltaTime);
+                else currentAnimation.reset();
                 break;
             case FALLING_ASLEEP:
                 if (currentAnimation.equals(fallingAsleepAnimation) && currentAnimation.isCompleted()) {

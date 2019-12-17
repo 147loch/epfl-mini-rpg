@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
+import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -52,6 +53,9 @@ public class Ferme extends ARPGArea {
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(9 , 10)));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(10 , 13)));
 		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(11, 10)));
+
+		registerActor(new FireSpell(this, Orientation.RIGHT, new DiscreteCoordinates(11, 6)));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(13, 6)));
 		
 		registerActor(new CastleKey(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
 		registerActor(new Bow(this, Orientation.UP, new DiscreteCoordinates(5, 6)));
