@@ -7,7 +7,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
@@ -20,13 +19,13 @@ public class PressurePlate extends AreaEntity {
 
     private Sprite onSprite;
     private Sprite offSprite;
-    private Activatable entityActivatable;
+    private Actionable entityActionable;
     private boolean isAlreadyActive;
 
-    public PressurePlate(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
+    public PressurePlate(Area area, Orientation orientation, DiscreteCoordinates position, Actionable entityActionable) {
         super(area, orientation, position);
 
-        this.entityActivatable = entityActivatable;
+        this.entityActionable = entityActionable;
         isAlreadyActive = false;
 
         offSprite = new RPGSprite("custom/pressurePlate", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16), new Vector(0, 0.2f));
@@ -35,7 +34,7 @@ public class PressurePlate extends AreaEntity {
 
     public void active() {
         if (!isAlreadyActive) {
-            entityActivatable.activeEntity();
+            entityActionable.activeEntity();
             isAlreadyActive = true;
         }
     }

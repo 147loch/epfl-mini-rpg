@@ -11,7 +11,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class HiddenBridge extends AreaEntity implements Activatable {
+public class HiddenBridge extends AreaEntity implements Actionable {
 
 	public HiddenBridge(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);

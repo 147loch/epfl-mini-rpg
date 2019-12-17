@@ -4,12 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.arpg.actor.FlyableEntity;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -22,13 +20,13 @@ public class Lever extends AreaEntity {
 	
 	private Sprite onSprite;
 	private Sprite offSprite;
-	private Activatable entityActivatable;
+	private Actionable entityActionable;
 	private boolean isAlreadyActive;
 	
-	public Lever(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
+	public Lever(Area area, Orientation orientation, DiscreteCoordinates position, Actionable entityActionable) {
 		super(area, orientation, position);
 		
-		this.entityActivatable = entityActivatable;
+		this.entityActionable = entityActionable;
 		isAlreadyActive = false;
 
 		offSprite = new RPGSprite("custom/lever", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
@@ -37,7 +35,7 @@ public class Lever extends AreaEntity {
 	
 	public void active() {
 		if (!isAlreadyActive) {
-			entityActivatable.activeEntity();
+			entityActionable.activeEntity();
 			isAlreadyActive = true;
 		}
 	}

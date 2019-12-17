@@ -3,11 +3,9 @@ package ch.epfl.cs107.play.game.arpg.actor.collectable;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.arpg.actor.puzzle.Activatable;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.window.Canvas;
 
 public class Staff extends CollectableAreaEntity {
 
