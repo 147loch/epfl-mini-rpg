@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
+import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -28,8 +29,13 @@ public class DarkLord extends MonsterEntity {
     private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
     private static final int RADIUS = 2;
     private static final int TELEPORTATION_RADIUS = 3;
+    private static final int MIN_SPELL_WAIT_DURATION = 50;
+    private static final int MAX_SPELL_WAIT_DURATION = 100;
 	
 	private ARPGDarkLordHandler handler;
+	private int initX;
+	private int initY;
+	private int updateCounter;
 	
 	private Animation[] animationsIdle;
 	private Animation[] animationsAttack;
@@ -41,6 +47,8 @@ public class DarkLord extends MonsterEntity {
 		super(area, orientation, coordinates, 2.f, VULNERABILITIES);
 		
 		handler = new ARPGDarkLordHandler();
+		initX = (int)getPosition().x;
+		initY = (int)getPosition().y;
 		
 		Sprite[][] spritesIdle = RPGSprite.extractSprites("zelda/darkLord", 3, 2, 2, this, 32, 32, new Vector(-0.5f, 0),
 				new Orientation[] {Orientation.UP , Orientation.LEFT , Orientation.DOWN, Orientation.RIGHT});
@@ -72,6 +80,7 @@ public class DarkLord extends MonsterEntity {
 
 	@Override
 	public void update(float deltaTime) {
+		updateCounter++;
 		switch (getCurrentState()) {
 			case IDLE:
 				animationIdle = animationsIdle[getOrientation().ordinal()];
@@ -82,6 +91,18 @@ public class DarkLord extends MonsterEntity {
 					orientate(Orientation.fromInt(RandomGenerator.getInstance().nextInt(4)));
 				} else
 					move(MOVEMENT_FRAMES);
+				
+				if (updateCounter >= RandomGenerator.getInstance().nextInt(MAX_SPELL_WAIT_DURATION - MIN_SPELL_WAIT_DURATION) + MIN_SPELL_WAIT_DURATION) {
+					updateCounter = 0;
+					setCurrentState(State.ATTACK);
+				}
+				break;
+			case ATTACK:
+				animationIdle.update(deltaTime);
+				resetMotion();
+				getOwnerArea().registerActor(new FireSpell(getOwnerArea(), getOrientation(),
+						getCurrentMainCellCoordinates().jump(getOrientation().toVector()), 4));
+				setCurrentState(State.IDLE);
 				break;
 			case IS_GOING_TO_TELEPORT:
 				animationAttack = animationsAttack[getOrientation().ordinal()];
@@ -90,7 +111,8 @@ public class DarkLord extends MonsterEntity {
 			case TELEPORTATION:
 				animationVanishTeleportation.update(deltaTime);
 				if (animationVanishTeleportation.isCompleted())
-					teleportation(RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS, RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS);
+					teleportation(initX + RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS,
+							initY + RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS);
 				break;
 			default:
 				break;
@@ -126,7 +148,7 @@ public class DarkLord extends MonsterEntity {
 	
 	@Override
 	public void draw(Canvas canvas) {
-		if (getCurrentState().equals(State.IDLE)) {
+		if (getCurrentState().equals(State.IDLE) || getCurrentState().equals(State.ATTACK)) {
 			animationIdle.draw(canvas);
 			animationVanishTeleportation.reset();
 			animationAttack.reset();

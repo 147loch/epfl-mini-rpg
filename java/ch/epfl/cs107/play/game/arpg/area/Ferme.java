@@ -63,5 +63,6 @@ public class Ferme extends ARPGArea {
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(3, 6)));
 		registerActor(new LogMonster(this, Orientation.UP, new DiscreteCoordinates(3, 7)));
 		registerActor(new ArrowItem(this, Orientation.UP, new DiscreteCoordinates(4, 7)));
+		registerActor(new FireSpell(this, Orientation.DOWN, new DiscreteCoordinates(7, 6), 3));
 	}
 }

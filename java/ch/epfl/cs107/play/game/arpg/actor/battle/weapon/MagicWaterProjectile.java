@@ -16,7 +16,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class MagicWater extends Projectile {
+public class MagicWaterProjectile extends Projectile {
 
 	private static final int FRAME_SPEED = 5;
 	private static final float MAX_LIFETIME = 1.f;
@@ -25,7 +25,7 @@ public class MagicWater extends Projectile {
 	private Animation animation;
 	private MagicWaterProjectileHandler handler;
 	
-	public MagicWater(Area area, Orientation orientation, DiscreteCoordinates position) {
+	public MagicWaterProjectile(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position, DAMAGE_TYPE, FRAME_SPEED, MAX_LIFETIME);
 		
 		Sprite[] sprites = new RPGSprite[4];
@@ -63,19 +63,19 @@ public class MagicWater extends Projectile {
 		@Override
 		public void interactWith(Grass grass) {
 			grass.cut(true);
-			getOwnerArea().unregisterActor(MagicWater.this);
+			getOwnerArea().unregisterActor(MagicWaterProjectile.this);
 		}
 		
 		@Override
 		public void interactWith(Bomb bomb) {
 			bomb.explode();
-			getOwnerArea().unregisterActor(MagicWater.this);
+			getOwnerArea().unregisterActor(MagicWaterProjectile.this);
 		}
 		
 		@Override
 		public void interactWith(MonsterEntity monster) {
 			monster.takeDamage(DamageType.MAGICAL, 1.f); // TODO put constant
-			getOwnerArea().unregisterActor(MagicWater.this);
+			getOwnerArea().unregisterActor(MagicWaterProjectile.this);
 			
 		}
 	}
