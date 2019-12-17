@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import ch.epfl.cs107.play.game.actor.SoundAcoustics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
@@ -43,6 +44,7 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.window.Audio;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class ARPGPlayer extends Player implements Inventory.Holder {
@@ -521,6 +523,13 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				isDialog = true;
 				npc.talked();
 			}
+		}
+	}
+
+	@Override
+	public void bip(Audio audio) {
+		if (isPassingADoor()) {
+			SoundAcoustics.stopAllSounds(audio);
 		}
 	}
 }

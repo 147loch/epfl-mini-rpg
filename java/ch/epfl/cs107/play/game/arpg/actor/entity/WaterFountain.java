@@ -29,7 +29,7 @@ public class WaterFountain extends AreaEntity {
     public WaterFountain(Area area, DiscreteCoordinates position) {
         super(area, Orientation.DOWN, position);
 
-        sound = new SoundAcoustics(ResourcePath.getSounds("random/waterFountain"), 0.15f, true, false, true, false);
+        sound = new SoundAcoustics(ResourcePath.getSounds("custom/waterFountain"), 0.15f, true, false, true, false);
         sound.shouldBeStarted();
 
         Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];

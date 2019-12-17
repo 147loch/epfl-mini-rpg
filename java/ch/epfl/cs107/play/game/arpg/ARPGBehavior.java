@@ -45,11 +45,7 @@ public class ARPGBehavior extends AreaBehavior {
 			}
 		}
 	}
-
-	public boolean isDoor(DiscreteCoordinates coord) {
-		return (((ARPGCell)getCell(coord.x, coord.y)).isDoor());
-	}
-
+	
 	public class ARPGCell extends AreaBehavior.Cell {
 
 		private final ARPGCellType type;
