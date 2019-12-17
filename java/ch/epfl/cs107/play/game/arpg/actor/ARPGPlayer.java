@@ -322,6 +322,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			cycleCurrentInventoryItem();
 		}
 
+		System.out.println(getCurrentMainCellCoordinates());
+
 		if (invicibilityTime > 0) {
 			invicibilityTime -= deltaTime;
 		} else if (invicibilityTime < 0) {
