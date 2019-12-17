@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.entity;
+package ch.epfl.cs107.play.game.arpg.actor.areaentity;
 
 import ch.epfl.cs107.play.game.actor.SoundAcoustics;
 import ch.epfl.cs107.play.game.areagame.Area;

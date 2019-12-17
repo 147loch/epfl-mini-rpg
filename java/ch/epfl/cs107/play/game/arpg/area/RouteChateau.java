@@ -1,20 +1,21 @@
 package ch.epfl.cs107.play.game.arpg.area;
 
+import java.util.Arrays;
+import java.util.List;
+
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
+import ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
-import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventRegister;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class RouteChateau extends ARPGArea {
 
@@ -66,6 +67,8 @@ public class RouteChateau extends ARPGArea {
 		
 		registerActor(new CastleDoor("zelda/Chateau", new DiscreteCoordinates(7, 1), this, Orientation.UP,
 				new DiscreteCoordinates(9, 13), new DiscreteCoordinates(10, 13)));
+		
+		registerActor(new DarkLord(this, Orientation.DOWN, new DiscreteCoordinates(9, 8)));
 
 		keyboardEventRegister = new KeyboardEventRegister(getKeyboard());
 		keyboardEventRegister.registerKeyboardEvents(new CheatKeysEventListener());

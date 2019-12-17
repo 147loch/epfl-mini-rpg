@@ -11,9 +11,9 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.Rarity;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
-import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -29,7 +29,7 @@ public class DarkLord extends MonsterEntity {
 	private static final int MOVEMENT_FRAMES = 16;
     private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
     private static final int RADIUS = 2;
-    private static final int TELEPORTATION_RADIUS = 3;
+    private static final int TELEPORTATION_RADIUS = 4;
     private static final int MIN_SPELL_WAIT_DURATION = 50;
     private static final int MAX_SPELL_WAIT_DURATION = 100;
     private static final double INVOKE_INSTEAD_TELEPORTATION = Rarity.UNCOMMON;
@@ -62,7 +62,7 @@ public class DarkLord extends MonsterEntity {
 		
 		RPGSprite[] vanishAnimationSprites = new RPGSprite[ANIMATION_VANISH_FRAME_LENGTH];
         for (int i = 0; i < ANIMATION_VANISH_FRAME_LENGTH; i++) {
-        	vanishAnimationSprites[i] = new RPGSprite("zelda/vanishTeleportation", 2.f, 2.f, this, new RegionOfInterest((i*32), 0, 32, 32), new Vector(-0.5f, 0));
+        	vanishAnimationSprites[i] = new RPGSprite("custom/vanishTeleportation", 2.f, 2.f, this, new RegionOfInterest((i*32), 0, 32, 32), new Vector(-0.5f, 0));
         }
         animationVanishTeleportation = new Animation(1, vanishAnimationSprites, false);
 

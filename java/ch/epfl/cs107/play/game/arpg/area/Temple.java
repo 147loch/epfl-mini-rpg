@@ -6,6 +6,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.ActionableStaff;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
+import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.LightHalo;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;

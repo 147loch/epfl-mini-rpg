@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.entity;
+package ch.epfl.cs107.play.game.arpg.actor.areaentity;
 
 import java.util.Collections;
 import java.util.List;
@@ -51,13 +51,13 @@ public class FireSpell extends AreaEntity implements Interactor {
         for (int i = 0; i < animationSprites.length; i++) {
             animationSprites[i] = new RPGSprite("zelda/fire", 1, 1, this,
                     new RegionOfInterest(i*16, 0, 16, 16));
-        }
+        }zelda
         animation = new Animation(ANIMATION_SPEED, animationSprites);
 
         Sprite[] vanishAnimationSprites = new Sprite[7];
         for (int i = 0; i < vanishAnimationSprites.length; i++)
             vanishAnimationSprites[i] = new RPGSprite(
-                    "zelda/vanishTeleportation", 1.f, 1.f, this,
+                    "custom/vanishTeleportation", 1.f, 1.f, this,
                     new RegionOfInterest((i*32), 0, 32, 32));
         animationVanish = new Animation(ANIMATION_SPEED/2, vanishAnimationSprites, false);
 

@@ -15,8 +15,6 @@ import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Lever extends AreaEntity {
-
-	private static final int ANIMATION_FRAME_LENGTH = 6;
 	
 	private Sprite onSprite;
 	private Sprite offSprite;
