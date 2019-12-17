@@ -5,13 +5,13 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
-public class ActivatableStaff implements Activatable {
+public class ActionableStaff implements Actionable {
 
     private Area area;
     private Orientation orientation;
     private DiscreteCoordinates coordinates;
 
-    public ActivatableStaff(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
+    public ActionableStaff(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         this.area = area;
         this.orientation = orientation;
         this.coordinates = coordinates;

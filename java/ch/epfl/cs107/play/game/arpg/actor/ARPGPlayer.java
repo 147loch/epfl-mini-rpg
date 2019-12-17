@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
@@ -91,6 +92,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private Behavior behavior;
     private Dialog dialog;
     private boolean isDialog;
+    private boolean hasDamageSoundActivated;
 
 	// Keyboard Events used for the player
 	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
@@ -191,6 +193,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		speedStaff = 0;
 		behavior = Behavior.IDLE;
 		isDialog = false;
+		hasDamageSoundActivated = true;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
@@ -268,6 +271,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	public final void takeDamage(float damage) {
+		hasDamageSoundActivated = false;
 		if (lastTookDamage <= 0) {
 			if (hp - damage >= 0) {
 				hp -= damage;
@@ -534,5 +538,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		if (isPassingADoor()) {
 			SoundAcoustics.stopAllSounds(audio);
 		}
+
+		if (!hasDamageSoundActivated) {
+			audio.playSound(audio.getSound(ResourcePath.getSounds("custom/sw.damage")), false, 0.75f, false, false, false);
+			hasDamageSoundActivated = true;
+		}
+
 	}
 }

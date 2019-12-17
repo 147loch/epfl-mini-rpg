@@ -4,7 +4,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
-import ch.epfl.cs107.play.game.arpg.actor.puzzle.ActivatableStaff;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.ActionableStaff;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.LightHalo;
@@ -26,7 +26,7 @@ public class Temple extends ARPGArea {
 
         registerActor(new LightHalo(this));
 
-        registerActor(new PressurePlate(this, Orientation.UP, new DiscreteCoordinates(2, 2), new ActivatableStaff(this, Orientation.UP, new DiscreteCoordinates(4, 3))));
+        registerActor(new PressurePlate(this, Orientation.UP, new DiscreteCoordinates(2, 2), new ActionableStaff(this, Orientation.UP, new DiscreteCoordinates(4, 3))));
 
         for (int i = 1; i <= 4; i++) {
             registerActor(new Coin(this, Orientation.UP, new DiscreteCoordinates(1, i)));

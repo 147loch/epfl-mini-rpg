@@ -18,13 +18,13 @@ public class Lever extends AreaEntity {
 	
 	private Sprite onSprite;
 	private Sprite offSprite;
-	private Activatable entityActivatable;
+	private Actionable entityActionable;
 	private boolean isAlreadyActive;
 	
-	public Lever(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
+	public Lever(Area area, Orientation orientation, DiscreteCoordinates position, Actionable entityActionable) {
 		super(area, orientation, position);
 		
-		this.entityActivatable = entityActivatable;
+		this.entityActionable = entityActionable;
 		isAlreadyActive = false;
 
 		offSprite = new RPGSprite("custom/lever", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
@@ -33,7 +33,7 @@ public class Lever extends AreaEntity {
 	
 	public void active() {
 		if (!isAlreadyActive) {
-			entityActivatable.activeEntity();
+			entityActionable.activeEntity();
 			isAlreadyActive = true;
 		}
 	}

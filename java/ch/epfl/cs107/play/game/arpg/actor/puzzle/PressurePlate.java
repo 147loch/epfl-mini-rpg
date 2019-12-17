@@ -19,13 +19,13 @@ public class PressurePlate extends AreaEntity {
 
     private Sprite onSprite;
     private Sprite offSprite;
-    private Activatable entityActivatable;
+    private Actionable entityActionable;
     private boolean isAlreadyActive;
 
-    public PressurePlate(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
+    public PressurePlate(Area area, Orientation orientation, DiscreteCoordinates position, Actionable entityActionable) {
         super(area, orientation, position);
 
-        this.entityActivatable = entityActivatable;
+        this.entityActionable = entityActionable;
         isAlreadyActive = false;
 
         offSprite = new RPGSprite("custom/pressurePlate", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16), new Vector(0, 0.2f));
@@ -34,7 +34,7 @@ public class PressurePlate extends AreaEntity {
 
     public void active() {
         if (!isAlreadyActive) {
-            entityActivatable.activeEntity();
+            entityActionable.activeEntity();
             isAlreadyActive = true;
         }
     }
