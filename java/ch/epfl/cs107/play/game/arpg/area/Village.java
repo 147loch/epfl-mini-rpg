@@ -49,7 +49,21 @@ public class Village extends ARPGArea {
 				new DiscreteCoordinates(25, 18)));
 
 		registerActor(fountain);
-		registerActor(new WaterEffect(new Vector(4, 1)));
+
+		for (int i = 3; i <= 22; i++) {
+			if (i % 3 != 0) {
+				if (i % 5 == 0) {
+					registerActor(new WaterEffect(new Vector(i, 2)));
+				} else {
+					registerActor(new WaterEffect(new Vector(i, 1)));
+				}
+			}
+		}
+		registerActor(new WaterEffect(new Vector(24, 3)));
+		registerActor(new WaterEffect(new Vector(28, 3)));
+		registerActor(new WaterEffect(new Vector(30, 5)));
+		registerActor(new WaterEffect(new Vector(32, 2)));
+		registerActor(new WaterEffect(new Vector(35, 7)));
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
 		registerActor(new SignEntity("NE PAS DÉTRUIRE, GROTTE CONDAMNÉE !", true, this, Orientation.DOWN, new DiscreteCoordinates(27, 17)));
