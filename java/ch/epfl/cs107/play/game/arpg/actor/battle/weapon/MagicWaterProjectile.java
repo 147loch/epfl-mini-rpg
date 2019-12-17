@@ -7,6 +7,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
+import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
@@ -77,6 +78,11 @@ public class MagicWaterProjectile extends Projectile {
 			monster.takeDamage(DamageType.MAGICAL, 1.f); // TODO put constant
 			getOwnerArea().unregisterActor(MagicWaterProjectile.this);
 			
+		}
+
+		@Override
+		public void interactWith(FireSpell fireSpell) {
+			fireSpell.extinguish();
 		}
 	}
 }

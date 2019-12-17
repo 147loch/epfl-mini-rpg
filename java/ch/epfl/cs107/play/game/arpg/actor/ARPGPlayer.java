@@ -162,7 +162,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private class CheatKeysEventListener implements StaticKeyboardEventListener {
 		@Override
 		public void onKeyEvent() {
-			getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
+			getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
 		}
 	}
 
@@ -226,11 +226,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
 			case BOMB:
-				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
-				inventory.removeEntry(ARPGItem.BOMB, 1);
-				if (!this.possess(ARPGItem.BOMB)) {
-					cycleCurrentInventoryItem();
-				}
+                Bomb bomb = new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
+                if (getOwnerArea().canEnterAreaCells(bomb, Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector())))) {
+                    getOwnerArea().registerActor(bomb);
+                    inventory.removeEntry(ARPGItem.BOMB, 1);
+                    if (!possess(ARPGItem.BOMB)) cycleCurrentInventoryItem();
+                }
 				break;
 			case BOW:
 				behavior = Behavior.ATTACK_WITH_BOW;
