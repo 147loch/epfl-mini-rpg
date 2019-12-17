@@ -25,9 +25,9 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.npc.King;
+import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
-import ch.epfl.cs107.play.game.arpg.actor.sign.King;
-import ch.epfl.cs107.play.game.arpg.actor.sign.Npc;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -507,11 +507,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 		
 		@Override
-		public void interactWith(Npc pnj) {
+		public void interactWith(Npc npc) {
 			if (!isDialog) {
-				pnj.setOrientation(getOrientation().opposite());
-				dialog = new Dialog(pnj.getTextDialog(), "zelda/dialog", getOwnerArea());
+				npc.setOrientation(getOrientation().opposite());
+				dialog = new Dialog(npc.getTextDialog(), "zelda/dialog", getOwnerArea());
 				isDialog = true;
+				npc.talked();
 			}
 		}
 	}

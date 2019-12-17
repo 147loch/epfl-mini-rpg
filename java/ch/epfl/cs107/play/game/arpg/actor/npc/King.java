@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.sign;
+package ch.epfl.cs107.play.game.arpg.actor.npc;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;

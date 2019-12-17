@@ -4,6 +4,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
+import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
+import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.CaveDoor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -45,5 +47,6 @@ public class Village extends ARPGArea {
 		registerActor(caveDoor);
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
+		registerActor(new Npc("Il fait beau aujourd'hui. Mes genoux sont tout secs.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(10, 5)));
 	}
 }

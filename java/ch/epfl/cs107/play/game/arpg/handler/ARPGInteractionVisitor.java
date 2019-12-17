@@ -16,10 +16,10 @@ import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.npc.King;
+import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
-import ch.epfl.cs107.play.game.arpg.actor.sign.King;
-import ch.epfl.cs107.play.game.arpg.actor.sign.Npc;
 import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
@@ -65,6 +65,6 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	
 	default void interactWith(King king) {}
 	
-	default void interactWith(Npc pnj) {}
+	default void interactWith(Npc npc) {}
 	
 }
