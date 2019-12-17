@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
-import ch.epfl.cs107.play.game.arpg.actor.puzzle.Activator;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.Target;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -72,7 +72,7 @@ public class Arrow extends Projectile implements FlyableEntity {
 		}
 		
 		@Override
-		public void interactWith(Activator activator) {
+		public void interactWith(Target activator) {
 			activator.active();
 		}
 	}

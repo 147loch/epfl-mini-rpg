@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
+import ch.epfl.cs107.play.game.arpg.actor.Rarity;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
@@ -31,6 +32,7 @@ public class DarkLord extends MonsterEntity {
     private static final int TELEPORTATION_RADIUS = 3;
     private static final int MIN_SPELL_WAIT_DURATION = 50;
     private static final int MAX_SPELL_WAIT_DURATION = 100;
+    private static final double INVOKE_INSTEAD_TELEPORTATION = Rarity.UNCOMMON;
 	
 	private ARPGDarkLordHandler handler;
 	private int initX;
@@ -69,13 +71,26 @@ public class DarkLord extends MonsterEntity {
 	}
 	
 	private void teleportation(int x, int y) {
-		resetMotion();
-		getOwnerArea().leaveAreaCells(this, getCurrentCells());
-		setCurrentPosition(new Vector(x, y));
-		ArrayList<DiscreteCoordinates> position = new ArrayList<>();
-		position.add(new DiscreteCoordinates(x, y));
-		getOwnerArea().canEnterAreaCells(this, position);
-		setCurrentState(State.IDLE);
+		if (getOwnerArea().canEnterAreaCells(this, Collections.singletonList(new DiscreteCoordinates(x, y)))) {
+			getOwnerArea().leaveAreaCells(this, getCurrentCells());
+			setCurrentPosition(new Vector(x, y));
+			getOwnerArea().enterAreaCells(this, Collections.singletonList(new DiscreteCoordinates(x, y)));
+			setCurrentState(State.IDLE);
+		} else {
+			teleportation(initX + RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS,
+					initY + RandomGenerator.getInstance().nextInt(2 * TELEPORTATION_RADIUS) - TELEPORTATION_RADIUS);
+		}
+	}
+	
+	private void invokeFlameSkull() {
+		FlameSkull flameSkull = new FlameSkull(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(2)));
+		if (getOwnerArea().canEnterAreaCells(flameSkull, Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(2))))) {
+			getOwnerArea().registerActor(flameSkull);
+			setCurrentState(State.IDLE);
+		} else {
+			orientate(Orientation.values()[RandomGenerator.getInstance().nextInt(4)]);
+			invokeFlameSkull();
+		}
 	}
 
 	@Override
@@ -94,15 +109,21 @@ public class DarkLord extends MonsterEntity {
 				
 				if (updateCounter >= RandomGenerator.getInstance().nextInt(MAX_SPELL_WAIT_DURATION - MIN_SPELL_WAIT_DURATION) + MIN_SPELL_WAIT_DURATION) {
 					updateCounter = 0;
-					setCurrentState(State.ATTACK);
+					if (RandomGenerator.getInstance().nextDouble() >= INVOKE_INSTEAD_TELEPORTATION)
+						setCurrentState(State.ATTACK);
+					else
+						setCurrentState(State.INVOKE);
 				}
 				break;
 			case ATTACK:
-				animationIdle.update(deltaTime);
-				resetMotion();
-				getOwnerArea().registerActor(new FireSpell(getOwnerArea(), getOrientation(),
-						getCurrentMainCellCoordinates().jump(getOrientation().toVector()), 4));
+				FireSpell fireSpell = new FireSpell(getOwnerArea(), getOrientation(),
+						getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(2)), 4);
+				if (getOwnerArea().canEnterAreaCells(fireSpell, Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(2)))))
+					getOwnerArea().registerActor(fireSpell);
 				setCurrentState(State.IDLE);
+				break;
+			case INVOKE:
+				invokeFlameSkull();
 				break;
 			case IS_GOING_TO_TELEPORT:
 				animationAttack = animationsAttack[getOrientation().ordinal()];
@@ -179,6 +200,5 @@ public class DarkLord extends MonsterEntity {
 			if (getCurrentState().equals(State.IDLE))
 				setCurrentState(State.IS_GOING_TO_TELEPORT);
 		}
-
 	}
 }

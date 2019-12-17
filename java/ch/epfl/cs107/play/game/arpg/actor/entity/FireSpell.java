@@ -1,5 +1,8 @@
 package ch.epfl.cs107.play.game.arpg.actor.entity;
 
+import java.util.Collections;
+import java.util.List;
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
@@ -16,11 +19,7 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.math.RegionOfInterest;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
-
-import java.util.Collections;
-import java.util.List;
 
 public class FireSpell extends AreaEntity implements Interactor {
 
@@ -59,8 +58,7 @@ public class FireSpell extends AreaEntity implements Interactor {
         for (int i = 0; i < vanishAnimationSprites.length; i++)
             vanishAnimationSprites[i] = new RPGSprite(
                     "zelda/vanishTeleportation", 1.f, 1.f, this,
-                    new RegionOfInterest((i*32), 0, 32, 32), new Vector(-0.5f, 0)
-            );
+                    new RegionOfInterest((i*32), 0, 32, 32));
         animationVanish = new Animation(ANIMATION_SPEED/2, vanishAnimationSprites, false);
 
         handler = new FireSpellHandler();
@@ -72,7 +70,8 @@ public class FireSpell extends AreaEntity implements Interactor {
 
     private void handlePropagation() {
         if (force > 0) {
-            getOwnerArea().registerActor(new FireSpell(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()), this.force - 1));
+        	if (getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()))))
+        		getOwnerArea().registerActor(new FireSpell(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()), this.force - 1));
         }
     }
 

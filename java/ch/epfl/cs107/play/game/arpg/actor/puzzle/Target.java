@@ -16,7 +16,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Activator extends AreaEntity implements FlyableEntity {
+public class Target extends AreaEntity implements FlyableEntity {
 
 	private static final int ANIMATION_FRAME_LENGTH = 6;
 	
@@ -24,7 +24,7 @@ public class Activator extends AreaEntity implements FlyableEntity {
 	private Activatable entityActivatable;
 	private boolean isAlreadyActive;
 	
-	public Activator(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
+	public Target(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
 		super(area, orientation, position);
 		
 		this.entityActivatable = entityActivatable;
