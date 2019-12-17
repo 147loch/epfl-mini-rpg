@@ -17,6 +17,8 @@ import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.Target;
+import ch.epfl.cs107.play.game.arpg.actor.sign.King;
+import ch.epfl.cs107.play.game.arpg.actor.sign.Pnj;
 import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
@@ -57,4 +59,8 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(FireSpell fireSpell) {}
 
 	default void interactWith(Sign sign) {}
+	
+	default void interactWith(King king) {}
+	
+	default void interactWith(Pnj pnj) {}
 }

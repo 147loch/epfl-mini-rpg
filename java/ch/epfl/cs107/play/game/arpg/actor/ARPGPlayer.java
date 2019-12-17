@@ -25,6 +25,8 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.sign.King;
+import ch.epfl.cs107.play.game.arpg.actor.sign.Pnj;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -304,6 +306,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 
 		keyboardRegister.update();
+		
+		System.out.println(getPosition());
 
 		if (isDisplacementOccurs()) {
 			isDialog = false;
@@ -484,6 +488,24 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void interactWith(Sign sign) {
 			if (!isDialog) {
 				dialog = new Dialog(sign.getTextMessage(), "zelda/dialog", getOwnerArea());
+				isDialog = true;
+			}
+		}
+		
+		@Override
+		public void interactWith(King king) {
+			if (!isDialog) {
+				king.setOrientation(getOrientation().opposite());
+				dialog = new Dialog(king.getTextMessage(), "zelda/dialog", getOwnerArea());
+				isDialog = true;
+			}
+		}
+		
+		@Override
+		public void interactWith(Pnj pnj) {
+			if (!isDialog) {
+				pnj.setOrientation(getOrientation().opposite());
+				dialog = new Dialog(pnj.getTextDialog(), "zelda/dialog", getOwnerArea());
 				isDialog = true;
 			}
 		}
