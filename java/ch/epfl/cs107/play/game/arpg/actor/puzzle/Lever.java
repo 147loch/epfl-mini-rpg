@@ -16,26 +16,23 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Target extends AreaEntity implements FlyableEntity {
+public class Lever extends AreaEntity {
 
 	private static final int ANIMATION_FRAME_LENGTH = 6;
 	
-	private Animation animation;
+	private Sprite onSprite;
+	private Sprite offSprite;
 	private Activatable entityActivatable;
 	private boolean isAlreadyActive;
 	
-	public Target(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
+	public Lever(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
 		super(area, orientation, position);
 		
 		this.entityActivatable = entityActivatable;
 		isAlreadyActive = false;
-		
-		Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
-		
-		for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
-			sprites[i] = new RPGSprite("zelda/orb", 1.f, 1.f, this, new RegionOfInterest((i*32), 64, 32, 32));
-		}
-		animation = new Animation(sprites.length, sprites, true);
+
+		offSprite = new RPGSprite("custom/lever", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
+		onSprite = new RPGSprite("custom/lever", 1.f, 1.f, this, new RegionOfInterest(16, 0, 16, 16));
 	}
 	
 	public void active() {
@@ -47,7 +44,6 @@ public class Target extends AreaEntity implements FlyableEntity {
 	
 	@Override
 	public void update(float deltaTime) {
-		animation.update(deltaTime);
 		super.update(deltaTime);
 	}
 
@@ -58,7 +54,7 @@ public class Target extends AreaEntity implements FlyableEntity {
 
 	@Override
 	public boolean takeCellSpace() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -78,7 +74,9 @@ public class Target extends AreaEntity implements FlyableEntity {
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (!isAlreadyActive)
-			animation.draw(canvas);
+		if (isAlreadyActive)
+			onSprite.draw(canvas);
+		else
+			offSprite.draw(canvas);
 	}
 }

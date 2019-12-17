@@ -25,6 +25,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -35,6 +36,7 @@ import ch.epfl.cs107.play.game.inventory.InventoryItem;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -470,6 +472,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void interactWith(ArrowItem arrow) {
 			inventory.addEntry(ARPGItem.ARROW, 1);
 			getOwnerArea().unregisterActor(arrow);
+		}
+
+		@Override
+		public void interactWith(PressurePlate pressurePlate) {
+			pressurePlate.active();
+			interactWith((Sign)pressurePlate);
 		}
 	}
 }

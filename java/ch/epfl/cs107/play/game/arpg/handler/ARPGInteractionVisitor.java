@@ -16,7 +16,8 @@ import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
-import ch.epfl.cs107.play.game.arpg.actor.puzzle.Target;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
 public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
@@ -49,10 +50,12 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	
 	default void interactWith(MagicWaterProjectile projectile) {}
 	
-	default void interactWith(Target activator) {}
+	default void interactWith(Lever activator) {}
 	
 	default void interactWith(Sword sword) {}
 
 	default void interactWith(FireSpell fireSpell) {}
+
+	default void interactWith(PressurePlate pressurePlate) {}
 
 }

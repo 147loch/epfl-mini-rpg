@@ -15,7 +15,8 @@ import ch.epfl.cs107.play.window.Window;
 
 public class ARPG extends RPG {
 
-    private final static int STARTING_AREA = 0;
+    private final static int STARTING_AREA = 7;
+    private final static DiscreteCoordinates STARTING_COORDINATES = new DiscreteCoordinates(2, 4);
 
     // we use the ARPGArea type to ensure it isn't an area from any tutorial or some other sort
     private final List<ARPGArea> areas = new ArrayList<>(
@@ -50,7 +51,7 @@ public class ARPG extends RPG {
     	if (super.begin(window, fileSystem)) {
     	    createAreas();
     		Area area = setCurrentArea(areas.get(STARTING_AREA).getTitle(), true);
-    		ARPGPlayer player = new ARPGPlayer(area, Orientation.DOWN, new DiscreteCoordinates(6, 10));
+    		ARPGPlayer player = new ARPGPlayer(area, Orientation.DOWN, STARTING_COORDINATES);
     		initPlayer(player);
 
     		return true;

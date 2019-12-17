@@ -18,9 +18,9 @@ public class CastleDoor extends Door {
 	private boolean isOpened;
 	
 	public CastleDoor(String destination, DiscreteCoordinates otherSideCoordinates, Area area,
-			Orientation orientation, DiscreteCoordinates position, DiscreteCoordinates secondPosition) {
-		super(destination, otherSideCoordinates, Logic.TRUE, area, orientation, position, secondPosition);
-		
+			Orientation orientation, DiscreteCoordinates position, DiscreteCoordinates ...otherPositions) {
+		super(destination, otherSideCoordinates, Logic.TRUE, area, orientation, position, otherPositions);
+
 		doorOpened = new RPGSprite("zelda/castleDoor.open", 2.f, 2.f, this);
 		doorClosed = new RPGSprite("zelda/castleDoor.close", 2.f, 2.f, this);
 		

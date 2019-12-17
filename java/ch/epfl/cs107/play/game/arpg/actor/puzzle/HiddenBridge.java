@@ -53,9 +53,7 @@ public class HiddenBridge extends AreaEntity implements Activatable {
 	}
 
 	@Override
-	public void acceptInteraction(AreaInteractionVisitor v) {
-		((ARPGInteractionVisitor)v).interactWith(this);
-	}
+	public void acceptInteraction(AreaInteractionVisitor v) {}
 
 	@Override
 	public void activeEntity() {

@@ -5,7 +5,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Waterfall;
-import ch.epfl.cs107.play.game.arpg.actor.puzzle.Target;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -50,7 +50,7 @@ public class Route extends ARPGArea {
 		
 		HiddenBridge bridge = new HiddenBridge(this, Orientation.UP, new DiscreteCoordinates(15, 9));
 		registerActor(bridge);
-		registerActor(new Target(this, Orientation.UP, new DiscreteCoordinates(18, 7), bridge));
+		registerActor(new Lever(this, Orientation.UP, new DiscreteCoordinates(19, 8), bridge));
 		
 	}
 }
