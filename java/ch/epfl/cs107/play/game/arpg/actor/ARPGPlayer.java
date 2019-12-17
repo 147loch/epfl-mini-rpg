@@ -275,6 +275,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				lastTookDamage = damage;
 				invicibilityTime = INVINCIBILITY_TIME;
 			} else {
+				lastTookDamage = hp;
+				hp = 0;
 				behavior = Behavior.DEAD;
 			}
 		}
