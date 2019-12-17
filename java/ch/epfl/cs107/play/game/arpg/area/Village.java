@@ -8,10 +8,9 @@ import ch.epfl.cs107.play.game.arpg.actor.areaentity.WaterFountain;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.WaterEffect;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
-import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
+import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Village extends ARPGArea {

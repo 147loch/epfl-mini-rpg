@@ -8,7 +8,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
-import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
+import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
