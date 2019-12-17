@@ -19,14 +19,16 @@ public class PressurePlate extends Sign {
     private Activatable entityActivatable;
     private boolean isAlreadyActive;
 
-    public PressurePlate(Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
-        super("Un gros bruit est survenu au village...", area, orientation, position);
+    public PressurePlate(String dialogString, Area area, Orientation orientation, DiscreteCoordinates position, Activatable entityActivatable) {
+        super(dialogString, area, orientation, position);
 
         this.entityActivatable = entityActivatable;
         isAlreadyActive = false;
 
-        offSprite = new RPGSprite("custom/pressurePlate", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16), new Vector(0, 0.25f));
-        onSprite = new RPGSprite("custom/pressurePlate", 1.f, 1.f, this, new RegionOfInterest(16, 0, 16, 16), new Vector(0, 0.25f));
+        offSprite = new RPGSprite("custom/pressurePlate", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16), new Vector(0, 0.2f));
+        onSprite = new RPGSprite("custom/pressurePlate", 1.f, 1.f, this, new RegionOfInterest(16, 0, 16, 16), new Vector(0, 0.2f));
+        offSprite.setAlpha(0.75f);
+        onSprite.setAlpha(0.75f);
     }
 
     public void active() {

@@ -307,8 +307,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 
 		keyboardRegister.update();
-		
-		System.out.println(getPosition());
 
 		if (isDisplacementOccurs()) {
 			isDialog = false;
@@ -488,7 +486,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		@Override
 		public void interactWith(PressurePlate pressurePlate) {
 			pressurePlate.active();
-			// interactWith((Sign)pressurePlate);
+			interactWith((Sign)pressurePlate);
 		}
 
 		@Override

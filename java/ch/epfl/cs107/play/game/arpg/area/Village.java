@@ -15,7 +15,7 @@ public class Village extends ARPGArea {
 
 	public Village() {
 		super();
-		caveDoor = new CaveDoor("GrotteMew", new DiscreteCoordinates(8, 2),
+		caveDoor = new CaveDoor("GrotteMew", new DiscreteCoordinates(8, 3),
 				this, Orientation.UP, new DiscreteCoordinates(25, 18));
 	}
 
