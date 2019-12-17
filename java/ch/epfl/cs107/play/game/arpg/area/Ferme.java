@@ -47,6 +47,6 @@ public class Ferme extends ARPGArea {
 		
 		registerActor(new SignEntity("Maison du futur héro", true, this, Orientation.UP, new DiscreteCoordinates(3, 11)));
 		
-		registerActor(new Npc("C'est bête, j'ai perdu mon épée. Garde la si tu la trouves.", Emotion.INTERROGATION, this, Orientation.UP, new DiscreteCoordinates(6, 7)));
+		registerActor(new NPC("C'est bête, j'ai perdu mon épée. Garde la si tu la trouves.", Emotion.INTERROGATION, this, Orientation.UP, new DiscreteCoordinates(6, 7)));
 	}
 }
