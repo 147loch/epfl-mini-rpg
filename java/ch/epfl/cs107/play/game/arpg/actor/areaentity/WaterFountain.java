@@ -34,7 +34,7 @@ public class WaterFountain extends AreaEntity {
 
         Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
         for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
-            sprites[i] = new RPGSprite("custom/fountain", 3.f, 3.f, this, new RegionOfInterest((i*48), 0, 48, 45), new Vector(-1f, -1f));
+            sprites[i] = new RPGSprite("custom/fountain", 3.f, 3.f, this, new RegionOfInterest((i*48), 0, 48, 48), new Vector(-1f, -1f));
         }
         animation = new Animation(sprites.length, sprites, true);
     }
