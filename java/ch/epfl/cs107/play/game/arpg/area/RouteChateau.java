@@ -6,6 +6,7 @@ import java.util.List;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.arpg.Test;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
@@ -32,15 +33,17 @@ public class RouteChateau extends ARPGArea {
 
 		@Override
 		public void onKeyEvent(KeyboardAction action) {
-			switch (action) {
-				case CHEAT_SPAWN_FLAMESKULL:
-					registerActor(new FlameSkull(RouteChateau.this, Orientation.DOWN, new DiscreteCoordinates(8, 10)));
-					break;
-				case CHEAT_SPAWN_LOGMONSTER:
-					registerActor(new LogMonster(RouteChateau.this, Orientation.DOWN, new DiscreteCoordinates(8, 10)));
-					break;
-				default:
-					break;
+			if (Test.MODE) {
+				switch (action) {
+					case CHEAT_SPAWN_FLAMESKULL:
+						registerActor(new FlameSkull(RouteChateau.this, Orientation.DOWN, new DiscreteCoordinates(8, 10)));
+						break;
+					case CHEAT_SPAWN_LOGMONSTER:
+						registerActor(new LogMonster(RouteChateau.this, Orientation.DOWN, new DiscreteCoordinates(8, 10)));
+						break;
+					default:
+						break;
+				}
 			}
 		}
 	}

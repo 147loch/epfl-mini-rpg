@@ -12,7 +12,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.game.arpg.ARPG;
+import ch.epfl.cs107.play.game.arpg.Test;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
@@ -177,7 +177,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private class CheatKeysEventListener implements StaticKeyboardEventListener {
 		@Override
 		public void onKeyEvent() {
-			getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+			if (Test.MODE) {
+				getOwnerArea().registerActor(new Bomb(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates().jump(getOrientation().toVector())));
+			}
 		}
 	}
 
@@ -218,6 +220,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Base inventory items could not be added.");
 		currentHoldingItem = (ARPGItem)inventory.getItemList().get(0);
+
+		if (Test.MODE) {
+			inventory.addEntry(ARPGItem.CASTLE_KEY, 1);
+			inventory.addEntry(ARPGItem.STAFF, 1);
+			inventory.addEntry(ARPGItem.BOW, 1);
+			inventory.addEntry(ARPGItem.ARROW, 99);
+			inventory.addEntry(ARPGItem.SWORD, 1);
+		}
 
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
 			{Orientation.UP , Orientation.LEFT , Orientation.DOWN, Orientation.RIGHT});
