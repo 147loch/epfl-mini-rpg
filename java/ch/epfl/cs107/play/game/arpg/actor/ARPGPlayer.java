@@ -437,8 +437,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void interactWith(CaveDoor caveDoor) {
-			setIsPassingADoor(caveDoor);
-		}
+			if (!wantsViewInteraction()) setIsPassingADoor(caveDoor);
+ 		}
 
 		@Override
 		public void interactWith(Grass grass) {

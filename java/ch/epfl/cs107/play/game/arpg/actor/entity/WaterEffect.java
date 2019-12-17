@@ -10,7 +10,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class WaterEffect extends Entity {
 
-	private static final int ANIMATION_FRAME_LENGTH = 3;
+	private static final int ANIMATION_FRAME_LENGTH = 8;
 	private static final int ANIMATION_SPEED = 5;
 	
 	private Animation animation;
@@ -21,7 +21,7 @@ public class WaterEffect extends Entity {
 		Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
 	
 		for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
-			sprites[i] = new RPGSprite("custom/water.effects", 1.f, 1.f, this, new RegionOfInterest(i*32, 0, 32, 32));
+			sprites[i] = new RPGSprite("custom/water.effects", 1.f, 1.f, this, new RegionOfInterest(i*16, 0, 16, 16));
 		}
 		animation = new Animation(ANIMATION_SPEED, sprites, true);
 	}
