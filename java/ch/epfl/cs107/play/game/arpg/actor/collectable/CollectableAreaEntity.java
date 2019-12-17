@@ -25,6 +25,16 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 	 * @param area The area it is in
 	 * @param orientation The orientation it should have
 	 * @param position The position where it should appear
+	 */
+	public CollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position) {
+		super(area, orientation, position);
+	}
+
+	/**
+	 * Create a Collectable Area Entity item
+	 * @param area The area it is in
+	 * @param orientation The orientation it should have
+	 * @param position The position where it should appear
 	 * @param animationString The animation sprite, not null
 	 */
 	public CollectableAreaEntity(Area area, Orientation orientation, DiscreteCoordinates position, String animationString) {
@@ -98,7 +108,9 @@ public abstract class CollectableAreaEntity extends AreaEntity {
 
 	@Override
 	public void update(float deltaTime) {
-		animation.update(deltaTime);
+		if (animation != null) {
+			animation.update(deltaTime);
+		}
 		super.update(deltaTime);
 	}
 	

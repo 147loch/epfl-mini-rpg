@@ -20,7 +20,7 @@ import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Npc extends MovableAreaEntity implements Interactor {
+public class NPC extends MovableAreaEntity implements Interactor {
 	
 	private static final int IDLE_MOVEMENT_FRAMES = 20;
 	private static final int TIME_NOT_MOVING = 20;
@@ -33,7 +33,7 @@ public class Npc extends MovableAreaEntity implements Interactor {
 	private int counter;
 	private boolean talked;
 	
-	public Npc(String textDialog, Emotion emotion, Area area, Orientation orientation, DiscreteCoordinates position) {
+	public NPC(String textDialog, Emotion emotion, Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
 		this.textDialog = textDialog;

@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
-import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
+import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -48,6 +48,6 @@ public class Ferme extends ARPGArea {
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(3, 6)));
 		registerActor(new ArrowItem(this, Orientation.UP, new DiscreteCoordinates(4, 7)));
 		
-		registerActor(new Npc("C'est bête, j'ai perdu mon épée. Garde la si tu la trouves.", Emotion.INTERROGATION, this, Orientation.UP, new DiscreteCoordinates(6, 7)));
+		registerActor(new NPC("C'est bête, j'ai perdu mon épée. Garde la si tu la trouves.", Emotion.INTERROGATION, this, Orientation.UP, new DiscreteCoordinates(6, 7)));
 	}
 }

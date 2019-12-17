@@ -7,10 +7,9 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CaveDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.WaterFountain;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
-import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
+import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Village extends ARPGArea {
@@ -45,6 +44,6 @@ public class Village extends ARPGArea {
 		registerActor(new WaterFountain(this, new DiscreteCoordinates(23, 8)));
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
-		registerActor(new Npc("Il fait beau aujourd'hui. Mes genoux sont tout secs.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(10, 5)));
+		registerActor(new NPC("Il fait beau aujourd'hui. Mes genoux sont tout secs.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(10, 5)));
 	}
 }

@@ -9,7 +9,7 @@ public enum Emotion {
 	EXCLAMATION(0, 32),
 	INTERROGATION(16, 32);
 	
-	private Emotion(int x, int y) {
+	Emotion(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
