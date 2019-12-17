@@ -26,7 +26,7 @@ import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.sign.King;
-import ch.epfl.cs107.play.game.arpg.actor.sign.Pnj;
+import ch.epfl.cs107.play.game.arpg.actor.sign.Npc;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -502,7 +502,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 		
 		@Override
-		public void interactWith(Pnj pnj) {
+		public void interactWith(Npc pnj) {
 			if (!isDialog) {
 				pnj.setOrientation(getOrientation().opposite());
 				dialog = new Dialog(pnj.getTextDialog(), "zelda/dialog", getOwnerArea());

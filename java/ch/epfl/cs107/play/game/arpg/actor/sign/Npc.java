@@ -18,22 +18,22 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Pnj extends MovableAreaEntity implements Interactor {
+public class Npc extends MovableAreaEntity implements Interactor {
 	
 	private static final int IDLE_MOVEMENT_FRAMES = 20;
 	private static final int TIME_NOT_MOVING = 20;
 	
 	private String textDialog;
 	private Animation[] animations;
-	private ARPGPnjHandler handler;
+	private ARPGNpcHandler handler;
 	private boolean canMove;
 	private int counter;
 	
-	public Pnj(String textDialog, Area area, Orientation orientation, DiscreteCoordinates position) {
+	public Npc(String textDialog, Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
 		this.textDialog = textDialog;
-		handler = new ARPGPnjHandler();
+		handler = new ARPGNpcHandler();
 		canMove = true;
 		counter = 0;
 		
@@ -126,7 +126,7 @@ public class Pnj extends MovableAreaEntity implements Interactor {
 		other.acceptInteraction(handler);
 	}
 
-	private class ARPGPnjHandler implements ARPGInteractionVisitor {
+	private class ARPGNpcHandler implements ARPGInteractionVisitor {
 		@Override
 		public void interactWith(ARPGPlayer player) {
 			canMove = false;
