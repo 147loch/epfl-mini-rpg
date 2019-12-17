@@ -54,7 +54,6 @@ public class ARPG extends RPG {
     		Area area = setCurrentArea(areas.get(STARTING_AREA).getTitle(), true);
     		ARPGPlayer player = new ARPGPlayer(area, Orientation.DOWN, STARTING_COORDINATES);
     		initPlayer(player);
-    		System.out.println("Test");
     		return true;
     	}
     	return false;
