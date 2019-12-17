@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Village extends ARPGArea {
@@ -47,8 +48,8 @@ public class Village extends ARPGArea {
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
 		
-		registerActor(new Npc("Les auteurs de ce jeu ne sont clairement pas scénaristes.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(25, 9)));
-		registerActor(new Npc("Le village me donne une satisfaction primordiale.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(31, 16)));
-		registerActor(new Npc("Il fait beau aujourd'hui. Mes genoux sont tout secs.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(10, 5)));
+		registerActor(new NPC("Les auteurs de ce jeu ne sont clairement pas scénaristes.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(25, 9)));
+		registerActor(new NPC("Le village me donne une satisfaction primordiale.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(31, 16)));
+		registerActor(new NPC("Il fait beau aujourd'hui. Mes genoux sont tout secs.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(10, 5)));
 	}
 }

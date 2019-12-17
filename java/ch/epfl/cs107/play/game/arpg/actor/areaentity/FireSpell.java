@@ -51,7 +51,7 @@ public class FireSpell extends AreaEntity implements Interactor {
         for (int i = 0; i < animationSprites.length; i++) {
             animationSprites[i] = new RPGSprite("zelda/fire", 1, 1, this,
                     new RegionOfInterest(i*16, 0, 16, 16));
-        }zelda
+        }
         animation = new Animation(ANIMATION_SPEED, animationSprites);
 
         Sprite[] vanishAnimationSprites = new Sprite[7];
