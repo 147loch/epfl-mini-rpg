@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.game.arpg.ARPG;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
@@ -32,7 +33,6 @@ import ch.epfl.cs107.play.game.arpg.actor.npc.King;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
 import ch.epfl.cs107.play.game.arpg.area.ARPGArea;
-import ch.epfl.cs107.play.game.arpg.area.Temple;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -95,6 +95,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private Dialog dialog;
     private boolean isDialog;
     private boolean hasDamageSoundActivated;
+    private boolean shownGameOverForeground;
 
 	// Keyboard Events used for the player
 	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
@@ -180,6 +181,15 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 
+	private class AcceptDeathDialogEventListener implements StaticKeyboardEventListener {
+		@Override
+		public void onKeyEvent() {
+			if (Behavior.DEAD.equals(behavior)) {
+				// if (getOwnerArea() instanceof  ARPGArea) ((ARPGArea)getOwnerArea()).restart();
+			}
+		}
+	}
+
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
 
@@ -196,12 +206,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		behavior = Behavior.IDLE;
 		isDialog = false;
 		hasDamageSoundActivated = true;
+		shownGameOverForeground = false;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.OPEN_INVENTORY, new OpenInventoryEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CHEAT_SPAWN_BOMB, new CheatKeysEventListener());
+		keyboardRegister.registerKeyboardEvent(KeyboardAction.ACCEPT_DIALOG, new AcceptDeathDialogEventListener());
 		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Base inventory items could not be added.");
@@ -305,43 +317,49 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	@Override
-	public void update(float deltaTime) {	
-		if (behavior.equals(Behavior.ATTACK_WITH_BOW)) {
-			speedBow += deltaTime;
-			animationsWithBow[getOrientation().opposite().ordinal()].update(deltaTime);
-		} else if (behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
-			speedStaff += deltaTime;
-			animationsWithStaff[getOrientation().opposite().ordinal()].update(deltaTime);
-		} else if (behavior.equals(Behavior.ATTACK_WITH_SWORD)) {
-			animationsWithSword[getOrientation().opposite().ordinal()].update(deltaTime);
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+
+		if (!behavior.equals(Behavior.DEAD)) {
+			if (behavior.equals(Behavior.ATTACK_WITH_BOW)) {
+				speedBow += deltaTime;
+				animationsWithBow[getOrientation().opposite().ordinal()].update(deltaTime);
+			} else if (behavior.equals(Behavior.ATTACK_WITH_STAFF)) {
+				speedStaff += deltaTime;
+				animationsWithStaff[getOrientation().opposite().ordinal()].update(deltaTime);
+			} else if (behavior.equals(Behavior.ATTACK_WITH_SWORD)) {
+				animationsWithSword[getOrientation().opposite().ordinal()].update(deltaTime);
+			}
+
+			if (isDisplacementOccurs()) {
+				isDialog = false;
+				behavior = Behavior.IDLE;
+				animationsWithSword[getOrientation().opposite().ordinal()].reset();
+				animationsIdle[getOrientation().opposite().ordinal()].update(deltaTime);
+			} else {
+				animationsIdle[getOrientation().opposite().ordinal()].reset();
+			}
+
+			if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
+				cycleCurrentInventoryItem();
+			}
+
+			// System.out.println(getCurrentMainCellCoordinates());
+
+			if (invicibilityTime > 0) {
+				invicibilityTime -= deltaTime;
+			} else if (invicibilityTime < 0) {
+				invicibilityTime = 0;
+				lastTookDamage = 0;
+			}
+		} else {
+			if (!shownGameOverForeground) {
+				getOwnerArea().registerActor(new GameOver(getOwnerArea()));
+				shownGameOverForeground = true;
+			}
 		}
 
 		keyboardRegister.update();
-
-		if (isDisplacementOccurs()) {
-			isDialog = false;
-			behavior = Behavior.IDLE;
-			animationsWithSword[getOrientation().opposite().ordinal()].reset();
-			animationsIdle[getOrientation().opposite().ordinal()].update(deltaTime);
-		} else {
-			animationsIdle[getOrientation().opposite().ordinal()].reset();
-		}
-
-		if (currentHoldingItem == null && inventory.getItemList().size() > 0) {
-			cycleCurrentInventoryItem();
-		}
-
-		// System.out.println(getCurrentMainCellCoordinates());
-
-		if (invicibilityTime > 0) {
-			invicibilityTime -= deltaTime;
-		} else if (invicibilityTime < 0) {
-			invicibilityTime = 0;
-			lastTookDamage = 0;
-		}
-		
-		if (!behavior.equals(Behavior.DEAD))
-			super.update(deltaTime);
 	}
 
 	@Override
@@ -371,24 +389,26 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	@Override
 	public void draw(Canvas canvas) {
-		if (behavior.equals(Behavior.ATTACK_WITH_BOW))
-			animationsWithBow[getOrientation().opposite().ordinal()].draw(canvas);
-		else if (behavior.equals(Behavior.ATTACK_WITH_STAFF))
-			animationsWithStaff[getOrientation().opposite().ordinal()].draw(canvas);
-		else if (behavior.equals(Behavior.ATTACK_WITH_SWORD) && !animationsWithSword[getOrientation().opposite().ordinal()].isCompleted())
-			animationsWithSword[getOrientation().opposite().ordinal()].draw(canvas);
-		else {
-			behavior = Behavior.IDLE;
-			animationsIdle[getOrientation().opposite().ordinal()].draw(canvas);
-			animationsWithSword[getOrientation().opposite().ordinal()].reset();
+		if (!Behavior.DEAD.equals(behavior)) {
+			if (behavior.equals(Behavior.ATTACK_WITH_BOW))
+				animationsWithBow[getOrientation().opposite().ordinal()].draw(canvas);
+			else if (behavior.equals(Behavior.ATTACK_WITH_STAFF))
+				animationsWithStaff[getOrientation().opposite().ordinal()].draw(canvas);
+			else if (behavior.equals(Behavior.ATTACK_WITH_SWORD) && !animationsWithSword[getOrientation().opposite().ordinal()].isCompleted())
+				animationsWithSword[getOrientation().opposite().ordinal()].draw(canvas);
+			else {
+				behavior = Behavior.IDLE;
+				animationsIdle[getOrientation().opposite().ordinal()].draw(canvas);
+				animationsWithSword[getOrientation().opposite().ordinal()].reset();
+			}
+
+			if (isInventoryOpen)
+				inventoryGui.draw(canvas);
+			else if (!isDialog)
+				gui.draw(canvas);
+			else
+				dialog.draw(canvas);
 		}
-		
-		if (isInventoryOpen)
-			inventoryGui.draw(canvas);
-		else if (!isDialog)
-			gui.draw(canvas);
-		else
-			dialog.draw(canvas);
 	}
 
 	@Override
@@ -536,7 +556,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public void enterArea(Area area, DiscreteCoordinates position) {
 		super.enterArea(area, position);
-		((ARPGArea)area).reactivateSounds();
+		if (area instanceof ARPGArea) ((ARPGArea)area).reactivateSounds();
 	}
 
 	@Override

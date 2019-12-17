@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ARPGPlayerStatusGUI implements Graphics {
 
-	private static final int GUI_DEPTH = Integer.MAX_VALUE - 1;
+	private static final int GUI_DEPTH = 9000;
 	private static final float INV_HEART_TIMER = 0.25f;
 	private static final float INV_HEART_TIMER_DECREASE_INTERVAL = 0.05f;
 	private static final int INV_HEART_BLINK_TIMES = 3;

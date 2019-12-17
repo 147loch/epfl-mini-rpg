@@ -13,6 +13,7 @@ public enum KeyboardAction implements Action {
     OPEN_INVENTORY		   (KeyboardKey.I)     { @Override public String getActionTitle() { return "Open Inventory"; } },
     USE_CURRENT_ITEM       (KeyboardKey.SPACE) { @Override public String getActionTitle() { return "Use"; } },
     VIEW_INTERACTION       (KeyboardKey.E)     { @Override public String getActionTitle() { return "Interact"; } },
+    ACCEPT_DIALOG          (KeyboardKey.ENTER) { @Override public String getActionTitle() { return "Accept Dialog"; } },
     CHEAT_SPAWN_BOMB       (KeyboardKey.B)     { @Override public String getActionTitle() { return "Spawn Bombs"; } },
     CHEAT_SPAWN_FLAMESKULL (KeyboardKey.S)     { @Override public String getActionTitle() { return "Spawn Flame Skull"; } },
     CHEAT_SPAWN_LOGMONSTER (KeyboardKey.L)     { @Override public String getActionTitle() { return "Spawn Log Monster"; } };
