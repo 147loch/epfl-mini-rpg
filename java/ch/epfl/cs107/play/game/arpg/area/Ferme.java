@@ -43,7 +43,6 @@ public class Ferme extends ARPGArea {
 				new DiscreteCoordinates(6, 11)));
 		
 		registerActor(new Bow(this, Orientation.UP, new DiscreteCoordinates(5, 6)));
-		registerActor(new Staff(this, Orientation.UP, new DiscreteCoordinates(4, 6)));
 		registerActor(new ArrowItem(this, Orientation.UP, new DiscreteCoordinates(4, 7)));
 		
 		registerActor(new SignEntity("Maison du futur héro", true, this, Orientation.UP, new DiscreteCoordinates(3, 11)));
