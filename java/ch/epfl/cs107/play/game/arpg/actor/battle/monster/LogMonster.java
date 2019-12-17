@@ -141,6 +141,7 @@ public class LogMonster extends MonsterEntity {
                     break;
                 case FALLING_ASLEEP:
                     inactivityCounter = RandomGenerator.getInstance().nextInt(MAX_SLEEPING_DURATION - MIN_SLEEPING_DURATION) + MIN_SLEEPING_DURATION;
+                    if (!this.isDisplacementOccurs()) orientate(Orientation.DOWN);
                     currentAnimation = fallingAsleepAnimation;
                     break;
                 case ASLEEP:

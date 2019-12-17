@@ -10,7 +10,9 @@ public abstract class ARPGArea extends Area {
 	private final static float CAMERA_SCALE_FACTOR = 15.f;
 
 	protected abstract void createArea();
-	
+
+	public void reactivateSounds() {}
+
 	@Override
 	public String getTitle() {
 		return "ARPGArea";

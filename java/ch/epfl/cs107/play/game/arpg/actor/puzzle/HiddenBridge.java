@@ -8,7 +8,9 @@ import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.window.Audio;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class HiddenBridge extends AreaEntity implements Actionable {
@@ -17,6 +19,7 @@ public class HiddenBridge extends AreaEntity implements Actionable {
 		super(area, orientation, position);
 		
 		isActivated = false;
+		hasSoundPlayed = true;
 		
 		sprite = new Sprite("zelda/bridge", 4.f, 3.f, this);
 		sprite.setDepth(-Float.MAX_VALUE);
@@ -24,7 +27,8 @@ public class HiddenBridge extends AreaEntity implements Actionable {
 
 	private Sprite sprite;
 	private boolean isActivated;
-	
+	private boolean hasSoundPlayed;
+
 	@Override
 	public void draw(Canvas canvas) {
 		if (isActivated)
@@ -57,5 +61,14 @@ public class HiddenBridge extends AreaEntity implements Actionable {
 	@Override
 	public void activeEntity() {
 		isActivated = !isActivated;
+		hasSoundPlayed = false;
+	}
+
+	@Override
+	public void bip(Audio audio) {
+		if (!hasSoundPlayed) {
+			hasSoundPlayed = true;
+			audio.playSound(audio.getSound(ResourcePath.getSounds("transactionOk")), false, 0.65f, false, false, false);
+		}
 	}
 }

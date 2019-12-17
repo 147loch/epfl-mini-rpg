@@ -31,6 +31,8 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.npc.King;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
+import ch.epfl.cs107.play.game.arpg.area.ARPGArea;
+import ch.epfl.cs107.play.game.arpg.area.Temple;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
 import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
@@ -271,12 +273,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	public final void takeDamage(float damage) {
-		hasDamageSoundActivated = false;
 		if (lastTookDamage <= 0) {
 			if (hp - damage >= 0) {
 				hp -= damage;
 				lastTookDamage = damage;
 				invicibilityTime = INVINCIBILITY_TIME;
+				hasDamageSoundActivated = false;
 			} else {
 				lastTookDamage = hp;
 				hp = 0;
@@ -329,7 +331,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			cycleCurrentInventoryItem();
 		}
 
-		System.out.println(getCurrentMainCellCoordinates());
+		// System.out.println(getCurrentMainCellCoordinates());
 
 		if (invicibilityTime > 0) {
 			invicibilityTime -= deltaTime;
@@ -532,6 +534,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	}
 
 	@Override
+	public void enterArea(Area area, DiscreteCoordinates position) {
+		super.enterArea(area, position);
+		((ARPGArea)area).reactivateSounds();
+	}
+
+	@Override
 	public void bip(Audio audio) {
 		if (isPassingADoor()) {
 			SoundAcoustics.stopAllSounds(audio);
@@ -541,6 +549,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			audio.playSound(audio.getSound(ResourcePath.getSounds("custom/sw.damage")), false, 0.75f, false, false, false);
 			hasDamageSoundActivated = true;
 		}
-
 	}
+
 }

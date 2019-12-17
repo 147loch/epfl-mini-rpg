@@ -11,7 +11,7 @@ import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Audio;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Waterfall extends Entity {
+public class Waterfall extends Entity implements SoundEntity {
 
 	private static final int ANIMATION_FRAME_LENGTH = 3;
 	
@@ -22,7 +22,6 @@ public class Waterfall extends Entity {
 		super(position);
 
 		sound = new SoundAcoustics(ResourcePath.getSounds("custom/waterfall"), 0.15f, true, false, true, false);
-		sound.shouldBeStarted();
 
 		Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
 		for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
@@ -45,5 +44,10 @@ public class Waterfall extends Entity {
 	@Override
 	public void bip(Audio audio) {
 		sound.bip(audio);
+	}
+
+	@Override
+	public void reactivateSounds() {
+		sound.shouldBeStarted();
 	}
 }

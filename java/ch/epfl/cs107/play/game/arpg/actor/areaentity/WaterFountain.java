@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.game.arpg.actor.entity.SoundEntity;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class WaterFountain extends AreaEntity {
+public class WaterFountain extends AreaEntity implements SoundEntity {
 
     private static final int ANIMATION_FRAME_LENGTH = 3;
 
@@ -30,7 +31,6 @@ public class WaterFountain extends AreaEntity {
         super(area, Orientation.DOWN, position);
 
         sound = new SoundAcoustics(ResourcePath.getSounds("custom/waterFountain"), 0.15f, true, false, true, false);
-        sound.shouldBeStarted();
 
         Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
         for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
@@ -71,4 +71,8 @@ public class WaterFountain extends AreaEntity {
         sound.bip(audio);
     }
 
+    @Override
+    public void reactivateSounds() {
+        sound.shouldBeStarted();
+    }
 }

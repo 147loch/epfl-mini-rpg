@@ -17,7 +17,9 @@ import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Route extends ARPGArea {
-	
+
+	private Waterfall waterfall = new Waterfall(new Vector(15, 3));
+
 	@Override
 	public String getTitle() {
 		return "zelda/Route";
@@ -50,7 +52,7 @@ public class Route extends ARPGArea {
 			}
 		}
 		
-		registerActor(new Waterfall(new Vector(15, 3)));
+		registerActor(waterfall);
 		
 		HiddenBridge bridge = new HiddenBridge(this, Orientation.UP, new DiscreteCoordinates(15, 9));
 		registerActor(bridge);
@@ -72,5 +74,10 @@ public class Route extends ARPGArea {
 		registerActor(new Rock(1, this, new DiscreteCoordinates(5, 15)));
 		registerActor(new Rock(3, this, new DiscreteCoordinates(9, 11)));
 		registerActor(new Rock(2, this, new DiscreteCoordinates(3, 2)));
+	}
+
+	@Override
+	public void reactivateSounds() {
+		waterfall.reactivateSounds();
 	}
 }

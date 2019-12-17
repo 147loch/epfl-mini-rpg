@@ -19,7 +19,6 @@ public class WaterEffect extends Entity {
 		super(position);
 		
 		Sprite[] sprites = new Sprite[ANIMATION_FRAME_LENGTH];
-	
 		for (int i = 0; i < ANIMATION_FRAME_LENGTH; i++) {
 			sprites[i] = new RPGSprite("custom/water.effects", 1.f, 1.f, this, new RegionOfInterest(i*16, 0, 16, 16));
 		}

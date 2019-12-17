@@ -18,6 +18,9 @@ import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Village extends ARPGArea {
 
+	// We are doing this since it is a simple way of reactivating the sound
+	private WaterFountain fountain = new WaterFountain(this, new DiscreteCoordinates(23, 8));
+
 	@Override
 	public String getTitle() {
 		return "zelda/Village";
@@ -45,7 +48,7 @@ public class Village extends ARPGArea {
 				this, Orientation.UP,
 				new DiscreteCoordinates(25, 18)));
 
-		registerActor(new WaterFountain(this, new DiscreteCoordinates(23, 8)));
+		registerActor(fountain);
 		registerActor(new WaterEffect(new Vector(4, 1)));
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
@@ -63,5 +66,10 @@ public class Village extends ARPGArea {
 		registerActor(new Rock(3, this, new DiscreteCoordinates(8, 4)));
 		registerActor(new Rock(4, this, new DiscreteCoordinates(5, 14)));
 		registerActor(new Rock(2, this, new DiscreteCoordinates(9, 13)));
+	}
+
+	@Override
+	public void reactivateSounds() {
+		fountain.reactivateSounds();
 	}
 }

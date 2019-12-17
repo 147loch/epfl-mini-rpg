@@ -6,12 +6,14 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.window.Audio;
 import ch.epfl.cs107.play.window.Canvas;
 
 import java.util.Arrays;
@@ -33,9 +35,11 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
     }
 
     private static final int ANIMATION_VANISH_FRAME_LENGTH = 7;
+    private static final int INVICIBILITY_COUNTER = 15;
 
     private float currentHealth;
     private float maxHealth;
+    private int invicibilityCounter;
 
     private Animation animationVanish;
     private State currentState;
@@ -49,6 +53,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
         this.vulnerabilities = Arrays.asList(vulnerabilities);
 
         currentState = State.IDLE;
+        invicibilityCounter = -1;
 
         RPGSprite[] vanishAnimationSprites = new RPGSprite[ANIMATION_VANISH_FRAME_LENGTH];
         for (int i = 0; i < ANIMATION_VANISH_FRAME_LENGTH; i++)
@@ -61,12 +66,13 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
 
     // Final Methods
     public final void takeDamage(DamageType damageType, float damage) {
-        if (vulnerabilities.contains(damageType)) {
+        if (vulnerabilities.contains(damageType) && invicibilityCounter < 0) {
             if (currentHealth - damage <= 0) {
                 currentHealth = 0;
                 this.currentState = State.DEAD;
             } else {
                 currentHealth -= damage;
+                invicibilityCounter = INVICIBILITY_COUNTER;
                 handleDamageEvent(damage);
             }
         }
@@ -107,6 +113,10 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
             currentHealth = 0;
         }
 
+        if (invicibilityCounter >= 0) {
+            invicibilityCounter--;
+        }
+
         if (State.DEAD.equals(currentState))
             animationVanish.update(deltaTime);
 
@@ -120,6 +130,17 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
     public void draw(Canvas canvas) {
         if (State.DEAD.equals(currentState) && !animationVanish.isCompleted()) {
             animationVanish.draw(canvas);
+        }
+    }
+
+    @Override
+    public void bip(Audio audio) {
+        if (invicibilityCounter == 0) {
+            audio.playSound(audio.getSound(ResourcePath.getSounds("custom/sw.damage.monster")), false, 0.75f, false, false, false);
+        }
+
+        if (State.DEAD.equals(currentState) && animationVanish.isCompleted()) {
+            audio.playSound(audio.getSound(ResourcePath.getSounds("custom/sw.monster.death")), false, 0.75f, false, false, false);
         }
     }
 }
