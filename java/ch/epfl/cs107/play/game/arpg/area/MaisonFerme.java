@@ -3,6 +3,8 @@ package ch.epfl.cs107.play.game.arpg.area;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
+import ch.epfl.cs107.play.game.arpg.actor.npc.Npc;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -24,5 +26,7 @@ public class MaisonFerme extends ARPGArea {
                 Orientation.DOWN, new DiscreteCoordinates(3,  0), new DiscreteCoordinates(4,  0)));
         
         registerActor(new Sign("Tiens c'est marrant, il y a une gameboy à côté.", this, Orientation.UP, new DiscreteCoordinates(2, 7)));
+        
+        registerActor(new Npc("Sauve le roi, mon fils. Il est prisonnier des monstres !", Emotion.EXCLAMATION, this, Orientation.UP, new DiscreteCoordinates(4, 4)));
     }
 }

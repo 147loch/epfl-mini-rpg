@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.sign;
+package ch.epfl.cs107.play.game.arpg.actor.npc;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +16,8 @@ import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RandomGenerator;
+import ch.epfl.cs107.play.math.RegionOfInterest;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Npc extends MovableAreaEntity implements Interactor {
@@ -23,23 +25,29 @@ public class Npc extends MovableAreaEntity implements Interactor {
 	private static final int IDLE_MOVEMENT_FRAMES = 20;
 	private static final int TIME_NOT_MOVING = 20;
 	
+	private Sprite emotionSprite;
 	private String textDialog;
 	private Animation[] animations;
 	private ARPGNpcHandler handler;
 	private boolean canMove;
 	private int counter;
+	private boolean talked;
 	
-	public Npc(String textDialog, Area area, Orientation orientation, DiscreteCoordinates position) {
+	public Npc(String textDialog, Emotion emotion, Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
 		this.textDialog = textDialog;
 		handler = new ARPGNpcHandler();
 		canMove = true;
 		counter = 0;
+		talked = false;
 		
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/character", 4, 1, 2, this , 16, 32, new Orientation[]
 				{Orientation.UP , Orientation.RIGHT , Orientation.DOWN, Orientation.LEFT});
 		animations = RPGSprite.createAnimations(10, sprites);
+		
+		emotionSprite = new RPGSprite("custom/npc.dialogBubble", 1.f, 1.f, this,
+				new RegionOfInterest(emotion.getX(), emotion.getY(), 16, 16), new Vector(0.25f, 1.f));
 	}
 	
 	public String getTextDialog() {
@@ -48,6 +56,10 @@ public class Npc extends MovableAreaEntity implements Interactor {
 	
 	public void setOrientation(Orientation orientation) {
 		orientate(orientation);
+	}
+	
+	public void talked() {
+		talked = true;
 	}
 	
 	@Override
@@ -104,6 +116,8 @@ public class Npc extends MovableAreaEntity implements Interactor {
 	@Override
 	public void draw(Canvas canvas) {
 		animations[getOrientation().ordinal()].draw(canvas);
+		if (!talked)
+			emotionSprite.draw(canvas);
 	}
 
 	@Override
