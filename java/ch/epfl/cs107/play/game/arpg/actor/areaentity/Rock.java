@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.entity;
+package ch.epfl.cs107.play.game.arpg.actor.areaentity;
 
 import java.util.Collections;
 import java.util.List;
