@@ -315,8 +315,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 
 		keyboardRegister.update();
-		
-		System.out.println(getPosition());
 
 		if (isDisplacementOccurs()) {
 			isDialog = false;
