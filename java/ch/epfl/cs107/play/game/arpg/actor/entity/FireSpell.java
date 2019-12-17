@@ -68,6 +68,10 @@ public class FireSpell extends AreaEntity implements Interactor {
         this(area, orientation, coordinates, BASE_FORCE);
     }
 
+    public void extinguish() {
+        this.extinguishCounter = 0;
+    }
+
     private void handlePropagation() {
         if (force > 0) {
         	if (getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()))))
@@ -115,7 +119,7 @@ public class FireSpell extends AreaEntity implements Interactor {
     }
 
     @Override public boolean takeCellSpace() { return false; }
-    @Override public boolean isCellInteractable() { return false; }
+    @Override public boolean isCellInteractable() { return true; }
     @Override public boolean isViewInteractable() { return false; }
     @Override public boolean wantsCellInteraction() { return true; }
     @Override public boolean wantsViewInteraction() { return propagationCounter == 0; }
@@ -135,7 +139,7 @@ public class FireSpell extends AreaEntity implements Interactor {
         other.acceptInteraction(handler);
     }
 
-    private class FireSpellHandler implements ARPGInteractionVisitor {
+    private static class FireSpellHandler implements ARPGInteractionVisitor {
 
         @Override
         public void interactWith(ARPGPlayer player) {
