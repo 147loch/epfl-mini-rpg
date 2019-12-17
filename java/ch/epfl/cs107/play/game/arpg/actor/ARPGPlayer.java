@@ -32,9 +32,11 @@ import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventRegister;
 import ch.epfl.cs107.play.game.arpg.keybindings.StaticKeyboardEventListener;
 import ch.epfl.cs107.play.game.inventory.Inventory;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
+import ch.epfl.cs107.play.game.rpg.actor.Dialog;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -81,6 +83,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private float speedBow;
     private float speedStaff;
     private Behavior behavior;
+    private Dialog dialog;
+    private boolean isDialog;
 
 	// Keyboard Events used for the player
 	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
@@ -180,6 +184,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		speedBow = 0;
 		speedStaff = 0;
 		behavior = Behavior.IDLE;
+		isDialog = false;
 
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
@@ -301,6 +306,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		keyboardRegister.update();
 
 		if (isDisplacementOccurs()) {
+			isDialog = false;
 			behavior = Behavior.IDLE;
 			animationsWithSword[getOrientation().opposite().ordinal()].reset();
 			animationsIdle[getOrientation().opposite().ordinal()].update(deltaTime);
@@ -364,8 +370,10 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		
 		if (isInventoryOpen)
 			inventoryGui.draw(canvas);
-		else
+		else if (!isDialog)
 			gui.draw(canvas);
+		else
+			dialog.draw(canvas);
 	}
 
 	@Override
@@ -470,6 +478,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		public void interactWith(ArrowItem arrow) {
 			inventory.addEntry(ARPGItem.ARROW, 1);
 			getOwnerArea().unregisterActor(arrow);
+		}
+		
+		@Override
+		public void interactWith(Sign sign) {
+			if (!isDialog) {
+				dialog = new Dialog(sign.getTextMessage(), "zelda/dialog", getOwnerArea());
+				isDialog = true;
+			}
 		}
 	}
 }
