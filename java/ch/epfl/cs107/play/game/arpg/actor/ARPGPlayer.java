@@ -24,6 +24,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
+import ch.epfl.cs107.play.game.arpg.actor.entity.CaveDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
 import ch.epfl.cs107.play.game.arpg.actor.sign.King;
@@ -426,6 +427,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 
 		@Override
+		public void interactWith(CaveDoor caveDoor) {
+			setIsPassingADoor(caveDoor);
+		}
+
+		@Override
 		public void interactWith(Grass grass) {
 			if (behavior.equals(Behavior.ATTACK_WITH_SWORD))
 				grass.cut(true);
@@ -486,7 +492,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		@Override
 		public void interactWith(PressurePlate pressurePlate) {
 			pressurePlate.active();
-			interactWith((Sign)pressurePlate);
 		}
 
 		@Override

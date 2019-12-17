@@ -4,20 +4,12 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
-import ch.epfl.cs107.play.game.arpg.actor.puzzle.CaveDoor;
+import ch.epfl.cs107.play.game.arpg.actor.entity.CaveDoor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Village extends ARPGArea {
-
-	protected static CaveDoor caveDoor;
-
-	public Village() {
-		super();
-		caveDoor = new CaveDoor("GrotteMew", new DiscreteCoordinates(8, 3),
-				this, Orientation.UP, new DiscreteCoordinates(25, 18));
-	}
 
 	@Override
 	public String getTitle() {
@@ -42,8 +34,11 @@ public class Village extends ARPGArea {
 				Logic.TRUE, this, Orientation.UP,
 				new DiscreteCoordinates(29, 19), new DiscreteCoordinates(30, 19)));
 
-		registerActor(caveDoor);
+		registerActor(new CaveDoor("GrotteMew", new DiscreteCoordinates(8, 3),
+				this, Orientation.UP,
+				new DiscreteCoordinates(25, 18)));
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
+
 	}
 }

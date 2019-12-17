@@ -14,6 +14,7 @@ import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.entity.CastleDoor;
+import ch.epfl.cs107.play.game.arpg.actor.entity.CaveDoor;
 import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever;
@@ -66,5 +67,7 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(King king) {}
 	
 	default void interactWith(Npc pnj) {}
+
+	default void interactWith(CaveDoor caveDoor) {}
 	
 }

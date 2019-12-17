@@ -164,5 +164,11 @@ public class Bomb extends AreaEntity implements Interactor {
 			if (explosionAnimationIndex == 1)
 				monsterEntity.takeDamage(DamageType.FIRE, 1.f); // TODO put constant
 		}
+
+		@Override
+		public void interactWith(CaveDoor caveDoor) {
+			if (explosionAnimationIndex == 1)
+				caveDoor.changeSignal();
+		}
 	}
 }
