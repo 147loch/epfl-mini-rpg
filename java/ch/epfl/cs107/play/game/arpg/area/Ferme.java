@@ -7,6 +7,7 @@ import ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Rock;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
@@ -48,5 +49,10 @@ public class Ferme extends ARPGArea {
 		registerActor(new SignEntity("Maison du futur héro", true, this, Orientation.UP, new DiscreteCoordinates(3, 11)));
 		
 		registerActor(new NPC("C'est bête, j'ai perdu mon épée. Garde la si tu la trouves.", Emotion.INTERROGATION, this, Orientation.UP, new DiscreteCoordinates(6, 7)));
+
+		//Rocks
+		registerActor(new Rock(0, this, new DiscreteCoordinates(11, 13)));
+		registerActor(new Rock(2, this, new DiscreteCoordinates(15, 10)));
+		registerActor(new Rock(4, this, new DiscreteCoordinates(11, 1)));
 	}
 }

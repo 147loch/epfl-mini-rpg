@@ -7,9 +7,10 @@ import ch.epfl.cs107.play.game.arpg.actor.areaentity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Lilypads;
+import ch.epfl.cs107.play.game.arpg.actor.entity.Rock;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Waterfall;
-import ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
@@ -67,5 +68,9 @@ public class Route extends ARPGArea {
 		registerActor(new Lilypads(new Vector(15, 3), 3));
 		registerActor(new Lilypads(new Vector(16, 2), 1));
 		
+		//Rocks
+		registerActor(new Rock(1, this, new DiscreteCoordinates(5, 15)));
+		registerActor(new Rock(3, this, new DiscreteCoordinates(9, 11)));
+		registerActor(new Rock(2, this, new DiscreteCoordinates(3, 2)));
 	}
 }
