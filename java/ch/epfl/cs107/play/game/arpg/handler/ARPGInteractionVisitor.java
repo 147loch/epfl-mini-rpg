@@ -18,6 +18,10 @@ import ch.epfl.cs107.play.game.arpg.actor.entity.FireSpell;
 import ch.epfl.cs107.play.game.arpg.actor.entity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
+import ch.epfl.cs107.play.game.arpg.actor.puzzle.Target;
+import ch.epfl.cs107.play.game.arpg.actor.sign.King;
+import ch.epfl.cs107.play.game.arpg.actor.sign.Npc;
+import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 
 public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
@@ -58,4 +62,10 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 
 	default void interactWith(PressurePlate pressurePlate) {}
 
+	default void interactWith(Sign sign) {}
+	
+	default void interactWith(King king) {}
+	
+	default void interactWith(Npc pnj) {}
+	
 }
