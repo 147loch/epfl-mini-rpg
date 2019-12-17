@@ -199,8 +199,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CHEAT_SPAWN_BOMB, new CheatKeysEventListener());
 		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
 
-		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Inventory item could not be added.");
-		// if (!inventory.addEntry(ARPGItem.SWORD, 1)) System.out.println("Inventory item could not be added.");
+		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Base inventory items could not be added.");
 		currentHoldingItem = (ARPGItem)inventory.getItemList().get(0);
 
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
@@ -326,7 +325,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			cycleCurrentInventoryItem();
 		}
 
-		System.out.println(getCurrentMainCellCoordinates());
+		// System.out.println(getCurrentMainCellCoordinates());
 
 		if (invicibilityTime > 0) {
 			invicibilityTime -= deltaTime;
