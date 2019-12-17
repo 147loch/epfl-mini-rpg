@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.WaterFountain;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.WaterEffect;
@@ -47,6 +48,7 @@ public class Village extends ARPGArea {
 		registerActor(new WaterEffect(new Vector(4, 1)));
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
+		registerActor(new SignEntity("NE PAS DÉTRUIRE, GROTTE CONDAMNÉE !", true, this, Orientation.DOWN, new DiscreteCoordinates(27, 17)));
 		
 		registerActor(new NPC("Les auteurs de ce jeu ne sont clairement pas scénaristes.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(25, 9)));
 		registerActor(new NPC("Le village me donne une satisfaction primordiale.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(31, 16)));
