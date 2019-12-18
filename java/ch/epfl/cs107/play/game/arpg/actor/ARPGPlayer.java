@@ -263,7 +263,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		keyboardRegister.registerKeyboardEvents(new InventoryKeyEventListener());
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Base inventory items could not be added.");
-		currentHoldingItem = (ARPGItem)inventory.getItemList().get(0);
+		cycleCurrentInventoryItem();
 
 		if (Test.MODE) {
 			inventory.addEntry(ARPGItem.CASTLE_KEY, 1);
