@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.arpg.handler;
 
 import ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
+import ch.epfl.cs107.play.game.arpg.actor.Shop;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
@@ -69,5 +70,7 @@ public interface ARPGInteractionVisitor extends RPGInteractionVisitor {
 	default void interactWith(CaveDoor caveDoor) {}
 
 	default void interactWith(NPC npc) {}
+
+	default void interactWith(Shop shopper) {}
 	
 }

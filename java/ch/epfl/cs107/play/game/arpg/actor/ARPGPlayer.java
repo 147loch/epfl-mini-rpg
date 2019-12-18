@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.arpg.actor;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import ch.epfl.cs107.play.game.actor.SoundAcoustics;
 import ch.epfl.cs107.play.game.areagame.Area;
@@ -87,7 +88,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private float maxHp;
 	private float invicibilityTime;
 	private float lastTookDamage;
-    private boolean isInventoryOpen;
+	private boolean isInventoryOpen;
     private boolean didDamage;
     private float speedBow;
     private float speedStaff;
@@ -96,6 +97,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
     private boolean isDialog;
     private boolean hasDamageSoundActivated;
     private boolean shownGameOverForeground;
+
+    private Shop currentShop;
 
 	// Keyboard Events used for the player
 	private class CycleItemKeyEventListener implements StaticKeyboardEventListener {
@@ -108,7 +111,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	private class OpenInventoryEventListener implements StaticKeyboardEventListener {
 		@Override
 		public void onKeyEvent() {
-			isInventoryOpen = !isInventoryOpen;
+			if (Objects.nonNull(currentShop) && currentShop.isShopOpened()) {
+				currentShop.closeShop();
+			} else {
+				isInventoryOpen = !isInventoryOpen;
+			}
 		}
 	}
 
@@ -155,7 +162,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void onKeyEvent(KeyboardAction action) {
-			if (!isInventoryOpen) {
+			if (!isInventoryOpen && !(Objects.nonNull(currentShop) && currentShop.isShopOpened())) {
 				switch (action) {
 					case MOVE_LEFT:
 						moveOrientate(Orientation.LEFT);
@@ -183,14 +190,23 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 					KeyboardAction.MOVE_DOWN,
 					KeyboardAction.MOVE_LEFT,
 					KeyboardAction.MOVE_UP,
-					KeyboardAction.MOVE_RIGHT
+					KeyboardAction.MOVE_RIGHT,
+					KeyboardAction.ACCEPT_DIALOG
 			);
 		}
 
 		@Override
 		public void onKeyEvent(KeyboardAction action) {
-			if (isInventoryOpen) {
-				inventoryGui.selectionUpdate(action);
+			if (action == KeyboardAction.ACCEPT_DIALOG) {
+				if (Objects.nonNull(currentShop) && currentShop.isShopOpened()) {
+					currentShop.buy(inventory);
+				}
+			} else {
+				if (isInventoryOpen) {
+					inventoryGui.selectionUpdate(action);
+				} else if (Objects.nonNull(currentShop) && currentShop.isShopOpened()) {
+					currentShop.selectionUpdate(action);
+				}
 			}
 		}
 	}
@@ -386,6 +402,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				invicibilityTime = 0;
 				lastTookDamage = 0;
 			}
+
+			if (Objects.nonNull(currentShop) && !currentShop.isShopOpened()) {
+				currentShop = null;
+			}
+
 		} else {
 			if (!shownGameOverForeground) {
 				getOwnerArea().registerActor(new GameOver(getOwnerArea()));
@@ -434,12 +455,15 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				animationsWithSword[getOrientation().opposite().ordinal()].reset();
 			}
 
-			if (isInventoryOpen)
+			if (isInventoryOpen) {
 				inventoryGui.draw(canvas);
-			else if (!isDialog)
+			}
+			if (!(Objects.nonNull(currentShop) && currentShop.isShopOpened()) && !isInventoryOpen && !isDialog) {
 				gui.draw(canvas);
-			else
+			}
+			if (isDialog && !(Objects.nonNull(currentShop) && currentShop.isShopOpened()) && !isInventoryOpen) {
 				dialog.draw(canvas);
+			}
 		}
 	}
 
@@ -451,8 +475,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public boolean wantsViewInteraction() {
 		return (
-				KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed() ||
-				behavior.equals(Behavior.ATTACK_WITH_SWORD)
+				!isInventoryOpen &&
+				(KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed() ||
+						behavior.equals(Behavior.ATTACK_WITH_SWORD))
 		);
 	}
 
@@ -581,6 +606,14 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				dialog = new Dialog(npc.getTextDialog(), "zelda/dialog", getOwnerArea());
 				isDialog = true;
 				npc.talked();
+			}
+		}
+
+		@Override
+		public void interactWith(Shop shopper) {
+			if (wantsViewInteraction()) {
+				shopper.openShop();
+				currentShop = shopper;
 			}
 		}
 	}

@@ -3,6 +3,8 @@ package ch.epfl.cs107.play.game.arpg.area;
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.arpg.actor.ARPGItem;
+import ch.epfl.cs107.play.game.arpg.actor.Shop;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Rock;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity;
@@ -67,7 +69,10 @@ public class Village extends ARPGArea {
 
 		registerActor(new Sword(this, Orientation.UP, new DiscreteCoordinates(13, 18)));
 		registerActor(new SignEntity("NE PAS DÉTRUIRE, GROTTE CONDAMNÉE !", true, this, Orientation.DOWN, new DiscreteCoordinates(27, 17)));
-		
+		registerActor(new SignEntity("Bombes: " + ARPGItem.BOMB.getPrice() + " - Flèches: " + ARPGItem.ARROW.getPrice() + " - Arc: " + ARPGItem.BOW.getPrice() + " (pièces)",true, this, Orientation.DOWN, new DiscreteCoordinates(15, 9)));
+
+		registerActor(new Shop(this, Orientation.DOWN, new DiscreteCoordinates(17, 10)));
+
 		//NPCs
 		registerActor(new NPC("Les auteurs de ce jeu ne sont clairement pas scénaristes.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(25, 9)));
 		registerActor(new NPC("Le village me donne une satisfaction primordiale.", Emotion.EMPTY, this, Orientation.UP, new DiscreteCoordinates(31, 16)));

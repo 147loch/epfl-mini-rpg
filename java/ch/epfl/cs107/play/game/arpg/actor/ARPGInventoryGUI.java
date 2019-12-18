@@ -115,7 +115,7 @@ public class ARPGInventoryGUI implements Graphics {
 						number.draw(canvas);
 					}
 
-					if (currentSelection.x == j && currentSelection.y == i) {
+					if (currentSelection.x == j && currentSelection.y == k) {
 						if (itemQty > 0) {
 							currentSelectedItem = item;
 						} else {

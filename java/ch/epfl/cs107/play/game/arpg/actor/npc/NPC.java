@@ -116,8 +116,7 @@ public class NPC extends MovableAreaEntity implements Interactor {
 	@Override
 	public void draw(Canvas canvas) {
 		animations[getOrientation().ordinal()].draw(canvas);
-		if (!talked)
-			emotionSprite.draw(canvas);
+		if (!talked) emotionSprite.draw(canvas);
 	}
 
 	@Override
