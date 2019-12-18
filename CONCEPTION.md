@@ -1,207 +1,117 @@
 # Classes, interfaces, enums et paquetages
 
+L'énumération ci-dessous donne une idée de base quant aux choix de placements effectués.
+Il est probablement plus simple de regarder le UML généré ou alors l'image qui y correspond et/ou le PDF `classmap.pdf` qui se trouvent dans le Google Drive suivant: https://drive.google.com/drive/folders/1DLTQZ81njx7j2XYH97izlQByb7ZLf6w6?usp=sharing
+
 ```
 [ch]
     [epfl]
-    	[cs107]
-    		[play]
-    			[game]
-    				[actor]
-    					(...)
-    				[areagame]
-    					[actor]
-    						(...)
-    					(...)
-    					[handler]
-    						(...)
-    					[io]
-    						(...)
-    				[arpg]
-    					[actor]
-    						[areaentity]
-    							Bomb
-    							CastleDoor
-    							CaveDoor
-    							[collectable]
-    								ArrowItem
-    								Bow
-    								CastleKey
-    								Coin
-    								CollectableAreaEntity
-    								Heart
-    								Staff
-    								Sword
-    							FireSpell
-    							Grass
-    							Rock
-    							SignEntity
-    							WaterFountain
-    						ARPGInventory
-    						ARPGInventoryGUI
-    						ARPGItem
-    						ARPGPlayer
-    						ARPGPlayerStatusGUI
-    						[battle]
-    							DamageType
-    							[monster]
-    								DarkLord
-    								FlameSkull
-    								LogMonster
-    								MonsterEntity
-    							[weapon]
-    								Arrow
-    								MagicWaterProjectile
-    								Projectile
-    						[entity]
-    							Lilypads
-    							SoundEntity
-    							WaterEffect
-    							Waterfall
-    						FlyableEntity
-    						GameOver
-    						[npc]
-    							Emotion
-    							King
-    							NPC
-    						[puzzle]
-    							Actionable
-    							ActionableStaff
-    							HiddenBridge
-    							Lever
-    							PressurePlate
-    						Rarity
-    						Shop
-    					[area]
-    						ARPGArea
-    						Chateau
-    						Ferme
-    						GrotteMew
-    						MaisonFerme
-    						Route
-    						RouteChateau
-    						RouteTemple
-    						Temple
-    						Village
-    					ARPG
-    					ARPGBehavior
-    					[handler]
-    						ARPGInteractionVisitor
-    					Test
-    				Game
-    				[inventory]
-    					Inventory
-    					InventoryItem
-    				[keybindings]
-    					Action
-    					Event
-    					Key
-    					KeyboardAction
-    					KeyboardEventListener
-    					KeyboardEventRegister
-    					KeyboardKey
-    					StaticKeyboardEventListener
-    					XMLBinding
-    					XMLBindings
-    				Playable
-    				[rpg]
-    					[actor]
-    						Dialog
-    						Door
-    						LightHalo
-    						Player
-    						RPGSprite
-    						Sign
-    					[handler]
-    						RPGInteractionVisitor
-    					RPG
-    				[tutos]
-    					[actor]
-    						GhostPlayer
-    						SimpleGhost
-    					[area]
-    						SimpleArea
-    						[tuto1]
-    							Ferme
-    							Village
-    						[tuto2]
-    							Ferme
-    							Village
-    						Tuto2Area
-    					Tuto1
-    					Tuto2
-    					Tuto2Behavior
-    				Updatable
-    			[io]
-    				DefaultFileSystem
-    				FileSystem
-    				FolderFileSystem
-    				ResourceFileSystem
-    				XMLTexts
-    				ZipFileSystem
-    			[math]
-    				Attachable
-    				Circle
-    				DiscreteCoordinates
-    				Node
-    				Polygon
-    				Polyline
-    				Positionable
-    				RandomEvent
-    				RandomGenerator
-    				RegionOfInterest
-    				Shape
-    				TextAlign
-    				Transform
-    				Vector
-    			Play
-    			[recorder]
-    				Record
-    				[recordEntry]
-    					KeyboardPressedRecordEntry
-    					KeyboardReleasedRecordEntry
-    					MouseButtonPressedRecordEntry
-    					MouseButtonReleasedRecordEntry
-    					MouseMoveRecordEntry
-    					RecordEntry
-    				Recorder
-    				RecordReplayer
-    			[signal]
-    				[logic]
-    					And
-    					Logic
-    					LogicGate
-    					LogicNumber
-    					MultipleAnd
-    					Nand
-    					Not
-    					Or
-    					Xor
-    				Numeric
-    				Signal
-    				[wave]
-    					Sawtooth
-    					Sine
-    					Square
-    					Triangle
-    					Waveform
-    			[window]
-    				Audio
-    				Button
-    				Canvas
-    				Image
-    				Keyboard
-    				Mouse
-    				Sound
-    				[swing]
-    					ImageItem
-    					Item
-    					ShapeItem
-    					SoundItem
-    					SwingImage
-    					SwingSound
-    					SwingWindow
-    					TextItem
-    				Window
+        [cs107]
+            [play]
+                [game]
+                    [actor]
+                        (...)
+                    [areagame]
+                        (...)
+                    [arpg] 
+                        [actor] (P) Main actor package
+                            [areaentity] (P) Holds all the AreaEntities, not movable
+                                [collectable] (P) Collectable AreaEntities, defined by the corresponding abstract class.
+                                    ArrowItem (C)
+                                    Bow (C)
+                                    CastleKey (C)
+                                    Coin (C)
+                                    CollectableAreaEntity (A) Class with the basic definitions for collectable items
+                                    Heart (C)
+                                    Staff (C)
+                                    Sword (C)
+                                Bomb (C) 
+                                CastleDoor (C)
+                                CaveDoor (C)
+                                FireSpell (C)
+                                Grass (C)
+                                Rock (C)
+                                SignEntity (C)
+                                WaterFountain (C)
+                            [battle] (P) All actors related to battle
+                                [monster] (P) The Monster MovableAreaEntities and defined by the corresponding abstract class are placed here
+                                    DarkLord (C)
+                                    FlameSkull (C)
+                                    LogMonster (C)
+                                    MonsterEntity (A) Class which holds all the definitions for monsters
+                                [weapon] (P) Projectile MovableAreaEntities defined by the corresponding abstract class which are able to hurt the monsters, other weapons are simple entities placed in [areaentity]
+                                    Arrow (C) This is not the collectable arrow, it is the one that is launched by the bow
+                                    MagicWaterProjectile (C)
+                                    Projectile (A) Definitions for projectiles
+                                DamageType (E) Damage types, placed here as it is mainly used by MonsterEntity
+                            [entity] (P) Simple entities that are placed in impassable zones and ignore area restriction (mainly decorations)
+                                Lilypads (C)
+                                SoundEntity (I) This is an interface placed here as it defines entity properties, used by Waterfall and WaterFountain
+                                WaterEffect (C)
+                                Waterfall (C)
+                            [npc] (P) This package holds all NPC-like AreaEntities
+                                Emotion (E) Corresponds to the bubble, used only by NPCs so it is placed here
+                                King (C)
+                                NPC (C)
+                            [puzzle] (P) Holds all the puzzle-related classes, mainly properties, but some can act as signals
+                                Actionable (I) Used by puzzle items
+                                ActionableStaff (C) Puzzle-definition of a normal Staff AreaEntity, so that it is actionnable.
+                                HiddenBridge (C)
+                                Lever (C)
+                                PressurePlate (C)
+                            ARPGInventory (C) It is an actor with protected methods limited by definition to this package, plus it interacts closely with ARPGPlayer
+                            ARPGInventoryGUI (C) Linked to the inventory and the player
+                            ARPGItem (E) Used by the inventory and many sub-packages here
+                            ARPGPlayer (C) Main actor of the game
+                            ARPGPlayerStatusGUI (C) Closely linked to the player and main actor of the game
+                            FlyableEntity (I) An interface which can be used by any actor if it should be able to fly
+                            GameOver (C) A main actor related to the player, does not really make sense to create a subpackage just for it
+                            Rarity (I) Element that could be used in every actor, although now it is only used by Grass
+                            Shop (C) An NPC which needs a particular protected access to the inventory, so it needed to be placed here
+                        [area] (P) Holds every area created for the game, definitions given by the corresponding abstract class
+                            ARPGArea (A) Definitions for all of the areas of this package
+                            Chateau (C)
+                            Ferme (C)
+                            GrotteMew (C)
+                            MaisonFerme (C)
+                            Route (C)
+                            RouteChateau (C)
+                            RouteTemple (C)
+                            Temple (C)
+                            Village (C)
+                        [handler] (P) Holds the interaction handlers with all of the Interactables, as instructed
+                            ARPGInteractionVisitor (I)
+                        ARPG (C) Main ARPG class
+                        ARPGBehavior (C) Class linked to ARPG, placed here as instructed
+                        Test (I) As instructed
+                    [inventory] (P) As instructed, holds high-level inventory definitions
+                        Inventory (A)
+                        InventoryItem (I)
+                    [keybindings] (P) Custom package, holds definitions for keyboard-related classes: Event register and KeyboardActions
+                        Action (I) Definitions for KeyboardActions
+                        Event (C)
+                        Key (I) Definitions for KeyboardKeys
+                        KeyboardAction (E)
+                        KeyboardEventListener (I) Used by the register
+                        KeyboardEventRegister (C)
+                        KeyboardKey (E)
+                        StaticKeyboardEventListener (I) Linked to KeyboardEventListener
+                        XMLBinding (C) Used by XMLBindings
+                        XMLBindings (FC) Class which is only used by the KeyboardAction to save the state of keybinds in an XML
+                    [rpg]
+                        (...)
+                    (...)
+                [io]
+                    (...)
+                [math]
+                    (...)
+                [recorder]
+                    (...)
+                [signal]
+                    (...)
+                [window]
+                    (...)
+                Play (C, main)
 ```
 
 # Modifications personelles par rapport à l'énoncé

@@ -5,6 +5,6 @@ public interface Actionable {
 	/**
 	 * This method is used to change the state of an entity
 	 */
-	public void activeEntity();
+	void activeEntity();
 	
 }
