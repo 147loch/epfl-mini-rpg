@@ -252,8 +252,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		isDialog = false;
 		hasDamageSoundActivated = true;
 		shownGameOverForeground = false;
-
-		behavior = Behavior.DEAD;
 		
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
