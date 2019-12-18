@@ -32,7 +32,7 @@ Vaincre le Dark Lord et sauver le roi.
 ####Comment vaincre le Dark Lord
 Le seigneur des ténèbres situé devant le chateau tout en haut est insensible à tout dégats physiques, il n'est possible de le blesser qu'au moyen de magie. Afin de produire cette magie, il faut vous procurer un baton magique.
 
-Celui-ci possède 3 pouvoirs:
+Le Dark Lord possède 3 pouvoirs:
 - l'invocation de crânes volants
 - l'apparition de flammes
 - une téléportation si le joueur s'approche trop
