@@ -7,7 +7,6 @@ import ch.epfl.cs107.play.game.arpg.actor.areaentity.Rock;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
 import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;

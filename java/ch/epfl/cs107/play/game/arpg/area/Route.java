@@ -58,7 +58,7 @@ public class Route extends ARPGArea {
 		registerActor(bridge);
 		registerActor(new Lever(this, Orientation.UP, new DiscreteCoordinates(19, 8), bridge));
 		
-		registerActor(new SignEntity("Si seulement quelqu'un avait un projectile pour atteindre ce levier...", true, this, Orientation.UP, new DiscreteCoordinates(12, 9)));
+		registerActor(new SignEntity("Si seulement quelqu'un avait un projectile pour atteindre ce levier", true, this, Orientation.UP, new DiscreteCoordinates(12, 9)));
 		
 		registerActor(new LogMonster(this, Orientation.DOWN, new DiscreteCoordinates(11, 11)));
 		registerActor(new LogMonster(this, Orientation.DOWN, new DiscreteCoordinates(4, 3)));
