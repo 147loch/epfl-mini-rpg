@@ -6,6 +6,10 @@ import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.game.arpg.ARPG;
+import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
+import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventRegister;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Transform;
 import ch.epfl.cs107.play.math.Vector;
@@ -13,12 +17,46 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class ARPGInventoryGUI implements Graphics {
 	
-	private static final int GUI_DEPTH = 1000;
-	
-	private ARPGPlayer player;
-	
-	public ARPGInventoryGUI(ARPGPlayer player) {
-		this.player = player;
+	private static final int GUI_DEPTH = 2000;
+
+	private DiscreteCoordinates currentSelection;
+	private ARPGInventory inventory;
+	private ARPGItem currentSelectedItem;
+	private String dialogTitle;
+
+	public ARPGInventoryGUI(ARPGInventory inventory, String dialogTitle) {
+		this.inventory = inventory;
+		this.dialogTitle = dialogTitle;
+		this.currentSelection = new DiscreteCoordinates(0,1);
+	}
+
+	protected ARPGItem getCurrentSelectedItem() { return currentSelectedItem; }
+
+	void selectionUpdate(KeyboardAction action) {
+		switch (action) {
+			case MOVE_UP:
+				if (currentSelection.y == 0) {
+					currentSelection = currentSelection.up();
+				}
+				break;
+			case MOVE_DOWN:
+				if (currentSelection.y == 1) {
+					currentSelection = currentSelection.down();
+				}
+				break;
+			case MOVE_LEFT:
+				if (currentSelection.x > 0) {
+					currentSelection = currentSelection.left();
+				}
+				break;
+			case MOVE_RIGHT:
+				if (currentSelection.x < 3) {
+					currentSelection = currentSelection.right();
+				}
+				break;
+			default:
+				break;
+		}
 	}
 
 	@Override
@@ -33,18 +71,24 @@ public class ARPGInventoryGUI implements Graphics {
 				anchor.add(new Vector(3.f, 0.f)), 1, GUI_DEPTH).draw(canvas);
 		
 		//Title
-		TextGraphics title = new TextGraphics("Inventory", 1.f, Color.BLACK);
+		TextGraphics title = new TextGraphics(dialogTitle, 1.f, Color.BLACK);
 		title.setDepth(GUI_DEPTH);
 		title.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
 		title.setAnchor(new Vector(5.25f, 8.f));
 		title.draw(canvas);
-		
+
 		//Slots
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 4; j++) {
-				new ImageGraphics(ResourcePath.getSprite("zelda/inventory.slot"),
+				if (i == currentSelection.y && j == currentSelection.x) {
+					new ImageGraphics(ResourcePath.getSprite("zelda/inventory.selector"),
+							2.f, 2.f, new RegionOfInterest(0, 0, 64, 64),
+							anchor.add(new Vector(2*j + 3.7f, 3.f*i + 2.f)), 1, GUI_DEPTH+1).draw(canvas);
+				} else {
+					new ImageGraphics(ResourcePath.getSprite("zelda/inventory.slot"),
 						2.f, 2.f, new RegionOfInterest(0, 0, 64, 64),
 						anchor.add(new Vector(2*j + 3.7f, 3.f*i + 2.f)), 1, GUI_DEPTH).draw(canvas);
+				}
 			}
 		}
 		
@@ -52,18 +96,18 @@ public class ARPGInventoryGUI implements Graphics {
 		ARPGItem[] expendableList = {ARPGItem.BOMB, ARPGItem.ARROW};
 		for (int i = 0; i < expendableList.length; i++) {
 			ARPGItem item = expendableList[i];
-			if (player.getAmountOf(item) > 0) {
+			if (inventory.getAmountOf(item) > 0) {
 				new ImageGraphics(item.getResourcePath(),
 						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
 						anchor.add(new Vector(2.f*i + 3.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
-				TextGraphics number = new TextGraphics(player.getAmountOf(item) + "x", 0.6f, Color.BLACK);
+				TextGraphics number = new TextGraphics(inventory.getAmountOf(item) + "x", 0.6f, Color.BLACK);
 				number.setDepth(GUI_DEPTH);
 				number.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
 				number.setAnchor(new Vector(2.f*i + 4.25f, 4.5f));
 				number.draw(canvas);
 			}
 		}
-		if (player.getAmountOf(ARPGItem.CASTLE_KEY) > 0) {
+		if (inventory.getAmountOf(ARPGItem.CASTLE_KEY) > 0) {
 			new ImageGraphics(ARPGItem.CASTLE_KEY.getResourcePath(),
 					2.f, 2.f, new RegionOfInterest(0, 0, 16, 16),
 					anchor.add(new Vector(9.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
@@ -77,7 +121,7 @@ public class ARPGInventoryGUI implements Graphics {
 		for (int i = 0; i < weaponsList.length; i++)
 		{
 			ARPGItem item = weaponsList[i];
-			if (player.getAmountOf(item) > 0) {
+			if (inventory.getAmountOf(item) > 0) {
 				new ImageGraphics(item.getResourcePath(),
 						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
 						anchor.add(new Vector(2.f*i + 3.7f, 2.f)), 1, GUI_DEPTH).draw(canvas);

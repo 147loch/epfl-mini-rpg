@@ -124,7 +124,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			if (currentHoldingItem != null && currentHoldingItem.equals(ARPGItem.BOW) && behavior.equals(Behavior.ATTACK_WITH_BOW)) {
 				Arrow arrow = new Arrow(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
 				if (possess(ARPGItem.ARROW) && speedBow >= SPEED_BOW && getOwnerArea().canEnterAreaCells(arrow, getFieldOfViewCells())) {
-					if (getAmountOf(ARPGItem.ARROW) >= 1) {
+					if (inventory.getAmountOf(ARPGItem.ARROW) >= 1) {
 						getOwnerArea().registerActor(arrow);
 						inventory.removeEntry(ARPGItem.ARROW, 1);
 					}
@@ -155,21 +155,42 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void onKeyEvent(KeyboardAction action) {
-			switch (action) {
-				case MOVE_LEFT:
-					moveOrientate(Orientation.LEFT);
-					break;
-				case MOVE_UP:
-					moveOrientate(Orientation.UP);
-					break;
-				case MOVE_RIGHT:
-					moveOrientate(Orientation.RIGHT);
-				 	break;
-				case MOVE_DOWN:
-					moveOrientate(Orientation.DOWN);
-					break;
-				default:
-					break;
+			if (!isInventoryOpen) {
+				switch (action) {
+					case MOVE_LEFT:
+						moveOrientate(Orientation.LEFT);
+						break;
+					case MOVE_UP:
+						moveOrientate(Orientation.UP);
+						break;
+					case MOVE_RIGHT:
+						moveOrientate(Orientation.RIGHT);
+						break;
+					case MOVE_DOWN:
+						moveOrientate(Orientation.DOWN);
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	}
+
+	private class InventoryKeyEventListener implements KeyboardEventListener {
+		@Override
+		public List<KeyboardAction> getActions() {
+			return Arrays.asList(
+					KeyboardAction.MOVE_DOWN,
+					KeyboardAction.MOVE_LEFT,
+					KeyboardAction.MOVE_UP,
+					KeyboardAction.MOVE_RIGHT
+			);
+		}
+
+		@Override
+		public void onKeyEvent(KeyboardAction action) {
+			if (isInventoryOpen) {
+				inventoryGui.selectionUpdate(action);
 			}
 		}
 	}
@@ -217,6 +238,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CHEAT_SPAWN_BOMB, new CheatKeysEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.ACCEPT_DIALOG, new AcceptDeathDialogEventListener());
 		keyboardRegister.registerKeyboardEvents(new MoveOrientateKeyEventListener(),true);
+		keyboardRegister.registerKeyboardEvents(new InventoryKeyEventListener());
 
 		if (!inventory.addEntry(ARPGItem.BOMB, 3)) System.out.println("Base inventory items could not be added.");
 		currentHoldingItem = (ARPGItem)inventory.getItemList().get(0);
@@ -246,7 +268,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		animationsWithSword = RPGSprite.createAnimations(ANIMATION_DURATION, spritesWithSword, false);
 
 		gui = new ARPGPlayerStatusGUI(this);
-		inventoryGui = new ARPGInventoryGUI(this);
+		inventoryGui = new ARPGInventoryGUI(this.inventory, "Inventory");
 	}
 
 	private void cycleCurrentInventoryItem() {
@@ -314,10 +336,11 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	// INVENTORY
 	public ARPGItem getCurrentItem() { return currentHoldingItem; }
-	public int getInventoryMoney() { return inventory.getMoney(); }
+	public int getInventoryMoney() {
+		return inventory.getMoney();
+	}
 	public float getHp() { return hp; }
 	public float getMaxHp() { return maxHp; }
-	public int getAmountOf(InventoryItem item) { return possess(item) ? inventory.getItemAmount(item) : 0; }
 
 	private void addHp(float hp) {
 		this.hp += hp;
@@ -329,6 +352,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+		keyboardRegister.update();
 
 		if (!behavior.equals(Behavior.DEAD)) {
 			if (behavior.equals(Behavior.ATTACK_WITH_BOW)) {
@@ -368,8 +392,6 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 				shownGameOverForeground = true;
 			}
 		}
-
-		keyboardRegister.update();
 	}
 
 	@Override

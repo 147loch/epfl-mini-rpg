@@ -46,9 +46,9 @@ public class KeyboardEventRegister {
      * @return True if successfully added to the List
      */
     public boolean registerKeyboardEvent(Event event) {
-        for (Event e: eventList)
+        /*for (Event e: eventList)
             if (e.getAction().equals(event.getAction()))
-                return false;
+                return false;*/
         return eventList.add(event);
     }
 
@@ -109,8 +109,7 @@ public class KeyboardEventRegister {
      * @see this#registerKeyboardEvents(List)
      */
     public void registerKeyboardEvents(KeyboardEventListener listener) {
-        Objects.requireNonNull(listener.getActions(), "Listener linked actions cannot be a null list")
-                .forEach(keyboardAction -> registerKeyboardEvents(listener, false));
+        registerKeyboardEvents(listener, false);
     }
 
     /**
