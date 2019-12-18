@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.Test;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.Grass;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
@@ -72,6 +73,11 @@ public class RouteChateau extends ARPGArea {
 				new DiscreteCoordinates(9, 13), new DiscreteCoordinates(10, 13)));
 		
 		registerActor(new DarkLord(this, Orientation.DOWN, new DiscreteCoordinates(9, 8)));
+		
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(13, 8)));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(6, 6)));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(5, 10)));
+		registerActor(new Grass(this, Orientation.UP, new DiscreteCoordinates(14, 11)));
 
 		keyboardEventRegister = new KeyboardEventRegister(getKeyboard());
 		keyboardEventRegister.registerKeyboardEvents(new CheatKeysEventListener());
