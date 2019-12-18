@@ -26,7 +26,7 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	protected ARPGPlayerStatusGUI(ARPGPlayer player) {
 		this.player = player;
 	}
-	
+
 	@Override
 	public void draw(Canvas canvas) {
 		List<Graphics> arrayHeartsBeforeDamage = new ArrayList<>();
@@ -54,7 +54,8 @@ public class ARPGPlayerStatusGUI implements Graphics {
 				anchor.add(new Vector(0.5f, 0.25f)), 1, GUI_DEPTH).draw(canvas);
 		
 		//DISPLAY NUMBER FOR COINS
-		for (int i = 0; i < Math.floor(Math.log10(player.getInventoryMoney()) + 1); i++) {
+		double max = player.getInventoryMoney() == 0 ? 1.0 : Math.floor(Math.log10(player.getInventoryMoney()) + 1);
+		for (int i = 0; i < max; i++) {
 			int row = 2;
 			int column = 1;
 			int c = Character.digit(Integer.toString(player.getInventoryMoney()).charAt(i), 10);
@@ -62,10 +63,10 @@ public class ARPGPlayerStatusGUI implements Graphics {
 				column = (c - 1) % 4;
 				row = (c - 1) / 4;
 			}
-			
+
 			new ImageGraphics(ResourcePath.getSprite("zelda/digits"),
-					0.8f, 0.8f, new RegionOfInterest(column*16, row*16, 16, 16),
-					anchor.add(new Vector(2.25f + i*0.5f, 0.9f)), 1, GUI_DEPTH + 1).draw(canvas);
+					0.8f, 0.8f, new RegionOfInterest(column * 16, row * 16, 16, 16),
+					anchor.add(new Vector(2.f + i * 0.5f, 0.9f)), 1, GUI_DEPTH + 1).draw(canvas);
 		}
 		
 		//DISPLAY HEART

@@ -197,7 +197,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 		@Override
 		public void onKeyEvent(KeyboardAction action) {
-			if (action == KeyboardAction.ACCEPT_DIALOG) {
+			if (action == KeyboardAction.ACCEPT_DIALOG && !Behavior.DEAD.equals(behavior)) {
 				if (Objects.nonNull(currentShop) && currentShop.isShopOpened()) {
 					currentShop.buy(inventory);
 				}
@@ -265,6 +265,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			inventory.addEntry(ARPGItem.BOW, 1);
 			inventory.addEntry(ARPGItem.ARROW, 99);
 			inventory.addEntry(ARPGItem.SWORD, 1);
+			inventory.addEntry(ARPGItem.BOMB, 96);
+			inventory.addMoney(9899);
 		}
 
 		Sprite[][] sprites = RPGSprite.extractSprites("zelda/player", 4, 1, 2, this , 16, 32, new Orientation[]
@@ -289,6 +291,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	private void cycleCurrentInventoryItem() {
 		List<InventoryItem> list = inventory.getItemList();
+		list.removeIf(item -> item.equals(ARPGItem.ARROW));
 		if (list.size() == 0) currentHoldingItem = null;
 		else {
 			int cur = list.indexOf(currentHoldingItem);

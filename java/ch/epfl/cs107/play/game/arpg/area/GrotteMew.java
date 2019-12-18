@@ -26,6 +26,8 @@ public class GrotteMew extends ARPGArea {
 
         registerActor(new LogMonster(this, Orientation.RIGHT, new DiscreteCoordinates(6, 7)));
         registerActor(new LogMonster(this, Orientation.DOWN, new DiscreteCoordinates(10, 7)));
+        registerActor(new LogMonster(this, Orientation.DOWN, new DiscreteCoordinates(8, 10)));
+        registerActor(new LogMonster(this, Orientation.DOWN, new DiscreteCoordinates(8, 14)));
 
         for (int i = 4; i <= 12; i++) {
             registerActor(new Coin(this, Orientation.DOWN, new DiscreteCoordinates(i, 11)));

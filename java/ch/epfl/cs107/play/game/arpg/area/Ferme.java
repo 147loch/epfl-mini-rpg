@@ -5,8 +5,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Rock;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
@@ -40,9 +38,6 @@ public class Ferme extends ARPGArea {
 		registerActor(new Door("PetalburgTimmy", new DiscreteCoordinates(3, 1),
 				Logic.TRUE, this, Orientation.DOWN,
 				new DiscreteCoordinates(6, 11)));
-		
-		registerActor(new Bow(this, Orientation.UP, new DiscreteCoordinates(5, 6)));
-		registerActor(new ArrowItem(this, Orientation.UP, new DiscreteCoordinates(4, 7)));
 		
 		registerActor(new SignEntity("Maison du futur héro", true, this, Orientation.UP, new DiscreteCoordinates(3, 11)));
 		
