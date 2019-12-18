@@ -19,6 +19,11 @@ public class ARPGInventoryGUI implements Graphics {
 	
 	private static final int GUI_DEPTH = 2000;
 
+	private static final ARPGItem[][] slotList = {
+			{ ARPGItem.BOMB,  ARPGItem.ARROW, null,           ARPGItem.CASTLE_KEY },
+			{ ARPGItem.SWORD, ARPGItem.BOW,   ARPGItem.STAFF, null                }
+	};
+
 	private DiscreteCoordinates currentSelection;
 	private ARPGInventory inventory;
 	private ARPGItem currentSelectedItem;
@@ -91,45 +96,33 @@ public class ARPGInventoryGUI implements Graphics {
 				}
 			}
 		}
-		
-		//Items
-		ARPGItem[] expendableList = {ARPGItem.BOMB, ARPGItem.ARROW};
-		for (int i = 0; i < expendableList.length; i++) {
-			ARPGItem item = expendableList[i];
-			if (inventory.getAmountOf(item) > 0) {
-				new ImageGraphics(item.getResourcePath(),
-						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
-						anchor.add(new Vector(2.f*i + 3.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
-				TextGraphics number = new TextGraphics(inventory.getAmountOf(item) + "x", 0.6f, Color.BLACK);
-				number.setDepth(GUI_DEPTH);
-				number.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
-				number.setAnchor(new Vector(2.f*i + 4.25f, 4.5f));
-				number.draw(canvas);
-			}
-		}
-		if (inventory.getAmountOf(ARPGItem.CASTLE_KEY) > 0) {
-			new ImageGraphics(ARPGItem.CASTLE_KEY.getResourcePath(),
-					2.f, 2.f, new RegionOfInterest(0, 0, 16, 16),
-					anchor.add(new Vector(9.7f, 5.f)), 1, GUI_DEPTH).draw(canvas);
-			TextGraphics name = new TextGraphics(ARPGItem.CASTLE_KEY.getName(), 0.3f, Color.BLACK);
-			name.setDepth(GUI_DEPTH);
-			name.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
-			name.setAnchor(new Vector(9.8f, 4.5f));
-			name.draw(canvas);
-		}
-		ARPGItem[] weaponsList = {ARPGItem.SWORD, ARPGItem.BOW, ARPGItem.STAFF};
-		for (int i = 0; i < weaponsList.length; i++)
-		{
-			ARPGItem item = weaponsList[i];
-			if (inventory.getAmountOf(item) > 0) {
-				new ImageGraphics(item.getResourcePath(),
-						2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
-						anchor.add(new Vector(2.f*i + 3.7f, 2.f)), 1, GUI_DEPTH).draw(canvas);
-				TextGraphics name = new TextGraphics(item.getName(), 0.3f, Color.BLACK);
-				name.setDepth(GUI_DEPTH);
-				name.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
-				name.setAnchor(new Vector(2.f*i + 3.75f, 1.5f));
-				name.draw(canvas);
+
+		for (int i = 0; i < slotList.length; i++) {
+			for (int j = 0; j < slotList[i].length; j++) {
+				int k = slotList.length - 1 - i;
+				if (slotList[i][j] != null) {
+					ARPGItem item = slotList[i][j];
+					int itemQty = inventory.getAmountOf(item);
+
+					if (itemQty > 0) {
+						new ImageGraphics(item.getResourcePath(),
+								2.f, 2.f, new RegionOfInterest(0, 0, 16, 32),
+								anchor.add(new Vector(2.f*j + 3.7f, 2.f + k * 3.f)), 1, GUI_DEPTH).draw(canvas);
+						TextGraphics number = new TextGraphics(inventory.getAmountOf(item) + "x", 0.6f, Color.BLACK);
+						number.setDepth(GUI_DEPTH);
+						number.setRelativeTransform(Transform.I.translated(canvas.getPosition().sub(width/2, height/2)));
+						number.setAnchor(new Vector(2.f*j + 4.25f, 1.5f + k * 3.f));
+						number.draw(canvas);
+					}
+
+					if (currentSelection.x == j && currentSelection.y == i) {
+						if (itemQty > 0) {
+							currentSelectedItem = item;
+						} else {
+							currentSelectedItem = null;
+						}
+					}
+				}
 			}
 		}
 	}

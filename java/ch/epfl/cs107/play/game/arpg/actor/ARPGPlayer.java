@@ -208,7 +208,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		@Override
 		public void onKeyEvent() {
 			if (Behavior.DEAD.equals(behavior)) {
-				// if (getOwnerArea() instanceof  ARPGArea) ((ARPGArea)getOwnerArea()).restart();
+				if (getOwnerArea() instanceof  ARPGArea) ((ARPGArea)getOwnerArea()).restart();
 			}
 		}
 	}
@@ -318,7 +318,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 
 	public final void takeDamage(float damage) {
 		if (lastTookDamage <= 0) {
-			if (hp - damage >= 0) {
+			if (hp - damage > 0) {
 				hp -= damage;
 				lastTookDamage = damage;
 				invicibilityTime = INVINCIBILITY_TIME;
