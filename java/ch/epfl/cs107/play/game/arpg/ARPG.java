@@ -18,6 +18,8 @@ public class ARPG extends RPG {
     private final static int STARTING_AREA = 7;
     private final static DiscreteCoordinates STARTING_COORDINATES = new DiscreteCoordinates(2, 4);
 
+    private Window window;
+
     // we use the ARPGArea type to ensure it isn't an area from any tutorial or some other sort
     private final List<ARPGArea> areas = new ArrayList<>(
             Arrays.asList(
@@ -44,6 +46,10 @@ public class ARPG extends RPG {
     
     @Override
     public void update(float deltaTime) {
+        if (window.isCloseRequested()) {
+            window.dispose();
+            this.end();
+        }
         super.update(deltaTime);
     }
     
@@ -54,6 +60,7 @@ public class ARPG extends RPG {
     		Area area = setCurrentArea(areas.get(STARTING_AREA).getTitle(), true);
     		ARPGPlayer player = new ARPGPlayer(area, Orientation.DOWN, STARTING_COORDINATES);
     		initPlayer(player);
+    		this.window = window;
     		return true;
     	}
     	return false;
