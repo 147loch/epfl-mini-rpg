@@ -255,7 +255,7 @@ Pour tous les PNJ, nous avons créé un systèmes de bulles pour indiquer si un 
 
 Nous avons créé les entités statiques suivantes:
 - Nénuphars (dans la zone Route)
-- Panneaux (dans plusieurs zones, possèdent tous un dialogue)
+- Panneaux (dans plusieurs zones, possèdent tous un dialogue, permet une implémentation d'un petit scénario)
 - Porte vers la grotte (au Nord du Village, ayant deux états, ouverte avec une bombe)
 - Rocher avec l'épée (au Nord du Village, en haut de la colline, l'épée peut être récupérée avec la touche d'interaction à distance)
 - Rochers (dispersés dans plusieurs zones)
@@ -268,31 +268,52 @@ Et d'autres entités animées:
 ## Système d'actionnements pour créer des énigmes
 
 - Interface `Actionable`
-
-- Pont caché
-- Baton magique activable
-- Levier
-- Plaque de pression
+- Pont caché (zone route, comportement décrit dans `README.md`)
+- Baton magique activable (temple, affiche l'objet de type `Staff` une fois le signal donné par une plaque de pression)
+- Levier (utilisé dans la Route pour activer le pont)
+- Plaque de pression (utilisé dans le Temple pour activer le baton magique)
 
 ## Bruitages et interfaces gérant des entités à sons répétés
 
-- Fontaine
-- Cascade
-- Activation du éevier
-- Activation de la plaque de pression
-- Coup sur le joueur
-- Coup sur les ennemis
-- Mort des ennemis
-- Mort du joueur
-- Transactions avec le marchand
+Nous avons implémenté une méthode dans `ARPGArea` qui permet d'activer les sons d'objets qui doivent être réactivés quand le joueur
+revient dans une zone. Ces objets ont donc des sons qui tournent en boucle et doivent être réinitialisé quand le joueur quitte la zone dans
+laquelle se trouve l'objet correspondant. Grâce à cette méthode, quand le joueur entre une nouvelle zone, il appelle cette méthode qui peut être
+overrid par la zone. La zone est donc responsable de stocker dans des attributs les objets qui émettend un son qui doit être réactivable.
+
+Ces objets doivent implémenter l'interface `SoundEntity` qui a une méthode qui doit être définie par l'objet pour savoir comment réactiver le code.
+
+Alors, l'aire, dans la méthode override `reactivateSound` va appeler la méthode de l'interface des objets conservés dans des attributs.
+
+Nous avons donc ajouté ces sons:
+- Fontaine (réactivable, dans le village)
+- Cascade (réactivable, dans la zone route)
+- Activation du levier (dans la zone route)
+- Activation de la plaque de pression (dans le temple)
+- Coup sur le joueur (partout)
+- Coup sur les ennemis (partout)
+- Mort des ennemis (partout)
+- Mort du joueur (partout)
+- Transactions avec le marchand (dans le village, deux sons: fail et ok)
 
 ## Game Over
 
+Si le joueur pert toute sa vie, le jeu s'arrête et un écran "Game Over" (dont la sprite a été créée par nous) est affiché.
+Si la touche `ENTER`, ou celle correspondant dans le fichier XML est activée, alors le jeu détruit la fenêtre et appelle la fonction
+`main` de `Play` pour relancer une nouvelle fenêtre.
+
 ## Zones ajoutées
 
-- Temple
-- Route du temple
-- Grotte
-- Maison
+Nous avons ajouté les zones suivantes:
+- Temple (après la route du temple)
+- Route du temple (accessible en activant le levier en bas à droite de la zone Route)
+- Grotte (accessible en plaçant une bombe devant l'éboulement au Nord du village)
+- Maison (zone de départ du jeu, à la Ferme)
 
 ## Un petit scénario
+
+Finalement, nous avons créé un petit scénario qui demande au joueur de trouver l'épée, puis le dirige vers le village
+pour qu'il trouve des pièces et achète le matériel nécessaire pour trouver le baton magique et vaincre le seigneur des ténèbres.
+
+En utilisant des PNJ et des panneaux, les dialogues vont mener le joueur à faire les bonnes décisions.
+
+Nous avons aussi implémenté quelques blagues dans les dialogues de PNJ ;)
