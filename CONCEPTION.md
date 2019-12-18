@@ -1,7 +1,19 @@
+# Note importante
+
+> **ATTENTION**: Fichiers manquants dans `res/`
+
+Afin de soumettre notre projet, nous avons dû omettre certains fichiers que nous avons rajoutés dans `res/`, ils sont disponibles à l'addresse suivante:
+https://drive.google.com/drive/folders/1DLTQZ81njx7j2XYH97izlQByb7ZLf6w6?usp=sharing
+
+Il suffira de glisser le dossier `res/` de `0_CUSTOM-RESOURCES` dans le dossier racine de notre projet, et les sprites et sons personnalisés (et leur sources décrites dans `CONCEPTION.md`) seront ajoutés automatiquement.
+
+Le drive contient aussi l'image de l'hierarchie utilisée dans notre projet. (Comme décrit dans `CONCEPTION.md`) 
+
 # Classes, interfaces, enums et paquetages
 
 L'énumération ci-dessous donne une idée de base quant aux choix de placements effectués.
-Il est probablement plus simple de regarder le UML généré ou alors l'image qui y correspond et/ou le PDF `classmap.pdf` qui se trouvent dans le Google Drive suivant: https://drive.google.com/drive/folders/1DLTQZ81njx7j2XYH97izlQByb7ZLf6w6?usp=sharing
+Il est probablement plus simple de regarder le UML généré ou alors l'image qui y correspond et/ou le PDF `classmap.pdf` qui se trouvent dans le Google Drive suivant: 
+https://drive.google.com/drive/folders/1DLTQZ81njx7j2XYH97izlQByb7ZLf6w6?usp=sharing
 
 ```
 [ch]
@@ -117,11 +129,32 @@ Il est probablement plus simple de regarder le UML généré ou alors l'image qu
 # Modifications personelles par rapport à l'énoncé
 ## Système de keybindings
 
+Lors de la programmation du projet, nous avons trouvé que de coder "en dur" les touches utilisées pour
+activer certaines interactions et gérer le mouvement n'était pas forcément une très bonne idée quant à la modification
+possible dans le futur desdites touches.
+
+Nous décrivons dans la section suivante le système complet. Mais c'est une modification qui fait que notre code n'est pas du
+tout similaire à celui demandé. Ce sytême ne diverge cependant pas trop de l'esprit de ce qui est demandé, il ajoute juste quelques fonctionnalités supplémentaires.  
+
 ## Touche de triche pour l'apparition de bombes
+
+Dans les instructions, il est demandé que la touche pour faire appaître des bombes n'est activable que dans `RouteChateau`.
+Étant donné que la zone du village nécessite une bombe pour ouvrir la porte vers la Grotte, nous avons décidé que cette touche de
+triche uniquement pouvait être utilisé dans toutes les zones. Elle est donc liée au joueur et non à la zone `RouteChateau`.
+
+De manière générale, les touches de triches ne sont activées seulement quand le mode de test est activé dans l'interface `Test.MODE`.
 
 ## Système de rareté pour l'apparition d'objets
 
+Nous avons effectué une petite déviation par rapport aux instructions lors de la création des constantes de `DROP` pour `Grass`.
+La rareté est définie depuis des constantes dans une interface `Rarity`, donc même si les constantes demandées sont présentes dans la classe `Grass`, elles
+tirent leur valeurs depuis l'interface.
+
 ## Changements dans l'affichage de l'objet en utilisation
+
+Dans les instructions, il est demandé de simplement faire tourner tous les objets dans l'indicateur en haut à droite de l'interface du joueur.
+Étant donné que les flèches sont un élément qui ne peut pas être utilisé par le joueur en tant qu'interaction (pas comme la bombe, par exemple), nous
+avons décidé qu'il n'y avait pas besoin de les afficher 
 
 # Extensions ajoutées
 ## Système de keybindings

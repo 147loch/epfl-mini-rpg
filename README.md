@@ -1,5 +1,16 @@
 # Le jeu "Le Jeu" de Loïc Herman et Kelvin Kappeler
 
+## Note importante
+
+> **ATTENTION**: Fichiers manquants dans `res/`
+
+Afin de soumettre notre projet, nous avons dû omettre certains fichiers que nous avons rajoutés dans `res/`, ils sont disponibles à l'addresse suivante:
+https://drive.google.com/drive/folders/1DLTQZ81njx7j2XYH97izlQByb7ZLf6w6?usp=sharing
+
+Il suffira de glisser le dossier `res/` de `0_CUSTOM-RESOURCES` dans le dossier racine de notre projet, et les sprites et sons personnalisés (et leur sources décrites dans `CONCEPTION.md`) seront ajoutés automatiquement.
+
+Le drive contient aussi l'image de l'hierarchie utilisée dans notre projet. (Comme décrit dans `CONCEPTION.md`) 
+
 ## Description
 
 Vous vous réveillez dans une maison, où une personne vous annonce que le roi a été emprisonné par un monstre des ténèbres.
