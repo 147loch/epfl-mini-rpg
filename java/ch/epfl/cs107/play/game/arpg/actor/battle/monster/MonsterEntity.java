@@ -46,6 +46,14 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
 
     private List<DamageType> vulnerabilities;
 
+    /**
+     * Contructor for the MonsterEntity
+     * @param area the area
+     * @param orientation the orientation
+     * @param coordinates the coordinates of the area
+     * @param maxHealth the maximum of health of the monster
+     * @param vulnerabilities the list of vulnerabilities
+     */
     public MonsterEntity(Area area, Orientation orientation, DiscreteCoordinates coordinates, float maxHealth, DamageType[] vulnerabilities) {
         super(area, orientation, coordinates);
         this.maxHealth = maxHealth;
@@ -67,7 +75,7 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
     // Final Method
     
     /**
-     * This method handles the interaction if a monster
+     * This method handles the interaction if the monster
      * can take a hit, or not, and what doing next.
      * @param damageTook the type of damage
      * @param damage the amount of damage

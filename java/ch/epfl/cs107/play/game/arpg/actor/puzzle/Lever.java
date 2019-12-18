@@ -21,6 +21,13 @@ public class Lever extends AreaEntity {
 	private Actionable entityActionable;
 	private boolean isAlreadyActive;
 	
+	/**
+	 * Constructor for the Lever
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position
+	 * @param entityActionable the Actionable entity
+	 */
 	public Lever(Area area, Orientation orientation, DiscreteCoordinates position, Actionable entityActionable) {
 		super(area, orientation, position);
 		

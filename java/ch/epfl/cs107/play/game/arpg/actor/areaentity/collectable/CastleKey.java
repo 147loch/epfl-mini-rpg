@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.collectable;
+package ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -6,10 +6,16 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
-public class ArrowItem extends CollectableAreaEntity {
+public class CastleKey extends CollectableAreaEntity {
 
-	public ArrowItem(Area area, Orientation orientation, DiscreteCoordinates position) {
-        super(area, orientation, position, "zelda/arrow.icon", 1, 16);
+	/**
+	 * Constructor for the CastleKey
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position in the area
+	 */
+	public CastleKey(Area area, Orientation orientation, DiscreteCoordinates position) {
+        super(area, orientation, position, "zelda/key", 1, 16);
     }
 
     @Override

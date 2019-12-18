@@ -28,10 +28,18 @@ public enum ARPGItem implements InventoryItem {
 
 	private String iconId;
 
+	/**
+	 * Constructor for the ARPGItem
+	 * @param iconId the string path for the sprite
+	 */
 	ARPGItem(String iconId) {
 		this.iconId = iconId;
 	}
 
+	/**
+	 * Return the ressource path
+	 * @return the ressource path
+	 */
 	public String getResourcePath() {
 		return ResourcePath.getSprite(this.iconId);
 	}

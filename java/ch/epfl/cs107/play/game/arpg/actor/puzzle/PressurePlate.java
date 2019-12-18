@@ -25,6 +25,13 @@ public class PressurePlate extends AreaEntity {
     private boolean isAlreadyActive;
     private boolean soundActive;
 
+    /**
+     * Constructor for the PressurePlate
+     * @param area the area
+     * @param orientation the orientation
+     * @param position the position in the area
+     * @param entityActionable the Actionable Entity
+     */
     public PressurePlate(Area area, Orientation orientation, DiscreteCoordinates position, Actionable entityActionable) {
         super(area, orientation, position);
 

@@ -2,9 +2,9 @@ package ch.epfl.cs107.play.game.arpg.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Coin;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.LightHalo;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;

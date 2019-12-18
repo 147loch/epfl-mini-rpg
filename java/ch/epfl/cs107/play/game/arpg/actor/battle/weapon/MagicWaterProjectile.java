@@ -26,6 +26,12 @@ public class MagicWaterProjectile extends Projectile {
 	private Animation animation;
 	private MagicWaterProjectileHandler handler;
 	
+	/**
+	 * Constructor for the MagicWaterProjectile
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position in the area
+	 */
 	public MagicWaterProjectile(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position, DAMAGE_TYPE, FRAME_SPEED, MAX_LIFETIME);
 		

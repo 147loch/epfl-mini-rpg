@@ -11,7 +11,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Coin;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
@@ -45,6 +45,12 @@ public class LogMonster extends MonsterEntity {
 
     private int inactivityCounter;
 
+    /**
+     * Constructor for the LogMonster
+     * @param area the area
+     * @param orientation the orientation
+     * @param position the position in the area
+     */
     public LogMonster(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position, 2.f, VULNERABILITIES);
 
@@ -79,12 +85,18 @@ public class LogMonster extends MonsterEntity {
     }
 
     // MonsterEntity events
-    @Override protected void handleDamageEvent(float damageTook) {}
-    @Override protected void handleDeathDropEvent() {
+    @Override
+    protected void handleDamageEvent(float damageTook) {}
+    @Override
+    protected void handleDeathDropEvent() {
         getOwnerArea().registerActor(new Coin(getOwnerArea(), Orientation.UP, getCurrentMainCellCoordinates()));
     }
 
     // Methods
+    
+    /**
+     * This method is used to handle the movement of the LogMonster
+     */
     private void handleIdleMovement() {
         if (!this.isDisplacementOccurs()) {
             if (RandomGenerator.getInstance().nextDouble() > 0.6) {

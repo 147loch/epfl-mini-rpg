@@ -12,8 +12,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer;
 import ch.epfl.cs107.play.game.arpg.actor.Rarity;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -45,6 +45,12 @@ public class DarkLord extends MonsterEntity {
 	private Animation animationAttack;
 	private Animation animationVanishTeleportation;
 
+	/**
+	 * Constructor for the DarkLord
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param coordinates the coordinates
+	 */
 	public DarkLord(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates, 2.f, VULNERABILITIES);
 		
@@ -70,6 +76,11 @@ public class DarkLord extends MonsterEntity {
         animationAttack = animationsAttack[orientation.ordinal()];
 	}
 	
+	/**
+	 * This method is used to handle the teleportation of the DarkLord
+	 * @param x the coordinate x of the target position
+	 * @param y the coordinate y of the target position
+	 */
 	private void teleportation(int x, int y) {
 		if (getOwnerArea().canEnterAreaCells(this, Collections.singletonList(new DiscreteCoordinates(x, y)))) {
 			getOwnerArea().leaveAreaCells(this, getCurrentCells());
@@ -82,6 +93,9 @@ public class DarkLord extends MonsterEntity {
 		}
 	}
 	
+	/**
+	 * This method is used to handle the invocation of FlameSkull
+	 */
 	private void invokeFlameSkull() {
 		FlameSkull flameSkull = new FlameSkull(getOwnerArea(), getOrientation(), getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(2)));
 		if (getOwnerArea().canEnterAreaCells(flameSkull, Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector().mul(2))))) {

@@ -17,6 +17,12 @@ public class Rock extends AreaEntity {
 
 	private RPGSprite sprite;
 	
+	/**
+	 * Constructor for the Rock
+	 * @param type the type of rock, between 0 and 4
+	 * @param area the area
+	 * @param position the position in the area
+	 */
 	public Rock(int type, Area area, DiscreteCoordinates position) {
 		super(area, Orientation.DOWN, position);
 		if (type < 0 || type > 4)

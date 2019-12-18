@@ -15,6 +15,12 @@ public class King extends Sign {
 
 	private Animation[] animation;
 	
+	/**
+	 * Constructor for the King
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position in the area
+	 */
 	public King(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super("Merci beaucoup aventurier !", area, orientation, position);
 		
@@ -23,6 +29,10 @@ public class King extends Sign {
 		animation = RPGSprite.createAnimations(0, sprites);
 	}
 	
+	/**
+	 * This method is used to change the orientation of the King
+	 * @param orientation the orientation
+	 */
 	public void setOrientation(Orientation orientation) {
 		orientate(orientation);
 	}

@@ -19,6 +19,15 @@ public abstract class Projectile extends MovableAreaEntity implements FlyableEnt
 	
 	private float currentLifeTime;
 	
+	/**
+	 * Constructor for the abstract class Projectile
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position
+	 * @param dt the damage type
+	 * @param frameSpeed the movement speed
+	 * @param maxLifeTime the lifetime, addition of deltaTime
+	 */
 	public Projectile(Area area, Orientation orientation, DiscreteCoordinates position, DamageType dt, int frameSpeed, float maxLifeTime) {
 		super(area, orientation, position);
 		damageType = dt;

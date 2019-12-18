@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Rock;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.WaterFountain;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.entity.WaterEffect;
 import ch.epfl.cs107.play.game.arpg.actor.npc.Emotion;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;

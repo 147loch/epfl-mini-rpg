@@ -15,6 +15,12 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public class HiddenBridge extends AreaEntity implements Actionable {
 
+	/**
+	 * Constructor for the HiddenBridge
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position in the area
+	 */
 	public HiddenBridge(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		

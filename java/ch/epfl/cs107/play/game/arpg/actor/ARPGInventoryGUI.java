@@ -27,14 +27,28 @@ public class ARPGInventoryGUI implements Graphics {
 	private ARPGItem currentSelectedItem;
 	private String dialogTitle;
 
+	/**
+	 * Constructor for the ARPGInventoryGUI
+	 * @param inventory the inventory
+	 * @param dialogTitle the dialog title
+	 */
 	public ARPGInventoryGUI(ARPGInventory inventory, String dialogTitle) {
 		this.inventory = inventory;
 		this.dialogTitle = dialogTitle;
 		this.currentSelection = new DiscreteCoordinates(0,1);
 	}
 
+	/**
+	 * Return the current selected item
+	 * @return the current selected item
+	 */
 	protected ARPGItem getCurrentSelectedItem() { return currentSelectedItem; }
 
+	/**
+	 * This method is used to handle the interaction with Keyboard
+	 * @param action the KeyboardAction
+	 * @see KeyboardAction
+	 */
 	void selectionUpdate(KeyboardAction action) {
 		switch (action) {
 			case MOVE_UP:

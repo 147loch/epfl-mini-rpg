@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.collectable;
+package ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable;
 
 import java.util.Collections;
 import java.util.List;

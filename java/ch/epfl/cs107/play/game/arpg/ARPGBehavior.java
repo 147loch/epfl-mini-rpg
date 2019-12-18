@@ -34,6 +34,11 @@ public class ARPGBehavior extends AreaBehavior {
 		}
 	}
 	
+	/**
+	 * Constructor for the ARPGBehavior
+	 * @param window the window
+	 * @param name the name of the window
+	 */
 	public ARPGBehavior(Window window, String name) {
 		super(window, name);
 		
@@ -44,11 +49,18 @@ public class ARPGBehavior extends AreaBehavior {
 			}
 		}
 	}
-	
+
 	public class ARPGCell extends AreaBehavior.Cell {
 
 		private final ARPGCellType type;
 		
+		/**
+		 * Constructor for the ARPGCell
+		 * @param x the coordinate x
+		 * @param y the coordinate y
+		 * @param type the type of the cell
+		 * @see ARPGCellType
+		 */
 		private ARPGCell(int x, int y, ARPGCellType type) {
 			super(x, y);
 			this.type = type;

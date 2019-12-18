@@ -18,6 +18,10 @@ public class Waterfall extends Entity implements SoundEntity {
 	private Animation animation;
 	private SoundAcoustics sound;
 
+	/**
+	 * Constructor for the Waterfall
+	 * @param position the position
+	 */
 	public Waterfall(Vector position) {
 		super(position);
 

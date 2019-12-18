@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.actor.collectable;
+package ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -17,6 +17,12 @@ public class Sword extends CollectableAreaEntity {
     private Sprite normalSprite;
     private Sprite takenSprite;
 
+    /**
+     * Constructor for the Sword
+     * @param area the area
+     * @param orientation the orientation
+     * @param position the position in the area
+     */
 	public Sword(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
         isTaken = false;
@@ -25,6 +31,9 @@ public class Sword extends CollectableAreaEntity {
         takenSprite = new RPGSprite("custom/rock.sword", 1.f, 2.f, this, new RegionOfInterest(16, 0, 16, 32));
     }
 
+	/**
+	 * This method is used if the player took the sword
+	 */
     public void collect() {
         isTaken = true;
     }

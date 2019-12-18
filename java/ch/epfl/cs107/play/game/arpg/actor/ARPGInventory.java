@@ -10,6 +10,10 @@ public class ARPGInventory extends Inventory {
 	private int money;
 	private int fortune;
 	
+	/**
+	 * Constructor for the ARPGMoney
+	 * @param money the initial money
+	 */
 	public ARPGInventory(int money) {
 		this.money = money;
 		fortune = this.money;
@@ -19,19 +23,52 @@ public class ARPGInventory extends Inventory {
         }
 	}
 	
+	/**
+	 * This method is used to add money to the inventory
+	 * @param money
+	 */
 	protected void addMoney(int money) {
 		this.money += money;
 		this.fortune += money;
 	}
 
+	/**
+	 * This method is used to return the amount of a specific item if it exists
+	 * @param item the specific item
+	 * @return the amount
+	 * @see public int getAmountOf(InventoryItem item)
+	 */
 	private int getItemAmount(InventoryItem item) { return super.getMap().get(item); }
 	
+	/**
+	 * Return the money
+	 * @return the money
+	 */
 	public int getMoney() {
 		return money;
 	}
+	
+	/**
+	 * Return the fortune
+	 * @return the fortune
+	 */
 	public int getFortune() {
 		return fortune;
 	}
+	
+	/**
+	 * Return the list of items in the inventory
+	 * @return the list of items in the inventory
+	 */
+	protected List<InventoryItem> getItemList() {
+		return new ArrayList<>(super.getMap().keySet());
+	}
+	
+	/**
+	 * This method is used to return the amount of a specific item
+	 * @param item the specific item
+	 * @return the amount
+	 */
 	public int getAmountOf(InventoryItem item) { return super.getMap().containsKey(item) ? getItemAmount(item) : 0; }
 
 	// Overrides the basic inventory methods so that we include the fortune management system
@@ -48,10 +85,4 @@ public class ARPGInventory extends Inventory {
         this.fortune -= item.getPrice() * count;
 	    return super.removeEntry(item, count);
 	}
-
-	protected List<InventoryItem> getItemList() {
-		return new ArrayList<>(super.getMap().keySet());
-	}
-
-
 }

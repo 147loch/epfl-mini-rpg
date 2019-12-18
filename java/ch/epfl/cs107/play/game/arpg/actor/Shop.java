@@ -31,6 +31,12 @@ public class Shop extends AreaEntity implements Inventory.Holder {
     private boolean transactionNotOkSoundPlayed;
     private boolean isShopOpened;
 
+    /**
+     * Constructor for the Shop
+     * @param area the area
+     * @param orientation the orientation
+     * @param coordinates the coordinates in the area
+     */
     public Shop(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
 
@@ -48,22 +54,42 @@ public class Shop extends AreaEntity implements Inventory.Holder {
         inventoryGUI = new ARPGInventoryGUI(inventory, "Shop");
     }
 
+    /**
+     * This method is used to handle the movement within the GUI from
+     * the KeyboardRegister given by the Player
+     * @param action the KeyboardAction
+     * @see KeyboardAction
+     */
     public void selectionUpdate(KeyboardAction action) {
         inventoryGUI.selectionUpdate(action);
     }
 
+    /**
+     * Return true, if the shop is opened
+     * @return true, if the shop is opened
+     */
     public boolean isShopOpened() {
         return isShopOpened;
     }
 
+    /**
+     * This method is used to open the shop
+     */
     public void openShop() {
         isShopOpened = true;
     }
 
+    /**
+     * This method is used to close the shop
+     */
     public void closeShop() {
         isShopOpened = false;
     }
 
+    /**
+     * This method is used to handle the purchase of an item in the shop
+     * @param playerInventory
+     */
     public void buy(ARPGInventory playerInventory) {
         if (Objects.nonNull(inventoryGUI.getCurrentSelectedItem()) && playerInventory.getMoney() >= inventoryGUI.getCurrentSelectedItem().getPrice()) {
             playerInventory.addMoney(-inventoryGUI.getCurrentSelectedItem().getPrice());

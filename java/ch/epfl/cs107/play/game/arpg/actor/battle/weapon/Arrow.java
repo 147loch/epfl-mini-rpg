@@ -25,6 +25,12 @@ public class Arrow extends Projectile implements FlyableEntity {
 	private RPGSprite[] sprites;
 	private ArrowHandler handler;
 
+	/**
+	 * Constructor for the Arrow
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position in the area
+	 */
 	public Arrow(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position, DAMAGE_TYPE, FRAME_SPEED, MAX_LIFETIME);
 		

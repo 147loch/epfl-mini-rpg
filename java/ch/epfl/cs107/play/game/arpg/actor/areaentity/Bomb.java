@@ -37,6 +37,12 @@ public class Bomb extends AreaEntity implements Interactor {
 	
 	private ARPGBombHandler handler;
 	
+	/**
+	 * Constructor for the Bomb
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position
+	 */
 	public Bomb(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		isExploding = false;
@@ -61,6 +67,9 @@ public class Bomb extends AreaEntity implements Interactor {
 		remainingTime = TIME_BEFORE_EXPLOSION;
 	}
 
+	/**
+	 * This method is used to begin the explosion of the Bomb
+	 */
 	public void explode() {
 		remainingTime = 0;
 	}

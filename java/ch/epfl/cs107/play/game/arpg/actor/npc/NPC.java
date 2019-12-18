@@ -33,6 +33,14 @@ public class NPC extends MovableAreaEntity implements Interactor {
 	private int counter;
 	private boolean talked;
 	
+	/**
+	 * Constructor for the NPC
+	 * @param textDialog the text for the dialog
+	 * @param emotion the emotion (the bubble)
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position in the area
+	 */
 	public NPC(String textDialog, Emotion emotion, Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		
@@ -50,14 +58,25 @@ public class NPC extends MovableAreaEntity implements Interactor {
 				new RegionOfInterest(emotion.getX(), emotion.getY(), 16, 16), new Vector(0.25f, 1.f));
 	}
 	
+	/**
+	 * Return the text for the dialog
+	 * @return the text for the dialog
+	 */
 	public String getTextDialog() {
 		return textDialog;
 	}
 	
+	/**
+	 * This method is used to change the orientation of the NPC
+	 * @param orientation the orientation
+	 */
 	public void setOrientation(Orientation orientation) {
 		orientate(orientation);
 	}
 	
+	/**
+	 * This method is used when the player spoke to the NPC
+	 */
 	public void talked() {
 		talked = true;
 	}

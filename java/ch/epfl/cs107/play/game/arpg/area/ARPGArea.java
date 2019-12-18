@@ -12,10 +12,24 @@ public abstract class ARPGArea extends Area {
 
 	private Window window;
 
+	/**
+	 * This method is used to create the different Areas
+	 */
 	protected abstract void createArea();
 
+	/**
+	 * This method is used to reactivate sounds for Areas with Sound Loops Items
+	 */
 	public void reactivateSounds() {}
-
+	
+	/**
+	 * This method is used to restart the game
+	 */
+	public void restart() {
+		window.dispose();
+		Play.main(null);
+	}
+	
 	@Override
 	public String getTitle() {
 		return "ARPGArea";
@@ -25,7 +39,7 @@ public abstract class ARPGArea extends Area {
 	public float getCameraScaleFactor() {
 		return CAMERA_SCALE_FACTOR;
 	}
-
+	
 	@Override
 	public boolean begin(Window window, FileSystem fileSystem) {
 		if (super.begin(window, fileSystem)) {
@@ -36,10 +50,5 @@ public abstract class ARPGArea extends Area {
 			return true;
 		}
 		return false;
-	}
-
-	public void restart() {
-		window.dispose();
-		Play.main(null);
 	}
 }

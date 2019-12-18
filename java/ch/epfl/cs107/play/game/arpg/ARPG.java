@@ -35,6 +35,9 @@ public class ARPG extends RPG {
             )
     );
 
+    /**
+     * This method is used to create the add the different Areas to ARPG
+     */
     private void createAreas() {
         areas.forEach(this::addArea);
     }

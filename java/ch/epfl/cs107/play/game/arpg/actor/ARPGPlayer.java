@@ -18,18 +18,18 @@ import ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor;
 import ch.epfl.cs107.play.game.arpg.actor.areaentity.Grass;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.ArrowItem;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Bow;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CastleKey;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Coin;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Staff;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.battle.DamageType;
 import ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile;
 import ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.ArrowItem;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Bow;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.CastleKey;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Staff;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Sword;
 import ch.epfl.cs107.play.game.arpg.actor.npc.King;
 import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
@@ -229,6 +229,12 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 
+	/**
+	 * Constructor for the ARPGPlayer
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param coordinates the coordinates in the area
+	 */
 	public ARPGPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
 		super(area, orientation, coordinates);
 
@@ -247,6 +253,8 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		hasDamageSoundActivated = true;
 		shownGameOverForeground = false;
 
+		behavior = Behavior.DEAD;
+		
 		keyboardRegister = new KeyboardEventRegister(getOwnerArea().getKeyboard());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.CYCLE_INVENTORY, new CycleItemKeyEventListener());
 		keyboardRegister.registerKeyboardEvent(KeyboardAction.USE_CURRENT_ITEM, new UseInventoryKeyItemEventListener());
@@ -289,6 +297,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		inventoryGui = new ARPGInventoryGUI(this.inventory, "Inventory");
 	}
 
+	/**
+	 * This method is used to change the current selected item
+	 */
 	private void cycleCurrentInventoryItem() {
 		List<InventoryItem> list = inventory.getItemList();
 		list.removeIf(item -> item.equals(ARPGItem.ARROW));
@@ -300,6 +311,9 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 
+	/**
+	 * This method is used to active the current selected item
+	 */
 	private void useInventoryItem() {
 		if (currentHoldingItem == null) return;
 		switch (currentHoldingItem) {
@@ -329,12 +343,20 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 		}
 	}
 	
+	/**
+	 * This method is used to move and orientate the player
+	 * @param orientation the orientation
+	 */
 	private void moveOrientate(Orientation orientation){
 		if (getOrientation() == orientation)
 			move(ANIMATION_DURATION * 2);
 		else orientate(orientation);
 	}
 
+	/**
+	 * This method is used to handle when the player took a hit
+	 * @param damage the damage
+	 */
 	public final void takeDamage(float damage) {
 		if (lastTookDamage <= 0) {
 			if (hp - damage > 0) {
@@ -349,18 +371,50 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 			}
 		}
 	}
+	
+	/**
+	 * This method is used to handle when the player took a hit of 0.5 heart
+	 */
 	public final void takeDamage() { takeDamage(0.5f); }
 
+	/**
+	 * Return last took damage
+	 * @return last took damage
+	 */
 	public float tookDamage() { return lastTookDamage; }
 
 	// INVENTORY
+	
+	/**
+	 * return the current selected item
+	 * @return the current selected item
+	 */
 	public ARPGItem getCurrentItem() { return currentHoldingItem; }
+	
+	/**
+	 * Return the money in the inventory
+	 * @return the money in the inventory
+	 */
 	public int getInventoryMoney() {
 		return inventory.getMoney();
 	}
+	
+	/**
+	 * Return the amount of hp
+	 * @return ther amount of hp
+	 */
 	public float getHp() { return hp; }
+	
+	/**
+	 * Return the amount of the maximum hp
+	 * @return the amount of the maximum hp
+	 */
 	public float getMaxHp() { return maxHp; }
 
+	/**
+	 * This method is used to add hp to the player
+	 * @param hp the amount of hp
+	 */
 	private void addHp(float hp) {
 		this.hp += hp;
 		

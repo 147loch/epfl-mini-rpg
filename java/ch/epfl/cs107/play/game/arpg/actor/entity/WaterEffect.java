@@ -15,6 +15,10 @@ public class WaterEffect extends Entity {
 	
 	private Animation animation;
 	
+	/**
+	 * COnstructor for the WaterEffect
+	 * @param position the position
+	 */
 	public WaterEffect(Vector position) {
 		super(position);
 		

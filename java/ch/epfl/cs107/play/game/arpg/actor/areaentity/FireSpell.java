@@ -40,6 +40,13 @@ public class FireSpell extends AreaEntity implements Interactor {
     private int extinguishCounter;
     private int propagationCounter;
 
+    /**
+     * Constructor for the FireSpell
+     * @param area the area
+     * @param orientation the orientation
+     * @param coordinates the coordinates in the area
+     * @param force the force
+     */
     public FireSpell(Area area, Orientation orientation, DiscreteCoordinates coordinates, int force) {
         super(area, orientation, coordinates);
 
@@ -64,14 +71,26 @@ public class FireSpell extends AreaEntity implements Interactor {
         handler = new FireSpellHandler();
     }
 
+    /**
+     * Constructor for the FireSpell
+     * @param area the area
+     * @param orientation the orientation
+     * @param coordinates the coordinates in the area
+     */
     public FireSpell(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         this(area, orientation, coordinates, BASE_FORCE);
     }
 
+    /**
+     * This method is used to extinguish the FireSpell
+     */
     public void extinguish() {
         this.extinguishCounter = 0;
     }
 
+    /**
+     * This method is used to propagate the FireSpell
+     */
     private void handlePropagation() {
         if (force > 0) {
         	if (getOwnerArea().canEnterAreaCells(this, Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()))))

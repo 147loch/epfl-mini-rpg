@@ -17,6 +17,15 @@ public class CastleDoor extends Door {
 	
 	private boolean isOpened;
 	
+	/**
+	 * Constructor for the CastleDoor
+	 * @param destination the name of the area of the destination
+	 * @param otherSideCoordinates the coordinates of the destination in the final area
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the coordinates of the door in the area
+	 * @param otherPositionsfor look position
+	 */
 	public CastleDoor(String destination, DiscreteCoordinates otherSideCoordinates, Area area,
 			Orientation orientation, DiscreteCoordinates position, DiscreteCoordinates ...otherPositions) {
 		super(destination, otherSideCoordinates, Logic.TRUE, area, orientation, position, otherPositions);
@@ -26,7 +35,11 @@ public class CastleDoor extends Door {
 		
 		isOpened = false;
 	}
-	
+	 
+	/**
+	 * This method is used to change the state (opened, closed) of the door
+	 * @return isOpened
+	 */
 	public boolean changeSignal() {
 		isOpened = !isOpened;
 		return isOpened;

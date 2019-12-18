@@ -10,8 +10,8 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.arpg.actor.Rarity;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Coin;
-import ch.epfl.cs107.play.game.arpg.actor.collectable.Heart;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Coin;
+import ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Heart;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -32,6 +32,12 @@ public class Grass extends AreaEntity {
 	private boolean active;
 	private boolean dropped;
 	
+	/**
+	 * Constructor for the Grass
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position in the area
+	 */
 	public Grass(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position);
 		sprite = new RPGSprite("zelda/grass", 1.f, 1.f, this, new RegionOfInterest(0, 0, 16, 16));
@@ -46,15 +52,10 @@ public class Grass extends AreaEntity {
 		animation = new Animation(sprites.length, sprites, false);
 	}
 	
-	@Override
-	public void update(float deltaTime) {
-		
-		if (!active)
-			animation.update(deltaTime);
-		
-		super.update(deltaTime);
-	}
-
+	/**
+	 * This method is used to destroy the Grass
+	 * @param wantDroppingItems true, for dropping Heart or Coin
+	 */
 	public void cut(boolean wantDroppingItems) {
 		active = false;
 		
@@ -70,6 +71,15 @@ public class Grass extends AreaEntity {
 			}
 			dropped = true;
 		}
+	}
+	
+	@Override
+	public void update(float deltaTime) {
+		
+		if (!active)
+			animation.update(deltaTime);
+		
+		super.update(deltaTime);
 	}
 	
 	@Override

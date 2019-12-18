@@ -27,6 +27,11 @@ public class WaterFountain extends AreaEntity implements SoundEntity {
     private Animation animation;
     private SoundAcoustics sound;
 
+    /**
+     * Constructor for the WaterFoutain
+     * @param area the area
+     * @param position the position in the area
+     */
     public WaterFountain(Area area, DiscreteCoordinates position) {
         super(area, Orientation.DOWN, position);
 

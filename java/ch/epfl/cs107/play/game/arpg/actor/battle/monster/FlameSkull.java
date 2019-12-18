@@ -40,6 +40,12 @@ public class FlameSkull extends MonsterEntity implements FlyableEntity {
 
 	private float remainingTime;
 
+	/**
+	 * Constructor for the FlameSkull
+	 * @param area the area
+	 * @param orientation the orientation
+	 * @param position the position
+	 */
 	public FlameSkull(Area area, Orientation orientation, DiscreteCoordinates position) {
 		super(area, orientation, position, 2.f, VULNERABILITIES);
 		

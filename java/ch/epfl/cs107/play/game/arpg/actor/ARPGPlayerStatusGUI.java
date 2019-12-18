@@ -23,6 +23,10 @@ public class ARPGPlayerStatusGUI implements Graphics {
 	private float invHeartTimer = INV_HEART_TIMER;
 	private int blinkCounter = 0;
 
+	/**
+	 * Constructor for the ARPGPlayerStatusGUI
+	 * @param player the player
+	 */
 	protected ARPGPlayerStatusGUI(ARPGPlayer player) {
 		this.player = player;
 	}

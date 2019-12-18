@@ -10,6 +10,11 @@ public class Lilypads extends Entity {
 
 	private RPGSprite sprite;
 	
+	/**
+	 * Constructor for the Lilypads
+	 * @param position the position
+	 * @param type the type, between 0 and 3
+	 */
 	public Lilypads(Vector position, int type) {
 		super(position);
 		if (type < 0 || type > 3)
