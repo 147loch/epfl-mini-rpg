@@ -5,7 +5,7 @@
 Afin de soumettre notre projet, nous avons dû omettre certains fichiers que nous avons rajoutés dans `res/`, ils sont disponibles à l'addresse suivante:
 https://drive.google.com/drive/folders/1DLTQZ81njx7j2XYH97izlQByb7ZLf6w6?usp=sharing
 
-Il suffira de glisser le dossier `res/` de `0_CUSTOM-RESOURCES` dans le dossier racine de notre projet, et les sprites et sons personnalisés (et leur sources décrites dans `CONCEPTION.md`) seront ajoutés automatiquement.
+Il suffira de glisser le dossier `res/` de `0_CUSTOM-RESOURCES` dans le dossier racine de notre projet, et les sprites et sons personnalisés (et leur sources décrites dans `README.md`) seront ajoutés automatiquement.
 
 Le drive contient aussi l'image de l'hierarchie utilisée dans notre projet. (Comme décrit dans `CONCEPTION.md`) 
 
@@ -247,31 +247,32 @@ Le shop est ouvert par intéraction mais est fermé avec la même touche que pou
 
 ## PNJ et Roi avec système de dialogue
 
-Afin de réaliser un petit scénario, nous avons ajoutés des PNJ (`NPC`) dans la carte
+Afin de réaliser un petit scénario, nous avons ajoutés des PNJ (`NPC`) dans certaines aires.
 
 Pour tous les PNJ, nous avons créé un systèmes de bulles pour indiquer si un dialogue n'a pas encore été lu (en utilisant la touche d'interaction à distance).
 
-
-- Système de bulles pour indiquer un dialogue non lu
-
 ## Entités animées (pour certaines) ajoutées
 
-- Nénuphars
-- Cascade
-- Effets d'eau
-- Rochers
-- Fontaine
-- Panneaux
-- Porte vers la grotte
-- Rocher avec l'épée
+Nous avons créé les entités statiques suivantes:
+- Nénuphars (dans la zone Route)
+- Panneaux (dans plusieurs zones, possèdent tous un dialogue)
+- Porte vers la grotte (au Nord du Village, ayant deux états, ouverte avec une bombe)
+- Rocher avec l'épée (au Nord du Village, en haut de la colline, l'épée peut être récupérée avec la touche d'interaction à distance)
+- Rochers (dispersés dans plusieurs zones)
+
+Et d'autres entités animées:
+- Cascade (en bas à droite de la zone Route, animée et émet un son en boucle)
+- Effets d'eau (dans la zone village, animés)
+- Fontaine (dans la zone village, animée et émet un son)
 
 ## Système d'actionnements pour créer des énigmes
+
+- Interface `Actionable`
 
 - Pont caché
 - Baton magique activable
 - Levier
 - Plaque de pression
-- Interface `Actionable`
 
 ## Bruitages et interfaces gérant des entités à sons répétés
 

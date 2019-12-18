@@ -7,7 +7,7 @@
 Afin de soumettre notre projet, nous avons dû omettre certains fichiers que nous avons rajoutés dans `res/`, ils sont disponibles à l'addresse suivante:
 https://drive.google.com/drive/folders/1DLTQZ81njx7j2XYH97izlQByb7ZLf6w6?usp=sharing
 
-Il suffira de glisser le dossier `res/` de `0_CUSTOM-RESOURCES` dans le dossier racine de notre projet, et les sprites et sons personnalisés (et leur sources décrites dans `CONCEPTION.md`) seront ajoutés automatiquement.
+Il suffira de glisser le dossier `res/` de `0_CUSTOM-RESOURCES` dans le dossier racine de notre projet, et les sprites et sons personnalisés (et leur sources décrites dans `README.md`) seront ajoutés automatiquement.
 
 Le drive contient aussi l'image de l'hierarchie utilisée dans notre projet. (Comme décrit dans `CONCEPTION.md`) 
 
@@ -77,7 +77,18 @@ Cette grotte est envahie de monstres troncs, mais possède un paquet de pièces 
 #### Fin du jeu 
 Une fois l'arc et les flèches obtenus, le joueur peut prendre le baton magique dans le temple et vaincre le Dark Lord. Celui-là laissera derrière lui après sa mort une clé qui permettra d'ouvrir la porte du château.
 
+# Sources des sprites et sons
+## Sons
 
+Les fichiers de sons commençant par `sw.` proviennent du jeu Stardew Valley. 
+Il est important de préciser que nous ne prévoyons pas de diffuser le jeu et avons utilisé ces bruitages dans un but personnel uniquement.
+Si le code venait à être diffusé, ces bruitages seront supprimés et remplacés par des bruitages dont la license est plus claire que "utilisation personelle uniquement".
 
+Les autres fichiers de sons sont des enregistrements de la campagne sécheronne efféctués par Loïc Herman. 
 
+## Sprites
+
+Tous les sprites ajoutés utilisent des assets venant de Opengameart, il est fort probable que ce soit le même que celui utilisé
+pour concevoir les backgrounds de la maquette car beaucoup d'entre eux sont pareils.
+Certains assets ont été modifiés comme celui du rocher de l'épée.
 
