@@ -64,7 +64,15 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
         animationVanish = new Animation(1, vanishAnimationSprites, false);
     }
 
-    // Final Methods
+    // Final Method
+    
+    /**
+     * This method handles the interaction if a monster
+     * can take a hit, or not, and what doing next.
+     * @param damageTook the type of damage
+     * @param damage the amount of damage
+     * @see DamageType
+     */
     public final void takeDamage(DamageType damageType, float damage) {
         if (vulnerabilities.contains(damageType) && invicibilityCounter < 0) {
             if (currentHealth - damage <= 0) {
@@ -78,15 +86,41 @@ public abstract class MonsterEntity extends MovableAreaEntity implements Interac
         }
     }
 
-    // Abstracted methods
+    // Abstracted Methods
+    
+    /**
+     * This method is called when a monster got some damage.
+     * @param damageTook the amount of damage taken by the monster
+     */
     protected abstract void handleDamageEvent(float damageTook);
+    /**
+     * This method is called when a monster die.
+     */
     protected abstract void handleDeathDropEvent();
 
     // Accessor / Mutator
+    
+    /**
+     * Return the maximum of health of the monster
+     * @return the maximum of health of the monster
+     */
     public final float getMaxHealth() { return maxHealth; }
+    /**
+     * Return the current health of the monster
+     * @return the current health of the monster
+     */
     public final float getCurrentHealth() { return currentHealth; }
 
+    /**
+     * Return the current state of the monster
+     * @return the current state of the monster
+     */
     protected final State getCurrentState() { return currentState; }
+    /**
+     * Change the state of the monster
+     * @param state the new state 
+     * @see State
+     */
     protected void setCurrentState(State state) { currentState = state; }
 
     // Overrides
