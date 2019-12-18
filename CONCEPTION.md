@@ -236,7 +236,7 @@ et appeler les méthods des listeners correspondants.
 
 ## Système d'inventaire avec interface et marchand
 
-Nous avons implémenté un système d'inventaire complet avec séléction des objets dans une interface qui peut être créée par 
+Nous avons implémenté un système d'inventaire complet avec sélection des objets dans une interface qui peut être créée par 
 tout acteur ayant un inventaire (le player tout comme le marchand).
 
 Le marchand est donc un simple personnage immobile qui possède un inventaire et a quelques méthodes supplémentaires pour que le joueur
