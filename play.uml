@@ -3,241 +3,241 @@
   <ID>JAVA</ID>
   <OriginalElement>ch.epfl.cs107.play</OriginalElement>
   <nodes>
-    <node x="3114.854469296135" y="464.0">ch.epfl.cs107.play.game.inventory.Inventory</node>
-    <node x="3008.104469296135" y="1211.0">ch.epfl.cs107.play.game.inventory.Inventory.Holder</node>
-    <node x="436.0" y="561.0">ch.epfl.cs107.play.game.arpg.ARPGBehavior</node>
-    <node x="2497.104469296135" y="1190.0">ch.epfl.cs107.play.game.arpg.area.Ferme</node>
-    <node x="717.75" y="1179.0">ch.epfl.cs107.play.game.keybindings.KeyboardEventListener</node>
-    <node x="1013.75" y="1125.0">ch.epfl.cs107.play.game.arpg.ARPG</node>
-    <node x="1486.104469296135" y="2224.0">ch.epfl.cs107.play.game.arpg.area.RouteChateau.CheatKeysEventListener</node>
-    <node x="10721.001006092672" y="950.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity</node>
-    <node x="1984.104469296135" y="1190.0">ch.epfl.cs107.play.game.arpg.area.RouteTemple</node>
-    <node x="1512.104469296135" y="1158.0">ch.epfl.cs107.play.game.arpg.area.RouteChateau</node>
-    <node x="1101.25" y="573.0">ch.epfl.cs107.play.game.rpg</node>
-    <node x="4718.062802629469" y="1654.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer</node>
-    <node x="772.875" y="382.0">ch.epfl.cs107.play.game.areagame</node>
-    <node x="12555.251006092672" y="3165.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile.MagicWaterProjectileHandler</node>
-    <node x="190.75" y="1104.0">ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell</node>
-    <node x="755.0" y="3475.0">ch.epfl.cs107.play.game.inventory.InventoryItem</node>
-    <node x="11050.95290804874" y="2157.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity.State</node>
-    <node x="6950.0352352894" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Bow</node>
-    <node x="770.5" y="3625.0">ch.epfl.cs107.play.game.arpg.actor.ARPGItem</node>
-    <node x="5859.0010060926725" y="1038.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity</node>
-    <node x="5062.062802629469" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CastleKey</node>
-    <node x="5644.062802629469" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.ArrowItem</node>
-    <node x="4247.104469296135" y="1049.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.WaterFountain</node>
-    <node x="12918.751006092672" y="3165.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow.ArrowHandler</node>
-    <node x="0.0" y="3177.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.InventoryKeyEventListener</node>
-    <node x="1661.0" y="3475.0">ch.epfl.cs107.play.game.keybindings.Event</node>
-    <node x="3677.032962562127" y="2006.0">ch.epfl.cs107.play.game.arpg.actor.Shop</node>
-    <node x="5792.643863235529" y="3022.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.ARPGPlayerHandler</node>
-    <node x="5365.062802629469" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Staff</node>
-    <node x="10235.001006092672" y="1125.0">ch.epfl.cs107.play.game.arpg.actor.GameOver</node>
-    <node x="8691.001006092672" y="939.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb</node>
-    <node x="10425.001006092672" y="1092.0">ch.epfl.cs107.play.game.arpg.actor.ARPGInventoryGUI</node>
-    <node x="8300.001006092672" y="1169.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity</node>
-    <node x="9452.770833333334" y="2003.0">ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor</node>
-    <node x="7251.0010060926725" y="939.0">ch.epfl.cs107.play.game.arpg.actor.npc.NPC</node>
-    <node x="3892.104469296135" y="1060.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge</node>
-    <node x="10710.45290804874" y="3198.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster.ARPGLogMonsterHandler</node>
-    <node x="730.0" y="3198.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CycleItemKeyEventListener</node>
-    <node x="6878.0010060926725" y="1049.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever</node>
-    <node x="1477.0" y="3475.0">ch.epfl.cs107.play.game.arpg.actor.npc.Emotion</node>
-    <node x="1979.282752124418" y="464.0">ch.epfl.cs107.play.game.arpg.area.ARPGArea</node>
-    <node x="3483.201901956066" y="3187.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.UseInventoryKeyItemEventListener</node>
-    <node x="4155.479469296135" y="561.0">ch.epfl.cs107.play.game.arpg.actor.entity.SoundEntity</node>
-    <node x="2143.104469296135" y="1158.0">ch.epfl.cs107.play.game.arpg.area.Village</node>
-    <node x="2849.104469296135" y="1190.0">ch.epfl.cs107.play.game.arpg.area.Chateau</node>
-    <node x="499.75" y="1092.0">ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCellType</node>
-    <node x="9926.001006092672" y="1104.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Rock</node>
-    <node x="6384.0352352894" y="2203.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Heart</node>
-    <node x="12204.251006092672" y="1995.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull</node>
-    <node x="3777.201901956066" y="3177.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.MoveOrientateKeyEventListener</node>
-    <node x="2592.0" y="3475.0">ch.epfl.cs107.play.Play</node>
-    <node x="238.0" y="3198.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CheatKeysEventListener</node>
-    <node x="1825.104469296135" y="1190.0">ch.epfl.cs107.play.game.arpg.area.GrotteMew</node>
-    <node x="3766.229469296135" y="561.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.Actionable</node>
-    <node x="12543.251006092672" y="2126.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile</node>
-    <node x="12621.751006092672" y="1038.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile</node>
-    <node x="475.0" y="3475.0">ch.epfl.cs107.play.game.keybindings.XMLBindings</node>
-    <node x="11434.001006092672" y="1093.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor</node>
-    <node x="9024.5352352894" y="3165.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb.ARPGBombHandler</node>
-    <node x="3245.104469296135" y="1103.0">ch.epfl.cs107.play.game.arpg.actor.ARPGInventory</node>
-    <node x="9005.001006092672" y="1092.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayerStatusGUI</node>
-    <node x="9316.001006092672" y="1093.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor</node>
-    <node x="11190.001006092672" y="1136.0">ch.epfl.cs107.play.game.arpg.actor.entity.WaterEffect</node>
-    <node x="733.375" y="106.0">ch.epfl.cs107.play.game.Playable</node>
-    <node x="3529.104469296135" y="1147.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.ActionableStaff</node>
-    <node x="12201.751006092672" y="3176.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull.ARPGFlameSkullHandler</node>
-    <node x="2338.104469296135" y="1190.0">ch.epfl.cs107.play.game.arpg.area.MaisonFerme</node>
-    <node x="6665.0352352894" y="2116.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Sword</node>
-    <node x="8221.973438752604" y="3165.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell.FireSpellHandler</node>
-    <node x="213.0" y="3623.0">ch.epfl.cs107.play.game.keybindings.KeyboardAction</node>
-    <node x="5952.062802629469" y="2203.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Coin</node>
-    <node x="12938.251006092672" y="2137.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow</node>
-    <node x="6421.0010060926725" y="1016.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Grass</node>
-    <node x="213.0" y="3475.0">ch.epfl.cs107.play.game.keybindings.Action</node>
-    <node x="48.0" y="3475.0">ch.epfl.cs107.play.game.keybindings.Key</node>
-    <node x="2756.0" y="3475.0">ch.epfl.cs107.play.game.arpg.Test</node>
-    <node x="652.5" y="2213.0">ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener</node>
-    <node x="10224.687802629469" y="3198.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord.ARPGDarkLordHandler</node>
-    <node x="12038.001006092672" y="1038.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate</node>
-    <node x="6731.0010060926725" y="1169.0">ch.epfl.cs107.play.game.arpg.actor.entity.Lilypads</node>
-    <node x="452.0" y="3198.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.AcceptDeathDialogEventListener</node>
-    <node x="0.0" y="3581.0">ch.epfl.cs107.play.game.keybindings.KeyboardKey</node>
-    <node x="2927.875" y="3198.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.OpenInventoryEventListener</node>
-    <node x="2025.0" y="3475.0">ch.epfl.cs107.play.game.keybindings.XMLBinding</node>
-    <node x="7954.0010060926725" y="884.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell</node>
-    <node x="4556.104469296135" y="1114.0">ch.epfl.cs107.play.game.arpg.actor.entity.Waterfall</node>
-    <node x="5219.220765191596" y="3154.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.Behavior</node>
-    <node x="952.0" y="3475.0">ch.epfl.cs107.play.game.keybindings.KeyboardEventRegister</node>
-    <node x="1328.75" y="1190.0">ch.epfl.cs107.play.game.arpg.area.Temple</node>
-    <node x="10704.95290804874" y="1951.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster</node>
-    <node x="7538.473438752604" y="3198.0">ch.epfl.cs107.play.game.arpg.actor.npc.NPC.ARPGNpcHandler</node>
-    <node x="10227.187802629469" y="1907.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord</node>
-    <node x="7645.0010060926725" y="1137.0">ch.epfl.cs107.play.game.arpg.actor.npc.King</node>
-    <node x="8238.458333333334" y="573.0">ch.epfl.cs107.play.game.actor</node>
-    <node x="2271.0" y="3475.0">ch.epfl.cs107.play.game.arpg.actor.Rarity</node>
-    <node x="12877.958333333334" y="561.0">ch.epfl.cs107.play.game.arpg.actor.FlyableEntity</node>
-    <node x="2656.104469296135" y="1158.0">ch.epfl.cs107.play.game.arpg.area.Route</node>
-    <node x="4522.458333333334" y="0.0">ch.epfl.cs107.play.game.Updatable</node>
-    <node x="2449.0" y="3475.0">ch.epfl.cs107.play.game.arpg.actor.battle.DamageType</node>
-    <node x="780.875" y="276.0">ch.epfl.cs107.play.game.Game</node>
+    <node x="3017.2999999999993" y="464.0">ch.epfl.cs107.play.game.inventory.Inventory</node>
+    <node x="3171.0499999999993" y="1201.0">ch.epfl.cs107.play.game.inventory.Inventory.Holder</node>
+    <node x="359.75" y="561.0">ch.epfl.cs107.play.game.arpg.ARPGBehavior</node>
+    <node x="2215.0499999999993" y="1180.0">ch.epfl.cs107.play.game.arpg.area.Ferme</node>
+    <node x="842.0" y="1169.0">ch.epfl.cs107.play.game.keybindings.KeyboardEventListener</node>
+    <node x="0.0" y="1115.0">ch.epfl.cs107.play.game.arpg.ARPG</node>
+    <node x="1558.0499999999993" y="2224.0">ch.epfl.cs107.play.game.arpg.area.RouteChateau.CheatKeysEventListener</node>
+    <node x="10931.649741462239" y="940.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity</node>
+    <node x="1331.0" y="1180.0">ch.epfl.cs107.play.game.arpg.area.RouteTemple</node>
+    <node x="1584.0499999999993" y="1148.0">ch.epfl.cs107.play.game.arpg.area.RouteChateau</node>
+    <node x="87.5" y="573.0">ch.epfl.cs107.play.game.rpg</node>
+    <node x="5031.549999999999" y="1654.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer</node>
+    <node x="561.4109708193046" y="382.0">ch.epfl.cs107.play.game.areagame</node>
+    <node x="12866.899741462239" y="3185.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile.MagicWaterProjectileHandler</node>
+    <node x="533.0" y="1094.0">ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell</node>
+    <node x="755.0" y="3495.0">ch.epfl.cs107.play.game.inventory.InventoryItem</node>
+    <node x="10954.399741462239" y="2157.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity.State</node>
+    <node x="9205.907142857142" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Bow</node>
+    <node x="770.5" y="3645.0">ch.epfl.cs107.play.game.arpg.actor.ARPGItem</node>
+    <node x="8898.002014189513" y="1028.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity</node>
+    <node x="9484.907142857142" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CastleKey</node>
+    <node x="9787.907142857142" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.ArrowItem</node>
+    <node x="4370.049999999999" y="1039.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.WaterFountain</node>
+    <node x="13230.399741462239" y="3185.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow.ArrowHandler</node>
+    <node x="640.6609708193046" y="3197.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.InventoryKeyEventListener</node>
+    <node x="1661.0" y="3495.0">ch.epfl.cs107.play.game.keybindings.Event</node>
+    <node x="3876.9175986050977" y="2006.0">ch.epfl.cs107.play.game.arpg.actor.Shop</node>
+    <node x="5454.144871332371" y="3042.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.ARPGPlayerHandler</node>
+    <node x="8645.907142857142" y="2224.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Staff</node>
+    <node x="12020.649741462239" y="1115.0">ch.epfl.cs107.play.game.arpg.actor.GameOver</node>
+    <node x="6044.049999999999" y="929.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb</node>
+    <node x="6358.049999999999" y="1082.0">ch.epfl.cs107.play.game.arpg.actor.ARPGInventoryGUI</node>
+    <node x="6654.049999999999" y="1159.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity</node>
+    <node x="10190.895913500077" y="2003.0">ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor</node>
+    <node x="7833.049999999999" y="929.0">ch.epfl.cs107.play.game.arpg.actor.npc.NPC</node>
+    <node x="3771.0499999999993" y="1050.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge</node>
+    <node x="11126.899741462239" y="3218.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster.ARPGLogMonsterHandler</node>
+    <node x="3060.9109708193046" y="3218.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CycleItemKeyEventListener</node>
+    <node x="7045.049999999999" y="1039.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever</node>
+    <node x="1477.0" y="3495.0">ch.epfl.cs107.play.game.arpg.actor.npc.Emotion</node>
+    <node x="2131.7837602212594" y="464.0">ch.epfl.cs107.play.game.arpg.area.ARPGArea</node>
+    <node x="3328.9109708193046" y="3207.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.UseInventoryKeyItemEventListener</node>
+    <node x="4155.394871332371" y="561.0">ch.epfl.cs107.play.game.arpg.actor.entity.SoundEntity</node>
+    <node x="2374.0499999999993" y="1148.0">ch.epfl.cs107.play.game.arpg.area.Village</node>
+    <node x="1897.0499999999993" y="1180.0">ch.epfl.cs107.play.game.arpg.area.Chateau</node>
+    <node x="315.0" y="1082.0">ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCellType</node>
+    <node x="9594.002014189513" y="1094.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Rock</node>
+    <node x="8924.907142857142" y="2203.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Heart</node>
+    <node x="12515.899741462239" y="1995.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull</node>
+    <node x="878.6609708193046" y="3197.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.MoveOrientateKeyEventListener</node>
+    <node x="2592.0" y="3495.0">ch.epfl.cs107.play.Play</node>
+    <node x="3622.9109708193046" y="3218.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CheatKeysEventListener</node>
+    <node x="2569.0499999999993" y="1180.0">ch.epfl.cs107.play.game.arpg.area.GrotteMew</node>
+    <node x="3645.1749999999993" y="561.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.Actionable</node>
+    <node x="12854.899741462239" y="2126.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile</node>
+    <node x="12933.399741462239" y="1028.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile</node>
+    <node x="475.0" y="3495.0">ch.epfl.cs107.play.game.keybindings.XMLBindings</node>
+    <node x="4680.049999999999" y="1083.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor</node>
+    <node x="6309.160970819305" y="3185.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb.ARPGBombHandler</node>
+    <node x="2887.0499999999993" y="1093.0">ch.epfl.cs107.play.game.arpg.actor.ARPGInventory</node>
+    <node x="11709.649741462239" y="1082.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayerStatusGUI</node>
+    <node x="5287.049999999999" y="1083.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor</node>
+    <node x="12210.649741462239" y="1126.0">ch.epfl.cs107.play.game.arpg.actor.entity.WaterEffect</node>
+    <node x="521.9109708193046" y="106.0">ch.epfl.cs107.play.game.Playable</node>
+    <node x="3408.0499999999993" y="1137.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.ActionableStaff</node>
+    <node x="12513.399741462239" y="3196.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull.ARPGFlameSkullHandler</node>
+    <node x="2728.0499999999993" y="1180.0">ch.epfl.cs107.play.game.arpg.area.MaisonFerme</node>
+    <node x="8081.907142857142" y="2116.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Sword</node>
+    <node x="10255.149741462239" y="3185.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell.FireSpellHandler</node>
+    <node x="213.0" y="3643.0">ch.epfl.cs107.play.game.keybindings.KeyboardAction</node>
+    <node x="8366.907142857142" y="2203.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Coin</node>
+    <node x="13249.899741462239" y="2137.0">ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow</node>
+    <node x="12454.649741462239" y="1006.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.Grass</node>
+    <node x="213.0" y="3495.0">ch.epfl.cs107.play.game.keybindings.Action</node>
+    <node x="48.0" y="3495.0">ch.epfl.cs107.play.game.keybindings.Key</node>
+    <node x="2756.0" y="3495.0">ch.epfl.cs107.play.game.arpg.Test</node>
+    <node x="1125.2999999999993" y="2213.0">ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener</node>
+    <node x="10521.649741462239" y="3218.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord.ARPGDarkLordHandler</node>
+    <node x="7418.049999999999" y="1028.0">ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate</node>
+    <node x="5897.049999999999" y="1159.0">ch.epfl.cs107.play.game.arpg.actor.entity.Lilypads</node>
+    <node x="1244.8977272727261" y="3218.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.AcceptDeathDialogEventListener</node>
+    <node x="0.0" y="3601.0">ch.epfl.cs107.play.game.keybindings.KeyboardKey</node>
+    <node x="3866.9109708193046" y="3218.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.OpenInventoryEventListener</node>
+    <node x="2025.0" y="3495.0">ch.epfl.cs107.play.game.keybindings.XMLBinding</node>
+    <node x="10017.395913500077" y="874.0">ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell</node>
+    <node x="4126.049999999999" y="1104.0">ch.epfl.cs107.play.game.arpg.actor.entity.Waterfall</node>
+    <node x="5293.144871332371" y="3174.0">ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.Behavior</node>
+    <node x="952.0" y="3495.0">ch.epfl.cs107.play.game.keybindings.KeyboardEventRegister</node>
+    <node x="2056.0499999999993" y="1180.0">ch.epfl.cs107.play.game.arpg.area.Temple</node>
+    <node x="11121.399741462239" y="1951.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster</node>
+    <node x="8133.660970819305" y="3218.0">ch.epfl.cs107.play.game.arpg.actor.npc.NPC.ARPGNpcHandler</node>
+    <node x="10624.399741462239" y="1907.0">ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord</node>
+    <node x="11400.649741462239" y="1127.0">ch.epfl.cs107.play.game.arpg.actor.npc.King</node>
+    <node x="7516.660970819305" y="573.0">ch.epfl.cs107.play.game.actor</node>
+    <node x="2271.0" y="3495.0">ch.epfl.cs107.play.game.arpg.actor.Rarity</node>
+    <node x="13069.293680856179" y="561.0">ch.epfl.cs107.play.game.arpg.actor.FlyableEntity</node>
+    <node x="1138.0" y="1148.0">ch.epfl.cs107.play.game.arpg.area.Route</node>
+    <node x="3989.7443041526376" y="0.0">ch.epfl.cs107.play.game.Updatable</node>
+    <node x="2449.0" y="3495.0">ch.epfl.cs107.play.game.arpg.actor.battle.DamageType</node>
+    <node x="569.4109708193046" y="276.0">ch.epfl.cs107.play.game.Game</node>
   </nodes>
   <notes />
   <edges>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.Rock" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-135.0" />
-      <point x="10070.501006092672" y="824.0" />
-      <point x="8331.958333333334" y="824.0" />
-      <point x="25.5" y="16.0" />
+      <point x="9738.502014189513" y="824.0" />
+      <point x="7604.4943041526385" y="824.0" />
+      <point x="19.83333333333394" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb.ARPGBombHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="48.0" y="-61.0" />
-      <point x="9168.5352352894" y="3002.0" />
-      <point x="9554.270833333334" y="3002.0" />
-      <point x="-29.0" y="270.0" />
+      <point x="6453.160970819305" y="3012.0" />
+      <point x="10234.395913500077" y="3012.0" />
+      <point x="-87.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.Shop" target="ch.epfl.cs107.play.game.actor">
       <point x="72.25" y="-267.0" />
-      <point x="3893.782962562127" y="1634.0" />
-      <point x="4790.604469296135" y="1634.0" />
-      <point x="4790.604469296135" y="784.0" />
-      <point x="8258.291666666666" y="784.0" />
-      <point x="-48.16666666666697" y="16.0" />
+      <point x="4093.6675986050977" y="1634.0" />
+      <point x="4669.549999999999" y="1634.0" />
+      <point x="4669.549999999999" y="774.0" />
+      <point x="7536.4943041526385" y="774.0" />
+      <point x="-48.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.entity.WaterEffect" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-103.0" />
-      <point x="11302.001006092672" y="784.0" />
-      <point x="8354.625" y="784.0" />
-      <point x="48.16666666666697" y="16.0" />
+      <point x="12322.649741462239" y="764.0" />
+      <point x="7638.4943041526385" y="764.0" />
+      <point x="53.83333333333394" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.puzzle.ActionableStaff" target="ch.epfl.cs107.play.game.arpg.actor.puzzle.Actionable">
       <point x="0.0" y="-92.0" />
-      <point x="3700.604469296135" y="864.0" />
-      <point x="3802.229469296135" y="864.0" />
+      <point x="3579.5499999999993" y="854.0" />
+      <point x="3681.1749999999993" y="854.0" />
       <point x="-36.0" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge" target="ch.epfl.cs107.play.game.arpg.actor.puzzle.Actionable">
       <point x="-83.75" y="-179.0" />
-      <point x="3975.854469296135" y="864.0" />
-      <point x="3874.229469296135" y="864.0" />
+      <point x="3854.7999999999993" y="854.0" />
+      <point x="3753.1749999999993" y="854.0" />
       <point x="36.0" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.puzzle.Lever" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-190.0" />
-      <point x="7054.5010060926725" y="834.0" />
-      <point x="8286.625" y="834.0" />
-      <point x="-19.83333333333303" y="16.0" />
+      <point x="7221.549999999999" y="854.0" />
+      <point x="7581.827637485971" y="854.0" />
+      <point x="-2.8333333333339397" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell.FireSpellHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="48.0" y="-61.0" />
-      <point x="8365.973438752604" y="2992.0" />
-      <point x="9525.270833333334" y="2992.0" />
-      <point x="-58.0" y="270.0" />
+      <point x="10399.149741462239" y="2982.0" />
+      <point x="10292.395913500077" y="2982.0" />
+      <point x="-29.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull" target="ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity">
       <point x="-79.75" y="-278.0" />
-      <point x="12284.001006092672" y="1624.0" />
-      <point x="11113.876006092672" y="1624.0" />
+      <point x="12595.649741462239" y="1634.0" />
+      <point x="11324.524741462239" y="1634.0" />
       <point x="168.375" y="289.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer" target="ch.epfl.cs107.play.game.actor">
       <point x="81.0" y="-619.0" />
-      <point x="4961.062802629469" y="794.0" />
-      <point x="8263.958333333334" y="794.0" />
-      <point x="-42.5" y="16.0" />
+      <point x="5274.549999999999" y="794.0" />
+      <point x="7547.827637485971" y="794.0" />
+      <point x="-36.83333333333394" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.Chateau" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-49.0" />
-      <point x="2918.604469296135" y="824.0" />
-      <point x="2205.00497434664" y="824.0" />
-      <point x="106.22222222222217" y="125.0" />
+      <point x="1966.5499999999993" y="844.0" />
+      <point x="2224.7282046657037" y="844.0" />
+      <point x="-26.555555555555657" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.entity.Waterfall" target="ch.epfl.cs107.play.game.arpg.actor.entity.SoundEntity">
       <point x="-56.0" y="-125.0" />
-      <point x="4612.104469296135" y="734.0" />
-      <point x="4285.229469296135" y="734.0" />
-      <point x="43.25" y="28.0" />
+      <point x="4182.049999999999" y="734.0" />
+      <point x="4198.644871332371" y="734.0" />
+      <point x="-43.25" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.npc.NPC" target="ch.epfl.cs107.play.game.actor">
-      <point x="-9.094947017729282E-13" y="-300.0" />
-      <point x="7438.001006092672" y="844.0" />
-      <point x="8292.291666666666" y="844.0" />
-      <point x="-14.16666666666697" y="16.0" />
+      <point x="0.0" y="-300.0" />
+      <point x="8020.049999999999" y="844.0" />
+      <point x="7593.160970819305" y="844.0" />
+      <point x="8.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGInventory" target="ch.epfl.cs107.play.game.inventory.Inventory">
       <point x="0.0" y="-136.0" />
-      <point x="3377.104469296135" y="864.0" />
-      <point x="3312.854469296135" y="864.0" />
-      <point x="66.0" y="125.0" />
+      <point x="3019.0499999999993" y="854.0" />
+      <point x="3083.2999999999993" y="854.0" />
+      <point x="-66.0" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord.ARPGDarkLordHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="-52.5" y="-28.0" />
-      <point x="10277.187802629469" y="3002.0" />
-      <point x="9583.270833333334" y="3002.0" />
+      <point x="10574.149741462239" y="2972.0" />
+      <point x="10321.395913500077" y="2972.0" />
       <point x="0.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener" target="ch.epfl.cs107.play.game.keybindings.KeyboardEventListener">
       <point x="0.0" y="-60.0" />
-      <point x="784.5" y="1634.0" />
-      <point x="821.25" y="1634.0" />
-      <point x="-34.5" y="60.0" />
+      <point x="1257.2999999999993" y="1634.0" />
+      <point x="1014.5" y="1634.0" />
+      <point x="34.5" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.AcceptDeathDialogEventListener" target="ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener">
       <point x="-64.5" y="-28.0" />
-      <point x="516.5" y="2932.0" />
-      <point x="731.6999999999998" y="2932.0" />
-      <point x="-52.799999999999955" y="60.0" />
+      <point x="1309.3977272727261" y="2952.0" />
+      <point x="1151.699999999999" y="2952.0" />
+      <point x="-105.60000000000002" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.inventory.Inventory.Holder" target="ch.epfl.cs107.play.game.inventory.Inventory">
       <point x="0.0" y="-28.0" />
-      <point x="3116.604469296135" y="864.0" />
-      <point x="3180.854469296135" y="864.0" />
-      <point x="-66.0" y="125.0" />
+      <point x="3279.5499999999993" y="854.0" />
+      <point x="3215.2999999999993" y="854.0" />
+      <point x="66.0" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-201.0" />
-      <point x="12235.501006092672" y="764.0" />
-      <point x="8365.958333333334" y="764.0" />
-      <point x="59.5" y="16.0" />
+      <point x="7615.549999999999" y="854.0" />
+      <point x="7587.4943041526385" y="854.0" />
+      <point x="2.8333333333339397" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell" target="ch.epfl.cs107.play.game.areagame">
-      <point x="-72.25" y="-135.0" />
-      <point x="263.0" y="434.0" />
-      <point x="792.875" y="434.0" />
-      <point x="-60.0" y="16.0" />
+      <point x="72.25" y="-135.0" />
+      <point x="749.75" y="444.0" />
+      <point x="661.4109708193046" y="444.0" />
+      <point x="20.0" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.entity.Waterfall" target="ch.epfl.cs107.play.game.actor">
       <point x="56.0" y="-125.0" />
-      <point x="4724.104469296135" y="774.0" />
-      <point x="8252.625" y="774.0" />
-      <point x="-53.83333333333303" y="16.0" />
+      <point x="4294.049999999999" y="754.0" />
+      <point x="7525.160970819305" y="754.0" />
+      <point x="-59.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CycleItemKeyEventListener" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
-      <point x="54.5" y="-28.0" />
-      <point x="893.5" y="2972.0" />
-      <point x="4844.062802629469" y="2972.0" />
+      <point x="62.0" y="-28.0" />
+      <point x="3246.9109708193046" y="2992.0" />
+      <point x="5157.549999999999" y="2992.0" />
       <point x="-36.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.ARPG" target="ch.epfl.cs107.play.game.rpg">
@@ -246,98 +246,98 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.MoveOrientateKeyEventListener" target="ch.epfl.cs107.play.game.keybindings.KeyboardEventListener">
       <point x="-62.5" y="-49.0" />
-      <point x="3839.701901956066" y="2912.0" />
-      <point x="1085.6544692961352" y="2912.0" />
-      <point x="1085.6544692961352" y="1634.0" />
-      <point x="890.25" y="1634.0" />
-      <point x="34.5" y="60.0" />
+      <point x="941.1609708193046" y="1634.0" />
+      <point x="945.5" y="1634.0" />
+      <point x="-34.5" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.puzzle.HiddenBridge" target="ch.epfl.cs107.play.game.actor">
       <point x="83.75" y="-179.0" />
-      <point x="4143.354469296135" y="754.0" />
-      <point x="8241.291666666666" y="754.0" />
-      <point x="-65.16666666666697" y="16.0" />
+      <point x="4022.2999999999993" y="744.0" />
+      <point x="7519.4943041526385" y="744.0" />
+      <point x="-65.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.RouteTemple" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-49.0" />
-      <point x="2053.604469296135" y="864.0" />
-      <point x="2072.2271965688624" y="864.0" />
-      <point x="-26.555555555555657" y="125.0" />
+      <point x="1400.5" y="824.0" />
+      <point x="2171.617093554593" y="824.0" />
+      <point x="-79.66666666666652" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord.ARPGDarkLordHandler" target="ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord">
       <point x="52.5" y="-28.0" />
+      <point x="10679.149741462239" y="3022.0" />
+      <point x="10779.399741462239" y="3022.0" />
       <point x="0.0" y="366.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Staff" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity">
       <point x="0.0" y="-49.0" />
-      <point x="5494.562802629469" y="1624.0" />
-      <point x="5975.143863235529" y="1624.0" />
-      <point x="-154.85714285714312" y="201.0" />
+      <point x="8775.407142857142" y="1624.0" />
+      <point x="9091.573442760942" y="1624.0" />
+      <point x="-77.42857142857156" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCell" target="ch.epfl.cs107.play.game.arpg.ARPGBehavior">
-      <point x="72.25" y="-135.0" />
-      <point x="407.5" y="864.0" />
-      <point x="490.25" y="864.0" />
-      <point x="-54.25" y="28.0" />
+      <point x="-72.25" y="-135.0" />
+      <point x="605.25" y="854.0" />
+      <point x="522.5" y="854.0" />
+      <point x="54.25" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CheatKeysEventListener" target="ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener">
-      <point x="-48.5" y="-28.0" />
-      <point x="286.5" y="2922.0" />
-      <point x="678.9000000000005" y="2922.0" />
-      <point x="-105.59999999999991" y="60.0" />
+      <point x="-56.0" y="-28.0" />
+      <point x="3678.9109708193046" y="2922.0" />
+      <point x="1310.0999999999995" y="2922.0" />
+      <point x="52.799999999999955" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity.State" target="ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity">
       <point x="0.0" y="-116.0" />
-      <point x="11124.45290804874" y="1634.0" />
-      <point x="11001.626006092672" y="1634.0" />
-      <point x="56.125" y="289.0" />
+      <point x="11027.899741462239" y="1634.0" />
+      <point x="11100.024741462239" y="1634.0" />
+      <point x="-56.125" y="289.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.rpg" target="ch.epfl.cs107.play.game.areagame">
       <point x="0.0" y="-16.0" />
-      <point x="1161.25" y="444.0" />
-      <point x="872.875" y="444.0" />
-      <point x="20.0" y="16.0" />
+      <point x="147.5" y="434.0" />
+      <point x="581.4109708193046" y="434.0" />
+      <point x="-60.0" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.SignEntity" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-70.0" />
-      <point x="8485.501006092672" y="864.0" />
-      <point x="8309.291666666666" y="864.0" />
-      <point x="2.83333333333303" y="16.0" />
+      <point x="6839.549999999999" y="844.0" />
+      <point x="7576.160970819305" y="844.0" />
+      <point x="-8.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.CastleDoor" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-146.0" />
-      <point x="9611.001006092672" y="834.0" />
-      <point x="8326.291666666666" y="834.0" />
-      <point x="19.83333333333303" y="16.0" />
+      <point x="5582.049999999999" y="804.0" />
+      <point x="7553.4943041526385" y="804.0" />
+      <point x="-31.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.areagame" target="ch.epfl.cs107.play.game.Game">
       <point x="-40.0" y="-16.0" />
-      <point x="812.875" y="357.0" />
-      <point x="825.375" y="357.0" />
+      <point x="601.4109708193046" y="357.0" />
+      <point x="613.9109708193046" y="357.0" />
       <point x="0.0" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CastleKey" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity">
       <point x="0.0" y="-49.0" />
-      <point x="5203.562802629469" y="1614.0" />
-      <point x="5897.715291806959" y="1614.0" />
-      <point x="-232.28571428571377" y="201.0" />
+      <point x="9626.407142857142" y="1624.0" />
+      <point x="9323.859157046656" y="1624.0" />
+      <point x="154.85714285714312" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.npc.NPC.ARPGNpcHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="52.5" y="-28.0" />
-      <point x="7695.973438752604" y="2982.0" />
-      <point x="9496.270833333334" y="2982.0" />
-      <point x="-87.0" y="270.0" />
+      <point x="8291.160970819305" y="3022.0" />
+      <point x="10263.395913500077" y="3022.0" />
+      <point x="-58.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-300.0" />
-      <point x="8838.001006092672" y="854.0" />
-      <point x="8314.958333333334" y="854.0" />
-      <point x="8.5" y="16.0" />
+      <point x="6191.049999999999" y="824.0" />
+      <point x="7564.827637485971" y="824.0" />
+      <point x="-19.83333333333394" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow" target="ch.epfl.cs107.play.game.arpg.actor.FlyableEntity">
       <point x="73.5" y="-136.0" />
-      <point x="13158.751006092672" y="864.0" />
-      <point x="13004.625" y="864.0" />
+      <point x="13470.399741462239" y="844.0" />
+      <point x="13195.960347522847" y="844.0" />
       <point x="50.66666666666606" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.keybindings.KeyboardKey" target="ch.epfl.cs107.play.game.keybindings.Key">
@@ -346,61 +346,63 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.npc.NPC.ARPGNpcHandler" target="ch.epfl.cs107.play.game.arpg.actor.npc.NPC">
       <point x="-52.5" y="-28.0" />
-      <point x="7590.973438752604" y="2962.0" />
-      <point x="7438.0010060926725" y="2962.0" />
+      <point x="8186.160970819305" y="2992.0" />
+      <point x="8020.049999999999" y="2992.0" />
       <point x="0.0" y="300.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.OpenInventoryEventListener" target="ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener">
       <point x="-56.5" y="-28.0" />
-      <point x="2984.375" y="2932.0" />
-      <point x="837.3000000000002" y="2932.0" />
-      <point x="52.799999999999955" y="60.0" />
+      <point x="3923.4109708193046" y="2912.0" />
+      <point x="1362.8999999999996" y="2912.0" />
+      <point x="105.60000000000002" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow" target="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile">
       <point x="-73.5" y="-136.0" />
-      <point x="13011.751006092672" y="1634.0" />
-      <point x="12948.751006092672" y="1634.0" />
+      <point x="13323.399741462239" y="1634.0" />
+      <point x="13260.399741462239" y="1634.0" />
       <point x="109.0" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CycleItemKeyEventListener" target="ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener">
-      <point x="-54.5" y="-28.0" />
-      <point x="0.0" y="60.0" />
+      <point x="-62.0" y="-28.0" />
+      <point x="3122.9109708193046" y="2942.0" />
+      <point x="1204.499999999999" y="2942.0" />
+      <point x="-52.799999999999955" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.ARPGBehavior" target="ch.epfl.cs107.play.game.areagame">
       <point x="0.0" y="-28.0" />
-      <point x="544.5" y="444.0" />
-      <point x="832.875" y="444.0" />
+      <point x="468.25" y="444.0" />
+      <point x="621.4109708193046" y="444.0" />
       <point x="-20.0" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.actor" target="ch.epfl.cs107.play.game.Updatable">
       <point x="0.0" y="-16.0" />
-      <point x="8306.458333333334" y="81.0" />
-      <point x="4607.958333333334" y="81.0" />
+      <point x="7584.660970819305" y="81.0" />
+      <point x="4075.2443041526376" y="81.0" />
       <point x="28.5" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.MaisonFerme" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-49.0" />
-      <point x="2407.604469296135" y="854.0" />
-      <point x="2125.3383076799737" y="854.0" />
-      <point x="26.555555555555657" y="125.0" />
+      <point x="2797.5499999999993" y="834.0" />
+      <point x="2357.5059824434816" y="834.0" />
+      <point x="106.22222222222217" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.Behavior" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
       <point x="0.0" y="-72.0" />
-      <point x="5289.720765191596" y="3002.0" />
-      <point x="4988.062802629469" y="3002.0" />
+      <point x="5363.644871332371" y="3022.0" />
+      <point x="5301.549999999999" y="3022.0" />
       <point x="108.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster" target="ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity">
       <point x="0.0" y="-322.0" />
-      <point x="10867.95290804874" y="1634.0" />
-      <point x="10889.376006092672" y="1634.0" />
-      <point x="-56.125" y="289.0" />
+      <point x="11284.399741462239" y="1634.0" />
+      <point x="11212.274741462239" y="1634.0" />
+      <point x="56.125" y="289.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayerStatusGUI" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-147.0" />
-      <point x="9150.501006092672" y="844.0" />
-      <point x="8320.625" y="844.0" />
-      <point x="14.16666666666697" y="16.0" />
+      <point x="11855.149741462239" y="784.0" />
+      <point x="7627.160970819305" y="784.0" />
+      <point x="42.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow.ArrowHandler" target="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow">
       <point x="55.5" y="-61.0" />
@@ -408,27 +410,27 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Heart" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity">
       <point x="0.0" y="-70.0" />
-      <point x="6514.5352352894" y="1634.0" />
-      <point x="6207.429577521243" y="1634.0" />
-      <point x="77.42857142857065" y="201.0" />
+      <point x="9055.407142857142" y="1634.0" />
+      <point x="9169.002014189513" y="1634.0" />
+      <point x="0.0" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster.ARPGLogMonsterHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="-52.5" y="-28.0" />
-      <point x="10762.95290804874" y="2992.0" />
-      <point x="9612.270833333334" y="2992.0" />
+      <point x="11179.399741462239" y="2962.0" />
+      <point x="10350.395913500077" y="2962.0" />
       <point x="29.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.Grass" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-223.0" />
-      <point x="6566.0010060926725" y="814.0" />
-      <point x="8275.291666666666" y="814.0" />
-      <point x="-31.16666666666697" y="16.0" />
+      <point x="12599.649741462239" y="754.0" />
+      <point x="7644.160970819305" y="754.0" />
+      <point x="59.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.WaterFountain" target="ch.epfl.cs107.play.game.actor">
       <point x="72.25" y="-190.0" />
-      <point x="4463.854469296135" y="764.0" />
-      <point x="8246.958333333334" y="764.0" />
-      <point x="-59.5" y="16.0" />
+      <point x="4586.799999999999" y="764.0" />
+      <point x="7530.827637485971" y="764.0" />
+      <point x="-53.83333333333394" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGItem" target="ch.epfl.cs107.play.game.inventory.InventoryItem">
       <point x="0.0" y="-136.0" />
@@ -440,114 +442,114 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb.ARPGBombHandler" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.Bomb">
       <point x="-48.0" y="-61.0" />
-      <point x="9072.5352352894" y="2962.0" />
-      <point x="8838.001006092672" y="2962.0" />
+      <point x="6357.160970819305" y="2992.0" />
+      <point x="6191.049999999999" y="2992.0" />
       <point x="0.0" y="300.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.InventoryKeyEventListener" target="ch.epfl.cs107.play.game.keybindings.KeyboardEventListener">
       <point x="-54.5" y="-49.0" />
-      <point x="54.5" y="1634.0" />
-      <point x="752.25" y="1634.0" />
+      <point x="695.1609708193046" y="1634.0" />
+      <point x="876.5" y="1634.0" />
       <point x="-103.5" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.GrotteMew" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-49.0" />
-      <point x="1894.604469296135" y="864.0" />
-      <point x="2045.6716410133067" y="864.0" />
-      <point x="-53.11111111111131" y="125.0" />
+      <point x="2638.5499999999993" y="844.0" />
+      <point x="2330.950426887926" y="844.0" />
+      <point x="79.66666666666652" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Sword" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity">
       <point x="0.0" y="-157.0" />
-      <point x="6797.5352352894" y="1624.0" />
-      <point x="6284.858148949816" y="1624.0" />
-      <point x="154.85714285714312" y="201.0" />
+      <point x="8214.407142857142" y="1604.0" />
+      <point x="8936.716299903797" y="1604.0" />
+      <point x="-232.28571428571468" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.ARPGPlayerHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="48.0" y="-204.0" />
-      <point x="5936.643863235529" y="2972.0" />
-      <point x="9467.270833333334" y="2972.0" />
+      <point x="5598.144871332371" y="3002.0" />
+      <point x="10205.395913500077" y="3002.0" />
       <point x="-116.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.Shop" target="ch.epfl.cs107.play.game.inventory.Inventory.Holder">
       <point x="-72.25" y="-267.0" />
-      <point x="3749.282962562127" y="1634.0" />
-      <point x="3062.354469296135" y="1634.0" />
+      <point x="3949.1675986050977" y="1634.0" />
+      <point x="3225.2999999999993" y="1634.0" />
       <point x="-54.25" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.ArrowItem" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity">
       <point x="0.0" y="-49.0" />
-      <point x="5788.062802629469" y="1634.0" />
-      <point x="6052.572434664102" y="1634.0" />
-      <point x="-77.42857142857065" y="201.0" />
+      <point x="9931.907142857142" y="1614.0" />
+      <point x="9401.287728475229" y="1614.0" />
+      <point x="232.28571428571468" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.ARPGBehavior.ARPGCellType" target="ch.epfl.cs107.play.game.arpg.ARPGBehavior">
       <point x="0.0" y="-147.0" />
-      <point x="54.25" y="28.0" />
+      <point x="-54.25" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGInventoryGUI" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-147.0" />
-      <point x="10563.001006092672" y="804.0" />
-      <point x="8343.291666666666" y="804.0" />
-      <point x="36.83333333333303" y="16.0" />
+      <point x="6496.049999999999" y="834.0" />
+      <point x="7570.4943041526385" y="834.0" />
+      <point x="-14.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.Ferme" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-49.0" />
-      <point x="2566.604469296135" y="844.0" />
-      <point x="2151.8938632355294" y="844.0" />
-      <point x="53.11111111111131" y="125.0" />
+      <point x="2284.5499999999993" y="854.0" />
+      <point x="2277.839315776815" y="854.0" />
+      <point x="26.555555555555657" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.InventoryKeyEventListener" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
       <point x="54.5" y="-49.0" />
-      <point x="163.5" y="2942.0" />
-      <point x="4736.062802629469" y="2942.0" />
+      <point x="804.1609708193046" y="2962.0" />
+      <point x="5049.549999999999" y="2962.0" />
       <point x="-144.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.ARPGPlayerHandler" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
       <point x="-48.0" y="-204.0" />
-      <point x="5840.643863235529" y="2992.0" />
-      <point x="5024.062802629469" y="2992.0" />
+      <point x="5502.144871332371" y="3012.0" />
+      <point x="5337.549999999999" y="3012.0" />
       <point x="144.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell.FireSpellHandler" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell">
       <point x="-48.0" y="-61.0" />
-      <point x="8269.973438752604" y="2962.0" />
-      <point x="8117.0010060926725" y="2962.0" />
+      <point x="10303.149741462239" y="2992.0" />
+      <point x="10180.395913500077" y="2992.0" />
       <point x="0.0" y="355.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull.ARPGFlameSkullHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="-54.0" y="-50.0" />
-      <point x="12255.751006092672" y="2982.0" />
-      <point x="9641.270833333334" y="2982.0" />
+      <point x="12567.399741462239" y="2952.0" />
+      <point x="10379.395913500077" y="2952.0" />
       <point x="58.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.Village" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-81.0" />
-      <point x="2230.604469296135" y="864.0" />
-      <point x="2098.782752124418" y="864.0" />
-      <point x="0.0" y="125.0" />
+      <point x="2461.5499999999993" y="854.0" />
+      <point x="2304.3948713323707" y="854.0" />
+      <point x="53.11111111111131" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-289.0" />
-      <point x="10945.501006092672" y="794.0" />
-      <point x="8348.958333333334" y="794.0" />
-      <point x="42.5" y="16.0" />
+      <point x="11156.149741462239" y="804.0" />
+      <point x="7615.827637485971" y="804.0" />
+      <point x="31.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Coin" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity">
       <point x="0.0" y="-70.0" />
-      <point x="6081.562802629469" y="1634.0" />
-      <point x="6130.0010060926725" y="1634.0" />
-      <point x="0.0" y="201.0" />
+      <point x="8496.407142857142" y="1614.0" />
+      <point x="9014.14487133237" y="1614.0" />
+      <point x="-154.85714285714312" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.npc.King" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-102.0" />
-      <point x="7789.5010060926725" y="854.0" />
-      <point x="8297.958333333334" y="854.0" />
-      <point x="-8.5" y="16.0" />
+      <point x="11545.149741462239" y="794.0" />
+      <point x="7621.4943041526385" y="794.0" />
+      <point x="36.83333333333394" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Arrow.ArrowHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="-55.5" y="-61.0" />
-      <point x="12974.251006092672" y="2962.0" />
-      <point x="9699.270833333334" y="2962.0" />
+      <point x="13285.899741462239" y="2932.0" />
+      <point x="10437.395913500077" y="2932.0" />
       <point x="116.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile" target="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile">
@@ -556,39 +558,39 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.RouteChateau" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-81.0" />
-      <point x="1658.604469296135" y="854.0" />
-      <point x="2019.1160854577515" y="854.0" />
-      <point x="-79.66666666666652" y="125.0" />
+      <point x="1730.5499999999993" y="834.0" />
+      <point x="2198.172649110148" y="834.0" />
+      <point x="-53.11111111111131" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.RouteChateau.CheatKeysEventListener" target="ch.epfl.cs107.play.game.keybindings.KeyboardEventListener">
       <point x="-57.5" y="-49.0" />
-      <point x="1543.604469296135" y="1624.0" />
-      <point x="959.25" y="1624.0" />
+      <point x="1615.5499999999993" y="1624.0" />
+      <point x="1083.5" y="1624.0" />
       <point x="103.5" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.UseInventoryKeyItemEventListener" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
       <point x="68.5" y="-39.0" />
-      <point x="3688.701901956066" y="2992.0" />
-      <point x="4916.062802629469" y="2992.0" />
-      <point x="36.0" y="619.0" />
+      <point x="3534.4109708193046" y="3002.0" />
+      <point x="5193.549999999999" y="3002.0" />
+      <point x="0.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile" target="ch.epfl.cs107.play.game.actor">
       <point x="-109.0" y="-201.0" />
-      <point x="12730.751006092672" y="754.0" />
-      <point x="8371.625" y="754.0" />
-      <point x="65.16666666666697" y="16.0" />
+      <point x="13042.399741462239" y="744.0" />
+      <point x="7649.827637485971" y="744.0" />
+      <point x="65.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.WaterFountain" target="ch.epfl.cs107.play.game.arpg.actor.entity.SoundEntity">
       <point x="-72.25" y="-190.0" />
-      <point x="4319.354469296135" y="744.0" />
-      <point x="4198.729469296135" y="744.0" />
-      <point x="-43.25" y="28.0" />
+      <point x="4442.299999999999" y="734.0" />
+      <point x="4285.144871332371" y="734.0" />
+      <point x="43.25" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.CheatKeysEventListener" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
-      <point x="48.5" y="-28.0" />
-      <point x="383.5" y="2952.0" />
-      <point x="4772.062802629469" y="2952.0" />
-      <point x="-108.0" y="619.0" />
+      <point x="56.0" y="-28.0" />
+      <point x="3790.9109708193046" y="3012.0" />
+      <point x="5229.549999999999" y="3012.0" />
+      <point x="36.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.RouteChateau.CheatKeysEventListener" target="ch.epfl.cs107.play.game.arpg.area.RouteChateau">
       <point x="57.5" y="-49.0" />
@@ -596,56 +598,56 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer" target="ch.epfl.cs107.play.game.inventory.Inventory.Holder">
       <point x="-81.0" y="-619.0" />
-      <point x="4799.062802629469" y="1624.0" />
-      <point x="3170.854469296135" y="1624.0" />
+      <point x="5112.549999999999" y="1624.0" />
+      <point x="3333.7999999999993" y="1624.0" />
       <point x="54.25" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-201.0" />
-      <point x="6130.0010060926725" y="804.0" />
-      <point x="8269.625" y="804.0" />
-      <point x="-36.83333333333303" y="16.0" />
+      <point x="9169.002014189513" y="834.0" />
+      <point x="7598.827637485971" y="834.0" />
+      <point x="14.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.MoveOrientateKeyEventListener" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
       <point x="62.5" y="-49.0" />
-      <point x="3964.701901956066" y="3002.0" />
-      <point x="4952.062802629469" y="3002.0" />
-      <point x="72.0" y="619.0" />
+      <point x="1066.1609708193046" y="2972.0" />
+      <point x="5085.549999999999" y="2972.0" />
+      <point x="-108.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.CaveDoor" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-146.0" />
-      <point x="11726.001006092672" y="774.0" />
-      <point x="8360.291666666666" y="774.0" />
-      <point x="53.83333333333303" y="16.0" />
+      <point x="4972.049999999999" y="784.0" />
+      <point x="7542.160970819305" y="784.0" />
+      <point x="-42.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.AcceptDeathDialogEventListener" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
       <point x="64.5" y="-28.0" />
-      <point x="645.5" y="2962.0" />
-      <point x="4808.062802629469" y="2962.0" />
+      <point x="1438.3977272727261" y="2982.0" />
+      <point x="5121.549999999999" y="2982.0" />
       <point x="-72.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.Bow" target="ch.epfl.cs107.play.game.arpg.actor.areaentity.collectable.CollectableAreaEntity">
       <point x="0.0" y="-49.0" />
-      <point x="7079.5352352894" y="1614.0" />
-      <point x="6362.286720378386" y="1614.0" />
-      <point x="232.28571428571377" y="201.0" />
+      <point x="9335.407142857142" y="1634.0" />
+      <point x="9246.430585618084" y="1634.0" />
+      <point x="77.42857142857156" y="201.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.UseInventoryKeyItemEventListener" target="ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener">
       <point x="-68.5" y="-39.0" />
-      <point x="3551.701901956066" y="2922.0" />
-      <point x="890.0999999999995" y="2922.0" />
-      <point x="105.59999999999991" y="60.0" />
+      <point x="3397.4109708193046" y="2932.0" />
+      <point x="1257.2999999999993" y="2932.0" />
+      <point x="0.0" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.Temple" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-49.0" />
-      <point x="1398.25" y="844.0" />
-      <point x="1992.5605299021959" y="844.0" />
-      <point x="-106.22222222222217" y="125.0" />
+      <point x="2125.5499999999993" y="854.0" />
+      <point x="2251.2837602212594" y="854.0" />
+      <point x="0.0" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.Projectile" target="ch.epfl.cs107.play.game.arpg.actor.FlyableEntity">
       <point x="109.0" y="-201.0" />
-      <point x="12948.751006092672" y="864.0" />
-      <point x="12953.958333333334" y="864.0" />
+      <point x="13260.399741462239" y="854.0" />
+      <point x="13145.293680856179" y="854.0" />
       <point x="0.0" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.keybindings.KeyboardAction" target="ch.epfl.cs107.play.game.keybindings.Action">
@@ -654,22 +656,22 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.FlameSkull" target="ch.epfl.cs107.play.game.arpg.actor.FlyableEntity">
       <point x="79.75" y="-278.0" />
-      <point x="12443.501006092672" y="864.0" />
-      <point x="12903.291666666668" y="864.0" />
+      <point x="12755.149741462239" y="854.0" />
+      <point x="13094.627014189515" y="854.0" />
       <point x="-50.66666666666606" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.areagame" target="ch.epfl.cs107.play.game.Playable">
       <point x="40.0" y="-16.0" />
-      <point x="892.875" y="357.0" />
-      <point x="880.375" y="357.0" />
-      <point x="880.375" y="251.0" />
-      <point x="912.625" y="251.0" />
+      <point x="681.4109708193046" y="357.0" />
+      <point x="668.9109708193046" y="357.0" />
+      <point x="668.9109708193046" y="251.0" />
+      <point x="701.1609708193046" y="251.0" />
       <point x="59.75" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.DarkLord" target="ch.epfl.cs107.play.game.arpg.actor.battle.monster.MonsterEntity">
       <point x="0.0" y="-366.0" />
-      <point x="10382.187802629469" y="1634.0" />
-      <point x="10777.126006092672" y="1634.0" />
+      <point x="10779.399741462239" y="1634.0" />
+      <point x="10987.774741462239" y="1634.0" />
       <point x="-168.375" y="289.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile.MagicWaterProjectileHandler" target="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile">
@@ -678,56 +680,56 @@
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.entity.Lilypads" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-70.0" />
-      <point x="6794.5010060926725" y="824.0" />
-      <point x="8280.958333333334" y="824.0" />
+      <point x="5960.549999999999" y="814.0" />
+      <point x="7559.160970819305" y="814.0" />
       <point x="-25.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.GameOver" target="ch.epfl.cs107.play.game.actor">
       <point x="0.0" y="-114.0" />
-      <point x="10320.001006092672" y="814.0" />
-      <point x="8337.625" y="814.0" />
-      <point x="31.16666666666697" y="16.0" />
+      <point x="12105.649741462239" y="774.0" />
+      <point x="7632.827637485971" y="774.0" />
+      <point x="48.16666666666606" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.Playable" target="ch.epfl.cs107.play.game.Updatable">
       <point x="0.0" y="-60.0" />
-      <point x="852.875" y="81.0" />
-      <point x="4550.958333333334" y="81.0" />
+      <point x="641.4109708193046" y="81.0" />
+      <point x="4018.2443041526376" y="81.0" />
       <point x="-28.5" y="28.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.areaentity.FireSpell" target="ch.epfl.cs107.play.game.actor">
-      <point x="0.0" y="-355.0" />
-      <point x="8117.0010060926725" y="864.0" />
-      <point x="8303.625" y="864.0" />
-      <point x="-2.83333333333303" y="16.0" />
+      <point x="9.094947017729282E-13" y="-355.0" />
+      <point x="10180.395913500079" y="814.0" />
+      <point x="7610.160970819305" y="814.0" />
+      <point x="25.5" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.weapon.MagicWaterProjectile.MagicWaterProjectileHandler" target="ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor">
       <point x="-58.5" y="-61.0" />
-      <point x="12613.751006092672" y="2972.0" />
-      <point x="9670.270833333334" y="2972.0" />
+      <point x="12925.399741462239" y="2942.0" />
+      <point x="10408.395913500077" y="2942.0" />
       <point x="87.0" y="270.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer.OpenInventoryEventListener" target="ch.epfl.cs107.play.game.arpg.actor.ARPGPlayer">
       <point x="56.5" y="-28.0" />
-      <point x="3097.375" y="2982.0" />
-      <point x="4880.062802629469" y="2982.0" />
-      <point x="0.0" y="619.0" />
+      <point x="4036.4109708193046" y="3022.0" />
+      <point x="5265.549999999999" y="3022.0" />
+      <point x="72.0" y="619.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.Route" target="ch.epfl.cs107.play.game.arpg.area.ARPGArea">
       <point x="0.0" y="-81.0" />
-      <point x="2742.604469296135" y="834.0" />
-      <point x="2178.4494187910846" y="834.0" />
-      <point x="79.66666666666652" y="125.0" />
+      <point x="1224.5" y="814.0" />
+      <point x="2145.0615379990377" y="814.0" />
+      <point x="-106.22222222222217" y="125.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.Game" target="ch.epfl.cs107.play.game.Playable">
       <point x="0.0" y="-28.0" />
-      <point x="825.375" y="251.0" />
-      <point x="793.125" y="251.0" />
+      <point x="613.9109708193046" y="251.0" />
+      <point x="581.6609708193046" y="251.0" />
       <point x="-59.75" y="60.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.area.ARPGArea" target="ch.epfl.cs107.play.game.areagame">
       <point x="0.0" y="-125.0" />
-      <point x="2098.782752124418" y="434.0" />
-      <point x="912.875" y="434.0" />
+      <point x="2251.2837602212594" y="434.0" />
+      <point x="701.4109708193046" y="434.0" />
       <point x="60.0" y="16.0" />
     </edge>
     <edge source="ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster.ARPGLogMonsterHandler" target="ch.epfl.cs107.play.game.arpg.actor.battle.monster.LogMonster">
@@ -735,8 +737,10 @@
       <point x="0.0" y="322.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.12480193163811967" x="6616.5" y="2233.5" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="0.12194043055145974" x="6772.0" y="2243.5" />
+  <SelectedNodes>
+    <node>ch.epfl.cs107.play.game.inventory.Inventory</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
