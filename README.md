@@ -28,6 +28,8 @@ Si le mode de test est activé:
 Nous avons implémenté un mode de test qui permet d'utiliser les contrôles de triche mentionnés ci-dessus et donnent au joueur tous les objets
 requis pour finir, c'est-à-dire que le joueur va recevoir un arc, des flèches, la clé du château et tous les autres objets du jeu dès l'instantiation.
 
+Pour l'activer, il est nécessaire d'aller dans l'interface `Test` du fichier `Test.java` dans le packetage `ch.epfl.cs107.play.game.arpg` et de remplacer le boolean `MODE` à `true`.
+
 ##Solution
 
 ####But du jeu
