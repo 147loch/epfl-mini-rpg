@@ -39,7 +39,7 @@ public class ARPG extends RPG {
 
     @Override
     public String getTitle() {
-        return "ZeldIC";
+        return "IC <-> Mini-Projet 2";
     }
     
     @Override

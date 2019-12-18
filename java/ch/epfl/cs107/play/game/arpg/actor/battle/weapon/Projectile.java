@@ -27,6 +27,11 @@ public abstract class Projectile extends MovableAreaEntity implements FlyableEnt
 		this.frameSpeed = frameSpeed;
 	}
 	
+	/**
+     * Return the DamageType of the projectile
+     * @return the type of damage of the projectile
+     * @see DamageType
+     */
 	protected DamageType getDamageType() {
 		return damageType;
 	}
