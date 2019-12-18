@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.keybindings;
+package ch.epfl.cs107.play.game.keybindings;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

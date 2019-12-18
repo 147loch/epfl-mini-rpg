@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.arpg.keybindings;
+package ch.epfl.cs107.play.game.keybindings;
 
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Keyboard;

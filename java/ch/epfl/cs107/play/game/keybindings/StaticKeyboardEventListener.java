@@ -1,11 +1,11 @@
-package ch.epfl.cs107.play.game.arpg.keybindings;
+package ch.epfl.cs107.play.game.keybindings;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
  * A static keyboard event listener is just an extension of the dynamic version, where the action is ignored.
- * @see ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener
+ * @see ch.epfl.cs107.play.game.keybindings.KeyboardEventListener
  */
 public interface StaticKeyboardEventListener extends KeyboardEventListener {
 

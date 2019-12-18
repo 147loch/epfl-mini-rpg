@@ -35,10 +35,10 @@ import ch.epfl.cs107.play.game.arpg.actor.npc.NPC;
 import ch.epfl.cs107.play.game.arpg.actor.puzzle.PressurePlate;
 import ch.epfl.cs107.play.game.arpg.area.ARPGArea;
 import ch.epfl.cs107.play.game.arpg.handler.ARPGInteractionVisitor;
-import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardAction;
-import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventListener;
-import ch.epfl.cs107.play.game.arpg.keybindings.KeyboardEventRegister;
-import ch.epfl.cs107.play.game.arpg.keybindings.StaticKeyboardEventListener;
+import ch.epfl.cs107.play.game.keybindings.KeyboardAction;
+import ch.epfl.cs107.play.game.keybindings.KeyboardEventListener;
+import ch.epfl.cs107.play.game.keybindings.KeyboardEventRegister;
+import ch.epfl.cs107.play.game.keybindings.StaticKeyboardEventListener;
 import ch.epfl.cs107.play.game.inventory.Inventory;
 import ch.epfl.cs107.play.game.inventory.InventoryItem;
 import ch.epfl.cs107.play.game.rpg.actor.Dialog;
@@ -478,7 +478,7 @@ public class ARPGPlayer extends Player implements Inventory.Holder {
 	@Override
 	public boolean wantsViewInteraction() {
 		return (
-				!isInventoryOpen &&
+				!isInventoryOpen && !(Objects.nonNull(currentShop) && currentShop.isShopOpened()) &&
 				(KeyboardAction.VIEW_INTERACTION.getAssignedButton(getOwnerArea().getKeyboard()).isPressed() ||
 						behavior.equals(Behavior.ATTACK_WITH_SWORD))
 		);
