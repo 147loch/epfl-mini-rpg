@@ -26,7 +26,7 @@ Il y a eu une rumeur dans le village qu'une grotte dont un éboulement a condamn
 - LEFT - Move Left 
 - TAB - Cycle Inventory Item
 - SPACE - Use Item 
-- ENTER - Accept Dialog 
+- ENTER - Accept Game Over and Buy Items 
 - E - Interact (view interaction) 
 - I - Open and Close Inventory and Close Shop
 

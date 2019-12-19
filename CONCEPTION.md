@@ -173,7 +173,7 @@ En bref, ce système permet de définir de façon modulable des listeners dans u
 
 Ce système permet donc d'avoir toutes les touches enregistrées dans un fichier XML généré lorsque le jeu est lancé pour la première fois en utilisant les valeurs par défaut, modifiable à volonté après coup.
 Si le fichier XML existe, alors les valeurs de ce fichier seront utilisées, et les actions qui s'y trouvent permettent de juste lier l'action à un bouton tel que défini par la maquette ou à créer un Event listener
-qui vérifiera le bouton à chaque update et actionnera une méthode (entre autres un callback) si le bouton a été pressé (ou est maintenu pressé). 
+qui sera utilisé par le register pour vérifier le bouton associé à chaque update et actionnera une méthode (entre autres un callback) si le bouton a été pressé (ou est maintenu pressé). 
 
 ### Fonctionnement détaillé
 
@@ -228,9 +228,9 @@ Fonctionnne de la même manière par la suite.
 ##### Exécution
 
 Une fois le register instantiée dans la classe qui possède aussi les implémentations statiques ou dynamiques des listener, et lorsque les
-événements sont bien enregistrés. La classe "parent" doit ajouter à sa méthode update un appel vers la méthode `update` du register qui ne prend
+événements sont bien enregistrés, la classe "parent" doit ajouter à sa méthode update un appel vers la méthode `update` du register qui ne prend
 aucun argument mais va vérifier si les touches de tous les événements ont été pressées ou maintenues (selon la définition donnée lors de l'ajout du listener/événement)
-et appeler les méthods des listeners correspondants.
+et appeler les méthodes des listeners correspondants.
 
 
 
